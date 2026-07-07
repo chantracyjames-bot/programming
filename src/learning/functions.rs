@@ -49,7 +49,7 @@
                 - it disappears after the function is finished
             - it is possible to declare multiple parameters
                 - example:
-                    fm sum(x: i2, y: f64) {
+                    fn sum(x: i2, y: f64) {
                         x + y
                     }
 
