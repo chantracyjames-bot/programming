@@ -75,4 +75,9 @@
                 - note that unlike .., this type is inclusive
                 - example:
                     1..=5 // 1 until 5
+            - to reverse the order, the .rev() method is used
+                - example:
+                    for i in 1..10.rev() {
+                        print!("{i}");     // starts from 9
+                    }
 */

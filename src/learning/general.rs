@@ -50,6 +50,31 @@
                         break;
                     }
                     print!(i); -> Error
+
+        - block labeling
+            - blocks of lines are able to be labeled
+                - used in loops to have precise control of looping
+            - uses a single quote '
+            - syntax:
+                '<label>: {
+                    <statements>
+                }
+            - example:
+                'block: {
+                    if 10 > 12 {
+                        print!("yes");
+                    } else {
+                        print!("no");
+                    }
+                }
+            - it is generally used to label loops
+                - example:
+                    'idkman: loop {
+                        loop {
+                            break 'idkman; // breaks the outer loop
+                        }
+                    }
+
         - shadowing 
             - variables in the same scope are able to be overshadowed
                 - this is done by redeclaring the variable

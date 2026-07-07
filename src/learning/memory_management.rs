@@ -38,17 +38,31 @@
                     println!("{}", a);           // idk
 
     - Rust borrowing
-        - lets variables use values of other variables
             - without transferring owmership
         - when a variable has a reference to another variable
             - this is called "borrowing"
+        - why borrowing?
+            - lets variables use the values of other variables
+                - without tranferring ownership
+            - avoids cloning
+                - which is slow from large amounts of data
+            - makes the program safer and faster
         - references
             - references lets other variables see the values of other variables
                 - it is done using the reference& & symbol
             - syntax:
                 &<variable>
             - example:
-                let a = &b; // a can borrowed from b
+                let a = &b; // a borrowed from b
+        - mutable reference
+            - it is possible to modify the value through a reference
+                - note that the original variable must be mutable
+            - uses the &mut syntax
+            - syntax:
+                let <reference_name> = &mut <variable_name>;
+            - example:
+                let b = &mut a;
+            - note that only one mutable reference can exist to a single variable at a time
 */
 
 fn main() {
