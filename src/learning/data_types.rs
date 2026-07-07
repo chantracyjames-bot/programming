@@ -10,23 +10,107 @@
             let my_text = "Hello";  // string
     - it is still possible to explicitly declare the data type for variables
         - numbers
-            - i32
-                - integers or whole numbers
-                - can range from -2,147,483,648 to 2,147,483,647
-                - syntax:
-                    let <variable_name>: i32 = <value>;
-                - exmaple:
-                    let my_num: i32 = 2147483647;
-            - f64
-                - floating points or decimal numbers
-                - can range from 1.797 693 134 862 315 7 x 10^309  to 1.797 693 134 862 315 7 x 10^308
-                - syntax:
-                    let <variable_name>: f64 = <value>
-                - example:
-                    let my_float: f64 = 3.141592;
+            - signed integers
+                - i8
+                    - integers or whole numbers
+                    - can range from -128 to 127
+                    - syntax:
+                        let <variable_name>: i8 = <value>;
+                    - example:
+                        let my_num: i8 = -128_i8;
+                - i16
+                    - integers or whole numbers
+                    - ranges from -32768 to 32767
+                    - syntax:
+                        let <variable_name>: i16 = <value>;
+                    - example:
+                        let my_num: i16 = 32767_i16;
+                - i32
+                    - integers or whole numbers
+                    - can range from -2,147,483,648 to 2,147,483,647
+                    - syntax:
+                        let <variable_name>: i32 = <value>;
+                    - exmaple:
+                        let my_num: i32 = 2147483647_i32;
+                - i64
+                    - integers or whole numbers
+                    - can range from -9223372036854775808 to 9223372036854775807⏎
+                    - syntax:
+                        let <variable_name>: i64 = <value>;
+                    - example:
+                        let my_num: i64 = 9223372036854775807_i64;
+                - i128
+                    - integers or whole numbers
+                    - can range from -170141183460469231731687303715884105728 to 170141183460469231731687303715884105727
+                    - syntax:
+                        let <variable_name>: i128 = <value>;
+                    - example:
+                    let my_num: i128 = -170141183460469231731687303715884105728_i128;
+            - unsigned integers
+                - u8
+                    - positive whole numbers
+                    - can range from 0 to 255
+                    - syntax:
+                        let <variable_name>: u8 = <value>;
+                    - example:
+                        let my_num: u8 = 255_u8;
+                - u16
+                    - positive whole numbers
+                    - can range from 0 to 65535
+                    - syntax:
+                        let <variable_name>: u16 = <value>;
+                    - example:
+                        let my_num: u16 = 65535_u16;
+                - u32
+                    - positive whole numbers
+                    - can range from 0 to 4294967295
+                    - syntax:
+                        let <variable_name>: u32 = <value>;
+                    - example:
+                        let my_num: u32 = 4294967295_u32;
+                - u64
+                    - positive whole numbers
+                    - can range from 0 to 18446744073709551615
+                    - syntax:
+                        let <variable_name>: u64 = <value>;
+                    - example:
+                        let my_num: u64 = 18446744073709551615_u64;
+                - u128
+                    - positive whole numbers
+                    - ranges from 0 to 340282366920938463463374607431768211455
+                    - syntax:
+                        let my_num: u128 = <value>;
+                    - example:
+                        let my_num: u128 = 340282366920938463463374607431768211455_u128;
+            - floating points
+                - f32
+                    - floating points or decimal numbers
+                    - can range from -3.40282347 × 10^38 to 3.40282347 × 10^38
+                    - syntax:
+                        let <variable_name>: f32 = <value>;
+                    - syntax:
+                        let my_float: f32 = 2.72_f32;
+                - f64
+                    - floating points or decimal numbers
+                    - the default floating point in Rust
+                    - can range from 1.797 693 134 862 315 7 x 10^308  to 1.797 693 134 862 315 7 x 10^308
+                    - syntax:
+                        let <variable_name>: f64 = <value>
+                    - example:
+                        let my_float: f64 = 3.141592_f64;
+        - pointers
+            - isize
+                - is a pointer-sized integer
+                - ranges from the full width of a machine's CPU architecture
+                    - in this case, 64-bit signed
+            - usize
+                - is a pointer-sized number
+                - ranges from the full width of a machine's CPU architecture
+                    - in this case, 64-bit unsigned
         - characters
             - char
                 - a single character
+                - is 32 bits wide (4 bytes?)
                 - it must be surrounded by single quotation marks ' '
                 - syntax:
                     let <variable_name>: char = <value>
@@ -35,6 +119,7 @@
         - booleans
             - bool
                 - a truth value
+                - is 8 bits wide (1 byte?)
                 - can only be either true or false
                 - syntax:
                     let <variable_name>: bool = <value>;
@@ -104,74 +189,10 @@
                             <string>.len();
                         - example:
                             "idkman".len();
-
-        - Rust also has types for collections
-            - like tuples and arrays (lists)
-            - tuples
-                - contains ordered and immutable collections of values
-                    - allows duplicate entries and a fixed length
-                - example:
-                    (1, 3.14, "lumbago")
-                - declaration and initialization
-                    - tuples are denoted by the parenthesis ( ) symbol
-                        - anything inside the parentheses are considered as a tuple
-                    - syntax:
-                        let <tuple_name>: (<data_types>) = (<values>);
-                    - example:
-                        let my_tuple: (u8, u8, u8) = (255, 255, 255)
-                - access and modification
-                    - tuples are accessed using indexes
-                        - starting form 0 as the first element
-                        - it is done using a dot . syntax
-                        - syntax:
-                            <tuple_name>.<index>;
-                        - example:
-                            idkman.0;
-                    - tuple deconstruct
-                        - it is possible to assign to other variables the values of a tuple
-                        - syntax:
-                            let (a, b, c) = my_tuple;
-            - arrays
-                - contains ordered and mutable collections of values
-                    - allows duplicate entries and a fixed length
-                - example:
-                    [1, 3.14, "idkman"]
-                - declaration and initialization
-                    - lists are denoted by the brackets [ ] symbol
-                        - anything inside the brackets are considered as a list
-                    - note that the values that an array holds must be the same type
-                    - syntax:
-                        let <array_name> = [<values>];
-                    - example:
-                        let my_array = ['A', 'B', 'C']
-                    - it is possible to initializa an array alongside declraring its type
-                        - syntax:
-                            let <array_name>: [<data_type>; <size>];
-                            // or 
-                            let <array_name>: [<data_type>; <size>] = [<valus>];
-                        - example:
-                            let lumbago: [&str; 3] = ["yes", "maybe", "no"];
-                    - it is also possible to declare an array with multiple of the same valus
-                        - syntax:
-                            let <array_name> = [<value>; <size>];
-                        - example:
-                            let maybe = [12; 3]; // [12, 12, 12]
-                - access and modification
-                    - arrays are accessed using indexes
-                        - starting from 0 as the first element
-                        - it is done using square brackets [ ]
-                        - syntax:
-                            <array_name>[<index>];
-                        - example:
-                            my_array[10]
 */
 
 fn main() {
-    // Create an empty String
-    
-    let my_array = [100;3];
+    let my_num: i32 = i32::MAX * 1.2;
 
-    for i in 0..=2 {
-        print!("{}", my_array[i]);
-    }
+    println!("{my_num}");
 }

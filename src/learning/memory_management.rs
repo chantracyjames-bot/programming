@@ -37,6 +37,16 @@
 
                     println!("{}", a);           // idk
 
+        - slice type
+            - a subtype of Rust's ownership
+                - is a type of reference, therefore it does not have ownership
+            - a read-only view on a contiguous sequence of elements in a collection
+            - &str is a type of slice type
+                - its a string slice
+            - any data type inside a collection can be a slice type
+                - take for instance an array of i32 values
+                - it would be a slice type of &[i32]
+
     - Rust borrowing
             - without transferring owmership
         - when a variable has a reference to another variable
@@ -63,6 +73,16 @@
             - example:
                 let b = &mut a;
             - note that only one mutable reference can exist to a single variable at a time
+                - it is also not possible to borrow from a variable with a present immutable reference
+                - example:
+                    let yes: i32 = 100;
+                    let no = &yes;           // immatable reference
+                    let maybe = &mut yes;    -> Error
+                                             // cannot borrow from variable with present immutable reference
+                    let lumbago: f64 = 3.14;
+                    let idk = &mut lumbago;  // mutable reference
+                    let man = &mut lumbago;  -> Error
+                                             // cannot boorow from variable with another present mutable reference
 */
 
 fn main() {

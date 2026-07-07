@@ -25,6 +25,43 @@
             - note that placeholders and their respective values must be in order
                 - example:
                     print!("{} is {}", "yes", 10); // yes is 10
+            
+    - naming conventions
+        - there are industry standard when naming certain elements in C
+        - variables
+            - usually in snake_case
+            - example:
+                let my_string;
+                let my_num[];44
+        - functions and methods
+            - usually in snake_case
+            - example:
+                my_function();
+                sum_all();
+        - filenames and folders
+            - usually in snake_case
+            - example:
+                my_program.rs
+                idkman.rs
+        - macros
+            - usually in snake_case with an exclamation marks as a suffix
+            - example:
+                println!
+                vec!
+        - constants and static variables
+            - usually in SCREAMING_SNAKE_CASE
+            - example:
+                CONSTANT_VARIABLE
+                STATIC_VARIABLE
+        - enum variants
+            - usually in UpperCamelCase
+            - example:
+                Results::Ok
+        - types, traits and enums
+            - usually in UpperCamelCase
+            - example:
+                enum MyEnum {...}
+                String
 
     - scope
         - by default, the compiler compiles code from the top to bottom, first line until the last line
