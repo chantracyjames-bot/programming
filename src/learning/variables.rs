@@ -51,4 +51,35 @@
             - when naming constant variables, it is recommended to use SCREAMING_SNAKE_CASE
             - example:
                 const MY_VARIABLE: &str = "Hello World";
+
+    - constants (const)
+        - these are variables that are unmodifiable
+            - i.e. the values cannot be changed
+            - the variable effectively becomes read-only
+            - similar to the final keyword in Java
+        - uses the const keyword
+            - defined outside of main()
+        - syntax:
+            const <variable_name>: <data_type> = <value>;
+        - example:
+            const MY_NUM: i23 = 10;
+        - sidenote:
+            - the variable must be declared with a data type
+                - if a const variable is declared without a data type, an error occurs
+                - example:
+                    const MY_NUM; -> Error
+            - the variable must be declares with a value
+                - if a const variable is declared without a value, an error occurs
+                - example:
+                    const MY_NUM: i32; -> Error
+        - convention:
+            - when naming constant variables, it is recommended to use SCREAMING_SNAKE_CASE
+            - example:
+                const MY_VARIABLE = "Hello World";
 */
+
+const MY_VAR: i32;
+
+fn main() {
+    println!("{MY_VAR}");
+}

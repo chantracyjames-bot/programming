@@ -32,7 +32,7 @@
             - usually in snake_case
             - example:
                 let my_string;
-                let my_num[];44
+                let my_num[];
         - functions and methods
             - usually in snake_case
             - example:
