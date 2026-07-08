@@ -1,1 +1,1 @@
-MIN
+println!("{}", yes["maybe"]);

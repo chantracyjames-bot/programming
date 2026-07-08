@@ -189,6 +189,27 @@
                             <string>.len();
                         - example:
                             "idkman".len();
+
+    - type convesion
+        - converts a data type to another type
+        - similar to type casting in C++ or Java
+        - uses the "as" keyowrd
+        - syntax:
+            <value> as <data_type>;
+        - example:
+            100 as i8;
+        - it is mostly used to convert data types
+            - example:
+                let my_num = 100 as u16;
+
+    - unit type ()
+        - is the absence of a value
+            - similar to void in C++ or Java
+        - used to return nothing in functions
+            - functions that returns no value
+        - is denoted by parentheses
+        - syntax:
+            ()
 */
 
 fn main() {
