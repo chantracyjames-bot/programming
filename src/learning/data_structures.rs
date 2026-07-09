@@ -296,20 +296,245 @@
                             - meaning it doesn't need to request memory from the system
                             - only when it reaches the max capacity
                         
-*/
+    - Rust Structs
+        - short for structure
+        - is a custom data strutcure that enables grouping of related values together
+            - somewhat of a "mini database"
+        - why structs?
+            - the group related data in a clean way
+            - they make the code easier to read and maintain
+        
+        - declaration and definition
+            - structs are able to be declared using the struct keyword
+            - structs are used to store multiple variables
+            - classic or C-style structs
+                - this type of struct is commonly used to have descriptive names for each fields
+                - syntax:
+                    struct <struct_name> {
+                        <variable_name>: <data_type>,
+                    }
+                - example:
+                    struct MyStruct {
+                        my_num: i32;
+                        my_str: String,
+                        my_char: char,
+                    }
+                - similar to C-style structs, it is not possible to declare default variables for struct fields
+                    - the fileds only get their values when a struct object is created
+                    - to initialize default values to fields
+                        - the Default Trait is used
+                        - syntax:
+                            #[derive(Default)]
+                            struct <struct_name> {...}
+                        - example:
+                            #[derive(Default)]
+                            struct MyStruct {...}
+            - tuple structs
+                - this type of struct is used when field naming is not needed
+                - syntax:
+                    struct <struct_name>(<data_types>);
+                - example:
+                    struct MyStruct(String, i32, f64);
+            - unit-like structs
+                - this type of struct has zero fields
+                    - it takes up no memory
+                - used as a placeholder
+                    - for types that need to implement behaviors
+                    - or to act as a marker
+                - syntax:
+                    struct <struct_name>>;
+                - example:
+                    struct MyStruct;
 
-use std::collections::HashMap;
+        - access and modification
+            - there multiple ways to access structs depending on the type declared                
+                - structs are accessed by creating an object of it
+                - sidenote:
+                    - Rust does not allow uninitialized variables
+                        - the compiler will throw an error if the struct object's field are not initialized
+                    - every single field must be initialized
+                - classic or C-style structs
+                    - syntax:
+                        let <struct_variable> = <struct_name> {...};
+                    - example:
+                        let my_struct = MyStruct {
+                            my_num: 100,
+                            my_str: String::from("idkman"),
+                            my_char: 'B',
+                        };
+                - tuple structs
+                    - syntax:
+                        let <struct_variable> = <struct_name>(<values>);
+                    - example:
+                        let my_struct = MyStruct("idkman".to_string, 100, 3.14);
+                - unit-like structs
+                    - syntax:
+                        let <struct_variable> = <struct_name>;
+                    - example:
+                        let my_struct = MyStruct;
+
+            - to access the variables inside the structs, or "fields" in Rust
+                - C-style structs
+                    - the dot . operator is used
+                    - syntax:
+                        <struct_variable>.<field>;
+                    - example:
+                        my_struct.my_name;
+                    - changing the value of a field
+                        - uses the same concept of accessing structs but with the assigment = operator
+                            - note that the struct variable must be mutable
+                        - syntax:
+                            <struct_name>.<field> = <new_value>;
+                        - example:
+                            my_struct.my_char = 'Y';
+                - tuple structs
+                    - like normal tuples, the dot . index is used
+                    - syntax:
+                        <struct_variable>.<index>;
+                    - example:
+                        my_struct.0;
+                    - changing the value of a field
+                        - uses the same concept of accessing structs but with the assigment = operator
+                            - note that the struct variable must be mutable
+                        - syntax:
+                            <struct_name>.<index> = <new_value>;
+                        - example:
+                            my_struct.0 = String::from("lumbago");
+                - unit-like structs
+                    - there are no fields inside a unit-like struct
+                    - it is mostly used for Traits
+            
+            - note that structs can only be in one state of access at a time
+                - only immutable or mutable
+                - that extends to its fields
+                    - meaning all fields are the same with either being immutable or mutable, but never both
+            - some fields of a struct can be "owned" by a variable
+                - only if they live on the heap like Strings or Vectors
+                - sidenote:
+                    - if one of the fields of a struct is owned by a variable
+                        - trying to print the entire struct leads to an error
+                - unlike primitive data types that are copied, not moved
+
+    - Rust impl
+        - an extension to Rust's structs which provides the behavior of the struct object
+        - structs and impl is Rust's implementation of classes
+            - structs provide the storage for the data
+            - impl provide how the data is manipulated
+        
+        - declaration and definition
+            - uses the impl keyword with the struct name
+            - syntax:
+                impl <struct_name> {...}
+            - example:
+                impl MyStruct {...}
+            - there are two types of operation in impl
+            - associated functions
+                - it is comparable to constructors in C++ or Java
+                - it is used to initialize fields in structs
+                - returns a Self object
+                    - which is the actual struct type that is the impl is based on
+                    - or the "storage" for the initialized data
+                - syntax:
+                    impl <struct_name> {
+                        fn <function_name>(<parameters>) -> Self {...}
+                    }
+                - example:
+                    impl MyStruct {
+                        fn new(my_num: i32, my_str: &str, my_char: char) -> Self {
+                            my_num: my_num,
+                            my_string: name.to_string(),
+                            my_char: my_char,
+                        }
+                    }
+            - methods
+                - similar to methods in other langauges like C++, Java and Python
+                - it is used to alter the behavior of the struct object
+                - it must always have a reference to self as the first parameter
+                    - similar to Python's self parameter
+                    - pointing to the actual instance of the object
+                - immutable methods
+                    - are not allowed to modify internal data
+                    - syntax:
+                        impl <struct_name> {
+                            fn <method_name>(&self, <parameters>) {...}
+                        }
+                    - example:
+                        impl MyStruct {
+                            fn my_method(&self) {
+                                println!("{}", self.my_string);
+                            }
+                        }
+                - mutable methods
+                    - are allowed to change fields of a struct object
+                    - syntax:
+                        impl <struct_name> {
+                            fn <methdo_name>(&mut self, <parameters>) {...}
+                        }
+                    - example:
+                        impl MyStruct {
+                            fn idkman(&mut self) {
+                                self.my_string = "lumbago".to_string();
+                            }
+                        }
+            - consuming methods
+                - unlike regular methods
+                    - this type of methods "consumes" the object instance
+                        - i.e takes ownership over the struct variable
+                        - redering it useless after it is called
+                - uses the self parameter without any references
+                    - this is how it hands over ownership
+                - syntax:
+                    impl <struct_name> {
+                        fn <method_name>(self, <parameters>) {...}
+                    }
+                - example:
+                    impl MyStruct {
+                        fn consumer(self) {
+                            println!("bye bye object");
+                        }
+                    }
+
+        - access and method calls
+            - associated functions
+                - it is called using the struct name with a double colon::
+                - syntax:
+                    <struct_name>::<function>(<arguments>);
+                - example:
+                    MyStruct::new(120, String::from("idkman"), 3.1415)
+            - methods
+                - regardless if the mutability, there are two ways to call a method
+                - standard syntax:
+                    - syntax:
+                        <object_name>.<method>(<arguments>);
+                    - example:
+                        my_struct.my_method();
+                - verbose syntax:
+                    - syntax:
+                        <struct_name>::<method>(&<mut> <object_name>, <arguments>);
+                    - example:
+                        MyStruct::my_method(&my_struct);
+                        // or
+                        MyStruct::idkman(&mut my_struct);
+                - for general purposes, the standard syntax is better
+                    - the compiler automatically handles the references and borrowing
+            - consuming methods
+                - similar to method calls with regular methods
+                - standard syntax:
+                    - syntax:
+                        <object_name>.<method>(<arguments>);
+                    - example:
+                        my_struct.consumer();
+                - verbose syntax:
+                    - syntax:
+                        <struct_name>::<method>(<object_name>, <arguments>);
+                    - example:
+                        MyStruct::consumer(my_struct);   
+*/
+struct Yes {
+    maybe: String,
+    no: i32,
+}
 
 fn main() {
-    let mut yes = HashMap::new();
-
-    yes.insert("lumbago", "idkman");
-    yes.insert("Hello", "Workd");
-
-    let test: &mut &str = yes.entry("maybe").or_insert("probs");
-    let binding = String::from("worp");
-    *test = &binding;
-    
-    yes.clear();
-    println!("{}", yes["maybe"]);
+    let probs: Yes = Yes;
 }
