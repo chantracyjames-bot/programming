@@ -33,5 +33,15 @@
                 format!("{}", <string>);
             - example:
                 format!("{} {}", "Hello", World);
-            
+        - dbg!()
+            - used for debugging
+            - uses the stderr terminal stream
+                - as opposed to the stdout stream used by print!() or println!()
+            - takes ownership of the values passed to it
+                - and returns them back
+                - as opposed to print!() or println!() which only takes the reference of the values
+            - syntax:
+                dbg!(<expression>);
+            - example:
+                dbg!(1+1);
 */

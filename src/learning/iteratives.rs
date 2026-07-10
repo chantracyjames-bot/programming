@@ -81,3 +81,24 @@
                         print!("{i}");     // starts from 9
                     }
 */
+
+fn main() {
+    let mut x: f32 = 1.0;
+    while x < 1e5 {
+        println!("{}", x);
+        x += 1.0;
+    }
+
+    let array: Vec<i32> = (1..100000).collect();
+    for i in array {
+        println!("{}", i);
+    }
+
+    let mut n: i32 = 1;
+    loop {
+        println!("{}", n);
+        n += 1;
+        if n < 100000 { continue; } 
+        break;
+    }
+}

@@ -213,7 +213,56 @@
 */
 
 fn main() {
-    let my_num: i32 = i32::MAX * 1.2;
+    println!("Primitive Rust Data Types.");
+    characters();
+    boolean();
+    string_slices();
+    signed_ints();
+    unsigned_ints();
+    floating_points();
+}
 
-    println!("{my_num}");
+fn characters() -> () {
+    println!("Characters:");
+    println!("char: {}", 'Y');
+    println!();
+}
+
+fn boolean() -> () {
+    println!("Boolean:");
+    println!("bool: {}", true);
+    println!();
+}
+
+fn string_slices() {
+    println!("String (slice type):");
+    println!("&str: {}", "Hello World");
+    println!();
+}
+
+fn signed_ints() -> () {
+    println!("Signed Integers:");
+    println!("i8: {}", i8::MAX);
+    println!("i16: {}", i16::MAX);
+    println!("i32: {}", i32::MAX);
+    println!("i64: {}", i64::MAX);
+    println!("i128: {}", i128::MAX);
+    println!();
+}
+
+fn unsigned_ints() -> () {
+    println!("Unsigned Integers:");
+    println!("u8: {}", u8::MAX);
+    println!("u16: {}", u16::MAX);
+    println!("u32: {}", u32::MAX);
+    println!("u64: {}", u64::MAX);
+    println!("u128: {}", u128::MAX);
+    println!();
+}
+
+fn floating_points() -> () {
+    println!("Floating Points:");
+    println!("f32: {}", f32::MAX);
+    println!("f64: {}", f64::MAX);
+    println!();
 }
