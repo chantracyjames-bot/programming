@@ -75,3 +75,18 @@
                         sum(3.14, 2.72);
                         sum('A', 1.12);  -> Error
 */
+
+fn print_stuff() {
+    println!("idkman");
+}
+
+fn return_to_sender() -> u8 {
+    100
+}
+
+fn main() {
+    let num = return_to_sender();
+    for i in 1..num {
+        print_stuff();
+    }
+}

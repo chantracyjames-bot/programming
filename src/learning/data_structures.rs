@@ -295,7 +295,69 @@
                         - very effiecient since it retains the memory allocated for the capacity of the hashmap
                             - meaning it doesn't need to request memory from the system
                             - only when it reaches the max capacity
-                        
+
+    - Rust Enums
+        - short for enumeration
+        - used to define a type that can be in the form of a few different values
+        - each value of an enum is called an "variant"
+        - why enums?
+            - groups related values into one type
+            - leads to cleaner and readable code
+            - handles different cases in match expressions
+
+        - declaration and definition
+            - enums are declared using the keyword
+            - syntax:
+                enum <enum_name> {...}
+            - example:
+                enum MyEnum {...}
+            - enums must also have a set of variants (values) declared
+                - separated by commas
+                - syntax:
+                    enum <enum_name> {
+                        <variant>
+                    }
+                - example:
+                    enum MyEnum {
+                        Idkman,
+                        Lumbago,
+                    }
+            - enums variants are able to hold a value
+                - syntax:
+                    enum <enum_name> {
+                        <variant>(<data_type>)
+                    }
+                - example:
+                    enum MyEnum {
+                        Idkman(String),
+                        Lumbago(String),
+                    }
+
+        - access and enumeration
+            - enum variants are access using double colons ::
+                - enum variants are usually declared as a value of a variable
+                - syntax:
+                    let <variable_name> = <enum_nam>::<variant>;
+                - example:
+                    let maybe = MyEnum::Idkman;
+            - enums are commonly used in match expressinos
+                - example:
+                    match maybe {
+                        MyEnum::Idkman => println!("yes"),
+                        MyEnum::Lumbago => println!("no"),
+                    }
+            - enums that holds can values are able to be assigned values
+                - syntax:
+                    let <variable> = <enum_name>::<variant>(<value>);
+                - example:
+                    let my_var = MyEnum::Lumbago(String::from("probs"));
+                - this concept is also used in match expressions
+                    - example:
+                        match my_var {
+                            MyEnum::Idkman(text) => println!("{}", text),
+                            MyEnum::Lumbago(text) => println!("{}", text),
+                        }
+
     - Rust Structs
         - short for structure
         - is a custom data strutcure that enables grouping of related values together
@@ -310,7 +372,7 @@
             - classic or C-style structs
                 - this type of struct is commonly used to have descriptive names for each fields
                 - syntax:
-                    struct <struct_name> {
+                    struct <struct_object> {
                         <variable_name>: <data_type>,
                     }
                 - example:
@@ -325,14 +387,14 @@
                         - the Default Trait is used
                         - syntax:
                             #[derive(Default)]
-                            struct <struct_name> {...}
+                            struct <struct_object> {...}
                         - example:
                             #[derive(Default)]
                             struct MyStruct {...}
             - tuple structs
                 - this type of struct is used when field naming is not needed
                 - syntax:
-                    struct <struct_name>(<data_types>);
+                    struct <struct_object>(<data_types>);
                 - example:
                     struct MyStruct(String, i32, f64);
             - unit-like structs
@@ -342,7 +404,7 @@
                     - for types that need to implement behaviors
                     - or to act as a marker
                 - syntax:
-                    struct <struct_name>>;
+                    struct <struct_object>>;
                 - example:
                     struct MyStruct;
 
@@ -355,7 +417,7 @@
                     - every single field must be initialized
                 - classic or C-style structs
                     - syntax:
-                        let <struct_variable> = <struct_name> {...};
+                        let <struct_variable> = <struct_object> {...};
                     - example:
                         let my_struct = MyStruct {
                             my_num: 100,
@@ -364,12 +426,12 @@
                         };
                 - tuple structs
                     - syntax:
-                        let <struct_variable> = <struct_name>(<values>);
+                        let <struct_variable> = <struct_object>(<values>);
                     - example:
                         let my_struct = MyStruct("idkman".to_string, 100, 3.14);
                 - unit-like structs
                     - syntax:
-                        let <struct_variable> = <struct_name>;
+                        let <struct_variable> = <struct_object>;
                     - example:
                         let my_struct = MyStruct;
 
@@ -384,7 +446,7 @@
                         - uses the same concept of accessing structs but with the assigment = operator
                             - note that the struct variable must be mutable
                         - syntax:
-                            <struct_name>.<field> = <new_value>;
+                            <struct_object>.<field> = <new_value>;
                         - example:
                             my_struct.my_char = 'Y';
                 - tuple structs
@@ -397,7 +459,7 @@
                         - uses the same concept of accessing structs but with the assigment = operator
                             - note that the struct variable must be mutable
                         - syntax:
-                            <struct_name>.<index> = <new_value>;
+                            <struct_object>.<index> = <new_value>;
                         - example:
                             my_struct.0 = String::from("lumbago");
                 - unit-like structs
@@ -415,6 +477,29 @@
                         - trying to print the entire struct leads to an error
                 - unlike primitive data types that are copied, not moved
 
+            - structs are able to be printed with some prerequisites
+                - println!() or print!()
+                    - the format specifier of {:?} or {:#?} must be used
+                    - along with the #[debug(Debug)] trait
+                        - which is declared before the struct declaration
+                    - syntax:
+                        println!("{:?}", <struct_object>);
+                        // or 
+                        println!("{:#?}", <struct_object>);
+                - dbg!()
+                    - can print a struct without any of the debug formats
+                        - since it is a debug printer
+                    - can either take a reference to the object or move ownership to it
+                        - note that ownership rules applies, the original variable is lost
+                    - syntax:
+                        dbg!(<struct_object>);
+                        // or
+                        dbg!(&<struct+_object>);
+                    - the values are able to be passed over to another variable
+                        - example:
+                            let a = MyStruct{100, "maybe".to_string(), 'Y'};
+                            let b = dbg!(a); // prints a and moves it to b
+
     - Rust impl
         - an extension to Rust's structs which provides the behavior of the struct object
         - structs and impl is Rust's implementation of classes
@@ -424,28 +509,39 @@
         - declaration and definition
             - uses the impl keyword with the struct name
             - syntax:
-                impl <struct_name> {...}
+                impl <struct_object> {...}
             - example:
                 impl MyStruct {...}
             - there are two types of operation in impl
             - associated functions
-                - it is comparable to constructors in C++ or Java
-                - it is used to initialize fields in structs
-                - returns a Self object
-                    - which is the actual struct type that is the impl is based on
-                    - or the "storage" for the initialized data
+                - these are comparable to static methods in C++ or Java
+                - like functions, they are able to return any data type
                 - syntax:
                     impl <struct_name> {
-                        fn <function_name>(<parameters>) -> Self {...}
+                        fn <method_name>(<parameters>) -> <return_type> {...}
                     }
                 - example:
-                    impl MyStruct {
-                        fn new(my_num: i32, my_str: &str, my_char: char) -> Self {
-                            my_num: my_num,
-                            my_string: name.to_string(),
-                            my_char: my_char,
-                        }
+                    impl my_method() -> String {
+                        String::from("lumbago");
                     }
+                - associated functions are able to be used as "contructors"
+                    - it is comparable to constructors in C++ or Java
+                    - it is used to initialize fields in structs
+                    - returns a Self object
+                        - which is the actual struct type that is the impl is based on
+                        - or the "storage" for the initialized data
+                    - syntax:
+                        impl <struct_object> {
+                            fn <function_name>(<parameters>) -> Self {...}
+                        }
+                    - example:
+                        impl MyStruct {
+                            fn new(my_num: i32, my_str: &str, my_char: char) -> Self {
+                                my_num: my_num,
+                                my_string: name.to_string(),
+                                my_char: my_char,
+                            }
+                        }
             - methods
                 - similar to methods in other langauges like C++, Java and Python
                 - it is used to alter the behavior of the struct object
@@ -455,7 +551,7 @@
                 - immutable methods
                     - are not allowed to modify internal data
                     - syntax:
-                        impl <struct_name> {
+                        impl <struct_object> {
                             fn <method_name>(&self, <parameters>) {...}
                         }
                     - example:
@@ -467,7 +563,7 @@
                 - mutable methods
                     - are allowed to change fields of a struct object
                     - syntax:
-                        impl <struct_name> {
+                        impl <struct_object> {
                             fn <methdo_name>(&mut self, <parameters>) {...}
                         }
                     - example:
@@ -484,7 +580,7 @@
                 - uses the self parameter without any references
                     - this is how it hands over ownership
                 - syntax:
-                    impl <struct_name> {
+                    impl <struct_object> {
                         fn <method_name>(self, <parameters>) {...}
                     }
                 - example:
@@ -498,7 +594,7 @@
             - associated functions
                 - it is called using the struct name with a double colon::
                 - syntax:
-                    <struct_name>::<function>(<arguments>);
+                    <struct_object>::<function>(<arguments>);
                 - example:
                     MyStruct::new(120, String::from("idkman"), 3.1415)
             - methods
@@ -510,7 +606,7 @@
                         my_struct.my_method();
                 - verbose syntax:
                     - syntax:
-                        <struct_name>::<method>(&<mut> <object_name>, <arguments>);
+                        <struct_object>::<method>(&<mut> <object_name>, <arguments>);
                     - example:
                         MyStruct::my_method(&my_struct);
                         // or
@@ -526,15 +622,132 @@
                         my_struct.consumer();
                 - verbose syntax:
                     - syntax:
-                        <struct_name>::<method>(<object_name>, <arguments>);
+                        <struct_object>::<method>(<object_name>, <arguments>);
                     - example:
                         MyStruct::consumer(my_struct);   
-*/
-struct Yes {
-    maybe: String,
-    no: i32,
-}
 
-fn main() {
-    let probs: Yes = Yes;
-}
+    - Rust traits
+        - Rust's solution to OOP inheritance
+        - similar to inheritance in OOP-centered languages
+            - implementing traits inherits the methods inside said traits
+
+        - declaration and definition
+            - traits are declared using the trait keyword
+            - syntax:
+                trait <trait_name> {...}
+            - example:
+                trait MyTrait {...}
+            - similar to abstract classes in Java or virtual functions in C++
+                - traits can have functions with no bodies
+                - sidenote:
+                    - even though traits are very similar to abstract classes
+                        - they are unable to hold any fields
+                        - they can only hold methods
+                - syntax:
+                    trait <trait_name> {
+                        fn <method_name>(&self, <parameters>);
+                    }
+                - example:
+                    trait MyTrait {
+                        fn my_method(&self) {}; // no body
+                    }
+            - methods can also have a default body
+                - they are inherited automatically
+                    - they are not required to be defined in an implementation
+                    - except when they call an undefined method
+                - syntax:
+                    trait <trait_name> {
+                        fn <method_name>(&self, <parameters>) {...}
+                    }
+                - example:
+                    trait MyTrait {
+                        fn my_method(&self) {
+                            println!("Hello World");
+                        }
+                    }
+                - if the method calls the undefined method
+                    - then the method does not get inherited unless the undefined method is defined
+                    - example:
+                        trait MyTrait {
+                            fn my_method(&self);  // undefined
+
+                            fn call_stuff(&self);
+                                self.my_method(); // won't get inherited until my_method does
+                        }
+            - associated functions are able to be declared inside of traits
+                - note that implementing them requires a different syntax
+                - syntax:
+                    trait <trait_name> [
+                        fn <method_name>(<parameters>) -> <return_type> {...}
+                    ]
+                - examle:
+                    trait MyTrait {
+                        fn create() -> Self {...}
+                    }
+
+        - access and implementation
+            - traits are used to add methods to struct implementations
+                - implementing traits are similar to inheritance in other programming languages
+                - uses the "for" keyword
+                - syntax:
+                    impl <trait_name> for <struct_name> {...}
+                - example:
+                    impl MyTrait for MyStruct
+            - after being implementing the trait, all methods from it are "inherited" with a few caveats
+                - all methods without a body that were implemented from a trait are required to be defined
+                    - if not, the compiler will throw an error
+                    - example:
+                        impl MyTrait for MyStruct {
+                            fn my_method(&self) {
+                                println!("idkman");
+                            }
+                        }
+                - similarly, methods that depend on an undefined method are not inherited
+                    - not until the undefined method gets defined
+            - trait implementation example
+                - sample code:
+                    trait Yes {
+                        fn idkman(&self);
+
+                        fn lumbago(&self) {
+                            println!("bruh");
+                            self.idkman();
+                        }
+
+                        fn yippee() -> ();
+                    }
+
+                    struct No {
+                        vorp: String,
+                        korg: i32,
+                    }
+
+                    impl No {
+                        fn maybe(vorp: &str, korg: i32) -> Self {
+                            Self {
+                                vorp: String::from(vorp),
+                                korg: korg,
+                            }
+                        }
+                    }
+
+                    impl Yes for No {
+                        fn idkman(&self) {
+                            println!("{}", self.vorp);
+                        }
+
+                        fn yippee() -> () {
+                            println!("wew");
+                        }
+                    }
+
+                    fn main() {
+                        No::yippee();
+                        let probs: No = No::maybe("probably", 100);
+                        probs.idkman();
+                        probs.lumbago();
+                        println!("{}", probs.korg);
+                    }
+*/
+
+
