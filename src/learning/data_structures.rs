@@ -296,68 +296,6 @@
                             - meaning it doesn't need to request memory from the system
                             - only when it reaches the max capacity
 
-    - Rust Enums
-        - short for enumeration
-        - used to define a type that can be in the form of a few different values
-        - each value of an enum is called an "variant"
-        - why enums?
-            - groups related values into one type
-            - leads to cleaner and readable code
-            - handles different cases in match expressions
-
-        - declaration and definition
-            - enums are declared using the keyword
-            - syntax:
-                enum <enum_name> {...}
-            - example:
-                enum MyEnum {...}
-            - enums must also have a set of variants (values) declared
-                - separated by commas
-                - syntax:
-                    enum <enum_name> {
-                        <variant>
-                    }
-                - example:
-                    enum MyEnum {
-                        Idkman,
-                        Lumbago,
-                    }
-            - enums variants are able to hold a value
-                - syntax:
-                    enum <enum_name> {
-                        <variant>(<data_type>)
-                    }
-                - example:
-                    enum MyEnum {
-                        Idkman(String),
-                        Lumbago(String),
-                    }
-
-        - access and enumeration
-            - enum variants are access using double colons ::
-                - enum variants are usually declared as a value of a variable
-                - syntax:
-                    let <variable_name> = <enum_nam>::<variant>;
-                - example:
-                    let maybe = MyEnum::Idkman;
-            - enums are commonly used in match expressinos
-                - example:
-                    match maybe {
-                        MyEnum::Idkman => println!("yes"),
-                        MyEnum::Lumbago => println!("no"),
-                    }
-            - enums that holds can values are able to be assigned values
-                - syntax:
-                    let <variable> = <enum_name>::<variant>(<value>);
-                - example:
-                    let my_var = MyEnum::Lumbago(String::from("probs"));
-                - this concept is also used in match expressions
-                    - example:
-                        match my_var {
-                            MyEnum::Idkman(text) => println!("{}", text),
-                            MyEnum::Lumbago(text) => println!("{}", text),
-                        }
-
     - Rust Structs
         - short for structure
         - is a custom data strutcure that enables grouping of related values together
@@ -372,7 +310,7 @@
             - classic or C-style structs
                 - this type of struct is commonly used to have descriptive names for each fields
                 - syntax:
-                    struct <struct_object> {
+                    struct <struct_name> {
                         <variable_name>: <data_type>,
                     }
                 - example:
@@ -387,14 +325,14 @@
                         - the Default Trait is used
                         - syntax:
                             #[derive(Default)]
-                            struct <struct_object> {...}
+                            struct <struct_name> {...}
                         - example:
                             #[derive(Default)]
                             struct MyStruct {...}
             - tuple structs
                 - this type of struct is used when field naming is not needed
                 - syntax:
-                    struct <struct_object>(<data_types>);
+                    struct <struct_name>(<data_types>);
                 - example:
                     struct MyStruct(String, i32, f64);
             - unit-like structs
@@ -404,7 +342,7 @@
                     - for types that need to implement behaviors
                     - or to act as a marker
                 - syntax:
-                    struct <struct_object>>;
+                    struct <struct_name>;
                 - example:
                     struct MyStruct;
 
@@ -417,7 +355,7 @@
                     - every single field must be initialized
                 - classic or C-style structs
                     - syntax:
-                        let <struct_variable> = <struct_object> {...};
+                        let <struct_variable> = <struct_name> {...};
                     - example:
                         let my_struct = MyStruct {
                             my_num: 100,
@@ -426,12 +364,12 @@
                         };
                 - tuple structs
                     - syntax:
-                        let <struct_variable> = <struct_object>(<values>);
+                        let <struct_variable> = <struct_name>(<values>);
                     - example:
                         let my_struct = MyStruct("idkman".to_string, 100, 3.14);
                 - unit-like structs
                     - syntax:
-                        let <struct_variable> = <struct_object>;
+                        let <struct_variable> = <struct_name>;
                     - example:
                         let my_struct = MyStruct;
 
@@ -500,7 +438,7 @@
                             let a = MyStruct{100, "maybe".to_string(), 'Y'};
                             let b = dbg!(a); // prints a and moves it to b
 
-    - Rust impl
+    - Rust struct impl
         - an extension to Rust's structs which provides the behavior of the struct object
         - structs and impl is Rust's implementation of classes
             - structs provide the storage for the data
@@ -509,7 +447,7 @@
         - declaration and definition
             - uses the impl keyword with the struct name
             - syntax:
-                impl <struct_object> {...}
+                impl <struct_name> {...}
             - example:
                 impl MyStruct {...}
             - there are two types of operation in impl
@@ -531,7 +469,7 @@
                         - which is the actual struct type that is the impl is based on
                         - or the "storage" for the initialized data
                     - syntax:
-                        impl <struct_object> {
+                        impl <struct_name> {
                             fn <function_name>(<parameters>) -> Self {...}
                         }
                     - example:
@@ -551,7 +489,7 @@
                 - immutable methods
                     - are not allowed to modify internal data
                     - syntax:
-                        impl <struct_object> {
+                        impl <struct_name> {
                             fn <method_name>(&self, <parameters>) {...}
                         }
                     - example:
@@ -563,7 +501,7 @@
                 - mutable methods
                     - are allowed to change fields of a struct object
                     - syntax:
-                        impl <struct_object> {
+                        impl <struct_name> {
                             fn <methdo_name>(&mut self, <parameters>) {...}
                         }
                     - example:
@@ -580,7 +518,7 @@
                 - uses the self parameter without any references
                     - this is how it hands over ownership
                 - syntax:
-                    impl <struct_object> {
+                    impl <struct_name> {
                         fn <method_name>(self, <parameters>) {...}
                     }
                 - example:
@@ -748,6 +686,196 @@
                         probs.lumbago();
                         println!("{}", probs.korg);
                     }
+
+    - Rust Enums
+        - short for enumeration
+        - used to define a type that can be in the form of a few different values
+        - each value of an enum is called an "variant"
+        - why enums?
+            - groups related values into one type
+            - leads to cleaner and readable code
+            - handles different cases in match expressions
+
+        - declaration and definition
+            - enums are declared using the keyword
+            - syntax:
+                enum <enum_name> {...}
+            - example:
+                enum MyEnum {...}
+            - enums must also have a set of variants (values) declared
+                - separated by commas
+                - syntax:
+                    enum <enum_name> {
+                        <variant>
+                    }
+                - example:
+                    enum MyEnum {
+                        Idkman,
+                        Lumbago,
+                    }
+            - enums variants are able to hold a value
+                - syntax:
+                    enum <enum_name> {
+                        <variant>(<data_type>)
+                    }
+                - example:
+                    enum MyEnum {
+                        Idkman(String),
+                        Lumbago(String),
+                    }
+
+        - access and enumeration
+            - enum variants are access using double colons ::
+                - enum variants are usually declared as a value of a variable
+                - syntax:
+                    let <variable_name> = <enum_nam>::<variant>;
+                - example:
+                    let maybe = MyEnum::Idkman;
+            - enums are commonly used in match expressinos
+                - example:
+                    match maybe {
+                        MyEnum::Idkman => println!("yes"),
+                        MyEnum::Lumbago => println!("no"),
+                    }
+            - enums that holds can values are able to be assigned values
+                - syntax:
+                    let <variable> = <enum_name>::<variant>(<value>);
+                - example:
+                    let my_var = MyEnum::Lumbago(String::from("probs"));
+                - this concept is also used in match expressions
+                    - example:
+                        match my_var {
+                            MyEnum::Idkman(text) => println!("{}", text),
+                            MyEnum::Lumbago(text) => println!("{}", text),
+                        }
+
+    - Rust enum impl
+        - an extension to Rust's enums
+        - similar to struct impl
+
+        - declaration and definition
+            - uses the impl keyword with the enum name
+            - syntax:
+                impl <enum_name> {...}
+            - example:
+                impl MyEnum {...}
+            - like struct impl, there are two types of operations
+            - associated functions
+                - these functions does not reference self
+                - syntax:
+                    impl <enum_name> {
+                        fn <method_name>(<parameters>) {...}
+                    }
+                - example:
+                    impl MyEnum {
+                        fn my_method() -> u64 {
+                            1000000000000000
+                        }
+                    }
+                
+                - similar to structs, associated functions are able oto be used as "constructors"
+                    - these type of associated functions must return a Self object
+                        - referring to the enum object
+                    - syntax:
+                        impl <enum_name> {
+                            fn <method_name>(<parameters>) -> Self {...}
+                        }
+                    - example:
+                        impl MyEnum {
+                            fn my_method() -> Self {
+                                Self::Idkman("lumbago")
+                            }
+                        }
+
+            - methods
+                - similar to struct methods
+                    - used to alter the behavior of the enum object
+                - these must have a reference to the self object
+                    - it must be the first parameter
+                - immutable methods
+                    - are not allowed to modify internal data
+                    - syntax:
+                        impl <enum_name> {
+                            fn <method_name>(&self, <parameters>) {...}
+                        }
+                    - example:
+                        impl MyEnum {
+                            fn my_method(&self) {
+                                match self {
+                                    MyEnum::Idkman => println!("lumbago"),
+                                    MyEnum::Lumbago => println!("idkman"),
+                                }
+                            }
+                        }
+                - mutable methods
+                    - are allowed to change fields of a enum object
+                    - syntax:
+                        impl <enum_name> {
+                            fn <methdo_name>(&mut self, <parameters>) {...}
+                        }
+                    - example:
+                        impl MyEnum {
+                            fn idkman(&mut self) {
+                                match self {
+                                    MyEnum::Idkman(yes) => *yes += "yes",
+                                    MyEnum::Lumbago(no) => *no += "no",
+                                }
+                            }
+                        }                                            
+                - consuming methods
+                    - unlike regular methods
+                        - this type of methods "consumes" the object instance
+                            - i.e takes ownership over the enum variable
+                            - redering it useless after it is called
+                    - uses the self parameter without any references
+                        - this is how it hands over ownership
+                    - syntax:
+                        impl <enum_name> {
+                            fn <method_name>(self, <parameters>) {...}
+                        }
+                    - example:
+                        impl MyEnum {
+                            fn consumer(self) {
+                                println!("bye bye object");
+                            }
+                        }
+
+        - access and method calls
+            - associated functions
+                - it is called using the enum name with a double colon::
+                - syntax:
+                    <enum_name>::<function>(<arguments>);
+                - example:
+                    MyEnum::my_method();
+            - methods
+                - regardless if the mutability, there are two ways to call a method
+                - standard syntax:
+                    - syntax:
+                        <object_name>.<method>(<arguments>);
+                    - example:
+                        my_enum.my_method();
+                - verbose syntax:
+                    - syntax:
+                        <enum_name>::<method>(&<mut> <object_name>, <arguments>);
+                    - example:
+                        MyEnum::my_method(&my_enum);
+                        // or
+                        MyEnum::idkman(&mut my_enum);
+                - for general purposes, the standard syntax is better
+                    - the compiler automatically handles the references and borrowing
+            - consuming methods
+                - similar to method calls with regular methods
+                - standard syntax:
+                    - syntax:
+                        <object_name>.<method>(<arguments>);
+                    - example:
+                        my_enum.consumer();
+                - verbose syntax:
+                    - syntax:
+                        <enum_name>::<method>(<object_name>, <arguments>);
+                    - example:
+                        MyEnum::consumer(my_enum);  
+                        
 */
 
 
