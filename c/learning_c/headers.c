@@ -1,0 +1,33 @@
+/* headers
+    - declared at the start of the program
+    - required to use features
+        - like printf, scanf, string, etc.
+    - libraries:
+        - stdio.h
+            - includes the input and output libraries
+            - printf for output
+            - scanf for input
+            - syntax:
+                - #include <stdio.h> // header declaration
+        - stdbool.h
+            - includes the boolean libraries
+            - enables the use of the bool data type
+            - syntax:
+                - #include <stdbool.h> // header declaration
+                  bool my_bool;
+        - string.h
+            - includes the string libraries and functions
+            - enables the use of string functions
+            - syntax:
+                - #include <string.h> //header declaration
+        - math.h
+            - includes the math functions and libraries
+            - enables the use of math functions
+            - syntax:
+                - #include <math.h>
+        - stdlib.h
+            - includes most of the low-level libraries
+                - like for dynamic memory management
+            - syntax:
+                - #include <stdlib.h>
+*/
