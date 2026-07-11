@@ -1,0 +1,33 @@
+database = []
+
+for a in range(int(input('Enter Number of Personal Information to Fill Up: '))):
+    info, name, addr, cnum, educ = [], [], [], [], []
+    print(f'\nPersonal Profile #{a+1}\n \nEnter Full Legal Name')
+    name.append(input('First Name \t: '))
+    name.append(input('Middle Name\t: '))
+    name.append(input('Last Name  \t: '))
+    info.append(name)
+    print('\nEnter Permanent Address')
+    addr.append(input('Barangay          : '))
+    addr.append(input('Municipality/City : '))
+    addr.append(input('Province          : '))
+    info.append(addr)
+    print('\nEnter Personal Contacts')
+    cnum.append(input('Mailing Address  : '))
+    cnum.append(input('Cellphone Number : '))
+    cnum.append(input('E-mail Address   : '))
+    info.append(cnum)
+    print('\nEnter Educational Attainments')
+    educ.append(input('Elementary School Attended : '))
+    educ.append(input('Secondary School Attended  : '))
+    educ.append(input('Tertiary School Attended   : '))
+    info.append(educ)
+    database.append(info)
+    print(f'\033c \n{'T-T ' * 15}')
+for x in range(len(database)):
+    print(f'\nPersonal Profile #{x+1}')
+    print(f'Name: {database[x][0][2]}, {database[x][0][0]} {database[x][0][1]} \n')
+    print(f'Permanent Address \nBarangay\t: {database[x][1][0]} \nMunicipality\t: {database[x][1][1]} \nProvince\t: {database[x][1][2]} \n')
+    print(f'Personal Contacts \nMailing Address\t: {database[x][2][0]} \nCellphone Number: {database[x][2][1]} \nE-mail Address\t: {database[x][2][2]} \n')
+    print(f'Educational Attainments \nElementary\t: {database[x][3][0]} \nSecondary\t: {database[x][3][1]} \nTertiary\t: {database[x][3][2]} \n')
+    print(f'{'T-T ' * 15}')
