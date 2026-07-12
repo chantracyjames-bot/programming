@@ -128,6 +128,32 @@
                     print!("{}", x);     // 2
             - it is recommended to have different names for each variable instead of overshadowing them
                 - this makes the code easier to read
+
+        - lifetime
+            - Rust prevents dangling pointers by introducing lifetimes
+                - a reference must not outlive the data it is pointing to
+            - is the time it takes for a variable to be dropped
+                - commonly when the variable hits the closing brace }
+                - ending its lifetime
+            - a reference is able to be tagged (or named)
+                - multiple references are able to be tagged with the same name
+                - with this, if one of the reference with the same name gets freed (or dropped)
+                    - then the references become invalid
+                - syntax:
+                    '<tag>
+                - example:
+                    'a
+                - sample code:
+                    fn lifetimes<'a>(x: &'a str, y: &'a str) -> &'a str -{
+                        a
+                    }
+                    // the output of lifetimes() is tied to the lifetime tag 'a
+                    // if one of the references with the same tag goes out of scope
+                    // then the anything with the tag 'a get's invalidated
+                - sidenote:
+                    - 'static is a reserved name
+                        - used for strings that lasts until the end of the program
+                    - '_ is an anonymous placeholder
 */
 
 
