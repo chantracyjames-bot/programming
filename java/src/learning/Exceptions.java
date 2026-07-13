@@ -169,6 +169,23 @@
                     catch(<exception1> | <exception2> e) {...}
                 - example:
                     catch (ArithmeticException | ArrayIndexOutOfBoundsException e) {...}
+
+        - try-with-resources
+            - a special implementation of the try-catch block
+                - with added support for streams
+                - which it closes automatically after the end of the try block
+            - syntax:
+                try (<stream>) {...}
+            - example:
+                try (FileWriter myWriter = new FileWriter("file")) {...}
+            - the catch statement is used the same way as a regular catch statement
+                - for Exception handling and Error debugging
+            - sample code:
+                try (FileWriter myWriter = new FileWriter("file")) {
+                    myWriter.write("idkman");
+                } catch (IOException e) {
+                    System.out.println("idkman"); 
+                }
 */
 
 public class Exceptions {
