@@ -101,6 +101,53 @@
             - when naming constant (final) variables, it is recommended to be in SCREAMING_SNAKE_CASE
             - exanple:
                 final int NUM1 = 1, NUM2 = 2;
+
+    - wrapper classes
+        - certain classes in Java requires an input of object
+            - primitive data types are not allowed here
+            - Java has wrapper classes, converting from a primitive data type to a class object
+                - object methods converts the wrapper object into its primiive counterpart
+            - wrapper classes
+                Tepe        Wrapper Class   Object Methods
+                byte        Byte            .byteValue()
+                short       Short           .shortValue()
+                int         Integer         .intValue()
+                long        Long            .longValue()
+                float       Float           .floatValue()
+                double      Double          .doubleValue()
+                boolean     Boolean         .booleanValue()
+                char        Character       .charValue()
+            - example:
+                ArrayList<int> myInt = new ArrayList<int>();         -> Error
+                // instead
+                ArrayList<Integer> myInt = new ArrayList<Integer>(); // valid
+            - sidenote:
+                - create wrapper objects of primitive data types
+                    - they are declared the same way but instead of the primitive type decalration
+                        - the wrapper class is used instead
+                    - syntax:
+                        <wrapperClass> <objectName> = <value>;
+                    - example:
+                        Integer myInt = 100;
+                        Double myDouble = 3.14;
+                        Character myChar = 'Y';
+                - it is possible to convert wrapper objects to primitive types
+                    - it is through using their respective object methods
+                    - syntax:
+                        <objectName>.<objectMethod>();
+                    - example:
+                        myInt.intValue();
+                        myDouble.doubleValue();
+                        myChar.charValue();
+                - it is also possible to convert a wrapper object into a string
+                    - it is through the .toString() method
+                    - syntax:
+                        <objectName>.toString();
+                    - example:
+                        myInt.toString();
+                        myDouble.toString();
+                        myChar.toString();
+                    - useful for using String methods on wrapper objects
 */
 
 public class Variables {

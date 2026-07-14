@@ -29,8 +29,8 @@
             - .createNewFile()
                 - returns a Boolean value
                 - creates a new file
-                    - returns True if the operation if successful
-                    - returns False if not
+                    - returns true if the operation if successful
+                    - returns false if not
                 - must be wrapped inside a try-catch block
                     - this is due to it throwing a IOException if an error occurs during the file creation
                 - syntax:
@@ -83,8 +83,8 @@
             - .mkdir()
                 - returns a Boolean value
                 - creates a new folder
-                    - returns True if the operation is successful
-                    - returns False if not
+                    - returns true if the operation is successful
+                    - returns false if not
                 - syntax:
                     <dirVariable>.mkdir();
                 - example:
@@ -258,14 +258,177 @@
                     } catch (FileNotFoundException e) {
                         System.out.println("idkman"); 
                     }
+
+    - I/O Streams
+        - unlike file management through the File class
+            - it is unable to write or read files with out the FileWriter and Scanner class
+            - it can only query if the file exists, query the name or size, or create and delete files
+        - I/O Streams are move advanced than the File class due to it being able to handle both text and binary data
+            - binary data like images, audio, PDFs, etc.
+        - Byte Streams
+            - examples are FileInputStream and FileOutputStream
+        - Character Streams
+            - examples are FileReader, FileWriter, BufferedReader and Bufferedriter
+
+        - FileInputSream
+            - used to read a file's contents byte by byte
+            - using the FileInputStream class, it must first be imported
+                - imported from the java.io.FileInputStream package
+                - syntax:
+                    import java.io.FileInputStream;
+            - similar to the File class, an object must be created to use the class method
+                - syntax:
+                    FileInputStream <inputVariable> = new FileInputStream(<file>);
+                - example:
+                    FIleInputStream myInput = new FileInputStream("file");
+                    // or
+                    try (FileInputStream myInput = new FileInputStream("file")) {...}
+
+                - note that FileInputStream can also take a File object as an argument
+                    - syntax:
+                        FileInputStream <inputVariable> = new FileInputStream(<fileVariable>);
+                    - example:
+                        FIleInputStream myInput = new FileInputStream(myFile);
+                        // or
+                        try (FileInputStream myInput = new FileInputStream(myFile)) {...}
+
+            - reading data from any file is done by storing each byte in a variable through the .read() method
+                - and converting that byte into a character by type casting it through (char)
+                - note that a value of -1 indicates that the variable is at the end of file
+                - sample code:
+                    try (FileInputStream myInput = new FileInputStream("file")) {
+                        int i;                                                    // used to store each raw bytes
+                        while((i = myInput.read()) != -1) {                       // runs it through a loop
+                                                                                  // storing each consequtive byte to the variable i
+                            System.out.print((char) i);                           // prints each byte and casting them as a character                                    
+                        }
+                    } catch (IOExeption e) {
+                        System.out.println("idkman"); 
+                    }
+
+        - FileOutputStream
+            - used to write to a file, byte by byte
+            - using the FileOutputStream class, it must first be imported
+                - imported from the java.io.FileOutputStream package
+                - syntax:
+                    import java.io.FileOutputStream;
+            - similar to the File class, an object must be created to use the class method
+                - syntax:
+                    FileOutputStream <outputVariable> = new FileOutputStream(<file>);
+                - example:
+                    FileOutputStream myOutput = new FileOutputStream("file");
+                    // or
+                    try (FileOutputStream myOutput = new FileOutputStream("file")) {...}
+
+                - note that FileOutputStream can also take a File object as an argument
+                    - syntax:
+                        FileOutputStream <outputStream> = new FileOutputStream(<fileVariable>);
+                    - example:
+                        FileOutputStream myOutput = new FileOutputStream(myFile);
+                        // or
+                        try (FileOutputStream myOutput = new FileOutputStream(myFile)) {...}
+
+                - similar to the FileWriter class, FileOutputStream can also take in a second argument
+                    - dictating if it enters append mode or not
+                    - ny default, without append mode, FileOutputStream overwrites the entire file with the .write() method is used
+                    - but using append mode, FileOutputStream will only write to the end of the pre-existing file
+                        - instead of overwriting it, it adds on to it
+                    - syntax:
+                        fileOutputStream <outputVariable> = new FileOutputStream(<file>, <boolean>);
+                    - example:
+                        FileOutputStream myOutput = new FileOutputStream("file", true); // turns on append mode
+
+            - writing data to a file is done through the .write() method
+                - note that the output must be binary
+                - text is not allowed
+                - sample code:
+                // uses FileInputStream to copy a file
+                try (FileInputStream myInput = new FileInputStream("file");           // uses the FileInputClass
+                     FileOutputStream myOutput = new FileOutputStream("otherFile")) { 
+                    int i;                                                            // used to store each raw bytes
+                    while ((i = myInput.read()) != -1) {                              // runs reading each byte into a loop
+                        myOutput.write(i);                                            // each loop, it writes the raw bytes from 
+                                                                                        // variable i into the output file
+                                                                                      // writing in binary format
+                    }     
+                } catch (IOException) {
+                    System.out.println("idkman"); 
+                }
+
+        - BufferedReader
+            - a faster version of the Scanner class
+                - replacing due to its faster speeds and less performance overheads
+            - usually combined with the FileReader class. which handles the opening of files
+            - using the BuffedReader class, it must first imported
+                - imported from the java.io.BufferecReader package
+                - syntax:
+                    import java.io.BufferedReader;
+            - using the FileWriter class as an argument
+                - BufferedReade enables line by line reading at faster speeds than the Scanner class
+                - syntax:
+                    BufferedReader <readerVariable> = new BufferedReader(new FileReader(<filename>));
+                    // or 
+                    BufferedReader <readerVariable> = new BufferedReader(new FileReader(<fileVariable>));
+                - example:
+                    try (BufferedReader myReader = new BufferedReader(new FileReader("file"))) {...}
+                    
+            - reading text line by line is done through the .readLine() method
+                - with a similar syntax to the Scanner class
+                - sample code:
+                    try (BufferedReader myReader = new BufferedReader(new FileReader("file"))) {
+                        String line;                                                             // used to store each line
+                        while((line = myReader.readLine()) != null) {                            // loops through each line in the file
+                                                                                                    // assigning each line to the line variable
+                                                                                                    // stops when the loop reaches the end of the file
+                                                                                                        // indicated by null
+                            System.out.println(line);                                            // prints each line
+                        }
+                    } catch (IOException e) {
+                        System.out.println("idkman"); 
+                    }
+
+        - BufferedWriter
+            - an advanced version of the FileWriter class
+                - being able to handle large text at the same time
+            - usually combimed with the FileWriter class, which handles the writing to files
+            - using the BufferedWriter class, it must first be imported
+                - imported from the java.io.BufferedWriter package
+                - syntax:
+                    import java.io.BufferedWriter;
+
+            - using the FileWriter class as an argument
+                - syntax:
+                    BufferedWriter <writerVariable> = new BufferedWriter(new FileWriter(<filename>));
+                    // or 
+                    BufferedWriter <writerVariable> = new BufferedWriter(new FileWriter(<fileVariable>));
+                - example:
+                    try (BufferedWriter myWriter = new BufferedWriter(new FileWriter("file"))) {...}
+                - note that FIleWriter can also take in a Boolean as a second argument to toggle append mode
+                              
+            - writing text line by line is done though the .write() method
+                - using the .newLine() to add a line break or new line
+                - sample code:
+                    try (BufferedWriter myWriter = new BufferedWriter(new FileWriter("file"))) {
+                        myWriter.write("idkman");                                                // writes to the first line
+                        myWriter.newLine();                                                      // inserts a new line
+                        myWriter.write("idkman");                                                // writes to the second line 
+                    } catch (IOException e) {
+                        System.out.println("idkman"); 
+                    }
+
+
 */
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class FileManagement {
-    public static void main(String[] args) {
+    static void basicFiles(String[] args) {
         try{
             String argument = args[0];
 
@@ -295,5 +458,36 @@ public class FileManagement {
         } catch (IOException e) {
             System.out.println("file error");
         }
+    }
+
+    static void ioStreamFiles(String[] args) {
+        //String argument = args[0];
+
+        try(FileInputStream input = new FileInputStream("../../../main.txt")) {
+            int i;
+            while ((i = input.read()) != -1) {
+                System.out.print((char) i);
+            }
+        } catch (IOException e) {
+            System.out.println("idkman");
+        }
+    }
+
+    static void bufferedFiles(String[] args) {
+        String argument = args[0];
+
+        try (BufferedReader myReader = new BufferedReader(new FileReader(argument))) {
+            String line;
+
+            while((line = myReader.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            System.out.println("idkman");
+        }
+    }
+
+    public static void main(String[] args) {
+        bufferedFiles(args);
     }
 }
