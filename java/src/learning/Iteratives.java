@@ -73,6 +73,57 @@
                 }
             - sidenote:
                 - the loop variable type must match the iterable type
+
+    - Iterators
+        - are objects that can be used to toop through collections
+            - mainly Collection type objects like ArryaLists, HashSets, etc.
+        - the term comes from "iterating" which is a technical from of looping
+
+        - declaration and initialization
+            - before an Iterator object is declared, it must first be imported
+                - it is imported from the java.util package
+                - syntax:
+                    import java.util.Iterator;
+            - after being imported an iterator object must be tied to a colletion
+                - calling that collection's iterator method
+                - syntax:
+                    Iterator<object> <iteratorObject> = <colletionObject>.iterator();
+                - example:
+                    Iterator<String> myIterator = myArrayList.iterator();
+                - it is possible to declare an Iterator variable using the var keyword
+                    - syntax:
+                        var <mapObject> = <collectionObject>.iterator();
+                    - example:
+                        var myIterator = myArrayList.iterator();
+
+        - access and iteration
+            - an iterator can be "advanced" using a few methods
+                - the .hasNext() method returns a boolean if the object being iterated has a succeeding value
+                    - indicating whether or not the object's elements are exhausted or not
+                    - syntax:
+                        <iteratorObject>.hasNext();
+                    - example:
+                        myIterator.hasNext();
+                - advacning the iterator is done through the .next() method
+                    - syntax:
+                        <iteratorObject>.next();
+                    - example:
+                        myIterator.next();
+                    - note that an Excepttion will be thrown if the iterator goes out of bounds
+                        - similar to the Index Out Of Bounds Exception
+
+            - an Iterator can remove elements form a collection
+                - it is done through the .remove() method
+                    - typically done while inside a loop
+                - syntax:
+                    <iteratorObject>.remove();
+                - example:
+                    myIterator.remove();
+                - sidenote:
+                    - it is recommended to remove items using a while loop with the .next() method
+                    - removing items when in a for loop or a for-each loop will not work correctly
+                        - due to the size of the collection changing when removing items
+        
 */
 
 public class Iteratives {
