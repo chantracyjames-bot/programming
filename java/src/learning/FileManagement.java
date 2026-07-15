@@ -208,15 +208,6 @@
                     - if FileWriter is not set to append mode
                         - it will overwrite the contents of the file
                         - deleting any previous entries
-            - it is recommended to wrap the entire process inside a try-with-resources
-                - using it, there is no need to close the stream with
-                - since the try-with-resources block automatically closes it after the try block ends
-                - example:
-                    try (File myFile = new File("file")) {
-                        myFile.createNewFile();
-                    } catch (IOException e) {
-                        System.out.println("idkman"); 
-                        }
 
         - reading a file
             - reading into a file is done through the Scanner class 
