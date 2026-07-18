@@ -418,43 +418,215 @@
                     String.valueOf(100); // "100"
 
         - Math class methods
-            - .max()
-                - queries the highest value between two values
-                - syntax:
-                    Math.max(x, y);
-            - .min()
-                - queries the lowest value between two values
-                - syntax:
-                    Math.min(x, y);
-            - .sqrt()
-                - performs a square root operation
-                - syntax:
-                    Matth.sqrt(x);
             - .abs()
                 - finds the absolute value 
-                - i.e. converts the number into a positive number
+                    - i.e. converts the number into a positive number
+                - returns a positive double, float, int or long value
                 - syntax:
                     Math.abs(x);
-            - .pow()
-                - raises a number to a power
+                - example:
+                    Math.abs(-10); // 10
+            - .addExact()
+                - adds two values
+                - returns a long or an int value
+                    - throws a ArithmeticException if the sum causes an overflow
                 - syntax:
-                    Math.pow(x, y); // x is the base number, y is the exponent
-            - .round()
-                - rounds a number to the nearest integer
+                    Math.addExact(x, y);
+                - example:
+                    Math.addExact(1, 1); // 2
+            - .cbrt()
+                - performs a cube root operation
+                - returns a double value
                 - syntax:
-                    Math.round(x);
+                    Math.cbrt(x);
+                - example:
+                    Math.cbrt(27); // 3
             - .ceil()
                 - rounds a number to the nearest next integer
+                - returns a double value
                 - syntax:
                     Math.ceil(x);
+                - example:
+                    Math.ceil(3.14); // 4.0
+            - .copySign()
+                - copies the sign of the second argument and places it on the first
+                - returns double or a float value
+                - syntax:
+                    Math.copySign(x, y);
+                - example:
+                    Math.copySign(-1, 4); // 1
+            - decrementExact()
+                - returns exactly one integer less than the argument
+                - returns an long or an int value
+                    - throws an ArithmeticException if an overflow occurs
+                - syntax:
+                    Math.decrementExact(x);
+                - example:
+                    Math.decrementExact(1); // 0
             - .floor()
                 - rounds a number to the nearest preceding integer
                 - syntax:
                     Math.floor(x);
+                - example:
+                    Math.floor(2.72); // 2.0
+            - .floorDiv()
+                - performs a division operation between two arguments
+                    - and then rounds the quotient down
+                - returns a long or an int value
+                - syntax:
+                    Math.floorDiv(x, y);
+                - example:
+                    Math.floorDiv(10, 3); // 3
+            - .floorMod()
+                - performs a division operation between two arguements
+                    - and then returns the modulo of the remainder rounded up
+                - returns a long or an int value
+                - syntax:
+                    Math.floorMod(x, y);
+                - example:
+                    Math.floorMod(10, 3); // 1
+            - .incrementExact()
+                - returns exactly one integer more than the argument
+                - returns a long or an int value
+                    - throws an ArithmeticException if an overflow occurs
+                - syntax:
+                    Math.incrementExact(x);
+                - example:
+                    Math.incrementExact(1); // 2 
+            - .max()
+                - queries the highest value between two values
+                - returns a double, float, int, or long value
+                - syntax:
+                    Math.max(x, y);
+                - example:
+                    Math.max(9, 5); // 9
+            - .min()
+                - queries the lowest value between two values
+                - returns a double, float, int or long value
+                - syntax:
+                    Math.min(x, y);
+                - example:
+                    Math.min(9, 5); // 5
+            - .multipleExact()
+                - returns the exact product between two arguements
+                - returns a long or an int value
+                    - throws an ArithmeticException if an overflow occurs
+                - syntax:
+                    Math.multiplyExact(x, y);
+                - example:
+                    Math.multiplyExact(1, 1); // 1
+            - .negateExact()
+                - returns the exact number but in the opposite sign (domain)
+                - returns a long or an int value
+                    - throws an ArithmeticException if an overflow occurs
+                - syntax:
+                    Math.negateExact(x);
+                - example:
+                    Math.negateExact(Integer.MIN_VALUE); -> Error
+            - .nextAfter()
+                - finds the next floating point number 
+                    - in the direction of the second argument
+                - returns a double or float value
+                - syntax:
+                    Math.nextAfter(x, y);
+                - example:
+                    Math.nextAfter(1f, 2f); // 1.0000001
+            - .nextDown()
+                - finds the next floating point number
+                    - in the negative direction
+                - returns a double or float value
+                - syntax:
+                    Math.nextDown(x);
+                - example:
+                    Math.nextDown(1); // 0.99999994
+            - .nextUp()
+                - finds the next floating point number
+                    - in the positive direction
+                - returns a double or float number
+                - syntax:
+                    Math.nextUp(x);
+                - example:
+                    Math.nextUp(1); // 1.0000001
+            - .pow()
+                - raises a number to a power
+                    - the first argument is the base
+                    - the second argument is the exponent
+                - syntax:
+                    Math.pow(x, y);
+                - example:
+                    Math.pow(3, 2); // 9
             - .random()
-                - returns a double ranging from 0.0 (inclusive) to 1.0 (exlusive)
+                - returns a double ranging from 0.0 to 1.0
+                    - 0.0 is inclusive, 1.0 is exclusive
                 - syntax
-                    int myRandomNum = (int) Math.Random * 101; // 0 to 100
+                    Math.random();
+                - example:
+                    Math.random(); // 0.00 to 0.99 
+            - .rint()
+                - rounds a number to the nearest integer
+                    - if the both integers are equally as far (0.5)
+                        - the method returns the nearest even number
+                - returns a double value
+                - syntax:
+                    Math.rint(x);
+                - example:
+                    Math.rint(1.5); // 2   
+            - .round()
+                - rounds a number to the nearest integer
+                - syntax:
+                    Math.round(x);
+                - example:
+                    Math.round(0.6); // 1
+            - .scalb()
+                - performs the mathemetical operation of x*2^y
+                    - the first argument is the base
+                    - the second argument is the exponent of 2
+                - returns a double or a float value
+                - syntax:
+                    Math.scalb(x, y);
+                - example:
+                    Math.scalb(3.0, 3.0); // 24.0
+            - .signum()
+                - queries the sign of the number
+                - return a double or a float
+                    - -1 if the number is negative
+                    - 1 if the number is positive
+                    - 0 if the number is exactly zero
+                - syntax:
+                    Math.signum(x);
+                - example:
+                    Math.signum(10); // 1.0
+            - .sqrt()
+                - performs a square root operation
+                - syntax:
+                    Math.sqrt(x);
+                - example:
+                    Math.sqrt(9); // 3
+            - .subtractExact()
+                - subtracts two values
+                - returns a long or an int value
+                    - throws a ArithmeticException if the difference causes an overflow
+                - syntax:
+                    Math.subtractExact(x, y);
+                - example:
+                    Math.subtractExact(1, 1); // 0
+            - .toIntExact()
+                - converts a long value to an int value
+                - returns an int value
+                    - throws a ArithmeticException if the result causes an overflow
+                - syntax:
+                    Math.toIntExact(x);
+                - example:
+                    Math.toIntExcat(10L); // 10
+            - .ulp()
+                - returns the unit of least precision of a number
+                    - larger numbers have lower precision
+                - returns a double or long value
+                    - doubles are more precise than floats
+                - syntax:
+                    Math.ulp(x);
+                - example:
+                    Math.ulp(1); // 2.220446049250313E-16
 
     - user-defined functions
         - paves the way for the creation of custom functions
