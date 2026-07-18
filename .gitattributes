@@ -1,3 +1,6 @@
+# Set the correct language flag in GitHub
+*.rs linguist-language=Rust
+
 # Set the default behavior for all files.
 * text=auto eol=lf
 
