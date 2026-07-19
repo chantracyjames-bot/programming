@@ -16,14 +16,15 @@ java_bin="/home/tarcy_arch/Documents/Programming/java/bin"
 rust_bin="/home/tarcy_arch/Documents/Programming/rust/bin"
 
 # functions used for a clean output
-separate()      { echo "=================================================="; }
-out_common()	{ echo "=================== Code Output =================="; separate; }
-out_c()			{ echo "================== Code Output: C ================"; separate; }
-out_cpp_gpp()	{ echo "============== Code Output: C++ (g++) ============"; separate; }
-out_cpp_clang()	{ echo "============= Code Output: C++ (clang) ==========="; separate; }
-out_java()		{ echo "================ Code Output: Java ==============="; separate; }
-out_python()	{ echo "=============== Code Output: Python =============="; separate; }
-out_rust()		{ echo "================ Code Output: Rust ==============="; separate; }
+separate()      { echo "==================================================="; }
+out_common()	{ echo "=================== Code Output ==================="; separate; }
+out_bash()		{ echo "================ Code Output: Bash ================"; separate; }
+out_c()			{ echo "================== Code Output: C ================="; separate; }
+out_cpp_gpp()	{ echo "============== Code Output: C++ (g++) ============="; separate; }
+out_cpp_clang()	{ echo "============= Code Output: C++ (clang) ============"; separate; }
+out_java()		{ echo "================ Code Output: Java ================"; separate; }
+out_python()	{ echo "=============== Code Output: Python ==============="; separate; }
+out_rust()		{ echo "================ Code Output: Rust ================"; separate; }
 
 # help page
 help() {
@@ -80,7 +81,7 @@ check_args() {
 						exit 1
 					fi
 				;;
-				"python")
+				"bash"|"python")
 					if [[ -z "$3" || -z "$4" ]]; then
 						echo "Error: Invalid Input: A directory, and a file is required. i.e quick -c ~/my_folder my_file.ext"
 						exit 1
@@ -97,7 +98,7 @@ check_args() {
 		;;
 		"-r"|"--run")
 			case "$2" in
-				"c"|"cpp_gpp"|"cpp_clang"|"python"|"rust")
+				"bash"|"c"|"cpp_gpp"|"cpp_clang"|"python"|"rust")
 					if [[ -z "$3" || -z "$4" ]]; then
 						echo "Error: Invalid Input: A directory, and a file is required. i.e quick -c ~/my_folder my_file.o"
 						exit 1
@@ -136,10 +137,16 @@ check_args() {
 check_valid() {
     if [[ "$1" == "-c" || "$1" == "-cr" || $1 == "--compile" || "$1" == "--compile-run" ]]; then
 		case "$2" in
+			"bash")
+				if [[ "$4" != *.sh ]]; then
+					echo "Error: Invalid Bash Script: This script only validates .sh shell script files."
+					exit 1
+				fi
+			;;
 			"c")
 				if [[ "$4" != *.c && "$4" != *.h ]]; then
-				echo "Error: Invalid C Source File: This script only validates .c and, .h source files."
-				exit 1
+					echo "Error: Invalid C Source File: This script only validates .c and, .h source files."
+					exit 1
 				fi
 			;;
 			"cpp_clang"|"cpp_gpp")
@@ -159,20 +166,20 @@ check_valid() {
 			;;
 			"java")
 				if [[ "$4" != *.java ]]; then
-				echo "Error: Invalid Java Source File: This script only validates .java source files."
-				exit 1
+					echo "Error: Invalid Java Source File: This script only validates .java source files."
+					exit 1
 				fi
 			;;
 			"python")
 				if [[ "$4" != *.py ]]; then
-				echo "Error: Invalid Python Soruce File: This script only validates .py source files."
-				exit 1
+					echo "Error: Invalid Python Soruce File: This script only validates .py source files."
+					exit 1
 				fi
 			;;
 			"rust")
 				if [[ "$4" != *.rs ]]; then
-				echo "Error: Invalid Rust Source File: This script only validates .rs source files."
-				exit 1
+					echo "Error: Invalid Rust Source File: This script only validates .rs source files."
+					exit 1
 				fi
 			;;
 			*)
@@ -219,6 +226,11 @@ if [[ $1 == "-cr" || $1 == "--compile-run" ]]; then
     dir="$3"
     cd "$dir"
     case "$2" in
+		"bash")
+			check_valid "$@"
+			out_bash
+			bash "$4"
+		;;
         "c")
 			check_valid "$@"
 			if [[ -f "$c_bin/$5.o" ]]; then { 
@@ -279,7 +291,7 @@ if [[ $1 == "-cr" || $1 == "--compile-run" ]]; then
 		"python")
 			check_valid "$@"
 			out_python
-			python -u "$4
+			python -u "$4"
 		;;
 		"rust")
 			check_valid "$@"
@@ -305,6 +317,10 @@ elif [[ $1 == "-c" || $1 == "--compile" ]]; then
     dir="$3"
     cd "$dir"
     case "$2" in
+		"bash")
+			check_valid "$@"
+			echo "Finished: Note: Bash scripts are automatically compiled when run."
+		;;
         "c")
 			check_valid "$@"
 			gcc "$4" -o "$c_bin/$5.o"
@@ -344,6 +360,11 @@ elif [[ $1 == "-r" || $1 == "--run" ]]; then
     dir="$3"
     cd "$dir"
     case "$2" in
+		"bash")
+			check_valid "$@"
+			out_bash
+			bash "$4"
+		;;
         "c")
 			check_valid "$@"
 			if [[ -f "$c_bin/$5.o" ]]; then { 
@@ -387,7 +408,7 @@ elif [[ $1 == "-r" || $1 == "--run" ]]; then
 		"python")
 			check_valid "$@"
 			out_python
-			python -u "$4
+			python -u "$4"
 		;;
 		"rust")
 			check_valid "$@"
@@ -414,6 +435,9 @@ elif [[ $1 == "-s" || $1 == "--separate" ]]; then
 		;;
 		"common")
 			out_common
+		;;
+		"bash")
+			out_bash
 		;;
 		"c")
 			out_c
