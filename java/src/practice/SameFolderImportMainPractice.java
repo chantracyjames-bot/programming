@@ -1,4 +1,4 @@
-public class InventoryMain {
+public class SameFolderImportMainPractice {
 
     public static String getResult(boolean result) {
         if(result) {

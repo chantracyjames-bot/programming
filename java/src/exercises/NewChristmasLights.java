@@ -1,7 +1,8 @@
 import java.util.Scanner;
-public class ChristmasLights 
+
+public class NewChristmasLights 
 {
-    public static void main(String[]args)
+    public static void printTree()
     {
         Scanner in = new Scanner(System.in);
         //Declaration of variables

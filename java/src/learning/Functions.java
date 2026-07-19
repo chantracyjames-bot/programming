@@ -166,7 +166,7 @@
                 - example:
                     "ABCD".getBytes(); // {65, 66, 67, 68}
             - .getChars()
-                - coopies a part of a String into a char array
+                - copies a part of a String into a char array
                 - returns a char[] value
                     - requires a start and end index
                         - note that the end index is exclusive

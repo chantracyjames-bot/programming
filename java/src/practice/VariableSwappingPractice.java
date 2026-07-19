@@ -1,4 +1,4 @@
-public class VariableSwapping 
+public class VariableSwappingPractice 
 {
     public static void main(String[] args)
     {

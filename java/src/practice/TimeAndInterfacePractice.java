@@ -45,7 +45,7 @@ class DVD implements Borrowable {
     }
 }
 
-public class InteractivePortal {
+public class TimeAndInterfacePractice {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int key = 1;

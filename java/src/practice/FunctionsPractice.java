@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class Idkman 
+public class FunctionsPractice 
 {
     public static void main(String[] args)
     {
@@ -11,7 +11,6 @@ public class Idkman
         int sum = sum(num1, num2);
         String greeting = "The sum of the two integers is: ";
         printNTimes(greeting, sum);
-        //System.out.println();
         in.close();
     }
 
@@ -28,28 +27,3 @@ public class Idkman
         }
     }
 }
-
-/* Access Modifier (static) return type name(args)
-   public           static  void        main(String[] args)
-{
-    statements
-}
-*/
-// Access modifiers
-// - public
-// - private
-// - protected
-
-// Return type
-// - void
-// - String, ints, Boolean
-
-// Name
-// - commonly called as "main"
-
-// Args
-// - list of Arguments
-
-
-//final
-// - makes a variable a constant (unchangeable)
