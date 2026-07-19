@@ -16,14 +16,14 @@ java_bin="/home/tarcy_arch/Documents/Programming/java/bin"
 rust_bin="/home/tarcy_arch/Documents/Programming/rust/bin"
 
 # functions used for a clean output
-separate()      { echo "============================================================"; }
-out_common()	{ echo "======================== Code Output ======================="; separate; }
-out_c()			{ echo "======================= Code Output: C ====================="; separate; }
-out_cpp_gpp()	{ echo "=================== Code Output: C++ (g++) ================="; separate; }
-out_cpp_clang()	{ echo "================== Code Output: C++ (clang) ================"; separate; }
-out_java()		{ echo "===================== Code Output: Java ===================="; separate; }
-out_python()	{ echo "==================== Code Output: Python ==================="; separate; }
-out_rust()		{ echo "===================== Code Output: Rust ===================="; separate; }
+separate()      { echo "=================================================="; }
+out_common()	{ echo "=================== Code Output =================="; separate; }
+out_c()			{ echo "================== Code Output: C ================"; separate; }
+out_cpp_gpp()	{ echo "============== Code Output: C++ (g++) ============"; separate; }
+out_cpp_clang()	{ echo "============= Code Output: C++ (clang) ==========="; separate; }
+out_java()		{ echo "================ Code Output: Java ==============="; separate; }
+out_python()	{ echo "=============== Code Output: Python =============="; separate; }
+out_rust()		{ echo "================ Code Output: Rust ==============="; separate; }
 
 # help page
 help() {
@@ -221,27 +221,52 @@ if [[ $1 == "-cr" || $1 == "--compile-run" ]]; then
     case "$2" in
         "c")
 			check_valid "$@"
+			if [[ -f "$c_bin/$5.o" ]]; then { 
+				rm "$c_bin/$5.o" 
+			} 
+			fi
 			gcc "$4" -o "$c_bin/$5.o"
-			out_c
+			if [[ -f "$c_bin/$5.o" ]]; then { 
+				out_c
+				"$c_bin/$5.o" 
+			} 
+			else 
+				echo "Error: File Not Found: Did the build compile successfully?"
+			fi
 			"$c_bin/$5.o"
 		;;
 		"cpp_gpp")
 			check_valid "$@"
+			if [[ -f "$c_bin/$5.o" ]]; then { 
+				rm "$cpp_bin/$5_gpp.o" 
+			} fi
 			g++ -std=c++23 -Wall -Wextra -Wpedantic "$4" -o "$cpp_bin/$5_gpp.o"
-			out_cpp_gpp
-			"$cpp_bin/$5_gpp.o"
+			if [[ -f "$cpp_bin/$5_gpp.o" ]]; then { 
+				out_cpp_gpp
+				"$cpp_bin/$5_gpp.o" 
+			} fi
 		;;
 		"cpp_clang")
 			check_valid "$@"
+			if [[ -f "$c_bin/$5.o" ]]; then { 
+				rm "$cpp_bin/$5_clang.o" 
+			} fi
 			clang++ -std=c++23 -Wall -Wextra -Wpedantic "$4" -o "$cpp_bin/$5_clang.o"
-			out_cpp_clang
-			"$cpp_bin/$5_clang.o"
+			if [[ -f "$cpp_bin/$5_clang.o" ]]; then { 
+				out_cpp_clang
+				"$cpp_bin/$5_clang.o" 
+			} fi
 		;;
 		"java")
 			check_valid "$@"
+			if [[ -f "$c_bin/$5.o" ]]; then { 
+				rm "$java_bin/$5.class"
+			} fi
 			javac "$4" -d "$java_bin"
-			out_java
-			java -cp "$java_bin" "$5"
+			if [[ -f "$java_bin/$5.class" ]]; then { 
+				out_java
+				java -cp "$java_bin" "$5" 
+			} fi
 		;;
 		"python")
 			check_valid "$@"
@@ -250,9 +275,14 @@ if [[ $1 == "-cr" || $1 == "--compile-run" ]]; then
 		;;
 		"rust")
 			check_valid "$@"
+			if [[ -f "$c_bin/$5.o" ]]; then { 
+				rm "$rust_bin/$5.o" 
+			} fi
 			rustc "$4" -o "$rust_bin/$5.o"
-			out_rust
-			"$rust_bin/$5.o"
+			if [[ -f "$rust_bin/$5.o" ]]; then { 
+				out_rust
+				"$rust_bin/$5.o" 
+			} fi
 		;; 
         *)
             echo "how did you get here?"

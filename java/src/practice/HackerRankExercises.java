@@ -6,6 +6,8 @@ public class HackerRankExercises {
 
         System.out.println("Hello, World.");
         System.out.println("Hello, Java.");
+
+        input.close();
     }
 
     static void numberConditions(int N) {
@@ -45,6 +47,7 @@ public class HackerRankExercises {
     }
 
     static void multiplicationTable(Scanner in) {
+        int N = in.nextInt();
         for (int i = 1; i <= 10; i++) {
             System.out.println(N + " x " + i + " = " + N * i);
         }
