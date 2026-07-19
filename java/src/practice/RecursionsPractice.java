@@ -1,4 +1,4 @@
-public class RecursionsExample
+public class RecursionsPractice
 {
     // Loops
     /*public static int factorial(int n)

@@ -1,4 +1,4 @@
-public class TestClass {
+public class ClassPractice {
     int ten = 10;
 
     public static void main(String[] args) {

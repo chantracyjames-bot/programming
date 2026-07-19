@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
-public class DivisionCalculator {
+public class ExceptionHandlingPractice {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         while(true) {

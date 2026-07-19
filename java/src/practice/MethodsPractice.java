@@ -1,4 +1,4 @@
-public class MethodTesting {
+public class MethodsPractice {
     static void testLang() {
         System.out.println("idkman");
     }

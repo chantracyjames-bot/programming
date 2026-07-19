@@ -233,7 +233,6 @@ if [[ $1 == "-cr" || $1 == "--compile-run" ]]; then
 			else 
 				echo "Error: File Not Found: Did the build compile successfully?"
 			fi
-			"$c_bin/$5.o"
 		;;
 		"cpp_gpp")
 			check_valid "$@"
@@ -244,7 +243,10 @@ if [[ $1 == "-cr" || $1 == "--compile-run" ]]; then
 			if [[ -f "$cpp_bin/$5_gpp.o" ]]; then { 
 				out_cpp_gpp
 				"$cpp_bin/$5_gpp.o" 
-			} fi
+			}  
+			else 
+				echo "Error: File Not Found: Did the build compile successfully?"
+			fi
 		;;
 		"cpp_clang")
 			check_valid "$@"
@@ -255,23 +257,29 @@ if [[ $1 == "-cr" || $1 == "--compile-run" ]]; then
 			if [[ -f "$cpp_bin/$5_clang.o" ]]; then { 
 				out_cpp_clang
 				"$cpp_bin/$5_clang.o" 
-			} fi
+			}  
+			else 
+				echo "Error: File Not Found: Did the build compile successfully?"
+			fi
 		;;
 		"java")
 			check_valid "$@"
-			if [[ -f "$c_bin/$5.o" ]]; then { 
+			if [[ -f "$java_bin/$5.class" ]]; then { 
 				rm "$java_bin/$5.class"
 			} fi
 			javac "$4" -d "$java_bin"
 			if [[ -f "$java_bin/$5.class" ]]; then { 
 				out_java
 				java -cp "$java_bin" "$5" 
-			} fi
+			}  
+			else 
+				echo "Error: File Not Found: Did the build compile successfully?"
+			fi
 		;;
 		"python")
 			check_valid "$@"
 			out_python
-			python -u "$4"
+			python -u "$4
 		;;
 		"rust")
 			check_valid "$@"
@@ -282,7 +290,10 @@ if [[ $1 == "-cr" || $1 == "--compile-run" ]]; then
 			if [[ -f "$rust_bin/$5.o" ]]; then { 
 				out_rust
 				"$rust_bin/$5.o" 
-			} fi
+			}  
+			else 
+				echo "Error: File Not Found: Did the build compile successfully?"
+			fi
 		;; 
         *)
             echo "how did you get here?"
@@ -335,33 +346,58 @@ elif [[ $1 == "-r" || $1 == "--run" ]]; then
     case "$2" in
         "c")
 			check_valid "$@"
-			out_c
-			"$c_bin/$4"
+			if [[ -f "$c_bin/$5.o" ]]; then { 
+				out_c
+				"$c_bin/$5.o" 
+			} 
+			else 
+				echo "Error: File Not Found: Did the build compile successfully?"
+			fi
 		;;
 		"cpp_gpp")
 			check_valid "$@"
-			out_cpp_gpp
-			"$cpp_bin/$4"
+			if [[ -f "$cpp_bin/$5_gpp.o" ]]; then { 
+				out_cpp_gpp
+				"$cpp_bin/$5_gpp.o" 
+			}  
+			else 
+				echo "Error: File Not Found: Did the build compile successfully?"
+			fi
 		;;
 		"cpp_clang")
 			check_valid "$@"
-			out_cpp_clang
-			"$cpp_bin/$4"
+			if [[ -f "$cpp_bin/$5_clang.o" ]]; then { 
+				out_cpp_clang
+				"$cpp_bin/$5_clang.o" 
+			}  
+			else 
+				echo "Error: File Not Found: Did the build compile successfully?"
+			fi
 		;;
 		"java")
 			check_valid "$@"
-			out_java
-			java -cp "$java_bin" "${4%.*}"
+			if [[ -f "$java_bin/$5.class" ]]; then { 
+				out_java
+				java -cp "$java_bin" "${4%.*}" 
+			}  
+			else 
+				echo "Error: File Not Found: Did the build compile successfully?"
+			fi
 		;;
 		"python")
 			check_valid "$@"
 			out_python
-			python -u "$4"
+			python -u "$4
 		;;
 		"rust")
 			check_valid "$@"
-			out_rust
-			"$rust_bin/$4"
+			if [[ -f "$rust_bin/$5.o" ]]; then { 
+				out_rust
+				"$rust_bin/$5.o" 
+			}  
+			else 
+				echo "Error: File Not Found: Did the build compile successfully?"
+			fi
 		;; 
 			*)
 				echo "how did you get here?"

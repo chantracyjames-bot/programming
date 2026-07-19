@@ -116,7 +116,7 @@ public class General {
     // main() signifies the start of the program
         // it is the entry point for the program to start in
     {
-        System.out.print("Hello World");
+        System.out.println("Hello World");
         // System.out.print() sends text to output in the terminal or screen
             // System is a built-in Java class
             // out is a member of the System class

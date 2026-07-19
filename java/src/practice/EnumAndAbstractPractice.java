@@ -68,7 +68,7 @@ class Truck extends Vehicle {
     }
 }
 
-public class VehicleRentalFleet {
+public class EnumAndAbstractPractice {
 
     public static String insuranceStuff(boolean idk) {
         if(idk) {
