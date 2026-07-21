@@ -10,6 +10,7 @@
 # quick -cr cpp_clang /home/Documents/ my_program.o my_program
 
 # build folder locations for each language
+assembly_bin="/home/tarcy_arch/Documents/Programming/assembly/bin"
 c_bin="/home/tarcy_arch/Documents/Programming/c/bin"
 cpp_bin="/home/tarcy_arch/Documents/Programming/cpp/bin"
 java_bin="/home/tarcy_arch/Documents/Programming/java/bin"
@@ -18,6 +19,7 @@ rust_bin="/home/tarcy_arch/Documents/Programming/rust/bin"
 # functions used for a clean output
 separate()      { echo "==================================================="; }
 out_common()	{ echo "=================== Code Output ==================="; separate; }
+out_assembly()	{ echo "============== Code Output: Assembly =============="; separate; }
 out_bash()		{ echo "================ Code Output: Bash ================"; separate; }
 out_c()			{ echo "================== Code Output: C ================="; separate; }
 out_cpp_gpp()	{ echo "============== Code Output: C++ (g++) ============="; separate; }
@@ -72,7 +74,7 @@ check_args() {
 	case "$1" in
 		"-c"|"-cr"|"--compile"|"--compile-run")
 			case "$2" in
-				"c"|"cpp_gpp"|"cpp_clang"|"java"|"rust")
+				"assembly"|"c"|"cpp_gpp"|"cpp_clang"|"java"|"rust")
 					if [[ -z "$3" || -z "$4" || -z "$5" ]]; then
 						echo "Error: Invalid Input: A directory, a file and a file without its extension is required. i.e quick -c ~/my_folder my_file.ext my_file"
 						exit 1
@@ -107,7 +109,7 @@ check_args() {
 						exit 1
 					fi
 				;;
-				"java")
+				"assembly"|"java")
 					if [[ -z "$3" || -z "$4" ]]; then
 						echo "Error: Invalid Input: A directory, and a file without its extension is required. i.e quick -c ~/my_folder my_file"
 						exit 1
@@ -137,6 +139,12 @@ check_args() {
 check_valid() {
     if [[ "$1" == "-c" || "$1" == "-cr" || $1 == "--compile" || "$1" == "--compile-run" ]]; then
 		case "$2" in
+			"assembly")
+				if [[ "$4" != *.asm ]]; then
+					echo "Error: Invalid Assembly Source File: This script only validates .asm source files."
+					exit 1
+				fi
+			;;
 			"bash")
 				if [[ "$4" != *.sh ]]; then
 					echo "Error: Invalid Bash Script: This script only validates .sh shell script files."
@@ -188,6 +196,12 @@ check_valid() {
 		esac
 	elif [[ "$1" == "-r" || "--run" ]]; then
 		case "$2" in
+			"assembly")
+				if [[ "$4" == *.* ]]; then
+					echo "Error: Invalid Output File: This script only runs Assembly files without any file extensions."
+					exit 1
+				fi
+			;;		
 			"c"|"cpp_clang"|"cpp_gpp"|"rust")
 				case "$4" in
 					*.o)
@@ -226,6 +240,22 @@ if [[ $1 == "-cr" || $1 == "--compile-run" ]]; then
     dir="$3"
     cd "$dir"
     case "$2" in
+		"assembly")
+			check_valid "$@"
+			if [[ -f "$assembly_bin/$5" ]]; then { 
+				rm "$assembly_bin/$5" 
+			} 
+			fi
+			nasm "$4" -f elf64 -o "$assembly_bin/$5.o"
+			ld "$assembly_bin/$5.o" -o "$assembly_bin/$5"
+			if [[ -f "$assembly_bin/$5" ]]; then { 
+				out_assembly
+				"$assembly_bin/$5" 
+			} 
+			else 
+				echo "Error: File Not Found: Did the source file successfully compiled?"
+			fi
+		;;
 		"bash")
 			check_valid "$@"
 			out_bash
@@ -243,7 +273,7 @@ if [[ $1 == "-cr" || $1 == "--compile-run" ]]; then
 				"$c_bin/$5.o" 
 			} 
 			else 
-				echo "Error: File Not Found: Did the build compile successfully?"
+				echo "Error: File Not Found: Did the source file successfully compiled?"
 			fi
 		;;
 		"cpp_gpp")
@@ -257,7 +287,7 @@ if [[ $1 == "-cr" || $1 == "--compile-run" ]]; then
 				"$cpp_bin/$5_gpp.o" 
 			}  
 			else 
-				echo "Error: File Not Found: Did the build compile successfully?"
+				echo "Error: File Not Found: Did the source file successfully compiled?"
 			fi
 		;;
 		"cpp_clang")
@@ -271,7 +301,7 @@ if [[ $1 == "-cr" || $1 == "--compile-run" ]]; then
 				"$cpp_bin/$5_clang.o" 
 			}  
 			else 
-				echo "Error: File Not Found: Did the build compile successfully?"
+				echo "Error: File Not Found: Did the source file successfully compiled?"
 			fi
 		;;
 		"java")
@@ -285,7 +315,7 @@ if [[ $1 == "-cr" || $1 == "--compile-run" ]]; then
 				java -cp "$java_bin" "$5" 
 			}  
 			else 
-				echo "Error: File Not Found: Did the build compile successfully?"
+				echo "Error: File Not Found: Did the source file successfully compiled?"
 			fi
 		;;
 		"python")
@@ -304,7 +334,7 @@ if [[ $1 == "-cr" || $1 == "--compile-run" ]]; then
 				"$rust_bin/$5.o" 
 			}  
 			else 
-				echo "Error: File Not Found: Did the build compile successfully?"
+				echo "Error: File Not Found: Did the source file successfully compiled?"
 			fi
 		;; 
         *)
@@ -317,6 +347,12 @@ elif [[ $1 == "-c" || $1 == "--compile" ]]; then
     dir="$3"
     cd "$dir"
     case "$2" in
+		"assembly")
+			check_valid "$@"
+			nasm "$4" -f elf64 -o "$assembly_bin/$5.o"
+			ld "$assembly_bin/$5.o" -o "$assembly_bin/$5"
+			echo "Finished: Assembly Program Compiled: Build output is at '$assembly_bin/$5'."
+		;;
 		"bash")
 			check_valid "$@"
 			echo "Finished: Note: Bash scripts are automatically compiled when run."
@@ -360,6 +396,16 @@ elif [[ $1 == "-r" || $1 == "--run" ]]; then
     dir="$3"
     cd "$dir"
     case "$2" in
+		"assembly")
+			check_valid "$@"
+			if [[ -f "$assembly_bin/$5" ]]; then { 
+				out_assembly
+				"$assembly_bin/$5" 
+			} 
+			else 
+				echo "Error: File Not Found: Did the source file successfully compiled?"
+			fi
+		;;
 		"bash")
 			check_valid "$@"
 			out_bash
@@ -372,7 +418,7 @@ elif [[ $1 == "-r" || $1 == "--run" ]]; then
 				"$c_bin/$5.o" 
 			} 
 			else 
-				echo "Error: File Not Found: Did the build compile successfully?"
+				echo "Error: File Not Found: Did the source file successfully compiled?"
 			fi
 		;;
 		"cpp_gpp")
@@ -382,7 +428,7 @@ elif [[ $1 == "-r" || $1 == "--run" ]]; then
 				"$cpp_bin/$5_gpp.o" 
 			}  
 			else 
-				echo "Error: File Not Found: Did the build compile successfully?"
+				echo "Error: File Not Found: Did the source file successfully compiled?"
 			fi
 		;;
 		"cpp_clang")
@@ -392,7 +438,7 @@ elif [[ $1 == "-r" || $1 == "--run" ]]; then
 				"$cpp_bin/$5_clang.o" 
 			}  
 			else 
-				echo "Error: File Not Found: Did the build compile successfully?"
+				echo "Error: File Not Found: Did the source file successfully compiled?"
 			fi
 		;;
 		"java")
@@ -402,7 +448,7 @@ elif [[ $1 == "-r" || $1 == "--run" ]]; then
 				java -cp "$java_bin" "${4%.*}" 
 			}  
 			else 
-				echo "Error: File Not Found: Did the build compile successfully?"
+				echo "Error: File Not Found: Did the source file successfully compiled?"
 			fi
 		;;
 		"python")
@@ -417,7 +463,7 @@ elif [[ $1 == "-r" || $1 == "--run" ]]; then
 				"$rust_bin/$5.o" 
 			}  
 			else 
-				echo "Error: File Not Found: Did the build compile successfully?"
+				echo "Error: File Not Found: Did the source file successfully compiled?"
 			fi
 		;; 
 			*)
@@ -435,6 +481,9 @@ elif [[ $1 == "-s" || $1 == "--separate" ]]; then
 		;;
 		"common")
 			out_common
+		;;
+		"assembly")
+			out_assembly
 		;;
 		"bash")
 			out_bash
