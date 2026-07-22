@@ -439,3 +439,57 @@
 #                         | |  NEXT -|-/   |  NEXT -|-/   |  NEXT -|-\
 #                         | |========|     |========|     |========| |
 #                         \------------------------------------------/
+#
+#   - Hash Tables
+#       - is a data structure that is designed to be fast to work with
+#       - why Hash Tables?
+#           - this type of data structure is sometime more prefered instead of arrays
+#               - due to being faster when searching, adding, and removing data
+#               - even with large amounts of data
+#           - hash tables are useful when using a container that is easy to:
+#               - find something, like a book in a library
+#               - store and find elements quickly
+#               - connecting values to keys, the keys are tied to their values
+#       - hash tables vs lists
+#           - in linked lists
+#               - finding an element will take since each node must be checked
+#               - only halting when the element has been found, taking O(n) time
+#           - in normals lists
+#               - even though the element to be found is known, the index is unknown
+#               - taking the same amount of time as linked lists due to this
+#           - in hash tables
+#               - the element can be easily found since there is a way to go to the element directly
+#               - through the use of a "hash function"
+#               - on average, hash tables table about O(1) time
+#       - a hash table is able to be made using 5 key points:
+#           - it requires an empty list
+#           - it requires a hash function
+#           - inserting an element using a hash function
+#           - looking up an element using a hash function
+#           - handling collisions
+#       - sample code:
+#           #> create an empty list (can be a set or a dictionary)
+#           my_list = [[], [], [], [], []]      #> stores 5 elements
+#                                                   #> also called "buckets"
+#                                               #> nested arrays prevent collisions
+#                                                   #> also called "chaining"   
+#
+#           #> create a hash function
+#           def hash_function(value):
+#           hash_sum = 0                        #> stores the value of the has
+#           for char in value:                  #> loops through every single character
+#               hash_sum += ord(char)           #> converts a character into a unicode code number
+#           return hash_sum % 5                 #> uses a modulo to dictate where the value is stored in
+#                                               #> different text will result into different hash codes
+#                                                   #> using a modulo will make storing a bit easier
+#           #> create an add function
+#           def add(value):
+#               index = hash_function(value)    #> calls the hash_function to return an index
+#                                                   #> where the new value is going to be stored in 
+#               my_list[index].append(value)    #> appends the new value to the corresponding index
+#
+#           #> create a loopup function
+#           def lookup(value):
+#               index = hash_function(value)    #> calls the hash_function to return an index
+#                                                   #> looks up where the value might be stored in
+#               print(f"{value} is at {index}") #> returns the index wherein the valus is stored at
