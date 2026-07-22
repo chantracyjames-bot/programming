@@ -327,3 +327,115 @@
 #                           print(current_node.value, end="- ") #> prints the value of the current node it is at
 #                           current_node = current_node.next    #> changes the pointer to the next value in the stack
 #                       print()                                 #> adds a new line
+#
+#   - Linked Lists
+#       - is a list whre the nodes are linked together
+#       - each node contains both a data and a pointer
+#           - the data it stores are able to be any value
+#               - like normal arrays
+#           - the pointer it holds is a pointer to another node
+#       - the elements in this list is linked together such that each node points to where in memory the other node is placed
+#       - illustration:
+#           |========|     |========|     |========|
+#           |  DATA  |   ->|  DATA  |   ->|  DATA  |
+#           |========|  /  |========|  /  |========|
+#           |  NEXT -|-/   |  NEXT -|-/   |  NEXT -|
+#           |========|     |========|     |========|
+#       - linked lists vs arrays (Python)
+#           - unlike linked lists, arrays are a existing data structure
+#               - unlike linked lists wherein the have to be implemented
+#           - in arrays, elements are stored together right next to each other (contiguous)
+#               - this is more memory efficient unlike linked lists wherein it has to accomodate nodes as well
+#               - while in linked lists, they are store separately in their own part in memory
+#           - in linked lists, elements are not able to be accessed directly (random access)
+#               - while in arrays, this is not the case
+#           - elements are able to be removed or added without any shfiting in linked lists
+#               - this is not the case in arrays, due to each element shifting
+#           - implementing linked lists is way more complecated unlike built-in arrays
+#               - this is due to the logic required to efficiently traverse linked lists
+#       - time complexities in Linked Lists Operations
+#           - Linear search works the same as normal lists
+#               - due to the algorithm searching through each node (element) one after the other
+#           - Binary search however, is impractical in linked lists
+#               - this is due to the algorithm needing to jump to specific nodes
+#               - it is technically possible, but the performance penalty makes it impractical to use
+#           - sorting algorithms that goes through each node sequentially is possible in linked lists
+#               - but algorithms that requires to jump through each other nodes (or based on an index)
+#               - are unlikely to work in linked lists
+#       - in linked lists, there are basic operations that is commonly done
+#           - traversal
+#               - traverses from one node to another
+#               - sample code:
+#                   #> singly linked lists
+#                   class Node:
+#                       def __init__(self, value) -> None:
+#                           self.data = data
+#                           self.next = None
+#
+#                   #> logic
+#                   def traverse(head) -> None:
+#                       current_node = head
+#                       while current_node:
+#                           print(current_node.data, end=" > ")
+#                           current_node = current_node.next
+#                       print("null")
+#           - removing a node
+#               - nodes are able to be removed at a constant performace penalty
+#               - like removing a certain node, this comes at a constant performace penalty
+#           - sort
+#               - this type of operation is more complicated but has the same penalties
+#       - types of linked lists
+#           - singly linked liss
+#               - this type of list are the simplest kind of linked lists
+#               - it takes up less memory space than other types
+#                   - due to each node only being linked to one other node
+#               - illustration
+#                   |========|     |========|     |========|
+#                   |  DATA  |   ->|  DATA  |   ->|  DATA  |
+#                   |========|  /  |========|  /  |========|
+#                   |  NEXT -|-/   |  NEXT -|-/   |  NEXT -|
+#                   |========|     |========|     |========|
+#           - double linked lists
+#               - this type of linked list has both the address of the next node
+#                   - but also has the address of the previous node
+#               - this type of link takes up more memory space than single linked nodes
+#                   - due to having an additional memory address to store
+#               - illutration
+#                   |========|<----|========|<----|========|
+#                   |  PREV  |   ->|  PREV  |   ->|  PREV  |
+#                   |========|   | |========|   | |========|
+#                   |  DATA  |  /  |  DATA  |  /  |  DATA  |
+#                   |========|  |  |========|  |  |========|
+#                   |  NEXT -|-/   |  NEXT -|-/   |  NEXT -|
+#                   |========|     |========|     |========|
+#           - circular linked lists
+#               - this type of linked lists mostly stays the same as doubly linked lists
+#                   - but the "head" and "tail" nodes are connected
+#               - even though this types of linked lists mostly take the same memory doubly linked lists
+#                   - it is a lot more complicated to implement
+#               - the trade off is that this type of linked lists are "contiguous"
+#                   - the elements inside are able to be cycled through
+#                   - though it is required to run checks every time a new node is created or removed
+#                       - to check if there are no links that points to null
+#               - there are two types of circular linked lists
+#                   - a circular singly linked list only points to the next node
+#                       - it cannot do so to the previous node
+#                       - illustration
+#                           |========|     |========|     |========|
+#                         ->|  DATA  |   ->|  DATA  |   ->|  DATA  |
+#                         | |========|  /  |========|  /  |========|
+#                         | |  NEXT -|-/   |  NEXT -|-/   |  NEXT -|-\
+#                         | |========|     |========|     |========| |
+#                         \------------------------------------------/
+#                   - a circular doubly linked list can point both at the next node
+#                       - and also to the previous node
+#                       - illustration
+#                         /------------------------------------------\
+#                         | |========|<----|========|<----|========| |
+#                         \-|  PREV  |   ->|  PREV  |   ->|  PREV  |</
+#                         > |========|   | |========|   | |========|
+#                         | |  DATA  |  /  |  DATA  |  /  |  DATA  |
+#                         | |========|  |  |========|  |  |========|
+#                         | |  NEXT -|-/   |  NEXT -|-/   |  NEXT -|-\
+#                         | |========|     |========|     |========| |
+#                         \------------------------------------------/
