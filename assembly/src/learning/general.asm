@@ -20,16 +20,27 @@
 ;                   - the data stored here does not change at runtime
 ;                   - syntax:
 ;                       section .data
+;                   - example:
+;                       section .data
+;                           text db "idkman", 10 ;> allocates memory for the text "idkman\n"
+;                                                ;> "text" holds the memory address for those values
 ;               - bss section
 ;                   - this is where variables are declared for future use
 ;                   - syntax:
 ;                       section .bss
+;                   - example:
+;                       section .bss
+;                           input resb 16 ;> resb stands for "reserve bytes"
+;                                         ;> allocated 16 bytes of memory
+;                                         ;> "input" holds the memory address for these bytes
 ;               - text section
 ;                   - this is where the actual code resides in
 ;                   - this section muct begin with the global _start declaration
 ;                       - basically the main() function in languages like C or Rust
 ;                   - syntax:
 ;                       section .text
+;                           global _start ;> makes _start be visible for the linker 
+;                       _start:           ;> the entry point of the program
 ;       - labels
 ;           - is used to label a part of code
 ;           - upon compilation
@@ -95,80 +106,144 @@
 ;               OF     overflow
 ;               AF     adjust
 ;               IF     interupt enabled
-;       - jumps
-;           - is used to "jump" to different parts of code
-;               - which is based on the labels
-;           - can be used to control the flow of the program
-;           - snytax:
-;               jmp <label>
-;           - example:
-;               jmp _start ;> jumps to the start of _start
-;                          ;> loads the value "_start" into the rip register
-;                          ;> the programs goes into an infinite loop
-;       - comparisons
-;           - allow programs to be able to take different paths
-;               - based on certain conditions
-;               - similar to conditional statements in C or C++
-;           - these are done to registers
-;           - syntax:
-;               cmp <register>, <value>
-;           - example:
-;               cmp rax, 23
-;               ;> or
-;               cmp rax, rbx
-;           - comparison with flags
-;               - after a comparison is made, certain flags are set
-;               - if a is equal to b, or a = b
-;                   - ZF = 1, or the ZF flag is set
-;               - if a is not equal to bm or a != b
-;                   - ZF = 0, or the ZF flag is reset
-;               - the SF flag gets set to the most significant bit
-;                   - which is a - b
-;           - conditional jumps
-;               - after a comparison is made, a conditional jump is able to be made
-;               - conditional jumps are based on the status of the flags
-;               - conditional jumps in code are written just like unconditional jumps
-;                   - though, the "jmp" syntax is replaced
-;                   - by the synbol for the conditional jump
-;               - list of conditional jumps:
-;                        jump symbol 
-;                    (signed) (unsigned)    if cmp a, b
-;                       je        -            a = b
-;                       jme       -            a != b
-;                       jg        ja           a > b
-;                       jge       jae          a >= b
-;                       jl        jb           a < b
-;                       jle       jbe          a <= b
-;                       jz        -            a = 0
-;                       jnz       -            a != 0
-;                       jo        -            overflow occured
-;                       jno       -            overflow did not occur
-;                       js        -            jump if signed
-;                       jns       -            jump if not signed
-;               - example:
-;                   cmp rax, 24  ;> compares rax to 24
-;                   je  _my_code ;> jumps to _my_code if rax is equal to 24
-;
-;                   cmp rax, rbx ;> compared rax to sbx
-;                   jg  _my_code ;> jumps to _my_code if rax is greaten than rbx
-;           - calls
-;               - essentially, calls and jumps are the same thing
-;               - however, when a "call" is used, the original position of the call
-;                   - was made in, is able to be returned by using ret (return?)
-;               - example:
-;                   _start:
-;                       call _print_hello
-;                   _print_hello:
-;                       mov rax, 1
-;                       mov rdi, 1
-;                       mov rsi, text
-;                       mov rdx, 14
-;                       syscall
-;                       ret
-;               - the code that prints the "Hello World" string is moved into its own section
-;                   - called "_print_hello", and this section was called
-;                   - this term is called "subroutine"
-;                       - presumably similar to functions (?)
+;       - ASCII
+;           - is the method which moderm computers use to represent strings of text
+;               - this is due to computers being able to only store numbers
+;           - to get around this, ASCII works by mapping numbers to specific characters
+;               - to letters, numbers, symbols, etc.
+;           - ASCII uses 7-bit binary codes to represent characters
+;               - however, a byte, is 8 bit, is the primary unit of imformation
+;               - and so, modern computers today support extended ASCII, which is 8 bit codes
+;           - ASCII Printable Characters
+;              Char	    Number	Description
+;                       0 - 31	Control characters
+;               NUL     0       null   
+;               SOH     1       start of heading   
+;               STX     2       start of transmission
+;               ETX     3       end of text
+;               EOT     4       end of transmission
+;               ENQ     5       enquiry
+;               ACK     6       acknowledge
+;               BEL     7       bell
+;               BS      8       backspace   
+;               TAB     9       horizontal tab
+;               LF      10      line feed, new line
+;               VT      11      vertical tab
+;               FF      12      form feed, new page
+;               CR      13      carriage return
+;               SO      14      shift out
+;               SI      15      shift in
+;               DLE     16      data tink escape
+;               DC1     17      device control 1
+;               DC2     18      device control 2
+;               DC3     19      device control 3
+;               DC4     20      device control 4
+;               NAK     21      negative acknowledge
+;               SYN     22      synchronous, idle
+;               ETS     23      end of transmission block
+;               CAN     24      cancek
+;               EM      25      end of medium 
+;               SUB     26      substitue
+;               ESC     27      escape
+;               FS      28      file separator 
+;               GS      29      group separator
+;               RS      30      record separator   
+;               US      31      unit separator
+;                       32	    space
+;               !	    33  	exclamation mark
+;               " 	    34	    quotation mark
+;               #	    35	    number sign
+;               $	    36	    dollar sign
+;               %	    37	    percent sign
+;               &	    38	    ampersand
+;               '	    39	    apostrophe
+;               (	    40	    left parenthesis
+;               )	    41	    right parenthesis
+;               *	    42  	asterisk
+;               +	    43  	plus sign
+;               ,	    44  	comma
+;               -	    45	    hyphen
+;               .	    46  	period
+;               /	    47  	slash
+;               0	    48  	digit 0
+;               1	    49  	digit 1
+;               2	    50  	digit 2
+;               3	    51  	digit 3
+;               4	    52  	digit 4
+;               5	    53  	digit 5
+;               6	    54  	digit 6
+;               7	    55  	digit 7
+;               8	    56  	digit 8
+;               9	    57  	digit 9
+;               :	    58  	colon
+;               ;	    59  	semicolon
+;               <	    60  	less-than
+;               =	    61  	equals-to
+;               >	    62  	greater-than
+;               ?	    63  	question mark
+;               @	    64  	at sign
+;               A	    65  	uppercase A
+;               B	    66  	uppercase B
+;               C	    67  	uppercase C
+;               D	    68  	uppercase D
+;               E	    69  	uppercase E
+;               F	    70  	uppercase F
+;               G	    71  	uppercase G
+;               H	    72  	uppercase H
+;               I	    73  	uppercase I
+;               J	    74  	uppercase J
+;               K	    75  	uppercase K
+;               L	    76  	uppercase L
+;               M	    77	    uppercase M
+;               N	    78  	uppercase N
+;               O	    79  	uppercase O
+;               P	    80  	uppercase P
+;               Q	    81  	uppercase Q
+;               R	    82  	uppercase R
+;               S	    83  	uppercase S
+;               T	    84  	uppercase T
+;               U	    85  	uppercase U
+;               V	    86  	uppercase V
+;               W	    87  	uppercase W
+;               X	    88  	uppercase X
+;               Y	    89  	uppercase Y
+;               Z	    90  	uppercase Z
+;               [	    91  	left square bracket
+;               \	    92  	backslash
+;               ]	    93  	right square bracket
+;               ^	    94  	caret
+;               _	    95	    underscore
+;               `	    96  	grave accent
+;               a	    97  	lowercase a
+;               b	    98  	lowercase b
+;               c	    99  	lowercase c
+;               d	    100 	lowercase d
+;               e	    101 	lowercase e
+;               f	    102 	lowercase f
+;               g	    103 	lowercase g
+;               h	    104 	lowercase h
+;               i	    105 	lowercase i
+;               j	    106 	lowercase j
+;               k	    107 	lowercase k
+;               l	    108 	lowercase l
+;               m	    109 	lowercase m
+;               n	    110 	lowercase n
+;               o	    111 	lowercase o
+;               p	    112 	lowercase p
+;               q	    113 	lowercase q
+;               r	    114 	lowercase r
+;               s	    115 	lowercase s
+;               t	    116 	lowercase t
+;               u	    117	    lowercase u
+;               v	    118	    lowercase v
+;               w	    119 	lowercase w
+;               x	    120 	lowercase x
+;               y	    121 	lowercase y
+;               z	    122 	lowercase z
+;               {	    123 	left curly brace
+;               |	    124 	vertical bar
+;               }	    125 	right curly brace
+;               ~	    126 	tilde
 ;
 ;   - system call
 ;       - also known as "syscall"
