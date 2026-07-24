@@ -493,3 +493,251 @@
 #               index = hash_function(value)    #> calls the hash_function to return an index
 #                                                   #> looks up where the value might be stored in
 #               print(f"{value} is at {index}") #> returns the index wherein the valus is stored at
+#
+#   - Trees
+#       - is a hierachical data structure consisting of nodes connected by edges
+#           - as each node contains a value and references to its child nodes
+#       - similar to linked lists, each node consists of both data and a reference to other nodes
+#       - unlike other data structures, in trees, a single element can have multiple 'next' elements
+#           - allowing data to branch out in various directions
+#       - usecases:
+#           - hierachical data
+#               - file systems, organizational models, etc.
+#           - databases
+#               - quick data retrieval
+#           - routing tables
+#               - used for routing data in network algorithms
+#           - sorting or searching
+#               - used for sorting data or searching for data
+#           - priority queues
+#               - priority queues are commonly implemented using trees
+#               - such as binary heaps
+#       - types of Trees
+#           - Binary Trees
+#               - each node has up to two children, the left and righr child node
+#               - this structure is the foundation for more complex tree types
+#                   - like Binary Search Trees, and AVL Trees
+#           - Binary Search Trees (BSTs)
+#               - a type of a Binary Tree where for each node
+#                   - the left child node has a lower value
+#                   - and the right child node has a higher value
+#           - AVL Trees
+#               - named after Adelson-Velsky and Landis
+#               - a type of Binary Search Tree that self-balances so that for every node
+#                   - the difference between the left and right subtrees is at most one, 1
+#               - the balanace is maintained through rotations where nodes are inserted or deleted
+#       - Trees vs Lists
+#           - arrays
+#               - are fast when accessing data directly
+#                   - only when the index is known
+#               - inserting and deleting elements requires other elements to shift in memeory
+#                   - in order to take place for the new element ot to take the place of the deleted element
+#                   - this process is very time consuming for very big data sets
+#           - linked lists
+#               - are fast when inserting and deleting nodes
+#                   - it does not require any memory shifting
+#               - accessing an element in a linked lists is slow
+#                   - as the list must first be traversed to access the element
+#           - trees
+#               - in Binary Trees, Binary Search Tree and AVL trees
+#                   - trees are better due to it being better in accessing and modifying each node
+#                   - it does not need to shift memory
+#
+#       - Binary Trees
+#           - is a type of a tree data structure where each node an have up to two child nodes
+#               - a left child node and right child node
+#           - why Binary Trees?
+#               - algorithms that traverse, search, inserts and deletes elemenet are simpler
+#                   - easier to implement and runs faster
+#               - keeping data in a Binary Search Tree is very efficient when searching for elements
+#               - balancing trees are easier to do with a limited number of child nodes
+#                   - e.g. using an AVL Binary Tree
+#               - Binary Trees can be represented as arrays
+#                   - making the tree more memory efficient
+#           - type of Binary Trees
+#               - balanced trees
+#                   - at most, only one difference between is left and right subtree heights
+#                       - for each node in the tree
+#                   - illustration:
+#                                       |---| 
+#                                 _---->| R |<----_
+#                                |      |---|      |
+#                                |                 |
+#                              |---|              |---|
+#                          _-->| A |<--_      _-->| B |
+#                         |    |---|    |    |    |---|
+#                         |             |    |
+#                       |---|         |---||---|
+#                       | C |         | D || E |
+#                       |---|         |---||---|
+#               - complete trees
+#                   - has all levels of full nodes, except the last level
+#                       - which can be full, or filled from left to right
+#                   - the properties of a binary tree means it is also balanced
+#                   - illustration:
+#                                       |---| 
+#                                 _---->| R |<----_
+#                                |      |---|      |
+#                                |                 |
+#                              |---|              |---|
+#                          _-->| A |<--_      _-->| B |<--_
+#                         |    |---|    |    |    |---|    |
+#                         |             |    |             |
+#                       |---|         |---||---|        |---|
+#                     _>| C |<_     _>| D || E |        | F |
+#                     ? |---| ?     ? |---||---|        |---|
+#                     |       |     |
+#                   |---|   |---| |---|
+#                   | G |   | H | | I |
+#                   |---|   |---| |---|
+#               - full tree
+#                   - is a kind of tree where each node either has 0 or 2 nodes
+#                       - there cannot be a node with a single child node
+#                   - illustration:
+#                                       |---| 
+#                                 _---->| R |<----_
+#                                |      |---|      |
+#                                |                 |
+#                              |---|              |---|
+#                          _-->| A |<--_          | B |
+#                         |    |---|    |         |---|
+#                         |             |    
+#                       |---|         |---|
+#                     _>| C |<_       | D |
+#                     ? |---| ?       |---|
+#                     |       |
+#                   |---|   |---|
+#                   | E |   | F |
+#                   |---|   |---|
+#               - perfect tree
+#                   - has all leaf nodes on the same level
+#                       - meaning, all levels are full of nodes
+#                           - all internal nodes have two child nodes
+#                   - it is also perfect, balanced and complete
+#                   - illustration:
+#                                       |---| 
+#                                 _---->| R |<----_
+#                                |      |---|      |
+#                                |                 |
+#                              |---|              |---|
+#                          _-->| A |<--_      _-->| B |<--_
+#                         |    |---|    |    |    |---|    |
+#                         |             |    |             |
+#                       |---|         |---||---|        |---|
+#                       | C |         | D || E |        | F |
+#                       |---|         |---||---|        |---|
+#           - similar to Linked Lists, implementing Trees is the same to it
+#           - tree implementation in Python:
+#               class TreeNode:
+#                   def __init__(self, data) -> None:
+#                       self.data = data
+#                       self.left = none
+#                       self.right = None
+#
+#               #> binary tree with a depth of two (root and two children)
+#               class Tree:
+#                   def __init__(self, value) -> None:
+#                       self.tree = TreeNode(value)
+#                   
+#                   def add_right(self, value) -> None:
+#                       self.tree.right = value
+#
+#                   def add_left(self, value) -> None:
+#                       self.tree.left
+#
+#               #> implementation without the Tree class
+#               root_node = TreeNode('R')
+#               node_a = TreeNode('A')
+#               node_b = TreeNode('B')
+#               
+#               root_node.left = node_a
+#               root_node.right = node_b
+#           - Binary Tree Traversal
+#               - going from node to node is called "traversal"
+#               - unlike linked lists, since they are linear data structures
+#                   - it is only traversible in one of two ways
+#                   - at the start of the first node (element) and go forwards or backwards
+#               - since trees can branch out to different directions, which is non-linear
+#                   - there are different ways of traversing Trees
+#               - there are two main categories of Tree traversal methods
+#                   - Breadth First Search (BFS)
+#                       - is when the nodes on the same level are visited 
+#                           - all before going to the next level in the tree
+#                       - meaning, that the three is explored in a more sideways direction
+#                   - Depth First Search (DFS)
+#                       - is when the traversal moves down the tree all to the leaf nodes (external)
+#                           - exploring the tree branch by branch in a downwards direction
+#                       - there are three different types of DFS traversals:
+#                           - pre-order
+#                           - in-order
+#                           - post-order
+#
+#                       - Pre-order Traversal
+#                           - is a type of DFS, where each node is visited in a certain order
+#                           - done by visiting the root node first, 
+#                               - then recursively do a pre-order traversal of the left subtree
+#                               - followed by a recursive pre-order traversal of the righ subtree
+#                           - used for creating a cope of the tree, prefix notation of an expression tree, etc.
+#                           - it is called "pre" due to each node is printed before the recursion
+#                               - recursion of left to and right subtrees
+#                           - function implementation of pre-order traversal of trees
+#                               def pre_order_traversal(node) -> None:
+#                                   if node is None:
+#                                       return
+#                                   print(node.data, end=", ")
+#                                   pre_order_traversal(node.left)
+#                           - sidenote:
+#                               - the first node to be printed is the root node, the first node to be traversed
+#                                   - before calling the left node and then the right node
+#                               - the function keeps traversing the left subtree before going to the right suntree
+#                                   - it will switch to the other node once the node becomes None
+#                                       - indicating that the node has no child nodes
+#                                   - after both left and right nodes return None
+#                                       - the recursive function ends and returns to the parent recursion
+#                               - the function ends its propagation until the rightmost node is reached
+#                       - In-order Traversal
+#                           - is a type of DFS, where each node is visited in a certain order
+#                           - done by a visiting the leftmost node first
+#                               - recursvely searching for the leftmost node
+#                           - after which, visits the root node
+#                               - and then visits the right node until the rightmost nodes
+#                           - it is called "in" due to the node being printed in between recursion calls
+#                               - the node gets printed after the left subtree and before te right subtree
+#                           - function implementation of in-order traversal of trees
+#                               def in_order_traversal(node) -> None:
+#                                   if node is Node:
+#                                       return
+#                                   in_order_traversal(node.left)
+#                                   print(node.data, end=", ")
+#                                   in_order_traversal(node.right)
+#                           - sidenote:
+#                               - the first node to be printed is the leftmost node
+#                                   - calling itself until the child with the most leftmost node is printed
+#                               - once the node becomes None
+#                                   - it indicates that there is no left child node
+#                                   - after that, moves to the parent of the child node
+#                                   - and then, the right node, before moving a node backwards
+#                               - the function recursively runs through the tree until the rightmost three is printed
+#                       - Post-order Traversal
+#                           - is a type of DFS, where each node is visited in a certain order
+#                           - done wisiing the leftmost node first
+#                               - recursively searching for the leftmost noe
+#                           - after which, recursively searches for the rightmost nodes
+#                               - and then finally printing the data of the node
+#                           - it is called "post" due to it visiting a node
+#                               - after the left and right child nodes are called recursivey
+#                           - function implementation of post-order traversal of trees
+#                               def post_order_traversal(node) -> None:
+#                                   if node is None:
+#                                       return
+#                                   post_order_traversal(node.left)
+#                                   post_order_traversal(node.right)
+#                                   print(node.data, end=", ")
+#                           - sidenode:
+#                               - the first node to be printed is the leftmost child node
+#                                   - printing the node and the going to the rigth child of the same parent node
+#                               - once the node becomes None
+#                                   - it indicates that the leftmost child node is empty
+#                                   - moving on to the right child node
+#                                   - after which bot child nodes becomes None, prints the data
+#                               - the function recursively runs through the tree until all nodes is printed
