@@ -575,17 +575,17 @@
 #                       - which can be full, or filled from left to right
 #                   - the properties of a binary tree means it is also balanced
 #                   - illustration:
-#                                       |---| 
-#                                 _---->| R |<----_
-#                                |      |---|      |
-#                                |                 |
-#                              |---|              |---|
-#                          _-->| A |<--_      _-->| B |<--_
-#                         |    |---|    |    |    |---|    |
-#                         |             |    |             |
-#                       |---|         |---||---|        |---|
-#                     _>| C |<_     _>| D || E |        | F |
-#                     ? |---| ?     ? |---||---|        |---|
+#                                        |---| 
+#                                 _----->| R |<-----_
+#                                |       |---|       |
+#                                |                   |
+#                              |---|               |---|
+#                          _-->| A |<--_       _-->| B |<--_
+#                         |    |---|    |     |    |---|    |
+#                         |             |     |             |
+#                       |---|         |---| |---|        |---|
+#                     _>| C |<_     _>| D | | E |        | F |
+#                     ? |---| ?     ? |---| |---|        |---|
 #                     |       |     |
 #                   |---|   |---| |---|
 #                   | G |   | H | | I |
@@ -843,17 +843,17 @@
 #                       - where h is the height of the tree
 #                       - only if the BST is a balanced tree
 #                       - illustration:
-#                                       |---| 
-#                                 _---->| 5 |<----_
-#                                |      |---|      |
-#                                |                 |
-#                              |---|              |---|
-#                          _-->| 3 |<--_      _-->| 7 |
-#                         |    |---|    |    |    |---|
-#                         |             |    |
-#                       |---|         |---||---|
-#                       | 1 |         | 4 || 6 |
-#                       |---|         |---||---|
+#                                        |---| 
+#                                 _----->| 5 |<-----_
+#                                |       |---|       |
+#                                |                   |
+#                              |---|               |---|
+#                          _-->| 3 |<--_       _-->| 7 |
+#                         |    |---|    |     |    |---|
+#                         |             |     |
+#                       |---|         |---| |---|
+#                       | 1 |         | 4 | | 6 |
+#                       |---|         |---| |---|
 #                   - if a BST contains the most nodes in the left subtree
 #                       - the worst case search will take longer
 #                       - these types of trees are called unbalanced trees
@@ -867,12 +867,12 @@
 #                         |    |---|    |         |---|
 #                         |             |    
 #                       |---|         |---|
-#                     _>| 1 |<_       | 4 |
-#                     ? |---| ?       |---|
-#                     |       |
-#                   |---|   |---|
-#                   | 0 |   | 2 |
-#                   |---|   |---|
+#                     _>| 1 |         | 4 |
+#                     ? |---|         |---|
+#                     |        
+#                   |---|
+#                   | 0 |
+#                   |---|
 #
 #           - BST value inserting
 #               - inserting a value in a BST is similar to searching a value
@@ -972,3 +972,284 @@
 #                       - the height of the the tree must be minimized
 #                           - for that, the tree must become balanced
 #                       - AVL trees solves this problem
+#       - Adelson-Velsky and Landis Trees
+#           - commonly known as AVL Trees
+#               - invented by Georgy Adelson-Velsky and Evgenii Landis in 1962
+#           - a type of Binary Search Tree, and are self-balancing
+#               - meaning, that the tree height is kept to a minimum
+#               - so that fast runtime is guaranteed searching, inserting and delete nodes
+#                   - with the time complexity of O(log n)
+#           - the only difference it and a regular Binary Search Tree
+#               - is that an AVL Tree do rotation operations in addition, keeping the tree balanced
+#               - in return, AVL trees ensures that it always have a minimum tree hright
+#                   - meaning, searching, inserting and deleting operations can be very fast
+#           - illustration:
+#                            Unbalanced Binary Search Tree          Self-balancing AVL Tree
+#                                     Height: 5                            Height: 2
+#                                       |---|                                |---|
+#                                 _---->| 5 |<----_                   _----->| 3 |<-----_
+#                                |      |---|      |                 |       |---|       |
+#                                |                 |                 |                   |
+#                              |---|              |---|            |---|               |---|
+#                          _-->| 3 |<--_          | 7 |        _-->| 0 |<--_       _-->| 5 |<--_
+#                         |    |---|    |         |---|       |    |---|    |     |    |---|    |
+#                         |             |                   |---|         |---| |---|         |---|
+#                       |---|         |---|                 |-1 |         | 1 | | 4 |         | 7 |
+#                     _>| 1 |         | 4 |                 |---|         |---| |---|         |---|
+#                     ? |---|         |---|
+#                     |        
+#                   |---|
+#                  >| 0 |
+#                 / |---|
+#                 ?
+#               |---|
+#               |-1 |
+#               |---|
+#           - the two trees above are both Binary Search Trees
+#               - having the same nodes, and the same in-order traversal
+#               - the hieght is very different due to AVL Trees is balanced
+#           - to restore the balance of an AVL Tree
+#               - left or right rotations are done, or a combination of left and right rotations
+#           - subtrees change parents during rotation to maintain in-order traversal
+#               - and to maintain the BST property
+#               - such that the left child is leff than the right child
+#                   - for all nodes in the tree
+#
+#           - The Balance Factor
+#               - a node's balance factor is he difference in subtree heights
+#               - the subtree heights are stored to each node for all nodes in an AVL tree
+#                   - the balance factor is calculated based on its subtree heights
+#                       - to check if the tree has become out of balance
+#               - the height of a subtree is the number of the edges
+#                   - the edges between the root node of the subtree and the leaf nodes farthest down in that subtree
+#               - sidenote:
+#                   - the balance factor (BF) for a node (X)
+#                       - is the difference between its right and left subtrees
+#                   - formula
+#                       BF(X) = height(right_subtree(X)) - height(left_subtree(X)))
+#                   - values
+#                       - 0
+#                           - the node is in balance
+#                       - more than 0
+#                           - the node is right-heavy
+#                       - less than 0
+#                           - the node is left-heavy
+#                   - if the balance factor is less than 0, or more than 1
+#                       - for one or more node in the tree
+#                           - then the tree is not considered balanced
+#                       - and a rotation is needed to restore balance
+#               - our-of-balance cases
+#                   - Left-Left (LL)
+#                       - the unbalanced node and its left child node are both left-heavy
+#                       - a single right rotation is required to restore balance
+#                   - Right-Right (RR)
+#                       - the unbalanced node and its right child node are both left-heavy
+#                       - a single left rotation is required to restore balance
+#                   - Left-Right (LR)
+#                       - the unbalanced node is left-heavy
+#                           - and its left node is right heavy
+#                       - to restore balance, a left rotation on the left child
+#                           - then the a right rotation on the unbalanced node
+#                   - Right-Left (RL)
+#                       - the unbalanced node is right-heavy
+#                           - and its left node is left heavy
+#                       - to restore balance, a right rotation on the left child
+#                           - then the a left rotation on the unbalanced node
+#
+#               - Left-Left Case
+#                   - a node where the unbalance is discovered to be left heavy
+#                       - so it the left child node, also being left heavy
+#                   - in this case, a single right rotation on the unbalanced node is enough to restore balance
+#                   - illustration:
+#                          Left-Left Case              Right Rotation
+#                                        |---|              |---|
+#                                 _----->| 5 |       _----->| 3 |<-----_
+#                                |       |---|      |       |---|       |
+#                                |       -2 BF      |       00 BF       |
+#                              |---|              |---|               |---|
+#                          _-->| 3 |              | 1 |               | 5 |
+#                         |    |---|              |---|               |---|
+#                         |    -1 BF              00 BF               00 BF
+#                       |---|
+#                       | 1 |
+#                       |---|
+#                       00 BF
+#                   - when '1' is added, the balance factor of '5' becomes -2
+#                       - meaning the tree is unbalanced
+#                       - this becomes an LL case due to both the unbalanced node '5'
+#                           - and its left child node '3' are left node heavy
+#                           - which is a negative balance factor
+#                       - a single right rotation at node '5' restores the balance of the tree
+#                   - illustration:
+#                                   Left-Left Case                     Right Rotation
+#                                        |---|                               |---|
+#                                 _----->| 3 |<-----_                 _----->| 1 |<-----_
+#                                |       |---|       |               |       |---|       |
+#                                |       -2 BF       |               |       00 BF       |
+#                              |---|               |---|           |---|               |---| 
+#                          _-->| 1 |<--_           | 5 |       _-->| 0 |           _-->| 3 |<--_
+#                         |    |---|    |          |---|      |    |---|          |    |---|    |
+#                         |             |          00 BF      |    -1 BF          |    00 BF    |
+#                       |---|  -1 BF  |---|                 |---|               |---|         |---|
+#                     _>| 0 |         | 2 |                 |-1 |               | 2 |         | 5 |
+#                     ? |---|         |---|                 |---|               |---|         |---|
+#                     | -1 BF         00 BF                 00 BF               00 BF         00 BF
+#                   |---|
+#                   |-1 |
+#                   |---|
+#                   00 BF
+#                   - as nodes '2', '0' and '-1' are added, the balance factor of '3' becomes -1
+#                       - meaning, the tree is out of balance
+#                       - this is also a LL case due to both the unbalanced '3' node
+#                           - and its left child node '1' are left heavy
+#                       - a single right rotation at node '3' restores the balance
+#               - Right-Right Case
+#                   - a node where the unbalance is discovered to be right heavy
+#                       - so it the left child node, also being right heavy
+#                   - in this case, a single left rotation on the unbalanced node is enough to restore balance
+#                   - illustration:
+#                          Right-Right Case             Left Rotation
+#                       |---|                               |---|
+#                       | 1 |<-----_                 _----->| 3 |<-----_
+#                       |---|       |               |       |---|       |
+#                       -2 BF     |---|             |       00 BF       |
+#                                 | 3 |<--_       |---|               |---|
+#                                 |---|   ?       | 1 |               | 5 |
+#                                 -1 BF   |       |---|               |---|
+#                                       |---|     00 BF               00 BF
+#                                       | 5 |
+#                                       |---|
+#                                       00 BF
+#                       
+#                   - when '5' is added, the balance factor of '1' becomes -2
+#                       - meaning the tree is unbalanced
+#                       - this becomes an RR case due to both the unbalanced node '1'
+#                           - and its left child node '3' are left node heavy
+#                           - which is a negative balance factor
+#                       - a single left rotation at node '1' restores the balance of the tree
+#                   - illustration:
+#                                    Left-Left Case                            Left Rotation
+#                                        |---|                                     |---|
+#                                 _----->| 3 |<-----_                       _----->| 5 |<-----_
+#                                |       |---|       |                     |       |---|       |
+#                                |       +2 BF       |                     |       00 BF       |
+#                              |---|               |---|                 |---|               |---| 
+#                              | 1 |           _-->| 5 |<--_         _-->| 3 |<--_           | 7 |<--_
+#                              |---|          |    |---|    |       |    |---|    |          |---|    |
+#                              00 BF          |    +1 BF    |       |    00 BF    |          +1 BF    |
+#                                           |---|         |---|   |---|         |---|               |---|
+#                                           | 4 |         | 7 |<_ | 1 |         | 4 |               | 8 |
+#                                           |---|         |---| ? |---|         |---|               |---|
+#                                           00 BF         +1 BF | 00 BF         00 BF               00 BF
+#                                                             |---|
+#                                                             | 8 |
+#                                                             |---|
+#                                                             00 BF
+#                   - as nodes '4', '7' and '8' are added, the balance factor of '3' becomes +2
+#                       - meaning, the tree is out of balance
+#                       - this is also a RR case due to both the unbalanced '3' node
+#                           - and its left child node '5' are right heavy
+#                       - a left rotation on the unbalanced child node
+#                           - and a right rotation on the main node restores balance
+#               - Left-Right Case
+#                   - a node where the unbalance is discovered to be left heavy
+#                       - and the left child node, is right heavy
+#                   - in this case, a single left rotation on the unbalanced node is enough to restore balance
+#                   - illustration:
+#                         Left-Right Case       Left Rotation              Right Rotation
+#                                   |---|                    |---|              |---|
+#                            _----->| 9 |             _----->| 9 |       _----->| 8 |<-----_
+#                           |       |---|            |       |---|      |       |---|       |
+#                           |       -2 BF            |       -2 BF      |       00 BF       |
+#                         |---|                    |---|              |---|               |---|
+#                         | 5 |<--_            _-->| 8 |              | 5 |               | 9 |
+#                         |---|    |          |    |---|              |---|               |---|
+#                         +1 BF    |          |    -1 BF              00 BF               00 BF
+#                                |---|      |---|
+#                                | 8 |      | 5 |
+#                                |---|      |---|
+#                                00 BF      00 BF
+#                       
+#                   - when '4' is added, the balance factor of '5' becomes -2
+#                       - meaning the tree is unbalanced
+#                       - this becomes an RR case due to both the unbalanced node '5' being left heavy
+#                           - and its left child node '3' is right node heavy
+#                           - which is a negative balance factor
+#                       - a left rotation at node '3', swapping with node '4'
+#                           - and a right rotation at node '5' restores balance in the tree 
+#                   - illustration:
+#                              Left-Right Case                  Left Rotation                    Right Rotation
+#                                   |---|                            |---|                            |---|
+#                            _----->| 8 |<-----_              _----->| 8 |<-----_              _----->| 6 |<-----_
+#                           |       |---|       |            |       |---|       |            |       |---|       |
+#                           |       -2 BF       |            |       -2 BF       |            |       00 BF       |    
+#                         |---|               |---|        |---|               |---|        |---|               |---|
+#                     _-->| 5 |<--_           | 9 |    _-->| 6 |<--_           | 9 |    _-->| 5 |           _-->| 8 |<--_
+#                    |    |---|    |          |---|   |    |---|    |          |---|   |    |---|          |    |---|    |
+#                    |    +1 BF    |          00 BF   |    -1 BF    |          00 BF   |    -1 BF          |    00 BF    |
+#                  |---|         |---|              |---|         |---|              |---|               |---|         |---|
+#                  | 4 |         | 6 |<_          _>| 5 |         | 7 |              | 4 |               | 7 |         | 9 |
+#                  |---|         |---| ?          ? |---|         |---|              |---|               |---|         |---|
+#                  00 BF         +1 BF |          | -1 BF         00 BF              00 BF               00 BF         00 BF
+#                                    |---|      |---|
+#                                    | 7 |      | 4 |
+#                                    |---|      |---|
+#                                    00 BF      00 BF
+#                   - as nodes '4', '6' and '7' are added, the balance factor of '8' becomes -2
+#                       - and its child node, '5' becomes unbalanced with a balance factor of +1
+#                       - meaning, the tree is out of balance
+#                       - this is also a LR case due to both the unbalanced '3' node being left heavy
+#                           - and its left child node '5' is right heavy
+#                       - a left rotation on its child node and a right rotation on the main node
+#                           - restores balance to the Tree
+#               - Right-Left Case
+#                   - a node where the unbalance is discovered to be right heavy
+#                       - and the right child node, is left heavy
+#                       - a right rotation on the unbalanced child node
+#                           - and a left rotation on the main node restores balance
+#                   - illustration:
+#                         Right-Left Case        Right Rotation             Left Rotation
+#                         |---|               |---|                             |---|
+#                         | 9 |<-----_        | 9 |<-----_               _----->|10 |<-----_
+#                         |---|       |       |---|       |             |       |---|       |
+#                         +2 BF       |       +2 BF       |             |       00 BF       |
+#                                   |---|               |---|         |---|               |---|
+#                               _-->|13 |               |10 |<--_     | 9 |               |13 |
+#                              |    |---|               |---|    |    |---|               |---|
+#                              |    -1 BF               +1 BF    |    00 BF               00 BF
+#                            |---|                             |---|
+#                            |10 |                             |13 |
+#                            |---|                             |---|
+#                            00 BF                             00 BF
+#                   - when '4' is added, the balance factor of '5' becomes -2
+#                       - meaning the tree is unbalanced
+#                       - this becomes an RR case due to both the unbalanced node '5' being left heavy
+#                           - and its left child node '3' is right node heavy
+#                           - which is a negative balance factor
+#                       - a left rotation at node '3', swapping with node '4'
+#                           - and a right rotation at node '5' restores balance in the tree 
+#                   - illustration:
+#                              Left-Right Case                  Left Rotation                    Right Rotation
+#                                   |---|                            |---|                                     |---|
+#                            _----->|10 |<-----_              _----->|10 |<-----_                       _----->|12 |<-----_
+#                           |       |---|       |            |       |---|       |                     |       |---|       |
+#                           |       +2 BF       |            |       +2 BF       |                     |       00 BF       |    
+#                         |---|               |---|        |---|               |---|                 |---|               |---|
+#                         | 9 |           _-->|13 |<--_    | 9 |           _-->|12 |<--_         _-->|10 | --_           |13 |<--_
+#                         |---|          |    |---|    |   |---|          |    |---|    |       |    |---|    |          |---|    |
+#                         00 BF          |    -1 BF    |   00 BF          |    +1 BF    |       |    -1 BF    |          +1 BF    |
+#                                      |---|         |---|              |---|         |---|   |---|         |---|               |---|
+#                                    _>|12 |         |14 |              |11 |         |13 |<_ | 9 |         |11 |               |14 |
+#                                    ? |---|         |---|              |---|         |---| ? |---|         |---|               |---|
+#                                    | -1 BF         00 BF              00 BF         +1 BF | 00 BF         00 BF               00 BF
+#                                  |---|                                                  |---|
+#                                  |11 |                                                  |14 |
+#                                  |---|                                                  |---|
+#                                  00 BF                                                  00 BF
+#                   - as nodes '14', '12' and '11' are added, the balance factor of '10' becomes +2
+#                       - and its child node, '13' becomes unbalanced with a balance factor of -1
+#                       - meaning, the tree is out of balance
+#                       - this is also a RL case due to both the unbalanced '3\10' node being right heavy
+#                           - and its left child node '13' is left heavy
+#                       - a right rotation on its child node and a left rotation on the main node
+#                           - restores balance to the Tree
