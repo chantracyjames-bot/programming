@@ -627,7 +627,7 @@
 #                       | C |         | D || E |        | F |
 #                       |---|         |---||---|        |---|
 #           - similar to Linked Lists, implementing Trees is the same to it
-#           - tree implementation in Python:
+#           - binary tree implementation in Python:
 #               class TreeNode:
 #                   def __init__(self, data) -> None:
 #                       self.data = data
@@ -741,3 +741,234 @@
 #                                   - moving on to the right child node
 #                                   - after which bot child nodes becomes None, prints the data
 #                               - the function recursively runs through the tree until all nodes is printed
+#
+#       - Binary Search Trees
+#           - BST is a type of Binary Tree data structure
+#           - the following properties must be true for a node in the tree
+#               - the node's left child and all of it's descendants, like its children, children's children, etc.
+#                   - must have lower values than the original node's value
+#               - the node's right child ald all of its descendants
+#                   - must have higher values than the original node's value
+#               - the left and right subrees must also be BSTs
+#           - these properties makes it faster to seach, add, and delete values than a regular Binary Tree
+#           - assuming all values in a BST are unique
+#               - the size of a tree and the number of nodes in it is n
+#               - a subtree starts with one of the nodes in the tree as a local root
+#                   - consists of that node and all of its descendants
+#               - the descendants of a node are all the child nodes of that node
+#                   - and their child nodes, and that child's child nodes, and so on
+#                   - and the descendants will be all nodes that are connected below that node
+#               - the node's height is the maximum number of edges betwen that node and a leaf node
+#               - a node's in-order successor is the node that comes after it if the in-order traversal is used
+#                   - an in-order traverals of the BST would result in node 13 coming before node 14
+#                   - and so, the successor of node 13 would be node 14
+#
+#           - Binary Search Tree Traversal
+#               - the primary way to check if the tree is a BST 
+#                   - is to check if the tree posses the properties of BSTs
+#               - another way is to use in-order traversal
+#                   - printing out if the nodes are in order from lowest to highest
+#               - binary search tree implementation in Python 
+#                   class TreeNode:
+#                       def __init__(self, data) -> None:
+#                           self.data = data
+#                           self.left = None
+#                           self.right = None
+#
+#                   def in_order_traversal(node) -> None:
+#                       if node is None:
+#                           return
+#                       in_order_traversal(node.left)
+#                       print(node.data, end=', ')
+#                       in_order_traversal(node.right)
+#
+#               #> example
+#                   root = TreeNode('10')
+#                   node_a = TreeNode('7')
+#                   node_b = TreeNode('13')
+#                   node_c = TreeNode('6')
+#                   node_d = TreeNode('8')
+#                   node_e = TreeNode('12')
+#                   node_f = TreeNode('14')
+#
+#                   root.left = node_a
+#                   root.right = node_b
+#
+#                   node_a.left = node_c
+#                   node_a.right = node_d
+#                   node_b.left = node_e
+#                   node_b.right = node_f
+#
+#           - BST value searching
+#               - finding a value in a BST is similar to using Binary Search on an array
+#                   - note using a Binary Search algorithm on an array, it must be first sorted
+#                   - since BSTs are already ordered from highest to lowest
+#                       - using the same algorithm as Binary Search is very efficient
+#               - rules:
+#                   - start at the root node
+#                   - if the in that node is equal to the target value
+#                       - return
+#                   - if the target value is higher than the value at that node
+#                       - continue searching to the right subtree
+#                   - if the target value is lower than the value at that node
+#                       - continue searching to the left subtree
+#                   - if the node returns None, and there are no more subtrees
+#                       - the target value is not present inside the BST
+#               - example algorithm:
+#                   def binary_search(node, target) -> int | None:
+#                       if node is None:
+#                           return None
+#                       elif node.data == target:
+#                           return node
+#                       elif node > node.data:
+#                           return binary_search(node.left, target)
+#                       else:
+#                           return binary_search(node.right, target)
+#               - in order to find the lowest value or the highest value in a BST
+#                   - go as far left or as far right as possible, respectively
+#                   - example algorithm:
+#                       def get_lowest_node(node) -> node:
+#                           current = node
+#                           while current.left is not None:
+#                               current = current.left
+#                           return current
+#
+#                       def get_highest_node(node) -> node:
+#                           current = node
+#                           while current.right is not None:
+#                               current = current.right
+#                           return current
+#               - time complexity
+#                   - the time complexity for finding a value inside a subtree is O(h)
+#                       - where h is the height of the tree
+#                       - only if the BST is a balanced tree
+#                       - illustration:
+#                                       |---| 
+#                                 _---->| 5 |<----_
+#                                |      |---|      |
+#                                |                 |
+#                              |---|              |---|
+#                          _-->| 3 |<--_      _-->| 7 |
+#                         |    |---|    |    |    |---|
+#                         |             |    |
+#                       |---|         |---||---|
+#                       | 1 |         | 4 || 6 |
+#                       |---|         |---||---|
+#                   - if a BST contains the most nodes in the left subtree
+#                       - the worst case search will take longer
+#                       - these types of trees are called unbalanced trees
+#                       - illustration:
+#                                       |---| 
+#                                 _---->| 5 |<----_
+#                                |      |---|      |
+#                                |                 |
+#                              |---|              |---|
+#                          _-->| 3 |<--_          | 7 |
+#                         |    |---|    |         |---|
+#                         |             |    
+#                       |---|         |---|
+#                     _>| 1 |<_       | 4 |
+#                     ? |---| ?       |---|
+#                     |       |
+#                   |---|   |---|
+#                   | 0 |   | 2 |
+#                   |---|   |---|
+#
+#           - BST value inserting
+#               - inserting a value in a BST is similar to searching a value
+#               - rules:
+#                   - start at the root node
+#                   - if the value is higher than the node
+#                       - go to the right subtree
+#                   - if the value is lower than the node
+#                       - go to the left subtree
+#                   - if there are no more subtrees to go to
+#                       - then insert tha value as a new node
+#               - node that all nodes in are unique
+#                   - if the value to insert is the same value as a node
+#                       - then the new value is discarded
+#               - example algorithm:
+#                   def insert_node(node, value) -> TreeNode | node:
+#                       if node is Node:
+#                           return TreeNode(value)
+#                       else:
+#                           if value > node.data:
+#                               node.right = insert_node(node.right, value)
+#                           elif value < node.data:
+#                               node.left = insert_node(node.left, value)
+#                       return node
+#
+#           - BST value deleting'
+#               - in order to delete a node, the node must first be searched
+#                   - after which, if found, there are three cases that can be done
+#               - rules:
+#                   - if the node is a lead node (external)
+#                       - it can be removed by removing the link to it
+#                   - if the node is not a leaf node and only has one child node
+#                       - it can be removed by connecting its child node to the current node's parent node
+#                   - if the node has both a left and right child node
+#                       - then find the node's in order successor
+#                       - change the values with that node and then delete it
+#               - example algorithm:
+#                   #> the function in which enables deleting specific nodes
+#                   #> note that the "node" perimeter enables recursion
+#                   def delete_node(node, value) -> node | None:
+#                       # these lines searches for the node with the correct value to delete
+#                       if not node:
+#                           return None
+#                       if node < node.data:
+#                           node.left = delete(node.left, data)
+#                       elif data > node.data:
+#                           node.right = delete(node.right, data)
+#                       #> runs when the corrent node to delete has been found
+#                       else:
+#                           #> if there is no child nodes
+#                               #> None is returned
+#                           #> if there is either a left child or right child node
+#                               #> then those child nodes beomes the parent of the current node's left or right child node
+#                           #> if the node has both child nodes
+#                               #> the in-order successor is found using the get_lowest_node() function
+#                               #> keeping the successor's value by seeting it as the value of the node to delete
+#                                   - and then it is now possible to delete the successor node
+#                           if not node.left:
+#                               temp node.right
+#                               node = None
+#                               return temp
+#                           elif not node.right:
+#                               temp node.left
+#                               node = None
+#                               return temp
+#                           node.data = get_lowest_node(node.right).data
+#                           node.right = delete(node.right, node.data)
+#                       return node
+#
+#           - BST time complexity compared to other Data Structures
+#               - comparing to sorted arrays and linked lists
+#                   - sorted arrays
+#                       - O(log n)
+#                   - linked lists
+#                       - O(n)
+#                   - BSTs
+#                       - O(log n)
+#                   - note that searching a BST is just as fast as Binary Search on an array
+#                       - with the same O(log n) time complexity
+#                       - add on to the fact that items don't have to be shifted in memory
+#                           - when inserting or deleting elements like Linked Lists
+#               - balanced BSTs
+#                   - when insearing, deleting or searching for a node
+#                       - the time complexity is actually O(h), wherein h is the right
+#                       - meaning, the higher (or taller) the tree, the longer the operation will take
+#                   - the reason why the time complexity compared to other Data Structures is O(log n)
+#                       - is only true if the tree is balanced
+#                           - refer to types of Binary Trees
+#                   - for a balanced BST, with a large number of nodes (n)
+#                       - the height becomes h ≈ log n
+#                       - therefore, the time complexity becomed O(h) = O(log n)
+#                   - in the case of BSTs being unbalanced
+#                       - the height of the tree is approximately the same as the number of nodes
+#                           - h ≈ n
+#                       - therefore, the time complexity becomes O(h) = O(n)
+#                   - in order to optimize a BST
+#                       - the height of the the tree must be minimized
+#                           - for that, the tree must become balanced
+#                       - AVL trees solves this problem
