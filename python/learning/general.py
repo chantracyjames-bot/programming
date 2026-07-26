@@ -150,7 +150,7 @@
 #       - global
 #           - declares the variable as global
 #               - creates the variable if it doesn't exist
-#           - usually is unadvised to use 
+#           - usually is unadvised to use
 #               - passing arguments are preferred
 #           - syntax:
 #               global <variable_name>
@@ -236,6 +236,6 @@
 #       - \xhh
 #           - represents a hex value
 
-print("Hello World") 
+print("Hello World")
 # print() is a python method that prints text to the screen
-# basic Python programgg
+# basic Python program
