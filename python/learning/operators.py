@@ -9,46 +9,46 @@
 #                     - if and only if they have the same data type
 #                         - adding numeric types and non-numeric types results into erros
 #                     - example: 
-#                         my_num = 10
-#                         my_other_num = 15
-#                         sum = my_num + my_other_num #> 25
+#                         my_num: int = 10
+#                         my_other_num: int = 15
+#                         sum: int = my_num + my_other_num #> 25
 #                 - subtraction (-)
 #                     - subtracts two values from one another
 #                     - example: 
-#                         my_num = 10
-#                         my_other_num = 15
-#                         dif = my_num - my_other_num #> -5
+#                         my_num: int = 10
+#                         my_other_num: int = 15
+#                         dif: int = my_num - my_other_num #> -5
 #                 - multiplication (*)
 #                     - multiplies two values with each other
 #                     - example: 
-#                         my_num = 10
-#                         my_other_num = 15
-#                         pro = my_num * my_other_num #> 150
+#                         my_num: int = 10
+#                         my_other_num: int = 15
+#                         pro: int = my_num * my_other_num #> 150
 #                 - division (/)
 #                     - divides one value by the other
 #                     - example: 
-#                         my_num = 10
-#                         my_other_num = 15
-#                         quo = my_num / my_other_num #> 0.666666666666 (auto casts to float)
+#                         my_num: int = 10
+#                         my_other_num: int = 15
+#                         quo: int = my_num / my_other_num #> 0.666666666666 (auto casts to float)
 #                 - modulus (%)
 #                     - returns the division remainder
 #                     - example: 
-#                         my_num = 10;
-#                         my_other_num = 15
-#                         mod = my_num % my_other_num #> 5
+#                         my_num: int = 10;
+#                         my_other_num: int = 15
+#                         mod: int = my_num % my_other_num #> 5
 #                 - exponentation (**)
 #                     - raises a value to an exponent
 #                     - example:
-#                         my_num = 10
-#                         my_other_num = 2
-#                         exp = my_num ** my_other_num #> 100
+#                         my_num: int = 10
+#                         my_other_num: int = 2
+#                         exp: int = my_num ** my_other_num #> 100
 #                 - floor division
 #                     - divides one value by the other
 #                     - takes the highest integer lower than the result
 #                     - exmaple
-#                         my_num = 10
-#                         my_other_num = 15
-#                         flo = my_num // my_other_num #> 0     
+#                         my_num: int = 10
+#                         my_other_num: int = 15
+#                         flo: int = my_num // my_other_num #> 0     
 #           
 #       - Assigment
 #           - used to assign values to variables
@@ -57,79 +57,79 @@
 #                   - used to assign any values to variables
 #                   - used to initialize variables
 #                   - example: 
-#                       my_num = 10
+#                       my_num: int = 10
 #               - addition assignment (+=)
 #                   - used to increment (or add) values
 #                   - example: 
-#                       my_num = 10
+#                       my_num: int = 10
 #                       my_num += 10 #> 20
 #               - subtractiom assignment (-=)
 #                   - used to decrement (or subtract) values
 #                   - example: 
-#                       my_num = 10
+#                       my_num: int = 10
 #                       my_num -= 10 #> 0
 #               - multiplication assignment (*=)
 #                  - used to multiply values
 #                   - example: 
-#                       my_num = 10
+#                       my_num: int = 10
 #                       my_num *= 10 #> 100
 #               - division assignment (/=)
 #                   - used to divide values
 #                   - example: 
-#                       my_num = 10
+#                       my_num: int = 10
 #                       my_num /= 10 #> 1
 #               - modulo assignment (%=)
 #                   - used to retrieve remainder values
 #                   - example: 
-#                       my_num = 10
+#                       my_num: int = 10
 #                       my_num %= 10; #> 0
 #               - floor division assignment (//=)
 #                   - used to divide values
 #                   - returns a value rounded down
 #                   - example:
-#                       my_num = 10
+#                       my_num: int = 10
 #                       my_num //= 10 #> 1
 #               - exponential assignment (**=)
 #                   - used to raise values to an exponent
 #                   - example:
-#                       my_num = 10
+#                       my_num: int = 10
 #                       my_num **= 3 #> 100
 #               - bitwise AND assignment (&=)
 #                   - used for bitwise operations
 #                   - uses the AND logic comparisons
 #                   - example: 
-#                       a = 60       #> 0011 1100
-#                       b = 13       #> 0000 1101
-#                       a &= b       #> 0000 1100 - 12 in binary
+#                       a: int = 60       #> 0011 1100
+#                       b: int = 13       #> 0000 1101
+#                       a &= b            #> 0000 1100 - 12 in binary
 #                       my_num %= 10 #> 0
 #               - bitwise OR assignment (|=)
 #                   - used for bitwise operations
 #                   - uses the OR logic comparisons
 #                   - example: 
-#                       a = 60;      #> 0011 1100
-#                       b = 13;      #> 0000 1101
-#                       a &= b;      #> 0011 1101 - 61 in binary
+#                       a: int = 60;      #> 0011 1100
+#                       b: int = 13;      #> 0000 1101
+#                       a &= b;           #> 0011 1101 - 61 in binary
 #                       my_num %= 10 #> 0
 #               - bitwise XOR assignment (^=)
 #                   - used for bitwise operations
 #                   - uses the XOR logic comparisons
 #                   - example: 
-#                       a = 60;      #> 0011 1100
-#                       b = 13;      #> 0000 1101
-#                       a &= b;      #> 0011 0001 - 49 in binary
-#                       my_num %= 10 #> 0
+#                       a: int = 60;      #> 0011 1100
+#                       b: int = 13;      #> 0000 1101
+#                       a &= b;           #> 0011 0001 - 49 in binary
+#                       my_num ^= 10 #> 0
 #               - left-shift assignment (<<=)
 #                   - shifts the bit to the left
 #                   - effectively multiplies the value by 2^n
 #                   - example: 
-#                       my_num = 60;  #> 0011 1100
-#                       my_num <<= 2; #> 1111 0000 - 240 in binary
+#                       my_num: int = 60 #> 0011 1100
+#                       my_num <<= 2     #> 1111 0000 - 240 in binary
 #               - right-shift assignment (>>=)
 #                   - shifts the bit to the right
 #                   - effectively divides the value by 2^n
 #                   - example: 
-#                       my_num = 60;  #> 0011 1100
-#                       my_num >>= 2; #> 0000 1111 - 15 in binary
+#                       my_num: int = 60 #> 0011 1100
+#                       my_num >>= 2     #> 0000 1111 - 15 in binary
 #               - walrus assignment (:=)
 #                   - assigns values to a variable
 #                   - example:
@@ -148,39 +148,39 @@
 #                   - returns True if both values are equal
 #                   - false otherwise
 #                   - exmaple: 
-#                       a = 10
-#                       b = 10
+#                       a: int = 10
+#                       b: int = 10
 #                       a == b #> True
 #               - not equal to (!=)
 #                   - returns tTue if the values are not equal
 #                   - False if they are equal
 #                   - exmaple: 
-#                       a = 10
-#                       b = 15
+#                       a: int = 10
+#                       b: int = 15
 #                       a =!= b #> True
 #               - greater than (>)
 #                   - returns True if the value to the left if greater than the value in the right
 #                   - exmaple: 
-#                       a = 10
-#                       b = 5
+#                       a: int = 10
+#                       b: int = 5
 #                       a > b #> True
 #               - less than (<)
 #                   - returns True if the value to the left if less than the value in the right
 #                   - exmaple: 
-#                       a = 10
-#                       b = 5
+#                       a: int = 10
+#                       b: int = 5
 #                       a < b #> False
 #               - greater than or equal to (>=)
 #                   - returns True if the value to the left if greater than or equal to the value in the right
 #                   - exmaple: 
-#                       a = 10
-#                       b = 10
+#                       a: int = 10
+#                       b: int = 10
 #                       a >= b #> True
 #               - less than or equal to (<=)
 #                   - returns True if the value to the left if less than or equal to the value in the right
 #                   - exmaple: 
-#                       a = 10
-#                       b = 20
+#                       a: int = 10
+#                       b: int = 20
 #                       a <= b #> Tru
 #
 #       - Logical
@@ -188,8 +188,8 @@
 #               - logical negation
 #               - flips the value of the returning value
 #               - example:
-#                   my_text = "Hello World"
-#                   "World" not in my_text  #> False
+#                   my_text: str = "Hello World"
+#                   "World" not in my_text       #> False
 #           - and 
 #               - logical AND
 #               - chains multiple conditions
@@ -211,15 +211,15 @@
 #                       - is queries if both objects refer to the same object in memory
 #                       - == queries if both objetct contain the same elemets
 #               - example:
-#                   x = "idkman"
-#                   y = "idkman"
-#                   x is y       #> True
+#                   x: str = "idkman"
+#                   y: str = "idkman"
+#                   x is y            #> True
 #           - is not
 #               - returns True if both values are not the same object
 #               - example:
-#                   x = "idkman"
-#                   y = "Hello World"
-#                   x is not y       #> Tru
+#                   x: str = "idkman"
+#                   y: str = "Hello World"
+#                   x is not y             #> True
 #
 #       - Membership
 #           - in
@@ -228,7 +228,7 @@
 #               - returns a bool value
 #                   - either True or False
 #               - syntax and example:
-#                   my_text = "Hello World"
+#                   my_text: stre = "Hello World"
 #                   "Hell" in my_text #> True
 #           - not in
 #               - queries if a certain value is not inside of a larger array of values
@@ -236,7 +236,7 @@
 #               - returns a bool value
 #                   - either True or False
 #               - syntax and example:
-#                   my_text = "Hello World"
+#                   my_text: str = "Hello World"
 #                   "idkman" in my_text #> Tru
 #
 #       - Bitwise

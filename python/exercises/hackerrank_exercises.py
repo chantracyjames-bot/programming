@@ -1,14 +1,14 @@
 def sum_of_two(a: int, b: int) -> int:
     return a + b
 
-def array_sum(arr: []) -> int:
+def array_sum(arr: list[int]) -> int:
     sum: int = 0
     for i in arr:
         sum += i
     return sum
 
-def compare_triplets(a: [], b: []) -> []:
-    result: [] = [0, 0]
+def compare_triplets(a: list[int], b: list[int]) -> list[int]:
+    result: list[int] = [0, 0]
     for i in range(len(a)):
         if a[i] > b[i]:
             result[0] += 1
@@ -16,13 +16,13 @@ def compare_triplets(a: [], b: []) -> []:
             result[1] += 1
     return result
 
-def a_very_big_sum(arr: []) -> int:
+def a_very_big_sum(arr: list[int]) -> int:
     sum: int = 0
     for i in arr:
         sum += i
     return sum
 
-def diagonal_difference(arr: [[]]) -> int:
+def diagonal_difference(arr: list[list[int]]) -> int:
     left: int = 0
     right: int = 0
     for i in range(len(arr)):
@@ -33,8 +33,8 @@ def diagonal_difference(arr: [[]]) -> int:
         counter -= 1
     return abs(left - right)
 
-def plus_minus(arr: []) -> None:
-    num: [] = [0] * 3
+def plus_minus(arr: list[int]) -> None:
+    num: list[int] = [0] * 3
     for i in arr:
         if i > 0:
             num[0] += 1
@@ -54,7 +54,7 @@ def stair_case(n: int) -> None:
             print('#', end='')
         print() 
 
-def min_max_sum(arr: []) -> None:
+def min_max_sum(arr: list[int]) -> None:
     sum: int = 0
     for i in arr:
         sum += i
@@ -68,7 +68,7 @@ def min_max_sum(arr: []) -> None:
             max = temp
     print(f'{min} {max}')
     
-def birthday_cake_candles(candles: []) -> int:
+def birthday_cake_candles(candles: list[int]) -> int:
     tallest: int = 0 
     num: int = 0
     for i in candles:
@@ -81,9 +81,9 @@ def birthday_cake_candles(candles: []) -> int:
     
 def time_conversion(s: str) -> str:
     meridian: str = 'AM' if s.endswith('AM') else 'PM'
-    temp: [] = s.split(meridian)
-    times: [] = temp[0].split(":")
-    time: [] = []
+    temp: list[str] = s.split(meridian)
+    times: list[str] = temp[0].split(":")
+    time: list[str] = []
     try:
         for i in times:
             if type(int(i)) is int:
@@ -97,7 +97,7 @@ def time_conversion(s: str) -> str:
         time[0] += 12
     return f'{time[0]:02}:{time[1]:02}:{time[2]:02}' 
     
-def two_pointer(arr: [], num: int) -> None:
+def two_pointer(arr: list[int], num: int) -> None:
     right: int = len(arr) - 1
     left: int = 0
     

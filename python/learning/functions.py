@@ -27,22 +27,22 @@
 #               - syntax:
 #                   type(<value or variable name>)
 #               - example:
-#                   x = 10 
-#                   type(x) #> `<class 'int'>`
+#                   x: int = 10 
+#                   type(x)     #> `<class 'int'>`
 #           - len()
 #               - queries the size of a list
 #                   - by extension, strings also
 #               - syntax:
 #                   len(<list>)
 #               - example:
-#                   a = "idkman"
-#                   len(a)       #> 6
+#                   a: str = "idkman"
+#                   len(a)            #> 6
 #           - isinstance()
 #               - determines if the value is the same type as the first parameter
 #               - syntax:
 #                   isinstance>(<variable>, <data type>)
 #               - example:
-#                   x = 3.14
+#                   x: float = 3.14
 #                   isinstance(x, float) #> True
 #           - range()
 #               - returns a range of integers
@@ -90,28 +90,28 @@
 #               - syntax:
 #                   <string>.lower()
 #               - example:
-#                   my_string = 'IDKMAN'
-#                   my_string.lower()    #> 'idkman'
+#                   my_string: str = 'IDKMAN'
+#                   my_string.lower()         #> 'idkman'
 #           - .upper()
 #               - converts the characters inside a string into their uppercase forms
 #               - syntax:
 #                   <string>.upper()
 #             - example:
-#                   my_string = 'idkman'
-#                   my_string.lower()    #> 'IDKMAN'
+#                   my_string: str = 'idkman'
+#                   my_string.lower()         #> 'IDKMAN'
 #           - .strip()
 #               - removes the whitespace present before or after the text
 #               - syntax:
 #                   <string>,strip()
 #               - example:
-#                   my_string = "  Hello World  "
-#                   my_string.strip()             #> "Hello World"
+#                   my_string: str = "  Hello World  "
+#                   my_string.strip()                  #> "Hello World"
 #           - .replace()
 #               - replaces a keyword (or a character) in a string
 #               - syntax:
 #                   <string>.replace(<string to be replaced>, <replacement string>)
 #               - example:
-#                   my_string = 'lumbago'
+#                   my_string: str = 'lumbago'
 #                   my_string.replace('l', 'd') #> 'dumbago'
 #           - .split()
 #               - splits the string into a list dictated by the split parameter
@@ -119,8 +119,8 @@
 #               - syntax:
 #                   <string>.split(<string separator>)
 #               - exmaple:
-#                   my_string = "Hello,World"
-#                   my_list = my_string.split(',') #> ['Hello', 'World']
+#                   my_string: str = "Hello,World"
+#                   my_list: list[str] = my_string.split(',') #> ['Hello', 'World']
 #           - .format()
 #               - presents a way to format strings
 #               - replaced by the f-string in python 3.6   
@@ -132,11 +132,11 @@
 #                   "yes{}".format("no")
 #               - multiple placeholders are possible
 #                   - example:
-#                       my_text = "my number is {} and adding {} equals {}"
+#                       my_text: str = "my number is {} and adding {} equals {}"
 #                       my_text.format(10, 20, 30)
 #               - it is common to use index numbers to mark the number and order of placeholders
 #                   - example:
-#                       test = "one {0}, yes {1}, idkman {2}"
+#                       test: str = "one {0}, yes {1}, idkman {2}"
 #                   - it is also common to use names as indexes
 #                       - example:
 #                           test = "{one}, {two}, {three}"
@@ -175,15 +175,15 @@
 #                   - syntax:
 #                       <list_name>.insert(<index>, <value>)
 #                   - example:
-#                       my_list = [1, 2, 3]
-#                       my_list.insert(1, 10) #> [1, 10, 2, 3]
+#                       my_list: list[int] = [1, 2, 3]
+#                       my_list.insert(1, 10)          #> [1, 10, 2, 3]
 #               - .append()
 #                   - adds items at the end of the list
 #                   - syntax:
 #                       <list_name>.append(<value>)
 #                   - example:
-#                       my_list = [1, 2, 3]
-#                       my_list.append(4)   #> [1, 2, 3, 4]
+#                       my_list: list[int] = [1, 2, 3]
+#                       my_list.append(4)              #> [1, 2, 3, 4]
 #               - .extend()
 #                   - used to extend (or append) elements from another list to the current list
 #                   - it is possible to extend from other containers
@@ -191,33 +191,33 @@
 #                   - syntax:
 #                       <list name1>.extend(<list name2>)
 #                   - example:
-#                       my_list = [1, 2, 3]
-#                       my_other_list = [4, 5, 6]
-#                       my_list.extend(my_other_list) #> [1, 2, 3, 4, 5, 6]
+#                       my_list: list[int] = [1, 2, 3]
+#                       my_other_list: list[int] = [4, 5, 6]
+#                       my_list.extend(my_other_list)        #> [1, 2, 3, 4, 5, 6]
 #           - removing elements
 #               - .remove()
 #                   - removes the first occurence of a value
 #                   - syntax:
 #                       <list_name>.remove(value)
 #                   - example:
-#                       my_list = [1, 2, 3]
-#                       my_list.remove(1)   #> [2, 3]
+#                       my_list: list[int] = [1, 2, 3]
+#                       my_list.remove(1)              #> [2, 3]
 #               - .pop()
 #                   - removes a value specified by its index value
 #                   - similar to the del keyword
 #                   - syntax:
 #                       <list_name>.pop(<index>)
 #                   - example:
-#                       my_list = [1, 2, 3]
-#                       my_list.pop(2)      #> [1, 2]
+#                       my_list: list[int] = [1, 2, 3]
+#                       my_list.pop(2)                 #> [1, 2]
 #               - .clear()
 #                   - clears the whole list
 #                       - leaves an empty list
 #                   - syntax:
 #                       <list_name>.clear()
 #                   - example:
-#                       my_list = [1, 2, 3]
-#                       my_list.clear()     #> []
+#                       my_list: list[int] = [1, 2, 3]
+#                       my_list.clear()                #> []
 #           - organiizng elements
 #               - .sort()
 #                   - sorts the list alphanumerically
@@ -225,21 +225,21 @@
 #                   - syntax:
 #                       - <list_name>.sort
 #                   - example:
-#                       my_list = [2, 3, 1]
-#                       my_list.sort()      #> [1, 2, 3]
+#                       my_list: list[int] = [2, 3, 1]
+#                       my_list.sort()                 #> [1, 2, 3]
 #                   - can be reversed through the reverse argument
 #                       - syntax:
 #                           <list_name>.sort(reverse = True)
 #                       - example:
-#                           my_list = [2, 3, 1]
-#                           my_list.sort(reverse = True) #> [3, 2, 1]
+#                           my_list: list[int] = [2, 3, 1]
+#                           my_list.sort(reverse = True)   #> [3, 2, 1]
 #               - .reverse()
 #                   - returns a reverse order of elements in a list
 #                   - syntax:
 #                       <list_name>.reverse()
 #                   - example:
-#                       my_list = [2, 3, 1]
-#                       my_list.reverse()   #> [1, 3, 2]
+#                       my_list: list[int] = [2, 3, 1]
+#                       my_list.reverse()              #> [1, 3, 2]
 #           - duplicating lists
 #               - .copy()
 #                   - copies lists
@@ -248,7 +248,7 @@
 #                   - syntax:
 #                       <list name1> = <list name2>.copy()
 #                   - example:
-#                       my_list = [1, 2, 3]
+#                       my_list: list[int] = [1, 2, 3]
 #                       my_other_list = my_list.copy() #> [1, 2, 3]
 #           - querying values
 #               - .count()
@@ -256,32 +256,32 @@
 #                   - syntax:
 #                       <list_name>.count(<value>)
 #                   - example:
-#                       my_list = [1, 2, 3]
-#                       my_list.count(1)    #> 1
+#                       my_list: list[int] = [1, 2, 3]
+#                       my_list.count(1)               #> 1
 #               - .index()
 #                   - returns the index of specified value in a list
 #                   - syntax:
 #                       <list_name>.index(<value>)
 #                   - example:
-#                       my_list = [1, 2, 3]
-#                       my_list.index(2)    #> 1
+#                       my_list: list[int] = [1, 2, 3]
+#                       my_list.index(2)               #> 1
 #
 #       - tuple methods
 #           - querying values
 #               - .count()
 #                   - used to count the number of occuerences of the specified value
 #                   - syntax:
-#                       <list_name>.count(<value>)
+#                       <tuple_name>.count(<value>)
 #                   - example:
-#                       my_list = [1, 2, 3]
-#                       my_list.count(1)    #> 1
+#                       my_tuple: tuple[int] = (1, 2, 3)
+#                       my_tuple.count(1)                #> 1
 #               - .index()
 #                   - returns the index of specified value in a list
 #                   - syntax:
 #                       <list_name>.index(<value>)
 #                   - example:
-#                       my_list = [1, 2, 3]
-#                       my_list.index(2)    #> 1
+#                       my_tuple: tuple[int] = (1, 2, 3)
+#                       my_tuple.index(2)                #> 1
 #
 #       - set methods
 #           - adding elements  
@@ -323,8 +323,8 @@
 #                   - syntax:
 #                       <set_name1> = <set_name2>.copy()
 #                   - example:
-#                       my_set = {1, 2, 3}
-#                       my_other_set = my_set.copy() #> {1, 2, 3}
+#                       my_set: set[int] = {1, 2, 3}
+#                       my_other_set: set[int] = my_set.copy() #> {1, 2, 3}
 #           - joint sets
 #               - .union()
 #                   - adds the elements from two sets
@@ -382,16 +382,16 @@
 #                       <dict_name>.update({<key>:<value>})
 #                   - then argument must be a dictionary
 #                   - example:
-#                       my_dictionary = { "idk" : "Hello" }
-#                       my_dictionary.update({"idk" : "man"}) #> { "idk" : "man" }
+#                       my_dictionary: dict[str, str] = { "idk" : "Hello" }
+#                       my_dictionary.update({"idk" : "man"})               #> { "idk" : "man" }
 #           - removing values
 #               - .pop()
 #                   - removes items through their key in a dictionary 
 #                   - syntax:
 #                       <dict_name>.pop(<key>)
 #                   - example:
-#                       my_dictionary = { "idk" : "man" }
-#                       my_dictionary.pop("idk")          #> {}
+#                       my_dictionary: dict[str, str] = { "idk" : "man" }
+#                       my_dictionary.pop("idk")                          #> {}
 #               - .popitem()
 #                   - removes the last item added in a dictionary
 #                   - syntax:
@@ -410,16 +410,16 @@
 #                   - syntax:
 #                       <dict name1> = <dict name2>.copy()
 #                   - example:
-#                       my_dictionary = { "idk" : "man" }
-#                       my_other_dictionary = my_dictionary.copy() #> { "idk" : "man" }
+#                       my_dictionary: dict[str, str] = { "idk" : "man" }
+#                       my_other_dictionary = my_dictionary.copy()        #> { "idk" : "man" }
 #           - querying values
 #               - .get()
 #                   - returns a the value a key holds inside a dictionary
 #                   - syntax:
 #                       <dict_name>.get(<key>)
 #                   - example:
-#                       my_dictionary = { "idk" : "man" }
-#                       my_dictionary.get("idk")        #> "man"
+#                       my_dictionary: dict[str, str] = { "idk" : "man" }
+#                       my_dictionary.get("idk")                          #> "man"
 #               - .keys()
 #                   - returns all keys inside a dictionary
 #                   - returns a list
@@ -427,8 +427,8 @@
 #                   - syntax:
 #                       <dict_name>.keys()
 #                   - example:
-#                       my_dictionary = { "idk : "man" }
-#                       my_dictionary.keys()             #> ["idk"]
+#                       my_dictionary: dict[str, str] = { "idk : "man" }
+#                       my_dictionary.keys()                             #> ["idk"]
 #               - .values()
 #                   - returns all values inside a dictionary
 #                   - returns a list
@@ -436,8 +436,8 @@
 #                   - syntax:
 #                       <dict_name>.values()
 #                   - example:
-#                       my_dictionary = { "idk" : "man" }
-#                       my_dictionary.values()           #> ["man"]
+#                       my_dictionary: dict[str, str] = { "idk" : "man" }
+#                       my_dictionary.values()                            #> ["man"]
 #               - .items()
 #                   - returns all items inside a dictionary
 #                   - returns tuples in a list
@@ -445,8 +445,8 @@
 #                   - syntax:
 #                       <dict_name>.items()
 #                   - example:
-#                       my_dictionary = { "idk" : "man" }
-#                       my_dictionary.items()            #> [("idk", "man")]
+#                       my_dictionary: dict[str, str] = { "idk" : "man" }
+#                       my_dictionary.items()                             #> [("idk", "man")]
 #
 #       - generator methods
 #           - .send()
@@ -456,7 +456,7 @@
 #                   #> assuming <generator name> is a generator object
 #                   <generator name>.send(<values>)
 #               - example:
-#                   def my_generator()
+#                   def my_generator() -> str:
 #                       while True:
 #                           my_value = yield
 #                           print(my_value)              
@@ -469,7 +469,7 @@
 #               - syntax:
 #                   <generator name>.close()
 #               - example:
-#                   def my_generator():
+#                   def my_generator() -> str:
 #                       try:
 #                           yield 'yes'
 #                       finally:
@@ -495,18 +495,18 @@
 #           - custom methods can either have a return statement or not
 #           - without return statament
 #               - syntax:
-#                   def <function_name>():
+#                   def <function_name>() -> <return_type>:
 #                       <statament>
 #               - example:
-#                   def my_function():
+#                   def my_function() -> None:
 #                       print("idkman")
 #           - with return statement
 #               syntax:
-#                   def <function_name>():
+#                   def <function_name>() -> <return_type>:
 #                       <statament>
 #                       return <value>
 #               - example:
-#                   def my_function():
+#                   def my_function() -> int:
 #                       x = 10
 #                       return x
 #               - sidenote:
@@ -521,16 +521,16 @@
 #           - when declaring a function that requires an input, it is called as a parameter
 #               - multiple inputs are called parameters
 #           - syntax:
-#               def <function_name>(<parameter>):
+#               def <function_name>(<parameter>) -> <return_type>:
 #                   <stataments>
 #           - example:
-#               def yes(idk):
+#               def yes(idk) -> None:
 #                   print(idk)
 #           - note that parameters are strictly temporary
 #               - it disappears after the function ends
 #           - functions that requires multiple inputs can also have multiple parameters
 #               - example:
-#                   def sum_of_num(x, y, z):
+#                   def sum_of_num(x, y, z) -> int:
 #                       retrun x + y + z
 #
 #       - access and function cals
@@ -563,14 +563,14 @@
 #               - if they have different parameters
 #           - is a form of polymorphism
 #           - syntax:
-#               def <function_name>(<parameters1>):
+#               def <function_name>(<parameters1>) -> <return_type>:
 #                   <stataments>
-#               def <function_name>(<parameters2>):
+#               def <function_name>(<parameters2>) -> <return_type>:
 #                   <stataments>
 #           - example:
-#               def print_stuff(yes: int):
+#               def print_stuff(yes: int) -> None:
 #                   print(yes)
-#               def print_stuff(no: str):
+#               def print_stuff(no: str) -> None:
 #                   print(no)
 #
 #       - *args and **kwargs
@@ -578,20 +578,20 @@
 #           - arbitraty arguments (*args):
 #               - allows multiple arguments and stores it in a tuple
 #               - syntax:
-#                   def <function_name>(*<args>): #> note that *args can be any name
-#                                                 #> the single star * is what defines the *args
+#                   def <function_name>(*<args>) -> <return_type>: #> note that *args can be any name
+#                                                                  #> the single star * is what defines the *args
 #                       <stataments>
 #               - example:
-#                   def idkman(*lumbago: int):
+#                   def idkman(*lumbago: int) -> None:
 #                       for i in lumbago:
 #                           print(i)
 #               - positional arguments are able to be combined with arbitrary arguments
 #                   - note that positional arguments must be declared first
 #                   - syntax:
-#                       def <function_name>(<parameters>, *<args>):
+#                       def <function_name>(<parameters>, *<args>) -> <return_type>:
 #                           <statements>
 #                   - example:
-#                       def my_function(my_string: str, *my_num: int):
+#                       def my_function(my_string: str, *my_num: int) -> None:
 #                           for i in my_num:
 #                               for n in range(i):
 #                                   print(my_string)
@@ -609,31 +609,31 @@
 #               - positional arguments are able to be combined with keyword arguments
 #                   - note that positional arguments must be declared first
 #                   - syntax:
-#                       def <function_name>(<parameters>, **<kwargs>):
+#                       def <function_name>(<parameters>, **<kwargs>) -> <return_type>:
 #                           <stataments>
 #                   - example:
-#                       def my_function(yes: str, **maybe):
+#                       def my_function(yes: str, **maybe) -> str:
 #                           print(str)
 #                           return maybe
 #           - *args and **kwargs are able to be declared simultaneously
 #               - *args must come before **kwargs
 #               - syntax:
-#                   def <function_name>(*<args>, **<kwargs>):
+#                   def <function_name>(*<args>, **<kwargs>) -> <return_type>:
 #                       <statament>
 #               - example:
-#                   def idkman(*yes, *no*):
+#                   def idkman(*yes, *no*) -> None:
 #                       pass
 #               - it is possible to unpack lists and tuples, or dictionaries when calling *args and **kwargs functions or methods
 #                   - *args
 #                       - example:
-#                           def idkman(a, b, c):
+#                           def idkman(a, b, c) -> None:
 #                               print(b)
-#                           my_list = [2, 3, 4]
+#                           my_list: list = [2, 3, 4]
 #                           idkman(*my_list)
 #                       - note that a star * must be present
 #                   - **kwargs
 #                       - example:
-#                           def lumbago(a, b):
+#                           def lumbago(a, b) -> None:
 #                               print(a)
 #                               print(b)
 #                           my_dict = { "a" : "idk", "b": "man" }
@@ -642,10 +642,10 @@
 #               - combining positional arguments, *args, and **kwargs
 #                   - note that positional arguments must come first, then *args, and then **kwargs
 #                   - syntax:
-#                       def <function_name>(<parameters>, *<args>, **<kwargs>):
+#                       def <function_name>(<parameters>, *<args>, **<kwargs>) -> <return_type>:
 #                           <stataments>
 #                   - example:
-#                       def my_function(yes, *no, **maybe):
+#                       def my_function(yes, *no, **maybe) -> None:
 #                           pass
 #
 #       - decorator functions
@@ -797,30 +797,30 @@
 #                       sys.setrecursionlimit(200) #> sets recursion limit to 2000
 #                   - it is recommended to use iteration when handling very deep recursions
 #           - syntax:
-#               def <function name>(<parameters>):
+#               def <function name>(<parameters>) -> <return_type>:
 #                   <base cases> #> to prevent endless recursions
 #                   return <function name>(arguments) <expression>
 #                   #> or
 #                   <function name>(<arguments>)
 #           - example:
 #               #> fibonacci sequence
-#               def factorial(n: int):
+#               def factorial(n: int) -> int:
 #                   if n == 1 or n == 0:
 #                       return 1
 #                   return n * factorial(n - 1)
 #               #> sum of list
-#               def sum_list(numbers):
+#               def sum_list(numbers) -> int:
 #                   if len(numbers) == 0:
 #                       return 0
 #                   else:
 #                       return numbers[0] + sum_list(numbers[1:])
 #               #> max number in list
-#               def find_max(numbers):
-#               if len(numbers) == 1:
-#                   return numbers[0]
-#               else:
-#                   max_of_rest = find_max(numbers[1:])
-#                   return numbers[0] if numbers[0] > max_of_rest else max_of_rest
+#               def find_max(numbers) -> int:
+#                   if len(numbers) == 1:
+#                       return numbers[0]
+#                   else:
+#                       max_of_rest = find_max(numbers[1:])
+#                       return numbers[0] if numbers[0] > max_of_rest else max_of_rest
 #           - two parts of a recursive function:
 #               - base case:
 #                   - conditions that terminate the recursion

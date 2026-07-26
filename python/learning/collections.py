@@ -7,10 +7,12 @@
 #       - arrays are declared using square brackets [ ]
 #           - values are separated by commas ,
 #       - syntax:
-#           <array_name> = [<values>]
+#           <array_name>: list = [<values>]
+#           #> or
+#           <array_name>: list[<data_type>] = [<values>]
 #       - example:
-#           my_array = []              #> empty array
-#           my_list = [1, "idk", True] #> non-empty array
+#           my_array: list = []              #> empty array
+#           my_list: list = [1, "idk", True] #> non-empty array
 #
 #   - access and modification
 #       - the elements inside an array is accessed through the use of indices
@@ -93,11 +95,11 @@
 #               - mixed arrays
 #                   - contains both arrays and normal values
 #                   - example:
-#                       my_nested_array = [1, "yes", [True, 0], "Hello World"]
+#                       my_nested_array: list = [1, "yes", [True, 0], "Hello World"]
 #               - pure arrays
 #                   - contains only array elements
 #                   - example:
-#                       my_nested_array = [[1, 2], ["idk", "man"], [True, False]]
+#                       my_nested_array: list[list[]] = [[1, 2], ["idk", "man"], [True, False]]
 #
 #       - accessing and modofication
 #           - accessing a nested array is done through the use of the index of the parent array and then the child array
@@ -137,7 +139,7 @@
 #                   - syntax:
 #                       <list_name> = [<values>]
 #                   - example:
-#                       my_list = [1, "idk", True]
+#                       my_list: list = [1, "idk", True]
 #               - explicit declaration
 #                   - uses the list() class
 #                   - syntax:
@@ -175,9 +177,11 @@
 #           - list duplication
 #               - duplication is achieved through the use of the assignment = operator
 #                   - syntax:
-#                       <list_name1> = <list_name2>
+#                       <list_name1>: list = <list_name2>
+#                       #> or
+#                       <list_name1>: list[<data_type>] = <list_name2>
 #                   - example:
-#                       my_list = my_other_list
+#                       my_list: list = my_other_list
 #                   - sidenote:
 #                       - both lists will become linked
 #                           - any changes to one will affect the other
@@ -185,19 +189,23 @@
 #               - to duplicate a list without dealing with linking
 #                   - .copy() solves this problem
 #                   - syntax:
-#                       <list_name1> = <list_name2>.copy()
+#                       <list_name1>: list = <list_name2>.copy()
+#                       #>
+#                       <list_name1>: list[<data_type>] = <list_name2>.copy()
 #                   - example:
-#                       my_list = my_other_list.copy()
+#                       my_list: list = my_other_list.copy()
 #               - the slice operator can also be used to copy lists
 #                   - syntax:
-#                       <list_name> = <list_name2>[:]
+#                       <list_name>: list = <list_name2>[:]
+#                       #> or
+#                       <list_name>: list[<data_type>] = <list_name2>[:]
 #
 #           - list concatenation
 #               - lists are able to be merged together or conjoined through the + operator
 #               - syntax:
 #                   <list_name1> + <list_name2>
 #               - example:
-#                   my_new_list = my_list + my_other_list
+#                   my_new_list: list = my_list + my_other_list
 #               - using the .extend() methods can also work
 #                   - example:
 #                       my_list.extend(my_other_list)
@@ -206,9 +214,11 @@
 #               - it is possible to create lists on the fly using list comprehension
 #               - the expression is enclosed in square brackets [ ]
 #               - syntax: 
-#                   <list_name> = [<expression>]
+#                   <list_name>: list = [<expression>]
+#                   #>
+#                   <list_name>: list[<data_type>] = [<expression>]
 #               - example:
-#                   my_list = [x for x in range(5)] #> [0, 1, 2, 3, 4]
+#                   my_list: list[int] = [x for x in range(5)] #> [0, 1, 2, 3, 4]
 #
 #       - tuples
 #           - elements are ordered, immutable and allows duplicate values
@@ -226,9 +236,11 @@
 #               - implicit declaration
 #                   - uses parentheses ( )
 #                   - syntax:
-#                       <tuple_name> = (<values>)
+#                       <tuple_name>: tuple = (<values>)
+#                       #>
+#                       <tuple_name>: tuple[<data_type>] = (<values>)
 #                   - example:
-#                       my_typle = (0, "man", False)
+#                       my_typle: tuple = (0, "man", False)
 #               - explicit declaration
 #                   - uses the tuple() class
 #                   - syntax:
@@ -246,8 +258,8 @@
 #               - while tuples are immutable, the only way to modify the elements is to convert the tuple into a list
 #                   - after the modification, it can be returned to being a tuple
 #                   - example:
-#                       my_tuple = (1, 2, 3, 4)
-#                       my_list = list(my_tuple)
+#                       my_tuple: tuple[int] = (1, 2, 3, 4)
+#                       my_list: list[int] = list(my_tuple)
 #                       my_list.append(5)
 #                       my_tuple = tuple(my_list)
 #                   - the same workaround is able to be used to remove, modify and query items
@@ -259,8 +271,8 @@
 #               - tuples are also allowed to be multiplied with integers
 #                   - effectively multiplying the elements
 #                   - example:
-#                       my_tuple = (1, 2, 3, 4)
-#                       my_other_tuple = my_tuple * 2 #> (1, 2, 3, 4, 1, 2, 3, 4)
+#                       my_tuple: tuple[int] = (1, 2, 3, 4)
+#                       my_other_tuple: tuple[int] = my_tuple * 2 #> (1, 2, 3, 4, 1, 2, 3, 4)
 #                       
 #           - collection unpacking
 #               - it is possible to unpack tuples and assign their valuts to individual variables
@@ -285,9 +297,11 @@
 #               - implicit declaration
 #                   - uses curly braces { }
 #                   - syntax:
-#                       <set_name> = {<vales>}
+#                       <set_name>: set = {<values>}
+#                       #> oe
+#                       <set_name>: set[<data_type>] = {<values>}
 #                   - example:
-#                       my_set = {1, 2, 3, 4}
+#                       my_set: set[int] = {1, 2, 3, 4}
 #               - explicit declaration
 #                   - uses the set() class
 #                   - syntax:
@@ -314,9 +328,11 @@
 #           - set duplication
 #               - duplication is achieved through the use of the assignment = operator
 #                   - syntax:
-#                       <set_name1> = <set_name2>
+#                       <set_name1>: set = <set_name2>
+#                       #>
+#                       <set_name1>: set[<data_type>] = <set_name2>
 #                   - example:
-#                       my_set = my_other_set
+#                       my_set: set = my_other_set
 #                   - sidenote:
 #                       - both sets will become linked
 #                           - any changes to one will affect the other
@@ -324,9 +340,11 @@
 #               - to duplicate a set with dealing with linking
 #                   - .copy() avoids this problem
 #                   - syntax:
-#                       <set_name1> = <set_name2>.copy()
+#                       <set_name1>: set = <set_name2>.copy()
+#                       #>
+#                       <set_name1>: set[<data_type>] = <set_name2>.copy()
 #                   - example:
-#                       my_set = my_other_set.copy()
+#                       my_set: set = my_other_set.copy()
 #       
 #           - frozensets
 #               - a fully immutable version of a set
@@ -357,18 +375,20 @@
 #               - can be declared in two ways
 #               - implicit declaration
 #                   - syntax:
-#                       <dict_name> = {<key>: <value>}
+#                       <dict_name>: dict = {<key>: <value>}
 #                   - example:
-#                       my_dict = {"yes": "no", "idk": "man"}
+#                       my_dict: dict = {"yes": "no", "idk": "man"}
 #                   - sidenote:
 #                       - if the key is a string, it must be enclosed in quotes
 #               - explicit declaration
 #                   - syntax:
-#                       <dict_name>: dict(<key_type>, <value_type>) = {<key_value>: <value>}
+#                       <dict_name>: dict[<key_type>, <value_type>] = {<key_value>: <value>}
 #                       #> or
 #                       dict(<key_name>=<value>)
 #                       #> or
 #                       dict([(<>key_name1, <value1>), (<key_name2>, <value2>)])
+#                   - example:
+#                       my_dict: dict[str, str] = {"yes": "no", "idk": "man"}
 #
 #           - access and modification
 #               - dictionary values are access by using their key
@@ -397,9 +417,11 @@
 #           - dictionary duplication
 #               - duplication is done through the use of the assignment = operator
 #                   - syntax:
-#                       <dict_name1> = <dict_name>
+#                       <dict_name1>: dict = <dict_name>
+#                       #> or
+#                       <dict_name1>: dict[<data_type>, <data_type>] = <dict_name>
 #                   - example:
-#                       my_dict = my_other_dict
+#                       my_dict: dict = my_other_dict
 #                   - sidenote:
 #                       - both dictionaries will become linked
 #                           - any changes to one will affect the other
@@ -407,7 +429,8 @@
 #               - to duplicate a dictionary without dealing with memory linking
 #                   - .copy() avoids this problem
 #                   - syntax:
-#                       <dict_name1> = <dict_name2>.copy()
+#                       <dict_name1>: dict = <dict_name2>.copy()
+#                       #> or
+#                       <dict_name1>: dict[<data_type>, <data_type>] = <dict_name2>.copy()
 #                   - example:
-#                       my_dict = my_other_dict.copy()
-
+#                       my_dict: dict = my_other_dict.copy()

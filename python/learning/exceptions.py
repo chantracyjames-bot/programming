@@ -53,9 +53,9 @@
 #           - it can help in handling multiple exceptions by being more specific
 #           - example:
 #               try:
-#                   my_list = [1, 2, 3, 4]
-#                   my_list[5]             #> IndexError
-#                   my_list[1] / 0         #> ZeroDivisionError
+#                   my_list: list[int] = [1, 2, 3, 4]
+#                   my_list[5]                        #> IndexError
+#                   my_list[1] / 0                    #> ZeroDivisionError
 #               except IndexError as err:
 #                   print('index out of bounds yo')
 #               except ZeroDivisionError as err:

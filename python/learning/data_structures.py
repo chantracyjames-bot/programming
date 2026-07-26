@@ -8,9 +8,11 @@
 #   - Python lists
 #       - lists are defined by square brackets [ ]
 #       - syntax:
-#           <list_name> = [<values>]
+#           <list_name>: list = [<values>]
+#           #> or
+#           <list_name>: list[<data_type>] = [<values>]
 #       - example:
-#           my_list = [1, 2, 3, 4]
+#           my_list: list[int] = [1, 2, 3, 4]
 #       - list methods
 #           - there are various built-in methods that are used for operations
 #           - like .append() or .sort()
@@ -47,7 +49,7 @@
 #                   - as it is easier to use lists than linked lists
 #           - stack implemementation using Python's lists:
 #               #> start with an empty stack
-#               stack = []
+#               stack: list = []
 #           
 #               #> push elements to the end of the stack
 #               stack.append('A')
@@ -71,7 +73,7 @@
 #               class Stack:
 #                   #> creates an empty stack
 #                   def __init__(self) -> None:
-#                       self.stack = []
+#                       self.stack: list = []
 #
 #                   #> method to check if the stack is empty
 #                   def is_empty(self) -> bool:
@@ -119,15 +121,15 @@
 #               #> handles the node logic
 #               class Node:
 #                   def __init__(self, value) -> None:
-#                       self.value = value                      #> takes in the value provided
-#                       self.next = None                        #> presumably the next node address(?)
+#                       self.value: int = value                 #> takes in the value provided
+#                       self.next: Node = None                  #> presumably the next node address(?)
 #
 #               #> handles the linked stack logic
 #               class Stack:
 #                   #> creates an empty stack
 #                   def __init__(self) -> None:
-#                       self.head = None                        #> is the pointer to the first node
-#                       self.size = 0                           #> represents the size of the list
+#                       self.head: Node = None                  #> is the pointer to the first node
+#                       self.size: int = 0                      #> represents the size of the list
 #  
 #                   #> method to check if the linked list is empty
 #                   def is_empty(self) -> bool:
@@ -196,7 +198,7 @@
 #       - queue using lists
 #           - queues implementation in Python's list
 #               #> start with an empty queue
-#               queue = []
+#               queue: list = []
 #
 #               #> enqueue items in the queue
 #               queue.append('A')
@@ -222,7 +224,7 @@
 #               class Queue:
 #                   #> creates an empty queue
 #                   def __init__(self) -> None:
-#                       self.queue = []
+#                       self.queue: list = []
 #   
 #                   #> method to check if the queue is empty
 #                   def is_empty(self) -> None:
@@ -268,16 +270,16 @@
 #               #> handles the node logic
 #               class Node:
 #                   def __init__(self, value) -> None:
-#                       self.value = value                      #> takes in the value provided
-#                       self.next = None                        #> presumably the next node address(?)
+#                       self.value: int = value                 #> takes in the value provided
+#                       self.next: Node = None                  #> presumably the next node address(?)
 #
 #               #> handles the linked queue logic
 #               class Queue:
 #                   #> creates an empty queue
 #                   def __init__(self) -> None:
-#                       self.front = None                       #> represents the first in line
-#                       self.rear = None                        #> represents the last in line
-#                       self.size = 0#                          #> represents the size of the queue
+#                       self.front: Node = None                 #> represents the first in line
+#                       self.rear: Node = None                  #> represents the last in line
+#                       self.size: int = 0                      #> represents the size of the queue
 #
 #                   #> method to check if the linked queue is empty
 #                   def is_empty(self) -> bool:
@@ -369,12 +371,12 @@
 #                   #> singly linked lists
 #                   class Node:
 #                       def __init__(self, value) -> None:
-#                           self.data = data
-#                           self.next = None
+#                           self.data: int = data
+#                           self.next: Node = None
 #
 #                   #> logic
 #                   def traverse(head) -> None:
-#                       current_node = head
+#                       current_node: Node = head
 #                       while current_node:
 #                           print(current_node.data, end=" > ")
 #                           current_node = current_node.next
@@ -469,30 +471,30 @@
 #           - handling collisions
 #       - sample code:
 #           #> create an empty list (can be a set or a dictionary)
-#           my_list = [[], [], [], [], []]      #> stores 5 elements
-#                                                   #> also called "buckets"
-#                                               #> nested arrays prevent collisions
-#                                                   #> also called "chaining"   
+#           my_list: list[list[]] = [[], [], [], [], []] #> stores 5 elements
+#                                                           #> also called "buckets"
+#                                                        #> nested arrays prevent collisions
+#                                                           #> also called "chaining"   
 #
 #           #> create a hash function
-#           def hash_function(value):
-#           hash_sum = 0                        #> stores the value of the has
-#           for char in value:                  #> loops through every single character
-#               hash_sum += ord(char)           #> converts a character into a unicode code number
-#           return hash_sum % 5                 #> uses a modulo to dictate where the value is stored in
-#                                               #> different text will result into different hash codes
-#                                                   #> using a modulo will make storing a bit easier
+#           def hash_function(value) -> int:
+#           hash_sum = 0                                 #> stores the value of the has
+#           for char in value:                           #> loops through every single character
+#               hash_sum += ord(char)                    #> converts a character into a unicode code number
+#           return hash_sum % 5                          #> uses a modulo to dictate where the value is stored in
+#                                                        #> different text will result into different hash codes
+#                                                           #> using a modulo will make storing a bit easier
 #           #> create an add function
-#           def add(value):
-#               index = hash_function(value)    #> calls the hash_function to return an index
-#                                                   #> where the new value is going to be stored in 
-#               my_list[index].append(value)    #> appends the new value to the corresponding index
+#           def add(value) -> None:
+#               index = hash_function(value)             #> calls the hash_function to return an index
+#                                                           #> where the new value is going to be stored in 
+#               my_list[index].append(value)             #> appends the new value to the corresponding index
 #
 #           #> create a loopup function
-#           def lookup(value):
-#               index = hash_function(value)    #> calls the hash_function to return an index
-#                                                   #> looks up where the value might be stored in
-#               print(f"{value} is at {index}") #> returns the index wherein the valus is stored at
+#           def lookup(value) -> None:
+#               index = hash_function(value)             #> calls the hash_function to return an index
+#                                                           #> looks up where the value might be stored in
+#               print(f"{value} is at {index}")          #> returns the index wherein the valus is stored at
 #
 #   - Trees
 #       - is a hierachical data structure consisting of nodes connected by edges
@@ -630,14 +632,14 @@
 #           - binary tree implementation in Python:
 #               class TreeNode:
 #                   def __init__(self, data) -> None:
-#                       self.data = data
-#                       self.left = none
-#                       self.right = None
+#                       self.data: str = data
+#                       self.left: TreeNode = None
+#                       self.right: TreeNode = None
 #
 #               #> binary tree with a depth of two (root and two children)
 #               class Tree:
 #                   def __init__(self, value) -> None:
-#                       self.tree = TreeNode(value)
+#                       self.tree: TreeNode = TreeNode(value)
 #                   
 #                   def add_right(self, value) -> None:
 #                       self.tree.right = value
@@ -646,9 +648,9 @@
 #                       self.tree.left
 #
 #               #> implementation without the Tree class
-#               root_node = TreeNode('R')
-#               node_a = TreeNode('A')
-#               node_b = TreeNode('B')
+#               root_node: TreeNode = TreeNode('R')
+#               node_a: TreeNode = TreeNode('A')
+#               node_b: TreeNode = TreeNode('B')
 #               
 #               root_node.left = node_a
 #               root_node.right = node_b
@@ -771,9 +773,9 @@
 #               - binary search tree implementation in Python 
 #                   class TreeNode:
 #                       def __init__(self, data) -> None:
-#                           self.data = data
-#                           self.left = None
-#                           self.right = None
+#                           self.data: int = data
+#                           self.left: TreeNode = None
+#                           self.right: TreeNode = None
 #
 #                   def in_order_traversal(node) -> None:
 #                       if node is None:
@@ -783,13 +785,13 @@
 #                       in_order_traversal(node.right)
 #
 #               #> example
-#                   root = TreeNode('10')
-#                   node_a = TreeNode('7')
-#                   node_b = TreeNode('13')
-#                   node_c = TreeNode('6')
-#                   node_d = TreeNode('8')
-#                   node_e = TreeNode('12')
-#                   node_f = TreeNode('14')
+#                   root: TreeNode = TreeNode('10')
+#                   node_a: TreeNode = TreeNode('7')
+#                   node_b: TreeNode = TreeNode('13')
+#                   node_c: TreeNode = TreeNode('6')
+#                   node_d: TreeNode = TreeNode('8')
+#                   node_e: TreeNode = TreeNode('12')
+#                   node_f: TreeNode = TreeNode('14')
 #
 #                   root.left = node_a
 #                   root.right = node_b
@@ -828,13 +830,13 @@
 #                   - go as far left or as far right as possible, respectively
 #                   - example algorithm:
 #                       def get_lowest_node(node) -> TreeNode:
-#                           current = node
+#                           current: TreeNode = node
 #                           while current.left is not None:
 #                               current = current.left
 #                           return current
 #
 #                       def get_highest_node(node) -> TreeNode:
-#                           current = node
+#                           current: TreeNode = node
 #                           while current.right is not None:
 #                               current = current.right
 #                           return current
@@ -888,7 +890,7 @@
 #                   - if the value to insert is the same value as a node
 #                       - then the new value is discarded
 #               - example algorithm:
-#                   def insert_node(node, value) -> TreeNode | node:
+#                   def insert_node(node, value) -> TreeNode:
 #                       if node is Node:
 #                           return TreeNode(value)
 #                       else:
@@ -931,11 +933,11 @@
 #                               #> keeping the successor's value by seeting it as the value of the node to delete
 #                                   - and then it is now possible to delete the successor node
 #                           if not node.left:
-#                               temp node.right
+#                               temp: TreeNode = node.right
 #                               node = None
 #                               return temp
 #                           elif not node.right:
-#                               temp node.left
+#                               temp: TreeNode = node.left
 #                               node = None
 #                               return temp
 #                           node.data = get_lowest_node(node.right).data
@@ -1296,10 +1298,10 @@
 #           - AVL Tree implementation in Python:
 #               class TreeNode:
 #                   def __init__(self, data) -> None:
-#                       self.data = data
-#                       self.left = None
-#                       self.right = None
-#                       self.height = 1
+#                       self.data: int = data
+#                       self.left: TreeNode = None
+#                       self.right: TreeNode = None
+#                       self.height: int = 1
 #
 #               def get_height(node) -> int:
 #                   if not node:
@@ -1312,8 +1314,8 @@
 #                   return get_height(node.left) - get_height(node.right)
 #      
 #               def right_rotate(y) -> TreeNode:
-#                   x = y.left
-#                   T2 = x.right
+#                   x: TreeNode = y.left
+#                   T2: TreeNode = x.right
 #                   x.right = y
 #                   y.left = T2
 #                   y.height = 1 + max(get_height(y.left), get_height(y.right))
@@ -1321,8 +1323,8 @@
 #                   return x
 #
 #               def left_rotate(y) -> TreeNode:
-#                   y = x.right
-#                   T2 = y.left
+#                   y: TreeNode = x.right
+#                   T2: TreeNode = y.left
 #                   y.left = x
 #                   x.right = T2
 #                   x.height = 1 + max(get_height(x.left), get_height(x.right))
@@ -1338,7 +1340,7 @@
 #                       node.right = insert_node(node.right, value)
 #
 #                   node.height = 1 + max(get_height(node.left), get_height(node.right))
-#                   balance = get_balance(node)
+#                   balance: int = get_balance(node)
 #
 #                   if balance > 1 and get_balance(node.left) >= 0:
 #                       return right_rotate(node)
@@ -1362,7 +1364,7 @@
 #                   - the same code to restore balance is needed
 #               - sample code:
 #                   def get_lowest_node(node) -> TreeNode:
-#                       current = node
+#                       current: TreeNode = node
 #                       while current is not None:
 #                           current = current.left
 #                       return current
@@ -1376,15 +1378,15 @@
 #                           node.right = delete_node(node.right, value)
 #                       else:
 #                           if node.left is None:
-#                               temp = node.right
+#                               temp: TreeNode = node.right
 #                               node = None
 #                               return temp
 #                           elif node.right is None:
-#                               temp = node.left 
+#                               temp: TreeNode = node.left 
 #                               node = None
 #                               return temp
 #                       
-#                           temp = get_lowest_node(node.right)
+#                           temp: TreeNode = get_lowest_node(node.right)
 #                           node.data = temp.data
 #                           node.right = delete(node.right, temp.data)
 #                       return node

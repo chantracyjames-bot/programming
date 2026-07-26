@@ -41,22 +41,22 @@
 #               - when declaring a class constructor, it must use the __init__() method name
 #               - syntax:
 #                   class <class_name>:
-#                       def __init__():
+#                       def __init__() -> <return_type>:
 #                           <statements>
 #               - example:
 #                   class MyClass:
-#                       def __init__():
+#                       def __init__() -> None:
 #                           print('lumbago')
 #
 #           - paramethers and arguments
 #               - like normal methods, it is possible to assign parameters to a constructor
 #               - syntax:
 #                   class <class_name>:
-#                       def __init__(<parameters>):
+#                       def __init__(<parameters>) -> <return_type>:
 #                           <statements>
 #               - example:
 #                   class Idkman:
-#                       def __init__(self, lumbago):
+#                       def __init__(self, lumbago) -> None:
 #                           self.lumbago = lumbago
 #               - self
 #                   - a reference to the current instance of the class or object of the class
@@ -71,7 +71,7 @@
 #                   - example:
 #                       #> with __init__() and self
 #                       class TestClass:
-#                           def __init__(self, idkman):
+#                           def __init__(self, idkman) -> None:
 #                               self.idkman = idkman    #> creates and object and initializes the idkman variable
 #                       
 #                       my_obj = TestClass("lumbago")   #> auto initializes idkman with "lumbago"
@@ -88,11 +88,11 @@
 #                       - assigning it will override the default value
 #                   - syntax:
 #                       class <class_name>:
-#                           def __init__(self, <variable> = <value>):
+#                           def __init__(self, <variable> = <value>) -> <return_type>:
 #                               self.<variable> = <variable>
 #                   - example:
 #                       class HelloWorld:
-#                           def __init__(self, hello, world = 'idkman'):
+#                           def __init__(self, hello, world = 'idkman') -> None:
 #                               self.hello = hello
 #                               self.world = world
 #                   
@@ -140,7 +140,7 @@
 #                   - every single instance object have unique object properties
 #                   - example:
 #                       class Lumbago:
-#                           def __init__(self, idkman):
+#                           def __init__(self, idkman) -> None:
 #                               self.idkman = idkman    #> creates a 'unique' property for the object
 #               
 #                       hello = Lumbago('Hello')
@@ -174,62 +174,62 @@
 #                   - syntax:
 #                       class <class_name>:
 #                           @staticmethod
-#                           def <method_name>():
+#                           def <method_name>() -> <return_type>:
 #                               <statements>
 #                   - example:
 #                       class Lumbago:
 #                           @staticmethod
-#                           def idkman():
+#                           def idkman() -> None:
 #                               print('worldhello')
 #               - non-static methods
 #                   - functions that belong to a class
 #                       - defining the behavior of objects created from the same class
 #                   - syntax:
 #                       class <class_name>:
-#                           def <method_name>():
+#                           def <method_name>() -> <return_type>:
 #                               <statements>
 #                   - example:
 #                       class MyClass:
-#                           def my_method():
+#                           def my_method() -> None:
 #                               print('idkman')
 #               - class methods can contain parameters
 #                   - static methods
 #                       - syntax:
 #                           class <class_name>:
 #                               @staticmethod
-#                               def <method_name>():
+#                               def <method_name>() -> <return_type>:
 #                                   <statements>
 #                       - example:
 #                           class Yes:
 #                               @staticmethod
-#                               def no():
+#                               def no() -> None:
 #                                   print('maybe')
 #                   - non-static methods
 #                       - syntax:
 #                           class <class_name>:
-#                               def <method_name>(self, <parameters>):
+#                               def <method_name>(self, <parameters>) -> <return_type>:
 #                                   <statements>
 #                       - example:
 #                           class MyClass:
-#                               def my_method(self, idkman):
+#                               def my_method(self, idkman) -> None:
 #                                   print('lumbago')
 #                   - note that all methods must contain self as the first parameter
 #                       - using self will enable the method to access any properties of the current object instance
 #                       - methods are able to directly modify the properties provided by self
 #                           - example:
 #                               class MyClass:
-#                                   def __init__(self, yes):
+#                                   def __init__(self, yes) -> None:
 #                                       self.yes = yes
-#                                   def my_method(self):
+#                                   def my_method(self) -> None:
 #                                       yes = 'idkman'
 #               - classes can contain multiple methods 
 #                   - example:
 #                       class MyClass:
-#                           def idkman():
+#                           def idkman() -> None:
 #                               pass
-#                           def maybe():
+#                           def maybe() -> None:
 #                               pass
-#                           def lumbago():
+#                           def lumbago() -> None:
 #                               pass
 #               - __str__()
 #                   - similar to __init__()
@@ -237,7 +237,7 @@
 #                   - commonly used to modify the string value when trying to print a property of an object
 #                   - syntax:
 #                       class <class_name>:
-#                           def __str__(self, <parameters>):
+#                           def __str__(self, <parameters>) -> str:
 #                               <statements>
 #                               return <expression>
 #           - access and calls
@@ -291,11 +291,11 @@
 #                               - works by passing self into the inner class
 #                               - example:
 #                                   class Outer:
-#                                       def __init__(self, yes):
+#                                       def __init__(self, yes) -> None:
 #                                           self.yes = yes
 #                                           self.inner = self.Inner(self)
 #                                       class Inner:
-#                                           def __init__(self, outer_self):
+#                                           def __init__(self, outer_self) -> None:
 #                                               self.outer = outer_self
 #
 #               - accessing inner classes
@@ -352,39 +352,39 @@
 #               - declaring another __init__() method overrides parent class' __init__() method
 #               - syntax:
 #                   class <child_class_name>(<parent_class_name>):
-#                       def __init__(self, <parameters>):
+#                       def __init__(self, <parameters>) -> <return_type>:
 #                           <statements>
 #               - adding the parent's __init__() method will complete the inheritance
 #                   - without it, it loses access to the properties of the parent class
 #                   - syntax:
 #                       class <child_class_name>(<parent_class_name>):
-#                           def __init__(self, <parameters>):
+#                           def __init__(self, <parameters>) -> <return_type>:
 #                               <parent_class_name>.__init__(self, <parameters>)
 #                   - example:
 #                       class ChildClass(ParentClass):
-#                           def __init__(self, yes, no):
+#                           def __init__(self, yes, no) -> None:
 #                               ParentClass.__init__(self, yes, no)
 #           - super()
 #               - lets the child inherit all properties and methods from its parent class
 #               - replaces the <parent_class_name>.__init__() method of inheiting
 #               - syntax:
 #                   class <child_class_name>(<parent_class_name>):
-#                       def __init__(self, <parameters>):
+#                       def __init__(self, <parameters>) -> <return_type>:
 #                           super().__init__(<parameters>)
 #               - example:
 #                   class ChildClass(ParentClass):
-#                       def __init__(self, yes):
+#                       def __init__(self, yes) -> None:
 #                           super().__init__(yes)
 #           - child classes can declare their own properties and methods
 #               - the parent class won't have access to new properties or methods declared by the child class
 #               - example:
 #                   class MyClass(ParentClass):
-#                       def __init__(self, no, idkman):
+#                       def __init__(self, no, idkman) -> None:
 #                           super().__init__(no):
 #                           #> new property
 #                           self.idkman = idkman
 #                       #> new method
-#                       def my_method(self):
+#                       def my_method(self) -> None:
 #                           print('probs')
 #
 #   - Polymorphism
@@ -394,29 +394,29 @@
 #       - overloading is a form of polymorphism
 #       - syntax:
 #           class <superclass_name>:
-#               def <method_name>(<parameters>):
+#               def <method_name>(<parameters>) -> <return_type>:
 #                   <statements>
 #           class <subclass_name1>:
-#               def <method_name>(<parameters>):
+#               def <method_name>(<parameters>) -> <return_type>:
 #                   <statements>
 #           class <subclass_name2>:
-#               def <method_name>(<parameters>):
+#               def <method_name>(<parameters>) -> <return_type>:
 #                   <statements>
 #           class <subclass_name3>:
-#               def <method_name>(<parameters>):
+#               def <method_name>(<parameters>) -> <return_type>:
 #                   <statements>
 #       - example:
 #           class MyClass:
-#               def my_method(self):
+#               def my_method(self) -> None:
 #                   print('idkman')
 #           class Yes(MyClass):
-#               def my_method(self):
+#               def my_method(self) -> None:
 #                   print('lumbago')
 #           class No(MyClass):
-#               def my_method(self):
+#               def my_method(self) -> None:
 #                   print('hello')
 #           class Maybe(MyClass):
-#               def my_method(self):
+#               def my_method(self) -> None:
 #                   print('world')
 #           #> all classses possesses the same methods but have different purposes
 #       - child classes are considered as polymorphism
@@ -449,12 +449,12 @@
 #                       #> static properties
 #                       <variable_name1>
 #                       #> non-static method
-#                       def <method_name1>(<parameters>):
+#                       def <method_name1>(<parameters>) -> <return_type>:
 #                           #> non-static properties
 #                           self.<variable_name2>
 #                       #> static method
 #                       @staticmethod
-#                       def <method_name2>(<variables>):
+#                       def <method_name2>(<variables>) -> <return_type>:
 #                           <statement>
 #               - example:
 #                   class MyClass:
@@ -462,10 +462,10 @@
 #                       maybe = 'yes'
 #                       #> static method
 #                       @staticmethod
-#                       def static_method(self):
+#                       def static_method(self) -> None:
 #                           pass
 #                       #> non-static method
-#                       def idkman(self):
+#                       def idkman(self) -> None:
 #                           #> non-static properties
 #                           self.probs = 'no'
 #                   
@@ -488,12 +488,12 @@
 #                       #> static properties
 #                       _<variable_name1>
 #                       #> non-static method
-#                       def _<method_name1>(<parameters>):
+#                       def _<method_name1>(<parameters>) -> <return_type>:
 #                           #> non-static properties
 #                           self._<variable_name2>
 #                       #> static method
 #                       @staticmethod
-#                       def _<method_name2>(<variables>):
+#                       def _<method_name2>(<variables>) -> <return_type>:
 #                           <statement>
 #               - example:
 #                   class MyClass:
@@ -501,10 +501,10 @@
 #                       _maybe = 'yes'
 #                       #> static method
 #                       @staticmethod
-#                       def _static_method(self):
+#                       def _static_method(self) -> None:
 #                           pass
 #                       #> non-static method
-#                       def _idkman(self):
+#                       def _idkman(self) -> None:
 #                           #> non-static properties
 #                           self._probs = 'no'
 #                   
@@ -535,12 +535,12 @@
 #                       #> static properties
 #                       __<variable_name1>
 #                       #> non-static method
-#                       def __<method_name1>(<parameters>):
+#                       def __<method_name1>(<parameters>) -> <return_type>:
 #                           #> non-static properties
 #                           self.__<variable_name2>
 #                       #> static method
 #                       @staticmethod
-#                       def __<method_name2>(<variables>):
+#                       def __<method_name2>(<variables>) -> <return_type>:
 #                           <statement>
 #               - example:
 #                   class MyClass:
@@ -548,10 +548,10 @@
 #                       __maybe = 'yes'
 #                       #> static method
 #                       @staticmethod
-#                       def __static_method(self):
+#                       def __static_method(self) -> None:
 #                           pass
 #                       #> non-static method
-#                       def __idkman(self):
+#                       def __idkman(self) -> None:
 #                           #> non-static properties
 #                           self.__probs = 'no'
 #                   
@@ -572,18 +572,18 @@
 #               - sets the value of a private property
 #               - example:
 #                   class MyClass:
-#                       __my_var = None      #> private property, cannot be modified from the outside
-#                       def set_var(maybe):  #> setter method
-#                           __my_var = maybe #> sets the value using a parameter
+#                       __my_var = None             #> private property, cannot be modified from the outside
+#                       def set_var(maybe) -> None: #> setter method
+#                           __my_var = maybe        #> sets the value using a parameter
 #
-#                   MyClass.set_var(10)      #> sets the private property through the setter method                  
+#                   MyClass.set_var(10)             #> sets the private property through the setter method                  
 #           - getter methods
 #               - retrives the value of a private property
 #               - example:
 #                   class MyClass:
-#                       __my_var = 'yes'    #> private property, cannot be accessed from the outside
-#                       def get_var():      #> getter method
-#                           return __my_var #> retieves the value
+#                       __my_var = 'yes'      #> private property, cannot be accessed from the outside
+#                       def get_var() -> str: #> getter method
+#                           return __my_var   #> retieves the value
 #
-#                   MyClass.get_var()       #> 'yes'
-#                                           #> retrieves the private property through the setter method   
+#                   MyClass.get_var()         #> 'yes'
+#                                             #> retrieves the private property through the setter method   

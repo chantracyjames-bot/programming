@@ -66,8 +66,8 @@
 #           - these objects have a iter() method which is used to get an iterator
 #       - using the iterator of an iterable
 #           - example:
-#               my_list = [1, 2, 3, "yes"]
-#               my_iterator = iter(my_list)
+#               my_list: list = [1, 2, 3, "yes"]
+#               my_iterator:  = iter(my_list)
 #               next(my_iterator)           #> 1
 #               next(my_iterator)           #> 2
 #               next(my_iterator)           #> 3
@@ -76,36 +76,36 @@
 #       - iterators are commonly used in a loop
 #           - leveraging iterables
 #           - example:
-#               my_string = 'idkman'
+#               my_string: str = 'idkman'
 #               for i in my_string:
 #                   print(i)
 #       - creating custom iterators
 #           - uses the __iter__() and __next__() methods to initialize and advance an iterable
 #           - example:
 #               class MyNumbers:
-#                   def __iter__(self):
-#                       self.a = 1
+#                   def __iter__(self) -> MyNumbers:
+#                       self.a: int = 1
 #                       return self
-#                   def __next__(self):
-#                       x = self.a
+#                   def __next__(self) -> int:
+#                       x: int = self.a
 #                       self.a += 1
 #                       return x
-#                   my_obj = MyNumbers
-#                   my_iterator = iter(my_obj) #> initializes the __iter__() method
-#                                              #> sets the first element to be 1
-#                   print(next(my_iterator))   #> 1
-#                                              #> next() returns the current value
-#                                              #> and then initializes the next element, 1 += 1 (2)
+#                   my_obj: MyNumbers = MyNumbers
+#                   my_iterator = iter(my_obj)    #> initializes the __iter__() method
+#                                                 #> sets the first element to be 1
+#                   print(next(my_iterator))      #> 1
+#                                                 #> next() returns the current value
+#                                                 #> and then initializes the next element, 1 += 1 (2)
 #           - to stop the iteration from going on forever or to set a limit
 #               - the StopIteration statement is used
 #               - example:
 #                   class MyNumber:
-#                       def __iter__(self):
-#                           self.yes = 1
+#                       def __iter__(self) -> MyNumber:
+#                           self.yes: int = 1
 #                           return self
-#                       def __next__(self):
+#                       def __next__(self) -> int:
 #                           if self.yes >= 10:
-#                               no = self.yes
+#                               no: int = self.yes
 #                               self.yes += 1
 #                               return no
 #                           else:

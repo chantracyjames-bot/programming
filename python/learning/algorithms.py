@@ -2,8 +2,8 @@
 #   - are a way of working with data and solving problems
 #       - problems like sorting, searching, iterating, etc.
 #   - sample code:
-#       my_list = [2, 1, 5, 3, 4, 8, 0]
-#       min_val = my_list[0]
+#       my_list: list[int] = [2, 1, 5, 3, 4, 8, 0]
+#       min_val: int = my_list[0]
 #       for i in my_list:
 #           min_val = i if min_val > i else min_val
 #       #> loops though the list finding the minimum value
