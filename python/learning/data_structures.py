@@ -827,13 +827,13 @@
 #               - in order to find the lowest value or the highest value in a BST
 #                   - go as far left or as far right as possible, respectively
 #                   - example algorithm:
-#                       def get_lowest_node(node) -> node:
+#                       def get_lowest_node(node) -> TreeNode:
 #                           current = node
 #                           while current.left is not None:
 #                               current = current.left
 #                           return current
 #
-#                       def get_highest_node(node) -> node:
+#                       def get_highest_node(node) -> TreeNode:
 #                           current = node
 #                           while current.right is not None:
 #                               current = current.right
@@ -912,7 +912,7 @@
 #               - example algorithm:
 #                   #> the function in which enables deleting specific nodes
 #                   #> note that the "node" perimeter enables recursion
-#                   def delete_node(node, value) -> node | None:
+#                   def delete_node(node, value) -> TreeNode | None:
 #                       # these lines searches for the node with the correct value to delete
 #                       if not node:
 #                           return None
@@ -1253,3 +1253,180 @@
 #                           - and its left child node '13' is left heavy
 #                       - a right rotation on its child node and a left rotation on the main node
 #                           - restores balance to the Tree
+#           - Retracing in AVL Trees
+#               - when inserting or deleting nodes
+#                   - the rtree may become unbalanced
+#               - in order to know if the tree is unbalanced
+#                   - the heights must be updated 
+#                   - and the balance factors of each ancestor node must be recalculated
+#               - this process, is called "retracing" and is done through recursion
+#                   - as the recursive calls propagate back to the root after an insertion and deletion
+#                   - if any ancestor node is found to have a balance factor outside of the range of -1 to 1
+#                       - a rotation is performed at that node to restore the tree's balance
+#                   - illustration:
+#                              Unbalanced Tree                              Retracing
+#                                   |---|                                     |---|
+#                            _----->|10 |<-----_                       _----->|10 |<-----_
+#                           |       |---|       |                     |       |---|       |
+#                           |       +1 BF       |                     |       +1 BF       |
+#                         |---|               |---|                 |---|               |---|
+#                     _-->| 9 |           _-->|14 |<--_         _-->| 9 |           _-->|14 |<--_
+#                    |    |---|          |    |---|    |       |    |---|          |    |---|    |
+#                    |    -1 BF          |    -1 BF    |       |    -1 BF          |    -1 BF    |
+#                  |---|               |---|         |---|   |---|               |---|         |---|
+#                  | 8 |             _>|13 |         |15 |   | 8 |             _>|12 |<_       |15 |
+#                  |---|             ? |---|         |---|   |---|             ? |---| ?       |---|
+#                  00 BF             | -2 BF         00 BF   00 BF             | 00 BF |       00 BF 
+#                                  |---|                                     |---|   |---|
+#                                _>|12 |                                     |11 |   |13 |
+#                                ? |---|                                     |---|   |---|
+#                                | -1 BF                                     00 BF   00 BF
+#                              |---|
+#                              |11 |
+#                              |---|
+#                              00 BF
+#               - after node '11' is inserted, the code will retrace
+#                   - calculating balance factors as it propagates back up towards the root node
+#                   - when node '13' is reached and the balancing factor of that node became -2
+#                       - a right rotation is done
+#               - only after a rotation is done, the code will continue to retrace
+#                   - calculating balancing factors further up on ancestor '14' and '10'
+#               - due to the balancing factors of node '14' and '10' remaining unchanged
+#                   - they are unaffected by the rotation
+#           - AVL Tree implementation in Python:
+#               class TreeNode:
+#                   def __init__(self, data) -> None:
+#                       self.data = data
+#                       self.left = None
+#                       self.right = None
+#                       self.height = 1
+#
+#               def get_height(node) -> int:
+#                   if not node:
+#                       return 0
+#                   return node.height
+#           
+#               def get_balance(node) -> int
+#                   if not node:
+#                       return 0
+#                   return get_height(node.left) - get_height(node.right)
+#      
+#               def right_rotate(y) -> TreeNode:
+#                   x = y.left
+#                   T2 = x.right
+#                   x.right = y
+#                   y.left = T2
+#                   y.height = 1 + max(get_height(y.left), get_height(y.right))
+#                   x.height = 1 + max(get_height(x.left), get_height(x.right))
+#                   return x
+#
+#               def left_rotate(y) -> TreeNode:
+#                   y = x.right
+#                   T2 = y.left
+#                   y.left = x
+#                   x.right = T2
+#                   x.height = 1 + max(get_height(x.left), get_height(x.right))
+#                   y.height = 1 + max(get_height(y.left), get_height(y.right))
+#                   return y
+#
+#               def insert_node(node, value) -> TreeNode | int:
+#                   if not node:
+#                       return TreeNode(value)
+#                   if value < node.data:
+#                       node.left = insert_node(node.left, value)
+#                   elif value > node.data:
+#                       node.right = insert_node(node.right, value)
+#
+#                   node.height = 1 + max(get_height(node.left), get_height(node.right))
+#                   balance = get_balance(node)
+#
+#                   if balance > 1 and get_balance(node.left) >= 0:
+#                       return right_rotate(node)
+#                   if balance > 1 and get_balance(node.left) < 0:
+#                       node.left = left_rotate(node.left)
+#                       return right_node(node)
+#                   if balance < -1 and get_balance(node.right) <= 0:
+#                       return left_rotate(node)
+#                   if balance < -1 and get_balance(node.right) > 0:
+#                       node.left = right_rotate(node.right)
+#                       return rleft_node(node)
+#                   return node
+#
+#           - AVL node deleting
+#               - when deleting a node that is not a leaf node
+#                   - the AVL Tree requires the least value in the node
+#                       - queried through the get_lowest_node() function
+#                   - found through using in-order traversal
+#               - this process is similar to deleting a node in a BST
+#               - deleting a node in a AVL Tree
+#                   - the same code to restore balance is needed
+#               - sample code:
+#                   def get_lowest_node(node) -> TreeNode:
+#                       current = node
+#                       while current is not None:
+#                           current = current.left
+#                       return current
+#               
+#                   def delete_node(node, value) -> TreeNode:
+#                       if not node:
+#                           return node
+#                       if value < node.data:
+#                           node.left = delete_node(node.left, value)
+#                       elif value > node.data:
+#                           node.right = delete_node(node.right, value)
+#                       else:
+#                           if node.left is None:
+#                               temp = node.right
+#                               node = None
+#                               return temp
+#                           elif node.right is None:
+#                               temp = node.left 
+#                               node = None
+#                               return temp
+#                       
+#                           temp = get_lowest_node(node.right)
+#                           node.data = temp.data
+#                           node.right = delete(node.right, temp.data)
+#                       return node
+#
+#           - Time Complexity in AVL Trees
+#               - when looking through an unbalanced BST, the worst case scenario is O(n)
+#               - but when searching in an AVL Tree 
+#                   - the worst case scenario becomes a constant O(log n)
+#               - when deleting, searching or inserting
+#                   - the algortihm will only run through the whole height of the tree
+#                   - meaning, keeping the height of the tree low
+#                       - algorithms will only have a lower runtime
+#               - AVL Trees vs BSTs
+#                   - a BST is not self-balancing
+#                       - it can become very unbalanced
+#                           - where the height is nearly the same as the number of nodes
+#                       - making operations like inserting, deleting or searching very s;pw
+#                           - with a time complexity of O(h) = O(n)
+#                   - an AVL Tree however, is self-balancing
+#                       - meaning, the height of the tree is kep to a minimum
+#                       - such that operations like inserting, deleting or searching
+#                           - takes only a time complexity of O(h) = O(log n)
+#                   - O(log n)
+#                       - in a perfect binary tree
+#                           - with a height of 4
+#                           - the number of nodes becomes
+#                               - 1, 2, 4, 8 or 15
+#                           - the same as
+#                               - 2^0, 2^1, 2^2. 2^3
+#                       - to get the number of nodes n in a perfect binary tree with a height of 5
+#                           - it is possible to add the number of nodes together
+#                               - 2^0 + 2^1 + 2^2 + 2^3 + 2^4 + 2^5 = 63
+#                           - which is the same as
+#                               - 2^6 - 1 = 63
+#                       - in general, the formula for the relationship between the height and number of nodes is
+#                           - 2^(h + 1) - 1
+#                       - relationship between the height of a Tree and the number ot nodes
+#                           -            n = 2(h + 1) - 1
+#                           -        n + 1 = 2(h + 1)
+#                           - log_2(n + 1) = log_2(2^(h + 1))
+#                           - log_2(n + 1) = h + 1
+#                           -            h = log_2(n + 1) - 1
+#                           -            h = log n            #> note that the +1 and -1 are dropped
+#                                                             #> due to being insignificant in Computer Science
+#                                                               #> when tackling time complexity
