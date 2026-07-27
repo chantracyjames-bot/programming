@@ -140,3 +140,13 @@
             - fgets() only reads until n - 1, where n is the size of the array or the number declared
             - fgets() stops when it has encounter the End-of-File
 */
+
+#include <stdio.h>
+
+int main() {
+    FILE *p_file = fopen("../../../README.md", "r");
+    char text[100];
+    while(fgets(text, sizeof(text), p_file)) {
+        printf("%s", text);
+    }
+}
