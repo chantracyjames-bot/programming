@@ -30,4 +30,9 @@
                 - like for dynamic memory management
             - syntax:
                 - #include <stdlib.h>
+        - error.h
+            - enables the use of errno
+                - used for error handling
+            - syntax:
+                #include <errno.h>
 */
