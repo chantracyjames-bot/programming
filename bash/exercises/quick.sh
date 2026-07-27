@@ -194,7 +194,7 @@ check_valid() {
 				echo "how did you get here?"
 			;;
 		esac
-	elif [[ "$1" == "-r" || "--run" ]]; then
+	elif [[ "$1" == "-r" || "$1" == "--run" ]]; then
 		case "$2" in
 			"assembly")
 				if [[ "$4" == *.* ]]; then
