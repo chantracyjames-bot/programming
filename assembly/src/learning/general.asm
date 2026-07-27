@@ -56,7 +56,7 @@
 ;           - the code "global _start" is required for the code to be properly linked
 ;       - registers
 ;           - are part of the processor that temporarily holds memory
-;           - in the x86_64 architectur, registers hold 64 bits
+;           - in the x86_64 architecture, registers hold 64 bits
 ;               - each register can hold:
 ;                   - unsigned = from 0 to 2^64 - 1
 ;                   - signed   = from -9.223 * 10^18 to 9.223 * 10^18
@@ -271,8 +271,8 @@
 ;       - sys_write
 ;           argument type       argument description
 ;           file descriptor         0 (std input)
-;                                   1 (std input)
-;                                   2 (std input)
+;                                   1 (std output)
+;                                   2 (std error)
 ;           buffer                  location of string
 ;           count                   length of string
 ;
