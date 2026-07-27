@@ -237,8 +237,7 @@ check_valid() {
 # compiles the program to its respective build folders and runs the compiled program
 if [[ $1 == "-cr" || $1 == "--compile-run" ]]; then
     check_args "$@"
-    dir="$3"
-    cd "$dir"
+    cd "$3" || echo "Warning: Changing directory via cd failed."
     case "$2" in
 		"assembly")
 			check_valid "$@"
@@ -344,8 +343,7 @@ if [[ $1 == "-cr" || $1 == "--compile-run" ]]; then
 # only compiles the program to its respective build folder
 elif [[ $1 == "-c" || $1 == "--compile" ]]; then
     check_args "$@"
-    dir="$3"
-    cd "$dir"
+    cd "$3" || echo "Warning: Changing directory via cd failed."
     case "$2" in
 		"assembly")
 			check_valid "$@"
@@ -393,8 +391,7 @@ elif [[ $1 == "-c" || $1 == "--compile" ]]; then
 # runs a program from a specified build folder
 elif [[ $1 == "-r" || $1 == "--run" ]]; then
     check_args "$@"
-    dir="$3"
-    cd "$dir"
+    cd "$3" || echo "Warning: Changing directory via cd failed."
     case "$2" in
 		"assembly")
 			check_valid "$@"
