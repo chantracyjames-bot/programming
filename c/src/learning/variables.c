@@ -103,7 +103,7 @@
                 const MY_VARIABLE = "Hello World";
             
     - typedef
-        - allows the created of aliases for existing types
+        - allows the created of aliases for existi ng types
         - makes complex decorations easier to read and maintain
             - improves clarity and readability
         - declared outside of main()
@@ -150,3 +150,35 @@
                 // inside a function
                 lumbago no = WORLD;
 */
+
+#include <stdio.h>
+#include <stdbool.h>
+
+typedef struct Yes {
+    char no;
+} Yes;
+
+typedef union No {
+    bool yes;
+} No;
+
+typedef enum Maybe {
+    MAYBE = 10,
+} Maybe;
+
+const int NUM = 100;
+
+int main() {
+
+    int int_num = 10;
+    float float_num = 3.14f;
+    char char_stuff= 'Y';
+    char string[] = "idkman";
+
+    Yes yes = { 'A' };
+    No no = { true };
+
+    Maybe probs = MAYBE;
+
+    printf("%d\n%f\n%c\n%s\n%c\n%i\n%i\n%i\n", int_num, float_num, char_stuff, string, yes.no, (int) no.yes, probs, NUM);
+}

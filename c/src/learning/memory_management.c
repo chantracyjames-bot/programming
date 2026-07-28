@@ -385,3 +385,24 @@
                 free(p_num);
                 p_num = NULL;
 */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int *p_num = malloc(sizeof(int));
+
+    printf("Before modification: %i\n", *p_num);
+
+    *p_num = 10;
+
+    printf("After modification: %i\n", *p_num);
+
+    free(p_num);
+
+    printf("Before ptr to NULL: %i\n", *p_num);
+
+    p_num = NULL;
+
+    printf("After ptr to NULL: %i", p_num);
+}

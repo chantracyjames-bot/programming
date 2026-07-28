@@ -244,3 +244,21 @@
                     }
                 }
 */
+
+#include <stdio.h>
+
+int return_num() {
+    return 0;
+}
+
+char return_char() {
+    return 'Y';
+}
+
+void print_stuff() {
+    printf("%i%c", return_num(), return_char());
+}
+
+int main() {
+    print_stuff();
+}
