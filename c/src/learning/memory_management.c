@@ -1,4 +1,99 @@
 /* memory management
+    - memory layout
+        - in C, memory is divided into varying segments
+            - which are the text or code, data, heap and stack
+        - knowing how memory works can greatly increase the efficiency of a program
+            - optimizing performance, debugging, and prevent errors
+                - errors like memory leaks and segmentation faults
+        - text segment
+            - also know as the code segment
+            - this is where the executable code of a program lives
+                - like a program's functions and instructions (or statements)
+            - this segment is usually read-only
+                - preventing any accidental modifications during program execution
+            - it is typically stores in the lower part of memeory
+                - its size depends on the number of instructions and the complexity of the program
+        - data segment
+            - this is where global and static variables of a program lives
+            - variables inside this segment retain their values throughout program execution
+            - the data segment is divided into two sections
+                - the initialized and uninitialized segments
+            - initialized data section
+                - this is where the global and static variables live in
+                    - only if the variables have been defined with their values
+                - example:
+                    int global_var = 10;            // global variable
+
+                    int main() {
+                        static int static_var = 12; // static variable
+                    }
+                - note that these variable only live in the initialized section
+                    - if they have been assigned values during compilation time
+            - uninitialized data section
+                - also known as the BSS section
+                - this is where global and static variables live in
+                    - only if they were not assigned values during compilation time
+                - these values get initialized to zero during runtime
+                    - until they are assigned values
+                - example:
+                    int global_var;            // global variable
+                                               // uninitialized
+                    int main() {
+                        static int static_var; // static variable
+                                               // uninitialized
+                    }
+        - heap segment
+            - this is where dynamic memory allocation is stored
+                - starts at the end of the BSS segment
+                - growing towards the higher memory addresses
+            - memory in the heap is managed using functions
+                - functions like malloc(), calloc(), free(), and realloc()
+            - the hap is shared by all shared libraries and dynamucally loaded mdules in a process
+            - example:
+                #include <stdlib.h>
+                int main() {
+                    int *p_ptr = malloc(sizeof(int));
+                    int* p_temp = realloc(p_ptr, sizeof(int) * 2);
+                    p_ptr = p_temp;
+                    free(p_ptr);
+                }
+        - stack segment
+            - this is where local variables, function parameters, and return addresses are stored
+                - for each function call during a program's execution
+            - each function call creates a stack frame in this segment
+            - the stack is usually at the higher memory addresses
+                - growing in the opposite direction of the heap
+            - then the stack and the heap meet, the program's free memory is exhausted
+            - example:
+                void func() {
+                    int local_var = 10;
+                }
+                int main() {
+                    func();
+                }
+        - sample code:
+            #include <stdlib.h>
+            int gl0bal_uvar;                // uninitialized global variable
+                                            // stored in the bss section
+                                                // of the data segment
+            int global_ivar = 10            // initialized global variable
+                                            // stored in the initialized section 
+                                                // of the data segment
+            void func() {
+                int local_var = 10;         // local variable
+                                            // stored at the stack segment
+            }
+
+            int main() {
+                static int static_uvar;     // uninitialized static variable
+                                            // stored in the bss section
+                                                // of the data segment
+                static int static_ivar = 9; // initialized static variable
+                                            // stored in the initilized section
+                                                // of the data segment
+                int *p_ptr = malloc(4);     // dynamically allocated memory
+                                            // stored in the heap segment
+            }
     - memory addresses
         - different machines, primarily those with differing architectures, have different memory configurations
             - this is one of the main reasons why some programs work on other machines while being incompatible with others
@@ -223,161 +318,210 @@
                     }
 
     - memory allocation
-        - there are two types of memory allocation
+        - there are two types of memory allocation in C
             - static memory
                 - memory that is allocated during compilation time
                     - i.e. before the program starts
                 - example:
                     char my_string[100]; // memory gets allocated for my_string during compilation
                 - either inefficient or insufficient depending on the situation
-                    - inefficient if memory is wasted, or not being utilized properly
+                    - inefficient if memory is wasted, when underutilizing allocated memory
                     - insufficient if memory allocated is not enough to hold data
             - dynamic memory
                 - memory that is allocated during runtime
                     - i.e. during the program runtime
-                - more effiecient than static memory due to better control of memory usage
-                - dynamic memory does not belong to any variable
-                    - it is only accessible through pointer variables
-                - to perform dynamic memory managament, the <stdlib.h> header is required
+                - more efficient than static memory due to better control of memory usage
+                    - though it is more complicated to maintain
+                - dynamic memory is not a variable nor does it belong to any
+                    - it is only accessible through pointer variables pointing to memory addresses
                 
         - dynamic memory management
-            - contains functions to deal with memory management
-                - like allocation, deallocation, reallocation, etc.
-            - improper handling of dynamix memory leads to memory leaks
+            - achievable through the <stdlib.h> header library
+                - containing functions to deal with memory management
+                - like allocating, deallocating, reallocating, etc.
+            - improper handling of dynamic memory can lead to memory leaks or unintended behavior
             - memory leaks
-                - dynamic memory that is allocated but never freed
-                - happens when the program is in a loop but never frees up memory allocation
+                - dynamic memory that is allocated but never freed after used
+                - occurs when the programmer forgets to free up memory
+                    - like when the program is in a loop but never frees up memory allocation
                 - example:
-                    - int lumbago = 10;
+                    int lumbago = 10;
                     int *p_yes;
-                    inr p_yes = malloc(sizeof(*p_yes));
-                    int p_yes = &lumbago;              // the malloc() call gets disregarded
-                                                        // data within it gets lost
+                    inr p_yes = (int *) malloc(sizeof(*p_yes));
+                    int p_yes = &lumbago ;                      // the malloc() call gets disregarded
+                                                                // data within it gets lost
             - functions
                 - malloc()
                     - syntax:
                         malloc(<size>):
                     - <size> refers to the amount of memory to be allocated
-                        - declared in bytes
+                        - must be declared in bytes, must also be an integer
+                        - refer to "data_types.c" for type sizes
                     - example:
                         malloc(8); // allocated 8 bytes of memory
-                    - sample:
-                        // inside main()
-                        int *p_yes = malloc(4);
-                        *p_yes = 10;
-
-                        printf("%d", *p_yes);   // 10
+                    - sample code:
+                        char *p_ptr;                               // initializes a pointer variable
+                        p_ptr = (char *) malloc(8 * sizeof(char)); // allocates dynamic memory
+                                                                       // size of 8 char bytes
+                                                                       // note that char has a size of 1 byte
+                        strcpy(p_ptr, "lumbago");                  // assignes a value to the memory address help by p_ptr
+                        p_ptr[7] = '\0';                           // adds a null terminator to the end of the string
+                                                                       // required since without it, the string doesn't teminate
+                                                                       // reading garbage values until a '\0' is reached
                 - calloc()
                     - syntax:
                         calloc(<amount>, <size>);
                     - <amount> signifies the amount of items to be allocated in memory
-                        - declared as int
+                        - must be an integer
                     - <size> refers to the amount of memory to be allocated
-                        - declared as bytes
+                        - must be declared in bytes, must also be an integer
+                        - refer to "data_types.c" for type sizes
                     - example:
                         calloc(1, 4); // allocates 4 bytes of memory for 1 item
-                    - sample:
-                        // inside main()
-                        int *p_yes = calloc(1, 4);
-                        *p_yes = 10;
-
-                        printf("%d\n", *p_yes);    // 10
+                    - sample code:
+                        char *p_ptr;                              // initializes a pointer variable
+                        p_ptr = (char *) calloc(7, sizeof(char)); // allocates dynamic memory
+                                                                    // size of 7 char bytes
+                                                                    // note that char has a size of 1 byte
+                        strcpy(p_ptr, "idkman");                  // assignes a value to the memory address help by p_ptr
+                        p_ptr[6] = '\0';                          // adds a null terminator to the end of the string
+                                                                    // required since without it, the string doesn't teminate
+                                                                    // reading garbage values until a '\0' is reached
                 - realloc()
                     - syntax:
-                        realloc(<name>, <new_size>);
-                    - <name> refers to the name of the pointer to be resized
+                        realloc(<old_pointer>, <new_size>);
+                    - <old_pointer> refers to the name of the pointer to be resized
                     - <new_size> refers to the new size of memory to be allocated
+                        - must be declared in bytes, must also be an integer
+                        - refer to "data_types.c" for type sizes
+                    - note that it a new variable must be present to hold the new address
+                        - it is generally unadvised to use the same pointer that is being reallocated
                     - example:
-                        realloc(p_ptr, 12); // reallocates 12 bytes of memory for p_ptr
-                    - sample:
-                        // inside main()
-                        char *p_my_string = NULL;
-                        p_my_string = malloc(5 * sizeof(char));
-                        strncpy(p_my_string, "hell", 4);
-                        p_my_string[5] = '\0';
-                        printf(p_my_string);
-                        char *p_new_string = realloc(p_my_string, 10 * sizeof(char));
-                        strncpy(p_new_string, "lumbago", 9);
-                        p_new_string[9] = '\0';
-                        printf(p_new_string);
+                        int *p_temp = realloc(p_ptr, 12); // reallocates 12 bytes of memory
+                    - sample code:
+                        char *p_text;                                              // initializes a pointer variable
+                        p_temp = (char *) calloc(strlen("lumbago"), sizeof(char)); // allocates dynamic memory
+                                                                                       // size of the length of "lumbago"
+                        strcpy(p_text, "lumbago");                                 // assigns the "lumbago" to the memory address
+                                                                                       // held by p_text
+                        char *p_temp;                                              // initializes a temporary pointer variable
+                        p_temp = (char *) realloc(p_text), strlen(" idkman"));     // reallocates dynamic memory
+                                                                                       // size of the length of "idkman"
+                                                                                       // note that char has a size of 1 byte
+                        if (p_temp == NULL) {                                      // checks if reallocation wa successful
+                            exit(1);                                               // runs a code block if reallocation failed
+                        }
+                        p_text = p_temp;                                           // moves the memory address from p_temp to p_text
+                                                                                   // note that when reallocation is successful
+                                                                                       // the original pointer is freed automatically
+                                                                                       // i.e. freed using free()
+                        strcat(p_text, " idkman");                                 // concatenates text to the end of the original text
+                                                                                       // becoming "lumbago idkman"
+
                 - free()
                     - syntax:
                         free(<name>)
                     - <name> refers to the name of the pointer to be deallocated
+                    - it is good practice to point the released pointer variable to NULL
+                        - to mitigate any unexpected behaviors like use-after-free errors
                     - example:
-                        free(p_ptr);
-                    - sample:
-                        char *p_yes = malloc(7 * sizeof(char));
-                        strncpy(p_yes, "idkman", 6);
-                        p_yes[6] = '\0';
-                        printf(p_yes);
-                        free(p_yes);
-                        p_yes = NULL;
+                        free(p_ptr); // releases the memory at pointer p_ptr
+                    - sample code:
+                        char *p_ptr;                              // initializes a pointer variable
+                        p_ptr = (char *) malloc(7, sizeof(char)); // allocate dynamic memory
+                                                                    // size of 7 bytes
+                                                                    // note that char has a size of 1 byte
+                        strncpy(p_ptr, "idkman", 6);              // assigns a value to the memory address
+                                                                    // help by p_ptr
+                                                                    // note that this is using strncpy() not strcpy()
+                        p_ptr[6] = '\0';                          // adds a null terminator to the end of the string
+                                                                    // required since without it, the string doesn't teminate
+                                                                    // reading garbage values until a '\0' is reached
+                        free(p_ptr);                              // releases the memory address at p_ptr
+                        p_ptr = NULL;                             // points the variable to NULL
+                                                                    // prevents use-after-free errors
             - sidenote:
-                - using malloc() to allocate memory is unpredictable and unreliable
-                    - it does not clear out the memory space that it is reserving
-                - as opposed to calloc() filling the allocated memory with zeroes
-                    - but it sacrifices effieciency
-                - it is recommended to write something in memory before reading it
+                - using the malloc() function to allocate memory is unpredictable and unreliable
+                    - this is due to it not initializing the values at that memory address
+                        - meaning it keeps the garbage values at that memory addresss
+                    - using the pointer's variable may yield unexpected values
+                        - assigning a value to the pointer fixes this issue
+                - using the calloc() function does not have the same problem as malloc()
+                    - it initializes the values at that memory address to zeroes
+                    - though, it comes at a performance penalty
 
     - memory access
-        - dynamic memory behaves similarly to an array
-            - it is possible to increment or decrement its constnets using an index
-            - example:
-                *p_ptr;
-                // or
-                p_ptr[0];
-        - dynamic memory is not a data type
-            - it is a sequence of bytes in memory
-            - it is possible to read dynamic memory as an int, char, float, etc.
-            - example:
-                int *p_int = NULL;
-                p_int = malloc(sizeof(int));
-                *p_int = 65;
-                char *p_char = (char*) p_int;
-                printf("%c", *p_char);        // 'A'
-                printf("\n%c", p_char[0]);    // 'A'
+        - pointer variables with dynamic memory behaves similarly to an array
+            - meaning, it is possible to access its contents using an zero-indexed access
+                - example:
+                    p_ptr[0];
+            - or increment or decerement the current index using their respective operators
+                - example:
+                    p_ptr++;
+                    // or
+                    p_ptr--;
+        - note that dynamic memory is not a data type
+            - it is a continuous sequence of bytes in memory
+                - depending if memory is fragmented
+            - it is possible to read dynamic memory
+                - can be as an char, int, float, etc.
+                - using type casting
+                - example:
+                    (char *) p_ptr;    // reads the memory address as char
+                                           // meaning, one byte at a time
+                    (int *) p_ptr;     // reads the memory address as int
+                                           // meaning, four bytes at a time
+                    (double) *) p_ptr; // reads the memory address as float
+                                           // meaning, four bytes at a time
+
             
         - memory reallocation
-            - used to resize allocated memory
-            - uses the realloc() function to reallocate memory
+            - resizes currently allocated memory
+                - through the use of the realloc() function
             - syntax:
-                realloc(<old_pointer>, <new_size>);
+                <new_pointer> = realloc(<old_pointer>, <new_size>);
             - <old_pointer> refers to the pointer to the memory to be resized
             - <new_size> refers to the new size of memory to be allocated
+                - must be declared in bytes, must also be an integer
+                - refer to "data_types.c" for type sizes
             - example:
-                realloc(p_ptr, 10); 
-            - note that if the current memory space that the currently allocated memory is not sufficient enough to resize
-                - it will reallocate memory somewhere else in the heap space
-                - allocating to another memory address with the new size
-            - it is recommended to initialize a new pointer to store the new memory address as opposed to using the old pointer
-                - using the old pointer may yield invalid data since it is part of the new pointer
-            - sample:
-                int num = 5;
-                int count = 0;
-                int *p_int_array = calloc(num, sizeof(int));
-                for(int i = 1; i <= num; i++, count++) { p_int_array[i - 1] = i; } 
+                int *p_temp = (int *) realloc(p_ptr, sizeof(int) * 2); 
+            - sidenote:
+                - if the current memory space is large enough
+                    - it will enlarge the current memory space instead of reallocating elsewhere
+                - if the current memory space is not sufficient
+                    - it will reallocate memory elsewhere in the heap space
+            - note that it a new variable must be present to hold the new address
+                - it is generally unadvised to use the same pointer that is being reallocated
+            - sample code:
+                int size = 5, count = 0;
+                int *p_num = (int *) calloc(size, sizeof(int));
+                for(int i = 1; i <= size; i++, count++) { 
+                    p_num[i - 1] = i; 
+                } 
                 
-                for(int i = 0; i < count; i++) { printf("%d", p_int_array[i]); }
-
-                num *= 2;
-                int *p_temp = realloc(p_int_array, num);
-                if(p_temp == NULL) {
-                    printf("Failed to reallocated!");
-                    free(p_temp);
-                    return 1;
+                for(int i = 0; i < count; i++) { 
+                    printf("%d", p_num[i]); 
                 }
-                p_int_array = p_temp;
+
+                size *= 2;
+                int *p_temp = (int *) realloc(p_num, size);
+                if(p_temp == NULL) {
+                    printf("failed to reallocate");
+                    exit(1);
+                }
+                p_num = p_temp;
 
         - memory deallocation
-            - deallocates or frees up allocated memory
-            - dynamic memory stays reserved (or in use) until it is manually deallocated or automatically freed after the program ends
-            - it is recommended to deallocate memory to prevent memory leaks
+            - frees up currently allocated memory
+                - deallocating through the use of the free() function
+            - memory that is allocated dynamically must be freed up
+                - dynamic memory stays reserved, requiring to be freed to prevent memory hogging
+            - it is recommended to deallocate memory to prevent memory leaks or errors
                 - it is also recommended to point the deallocated pointer to NULL to avoid unknown side effects
-            - uses the free() function
             - syntax:
                 free(<pointer>);
-            - <pointer> refers to the pointer to the memory address to be freed
+            - <pointer> refers to the pointer variable pointing to the memory address to be freed
             - example:
                 free(p_ptr);
             - sample:
