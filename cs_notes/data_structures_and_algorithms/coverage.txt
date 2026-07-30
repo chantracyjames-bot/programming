@@ -1,0 +1,23 @@
+Topics
+    - Data Structures and Algorithms:
+        - 1st Semester / Midterm
+            - Mathematical Functions
+                - Basic Operations
+                    - Addition
+                    - Subtraction
+                    - Multiplication
+                    - Division
+                - Absolute Numbers
+                - Laws of Negativity
+            - Arrays
+            - Queues
+            - Stacks
+            - Linked Lists (50/50)
+        - 1st Semester / Finals
+            - Notations
+            - Trees
+    - Algorithms ...
+        - 2st Semester / Midterms
+            -
+        - 2nd Semester / Finals
+            -

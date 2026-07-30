@@ -1,0 +1,18 @@
+- Information Management
+    - follows the IPO principle
+        - Input
+            - contains raw facts and data
+        - Process
+            - is the methods that converts data into information
+        - Output
+            - information
+    - Knowledge vs Wisdom
+        - Knowledge
+            - contains information
+            - available to decision makers
+                - or available to utilize for actions
+        - Wisdom
+            - it is the information that is applied
+    - tackles how to store data
+        - learn more about databases
+            - primarily MySQL
