@@ -9,6 +9,7 @@ The languages that I am familiar of are:
 + Beginner Level:
   * Assembly
   * Bash
+  * HTML-CSS
 + Intermediate Level:
   * C
   * C++
@@ -16,5 +17,4 @@ The languages that I am familiar of are:
   * Python
   * Rust
 + Planning to learn:
-  * HTML-CSS
   * JavaScript
