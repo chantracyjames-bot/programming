@@ -9,6 +9,13 @@ Topics
                     - Division
                 - Absolute Numbers
                 - Laws of Negativity
+                    - in Addition
+                    - in Subtraction
+                    - in Multiplication
+                    - in Division
+                - Floors and Ceilings
+                - Modulos
+                - Exponents and Logarithms
             - Arrays
             - Queues
             - Stacks
