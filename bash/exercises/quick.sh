@@ -14,6 +14,7 @@ assembly_bin="/home/tarcy_arch/Documents/Programming/assembly/bin"
 c_bin="/home/tarcy_arch/Documents/Programming/c/bin"
 cpp_bin="/home/tarcy_arch/Documents/Programming/cpp/bin"
 java_bin="/home/tarcy_arch/Documents/Programming/java/bin"
+python_bin="/home/tarcy_arch/Documents/Programming/python/bin"
 rust_bin="/home/tarcy_arch/Documents/Programming/rust/bin"
 
 # functions used for a clean output
@@ -320,7 +321,7 @@ if [[ $1 == "-cr" || $1 == "--compile-run" ]]; then
 		"python")
 			check_valid "$@"
 			out_python
-			python -u "$4"
+			"$python_bin/python" -u "$4"
 		;;
 		"rust")
 			check_valid "$@"
@@ -451,7 +452,7 @@ elif [[ $1 == "-r" || $1 == "--run" ]]; then
 		"python")
 			check_valid "$@"
 			out_python
-			python -u "$4"
+			"$python_bin/python" -u "$4"
 		;;
 		"rust")
 			check_valid "$@"
