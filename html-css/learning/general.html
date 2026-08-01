@@ -1,49 +1,56 @@
-<!-- general
+<!-- open this file in a browser -->
+<!DOCTYPE html>
+<html lang="en_US">
+<head>
+    <title>
+        general
+    </title>
+</head>
+<body style="background-color: black;">
+    <pre style="color: wheat;">
     - syntax
         - doctype declaration
             - it indicates that the document is an HTML file
             - syntax:
-                <!DOCTYPE html>
+                &lt;!DOCTYPE html&gt;
         - html element
             - every html file must have the html tag at the lowest level
             - syntax:
-                <html>
-                    <statements>
-                </html>
+                &lt;html&gt;
+                    &lt;statements&gt;
+                &lt;/html&gt;
         - elements
             - an element in html is defined by their tags
-            - some elements require a starting tag and a closing tag 
+            - some elements require a starting tag and a closing tag
                 - while some require no closing tags
             - closing tags
                 - for elements that needs a closing tag
                     - the forward slash / is required to close the element
-                - note that if a tag requires a closing tag 
+                - note that if a tag requires a closing tag
                     - if it is not present, contents may not show correctly
                 - syntax:
-                    <(tagname)>
-                        <statements>
-                    </(tagname)>
+                    &lt;(tagname)&gt;
+                        &lt;statements&gt;
+                    &lt;/(tagname)&gt;
         - attributes
             - html elements can contain attributes
             - they provide additional indormation about the elements
                 - they alway are specified at the start tag
                 - usually in the form of name="value"
             - syntax:
-                <(tag) <attribute>=<value>>
+                &lt;(tag) (attribute)="(value)"&gt;
         - HTML is not case-sensitive
-            - <p> is the same as <P>
+            - &lt;p&gt; is the same as &lt;P&gt;
             - it is generally recommmended to follow the lowercase format
                 - due to being recommmended by the W3C
-                
-
--->
-
-<!DOCTYPE html>
-
-<html>
-
-<body> 
-    <h1>Hello World</h1>
+        - commemts
+            - can be done inline and out of line
+            - used to add extra descriptions or temporarily remove problematic lines
+            - syntax:
+                &lt;!-- (text) --&gt;
+            - example:
+                <!-- y u here? -->
+    </pre>
 </body>
 
 </html>

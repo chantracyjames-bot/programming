@@ -1,4 +1,14 @@
-<!-- heading and paragraphs
+<!-- open this file in a browser -->
+<!DOCTYPE html>
+<html lang="en_US">
+<head>
+    <title>
+        text
+    </title>
+</head>
+    <body style="background-color:black">
+        <pre style="color:wheat">
+heading and paragraphs
     - in HTML
         - it is uncertain how the text in HTMLs are displayed
         - whether on large screens or small displays
@@ -6,35 +16,52 @@
         - note that browsers automatically removed any extra spaces
             - and lines when the page is displayed
         - example:
-                <p>
+                &lt;p&gt;
                     This paragraph
                     contains a lot of lines
                     in the source code,
                     but the browser
                     ignores it.
-                    </p>
-                    
-                    <p>
+                    &lt;/p&gt;
+
+                    &lt;p&gt;
                     This paragraph
                     contains         a lot of spaces
                     in the source         code,
                     but the        browser
                     ignores it.
-                </p>
-    - <p>
+                &lt;/p&gt;
+    - <b>&lt;h#&gt;</b>
+        - defines a heading
+        - search engines typically use headings to index the structure and content of a web page
+        - users usually skin though a page by its headings
+            - it is recommended to use headings to show the document structure
+            - it is also advised to use only 1 main heading which represents the main topic or title of a page
+        - can range from 1 to 6 depending on the level of importance
+            - 1 is the most important and 6 is the least important
+            - 1 is typically used for the page title, 2 for the section titles, and 3 for the sub-sections
+        - syntax:
+            &lt;h(number)&gt;
+                (text)
+            &lt;/h(number)&gt;
+        - example:
+            &lt;h1&gt;
+                Heading where?
+            &lt;/h1&gt;
+    - <b>&lt;p&gt;</b>
         - defines a paragraph
             - note that this element automatically starts at a new line
         - browsers automatically add somce whitespace
             - a margin before and after a paragraph
         - syntax:
-            <p>
-                <statements>
-            </p>
+            &lt;p&gt;
+                (text)
+            &lt;/p&gt;
         - example:
-            <p>
+            &lt;p&gt;
                 "Hello World"
-            </p>
-    - <br>
+            &lt;/p&gt;
+    - <b>&lt;hr&gt;</b>
         - a horizontal line rule
             - a straight line from one side of the page to the other
         - a tag that defines a thematic break in an HTML page
@@ -44,48 +71,216 @@
         - note that this tag is an empty tag
             - meaning it has no end tags
         - syntax:
-            <hr>
+            &lt;hr&gt;
         - example:
-            <p>
+            &lt;p&gt;
                 Hello
-                <hr>
+                &lt;hr&gt;
                 World
-            </p>
-    - <br>
+            &lt;/p&gt;
+    - <b>&lt;br&gt;</b>
         - a line break
-            - similar to adding a newline '\0' to a print statement
+            - similar to adding a newline to a print statement
         - used to start another paragraph
         - note that this tag is an empty tag
             - meaning it has no end tags
         - syntax:
-            <br>
+            &lt;br&gt;
         - example:
-            <p>
+            &lt;p&gt;
                 Hello
-                <br>
+                &lt;br&gt;
                 World
-            </p>
-    - <pre>
+            &lt;/p&gt;
+    - <b>&lt;pre&gt;</b>
         - defines proformatted text
         - the text inside this element is in a fixed width font
             - usually Courier
             - preserves both spaces and line spaces
         - syntax:
-            <pre>
-                <statament>
-            </pre>
+            &lt;pre&gt;
+                (text)
+            &lt;/pre&gt;
         - example:
-            <pre>
+            &lt;pre&gt;
                 Hello
                 World
-            </pre>
--->
-
-<!DOCTYPE html>
-<html> 
-<body>
-    <p>
-        Hello<br>World
-    </p>
+            &lt;/pre&gt;
+    - <i><b>formatting elements</b></i>
+        - <b>&lt;b&gt;</b>
+            - boldens the text
+            - syntax:
+                &lt;b&gt;
+                    (text)
+                &lt;/b&gt;
+            - example:
+                &lt;b&gt;
+                    <b>idkman</b>
+                &lt;/b&gt;
+        - <b>&lt;strong&gt;</b>
+            - boldens the text
+            - used to mark a piece of text as "important"
+            - syntax:
+                &lt;strong&gt;
+                    (text)
+                &lt;/strong&gt;
+            - example:
+                &lt;strong&gt;
+                    <b>lumbago</b>
+                &lt;/strong&gt;
+        - <b>&lt;i&gt;</b>
+            - italicize the text
+            - syntax:
+                &lt;i&gt;
+                    (text)
+                &lt;/i&gt;
+            - example:
+                &lt;i&gt;
+                    <i>hello</i>
+                &lt;/i&gt;
+        - <b>&lt;em&gt;</b>
+            - italicize the text
+            - used to put emphasis the text
+            - syntax:
+                &lt;em&gt;
+                    (text)
+                &lt;/em&gt;
+            - example:
+                &lt;em&gt;
+                    <i>hello</i>
+                &lt;/em&gt;
+        - <b>&lt;small&gt;</b>
+            - decreses the size of the text
+            - syntax:
+                &lt;small&gt;
+                    (text)
+                &lt;/small&gt;
+            - example
+                &lt;small&gt;
+                    <small>maybe</small>
+                &lt;/small&gt;
+        - <b>&lt;mark&gt;</b>
+            - marks or highlights a text
+            - syntax:
+                &lt;mark&gt;
+                    (text)
+                &lt;/mark&gt;
+            - example
+                &lt;mark&gt;
+                    <mark>no</mark>
+                &lt;/mark&gt;
+        - <b>&lt;del&gt;</b>
+            - adds a strike line across a piece of text
+            - syntax:
+                &lt;del&gt;
+                    (text)
+                &lt;/del&gt;
+            - example
+                &lt;del&gt;
+                    <del>hi</del>
+                &lt;/del&gt;
+        - <b>&lt;ins&gt;</b>
+            - adds an underline across a piece of text
+            - syntax:
+                &lt;ins&gt;
+                    (text)
+                &lt;/ins&gt;
+            - example
+                &lt;ins&gt;
+                    <ins>bye</ins>
+                &lt;/ins&gt;
+        - <b>&lt;sub&gt;</b>
+            - defines a subscripted text
+            - syntax:
+                &lt;sub&gt;
+                    (text)
+                &lt;/sub&gt;
+            - example
+                &lt;sub&gt;
+                    <sub>Hello</sub>
+                &lt;/sub&gt;
+        - <b>&lt;sup&gt;</b>
+            - defines a superscripted text
+            - syntax:
+                &lt;sup&gt;
+                    (text)
+                &lt;/sup&gt;
+            - example
+                &lt;sup&gt;
+                    <sup>World</sup>
+                &lt;/sup&gt;
+    - quotation and citations
+        <b>&lt;blockquote&gt;</b>
+            - defines a section of text that is quoted from another source
+            - browsers usually indent this type of elements
+            - syntax:
+                &lt;blockqoute cite="(url)"&gt;
+                    (text)
+                &lt;/blockqoute&gt;
+            - example:
+                &lt;blockqoute cite="https://github.com/chantracyjames-bot"&gt;
+    </pre>
+    <blockquote cite="https://github.com/chantracyjames-bot" style="color:wheat">
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;blame tarcy
+    </blockquote>
+    <pre style="color:wheat">
+                &lt;/blockqoute&gt;
+        <b>&lt;q&gt;</b>
+            - used for short quotations
+            - browsers usually insert quotation marks around the quotation
+            - syntax:
+                &lt;q&gt;
+                    (text)
+                &lt;/q&gt;
+            - example:
+                &lt;q&gt;
+                   "idkman"
+                &lt;/q&gt;
+        <b>&lt;abbr&gt;</b>
+            - defines an abbreviation or an acronym
+            - typically used with the title attribute
+            - syntax:
+                &lt;abbr title="(title)"&gt;
+                    (text)
+                &lt;/abbr&gt;
+            - example:
+                &lt;abbr title="i dont knowledge"&gt;
+                    IDK
+                &lt;/abbr&gt;
+        <b>&lt;address&gt;</b>
+            - defines the contact information of the owner or document
+            - browsers typically display addresses in italics
+                - and a line break before and after the element
+            - syntax:
+                &lt;address&gt;
+                    (text)
+                &lt;/address&gt;
+            - example:
+                &lt;address&gt;
+                    <i>lumbago</i>
+                &lt;/address&gt;
+        <b>&lt;cite&gt;</b>
+            - defines the title of a creative work
+            - browsers typically display this in italics
+            - syntax:
+                &lt;cit&gt;
+                    (text)
+                &lt;/cite&gt;
+            - example:
+                &lt;cite&gt;
+                    <i>maybe</i>
+                &lt;/cite&gt;
+        <b>&lt;bdo&gt;</b>
+            - bi-directional override
+            - changes the display direction of text
+            - syntax:
+                &lt;bdo dir="(direction)"&gt;
+                    (text)
+                &lt;/bd&gt;
+            - example:
+                &lt;bdo dir="rtl"&gt;
+                    ih
+                &lt;/bd&gt;
+    </pre>
 </body>
 </html>
