@@ -1,6 +1,0 @@
-Target Outcomes
-    - OOP
-        - creating an Information Database using MySQL
-            - connected to MySQL
-        - it is recommended to split classes into multiple files
-            - prevents any modifications affecting major parts of the code
