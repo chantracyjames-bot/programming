@@ -7,15 +7,15 @@
 # From:
 # cd /home/user/Documents/ && clang++ my_program.cpp -o ~/Documents/my_program.o && ~/Documents/my_program.o
 # To:
-# quick -cr cpp_clang /home/Documents/ my_program.o my_program
+# quick -cr cpp_clang /home/user/Documents/ my_program my_program.cpp
 
 # build folder locations for each language
-assembly_bin="/home/tarcy_arch/Documents/Programming/assembly/bin"
-c_bin="/home/tarcy_arch/Documents/Programming/c/bin"
-cpp_bin="/home/tarcy_arch/Documents/Programming/cpp/bin"
-java_bin="/home/tarcy_arch/Documents/Programming/java/bin"
-python_bin="/home/tarcy_arch/Documents/Programming/python/bin"
-rust_bin="/home/tarcy_arch/Documents/Programming/rust/bin"
+ASSEMBLY_BIN="/home/tarcy_arch/Documents/Programming/assembly/bin"
+C_BIN="/home/tarcy_arch/Documents/Programming/c/bin"
+CPP_BIN="/home/tarcy_arch/Documents/Programming/cpp/bin"
+JAVA_BIN="/home/tarcy_arch/Documents/Programming/java/bin"
+PYTHON_BIN="/home/tarcy_arch/Documents/Programming/python/bin"
+RUST_BIN="/home/tarcy_arch/Documents/Programming/rust/bin"
 
 # functions used for a clean output
 separate()      { echo "==================================================="; }
@@ -36,11 +36,11 @@ help() {
 	echo ""
 	echo "DESCRIPTION"
 	echo "        A shortcut for compiling and running languages with a clean termincal output, using Code Runner."
-	echo "        Unlike Code Runner's verbose syntax to run programs, this script feeds from Code Runner's arguments without being too verbose."
+	echo "        Unlike Code Runner's verbose syntax to run programs, this script feeds from Code Runner's arguments without being too long."
 	echo "        # Resulting into a cleaner terminal environment, easier to debug and diagnose."
 	echo ""
 	echo "SYPNOSIS"
-	echo "        quick [OPTIONS] [LANGUAGE] [DIRECTORY] [FILE_WITH_EXIT] [FILE_NO_EXT]"
+	echo "        quick [OPTIONS] [LANGUAGE] [DIRECTORY] [FILE_WITHOUT_EXTENSION] [FILE_WITH_EXTENTION]"
 	echo "        quick [-h | --help]"
 	echo ""
 	echo "OPTION"
@@ -62,34 +62,36 @@ help() {
 	echo "        1       Error. An error was encountered during execution."
 	echo ""
 	echo "EXAMPLES"
-	echo "        Compile a C source file to a specified directory."
-	echo "                quick -c c ~/Documents my_program.c my_program"
+	echo "        Compile a C source file from a specific directory."
+	echo "                quick -c c ~/Documents my_program my_program.c"
 	echo "        Run a C++ (clang++) output file from a specified directory."
 	echo "                quick -r cpp_clang ~/Documents my_program_clang.o"
-	echo "        Compile a .rs source file and run it from a specified output directory."
-	echo "                quick -cr rust ~/Documents my_program.rs my_program"
+	echo "        Compile a .rs source file from a specific directory and run it."
+	echo "                quick -cr rust ~/Documents my_program my_program.rs"
+    echo "        Compile a C source file with header files from a specific directory and run it"
+    echo "                quick -wr c ~/Documents output main.c my_header.c"
 }
 
-# checks if the arguments are valid
-check_args() {
+# validates the arguments
+check_arguments() {
 	case "$1" in
 		"-c"|"-cr"|"--compile"|"--compile-run")
 			case "$2" in
 				"assembly"|"c"|"cpp_gpp"|"cpp_clang"|"java"|"rust")
 					if [[ -z "$3" || -z "$4" || -z "$5" ]]; then
-						echo "Error: Invalid Input: A directory, a file and a file without its extension is required. i.e quick -c ~/my_folder my_file.ext my_file"
+						echo "Error: Invalid Input: A directory, a file without extension and a file is required. i.e quick -c lang ~/my_folder my_file my_file.ext"
 						exit 1
 					elif [[ -n "$6" ]]; then
-						echo "Error: Too Many Arguments: This language takes only 5 arguments at most."
+						echo "Error: Too Many Arguments: This option takes only 5 arguments at most."
 						exit 1
 					fi
 				;;
 				"bash"|"python")
 					if [[ -z "$3" || -z "$4" ]]; then
-						echo "Error: Invalid Input: A directory, and a file is required. i.e quick -c ~/my_folder my_file.ext"
+						echo "Error: Invalid Input: A directory, and a file is required. i.e quick -c lang ~/my_folder my_file.ext"
 						exit 1
 					elif [[ -n "$5" ]]; then
-						echo "Error: Too Many Arguments: This language takes only 4 arguments at most."
+						echo "Error: Too Many Arguments: This option takes only 4 arguments at most."
 						exit 1
 					fi
 				;;
@@ -103,19 +105,19 @@ check_args() {
 			case "$2" in
 				"bash"|"c"|"cpp_gpp"|"cpp_clang"|"python"|"rust")
 					if [[ -z "$3" || -z "$4" ]]; then
-						echo "Error: Invalid Input: A directory, and a file is required. i.e quick -c ~/my_folder my_file.o"
+						echo "Error: Invalid Input: A directory, and a file is required. i.e quick -r lang ~/my_folder my_file.o"
 						exit 1
 					elif [[ -n "$5" ]]; then
-						echo "Error: Too Many Arguments: This language takes only 4 arguments at most."
+						echo "Error: Too Many Arguments: This option takes only 4 arguments at most."
 						exit 1
 					fi
 				;;
 				"assembly"|"java")
 					if [[ -z "$3" || -z "$4" ]]; then
-						echo "Error: Invalid Input: A directory, and a file without its extension is required. i.e quick -c ~/my_folder my_file"
+						echo "Error: Invalid Input: A directory, and a file without its extension is required. i.e quick -r lang ~/my_folder my_file"
 						exit 1
 					elif [[ -n "$5" ]]; then
-						echo "Error: Too Many Arguments: This language takes only 4 arguments at most."
+						echo "Error: Too Many Arguments: This option takes only 4 arguments at most."
 						exit 1
 					fi
 				;;
@@ -124,42 +126,55 @@ check_args() {
 					exit 1
 				;;
 			esac
-		;;
-	esac
-
-	if [[ ! -d "$3" ]]; then
-		echo "Error: Invalid Input: '$3' is not a valid directory."
-		exit 1
-	elif [[ ! -f "$3/$4" ]]; then
-		echo "Error: Invalid Input: '$4' is not a valid file."
-		exit 1
-	fi
+        ;;
+        "-wr"|"--compile-with-header")
+			case "$2" in
+				"c")
+					if [[ -z "$3" || -z "$4" || -z "$5" ]]; then
+						echo "Error: Invalid Input: A directory, a file without extension and a file is required. i.e quick -wr lang ~/my_folder my_file my_file.ext"
+						exit 1
+					fi
+                    shift; shift; shift; shift; shift;
+                    for file in "$@"; do
+                        if [[ -z "$file" ]]; then 
+                            echo "Error: Invalid Input: A directory, a file without extension, and a main file with its headers is required. i.e. quick -wr lang ~/my_folder my_file my_file.ext my_header.ext etc."
+                            exit 1
+                        fi
+                    done
+				;;
+				*)
+					echo "tarcy sux"
+					exit 1
+				;;
+			esac
+        ;;
+    esac
 }
 
-# checks if the file given is valid
-check_valid() {
+# checks the validity of the file arguments
+check_file_validity() {
     if [[ "$1" == "-c" || "$1" == "-cr" || $1 == "--compile" || "$1" == "--compile-run" ]]; then
 		case "$2" in
 			"assembly")
-				if [[ "$4" != *.asm ]]; then
+				if [[ "$3" != *.asm ]]; then
 					echo "Error: Invalid Assembly Source File: This script only validates .asm source files."
 					exit 1
 				fi
 			;;
 			"bash")
-				if [[ "$4" != *.sh ]]; then
+				if [[ "$3" != *.sh ]]; then
 					echo "Error: Invalid Bash Script: This script only validates .sh shell script files."
 					exit 1
 				fi
 			;;
 			"c")
-				if [[ "$4" != *.c && "$4" != *.h ]]; then
+				if [[ "$3" != *.c && "$3" != *.h ]]; then
 					echo "Error: Invalid C Source File: This script only validates .c and, .h source files."
 					exit 1
 				fi
 			;;
 			"cpp_clang"|"cpp_gpp")
-				case "$4" in
+				case "$3" in
 				*.cpp|*.cc|*.cxx|*.h|*.hh|*.hpp)
 					:
 				;;
@@ -174,19 +189,19 @@ check_valid() {
 				esac
 			;;
 			"java")
-				if [[ "$4" != *.java ]]; then
+				if [[ "$3" != *.java ]]; then
 					echo "Error: Invalid Java Source File: This script only validates .java source files."
 					exit 1
 				fi
 			;;
 			"python")
-				if [[ "$4" != *.py ]]; then
+				if [[ "$3" != *.py ]]; then
 					echo "Error: Invalid Python Soruce File: This script only validates .py source files."
 					exit 1
 				fi
 			;;
 			"rust")
-				if [[ "$4" != *.rs ]]; then
+				if [[ "$3" != *.rs ]]; then
 					echo "Error: Invalid Rust Source File: This script only validates .rs source files."
 					exit 1
 				fi
@@ -195,16 +210,31 @@ check_valid() {
 				echo "how did you get here?"
 			;;
 		esac
+    elif [[ "$1" == "-w" || "$1" == "--compile-with-header" ]]; then
+        case "$2" in
+            "c")
+                shift; shift;
+                for file in "$@"; do
+                    if [[ "$file" != *.c && "$file" != *.h ]]; then
+                        echo "Error: Invalid C Source File: This script only validates .c and, .h source files."
+                        exit 1
+                    fi
+                done
+            ;;
+            *)
+                echo "how did you get here?"
+            ;;
+        esac
 	elif [[ "$1" == "-r" || "$1" == "--run" ]]; then
 		case "$2" in
 			"assembly")
-				if [[ "$4" == *.* ]]; then
+				if [[ "$3" == *.* ]]; then
 					echo "Error: Invalid Output File: This script only runs Assembly files without any file extensions."
 					exit 1
 				fi
 			;;		
 			"c"|"cpp_clang"|"cpp_gpp"|"rust")
-				case "$4" in
+				case "$3" in
 					*.o)
 						:
 					;;
@@ -215,13 +245,13 @@ check_valid() {
 				esac
 			;;
 			"java")
-				if [[ "$4" != *.class ]]; then
+				if [[ "$3" != *.class ]]; then
 					echo "Error: Invalid Output File: When running java, the .java extension is omiited."
 					exit 1
 				fi
 			;;
 			"python")
-				if [[ "$4" != *.py ]]; then
+				if [[ "$3" != *.py ]]; then
 					echo "Error: Invalid Output File: This script only runs .py source files."
 					exit 1
 				fi
@@ -235,245 +265,409 @@ check_valid() {
 	fi
 }
 
-# compiles the program to its respective build folders and runs the compiled program
-if [[ $1 == "-cr" || $1 == "--compile-run" ]]; then
-    check_args "$@"
-    cd "$3" || echo "Warning: Changing directory via cd failed."
-    case "$2" in
-		"assembly")
-			check_valid "$@"
-			if [[ -f "$assembly_bin/$5" ]]; then { 
-				rm "$assembly_bin/$5" 
-			} 
-			fi
-			nasm "$4" -f elf64 -o "$assembly_bin/$5.o"
-			ld "$assembly_bin/$5.o" -o "$assembly_bin/$5"
-			if [[ -f "$assembly_bin/$5" ]]; then { 
+# checks the validity of the arguments
+check_arguments "$@"
+
+# global variables
+RUN_TYPE="$1"
+shift
+RUN_LANGUAGE="$1"
+shift
+
+# compiles and runs the output file
+if [[ ${RUN_TYPE} == "-cr" || ${RUN_TYPE} == "--compile-run" ]]; then
+    DIRECTORY="$1"
+    shift
+    cd "${DIRECTORY}" || echo "Warning: Chanding directory via command 'cd' failed."
+    case "${RUN_LANGUAGE}" in
+        "assembly")
+            # no extensions
+            OUTPUT_FILE="${1%.*}"
+            shift
+            # input file
+            INPUT_FILE="$1"
+            shift
+            check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${INPUT_FILE}"
+			if [[ -f "${ASSEMBLY_BIN}/${OUTPUT_FILE}" ]]; then { 
+				rm "${ASSEMBLY_BIN}/${OUTPUT_FILE}" 
+			} fi
+			nasm "${INPUT_FILE}" -f elf64 -o "${ASSEMBLY_BIN}/${OUTPUT_FILE}.o"
+			ld "${ASSEMBLY_BIN}/${OUTPUT_FILE}.o" -o "${ASSEMBLY_BIN}/${OUTPUT_FILE}"
+			if [[ -f "${ASSEMBLY_BIN}/${OUTPUT_FILE}" ]]; then { 
 				out_assembly
-				"$assembly_bin/$5" 
+				"${ASSEMBLY_BIN}/${OUTPUT_FILE}" 
 			} 
 			else 
 				echo "Error: File Not Found: Did the source file successfully compiled?"
 			fi
-		;;
-		"bash")
-			check_valid "$@"
-			out_bash
-			bash "$4"
-		;;
+        ;;
+        "bash")
+            # input file
+            INPUT_FILE="$1"
+            check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${INPUT_FILE}"
+            shift
+            out_bash
+            bash "${INPUT_FILE}"
+        ;;
         "c")
-			check_valid "$@"
-			if [[ -f "$c_bin/$5.o" ]]; then { 
-				rm "$c_bin/$5.o" 
+            # no extensions
+            OUTPUT_FILE="${1%.*}"
+            shift
+            # input file
+            INPUT_FILE="$1"
+            shift
+            check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${INPUT_FILE}"
+			if [[ -f "${C_BIN}/${OUTPUT_FILE}.o" ]]; then { 
+				rm "${C_BIN}/${OUTPUT_FILE}.o" 
 			} 
 			fi
-			gcc "$4" -o "$c_bin/$5.o"
-			if [[ -f "$c_bin/$5.o" ]]; then { 
+			gcc "${INPUT_FILE}" -o "${C_BIN}/${OUTPUT_FILE}.o"
+			if [[ -f "${C_BIN}/${OUTPUT_FILE}.o" ]]; then { 
 				out_c
-				"$c_bin/$5.o" 
+				"${C_BIN}/${OUTPUT_FILE}.o" 
 			} 
 			else 
 				echo "Error: File Not Found: Did the source file successfully compiled?"
 			fi
-		;;
-		"cpp_gpp")
-			check_valid "$@"
-			if [[ -f "$c_bin/$5.o" ]]; then { 
-				rm "$cpp_bin/$5_gpp.o" 
+        ;;
+        "cpp_gpp")
+            # no extensions
+            OUTPUT_FILE="${1%.*}"
+            shift
+            # input file
+            INPUT_FILE="$1"
+            shift
+            check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${INPUT_FILE}"
+			if [[ -f "${CPP_BIN}/${OUTPUT_FILE}_gpp.o" ]]; then { 
+				rm "${CPP_BIN}/${OUTPUT_FILE}_gpp.o" 
 			} fi
-			g++ -std=c++23 -Wall -Wextra -Wpedantic "$4" -o "$cpp_bin/$5_gpp.o"
-			if [[ -f "$cpp_bin/$5_gpp.o" ]]; then { 
+			g++ -std=c++23 -Wall -Wextra -Wpedantic "${INPUT_FILE}" -o "${CPP_BIN}/${OUTPUT_FILE}_gpp.o"
+			if [[ -f "${CPP_BIN}/${OUTPUT_FILE}_gpp.o" ]]; then { 
 				out_cpp_gpp
-				"$cpp_bin/$5_gpp.o" 
+				"${CPP_BIN}/${OUTPUT_FILE}_gpp.o" 
 			}  
 			else 
 				echo "Error: File Not Found: Did the source file successfully compiled?"
 			fi
-		;;
-		"cpp_clang")
-			check_valid "$@"
-			if [[ -f "$c_bin/$5.o" ]]; then { 
-				rm "$cpp_bin/$5_clang.o" 
+        ;;
+        "cpp_clang")
+            # no extensions
+            OUTPUT_FILE="${1%.*}"
+            shift
+            # input file
+            INPUT_FILE="$1"
+            shift
+            check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${INPUT_FILE}"
+			if [[ -f "${CPP_BIN}/${OUTPUT_FILE}_clang.o" ]]; then { 
+				rm "${CPP_BIN}/${OUTPUT_FILE}_clang.o" 
 			} fi
-			clang++ -std=c++23 -Wall -Wextra -Wpedantic "$4" -o "$cpp_bin/$5_clang.o"
-			if [[ -f "$cpp_bin/$5_clang.o" ]]; then { 
+			clang++ -std=c++23 -Wall -Wextra -Wpedantic "${INPUT_FILE}" -o "${CPP_BIN}/${OUTPUT_FILE}_clang.o"
+			if [[ -f "${CPP_BIN}/${OUTPUT_FILE}_clang.o" ]]; then { 
 				out_cpp_clang
-				"$cpp_bin/$5_clang.o" 
+				"${CPP_BIN}/${OUTPUT_FILE}_clang.o" 
 			}  
 			else 
 				echo "Error: File Not Found: Did the source file successfully compiled?"
 			fi
-		;;
-		"java")
-			check_valid "$@"
-			if [[ -f "$java_bin/$5.class" ]]; then { 
-				rm "$java_bin/$5.class"
+        ;;
+        "java")
+            # no extensions
+            OUTPUT_FILE="${1%.*}"
+            shift
+            # input file
+            INPUT_FILE="$1"
+            shift
+            check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${INPUT_FILE}"
+			if [[ -f "${JAVA_BIN}/${OUTPUT_FILE}.class" ]]; then { 
+				rm "$JAVA_BIN/${OUTPUT_FILE}.class"
 			} fi
-			javac "$4" -d "$java_bin"
-			if [[ -f "$java_bin/$5.class" ]]; then { 
+			javac "${INPUT_FILE}" -d "${JAVA_BIN}"
+			if [[ -f "${JAVA_BIN}/${OUTPUT_FILE}.class" ]]; then { 
 				out_java
-				java -cp "$java_bin" "$5" 
+				java -cp "${JAVA_BIN}" "${OUTPUT_FILE}" 
 			}  
 			else 
 				echo "Error: File Not Found: Did the source file successfully compiled?"
 			fi
-		;;
-		"python")
-			check_valid "$@"
+        ;;
+        "python")
+            # input file
+            INPUT_FILE="$1"
+            shift
+            check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${INPUT_FILE}"
 			out_python
-			"$python_bin/python" -u "$4"
-		;;
-		"rust")
-			check_valid "$@"
-			if [[ -f "$c_bin/$5.o" ]]; then { 
-				rm "$rust_bin/$5.o" 
+			"${PYTHON_BIN}/python" -u "${INPUT_FILE}"
+        ;;
+        "rust")
+            # no extensions
+            OUTPUT_FILE="${1%.*}"
+            shift
+            # input file
+            INPUT_FILE="$1"
+            shift
+            check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${INPUT_FILE}"
+			if [[ -f "${RUST_BIN}/${OUTPUT_FILE}.o" ]]; then { 
+				rm "${RUST_BIN}/${OUTPUT_FILE}.o" 
 			} fi
-			rustc "$4" -o "$rust_bin/$5.o"
-			if [[ -f "$rust_bin/$5.o" ]]; then { 
+			rustc "${INPUT_FILE}" -o "${RUST_BIN}/${OUTPUT_FILE}.o"
+			if [[ -f "${RUST_BIN}/${OUTPUT_FILE}.o" ]]; then { 
 				out_rust
-				"$rust_bin/$5.o" 
+				"${RUST_BIN}/${OUTPUT_FILE}.o" 
 			}  
 			else 
 				echo "Error: File Not Found: Did the source file successfully compiled?"
 			fi
-		;; 
+        ;;
         *)
             echo "how did you get here?"
         ;;
     esac
-# only compiles the program to its respective build folder
-elif [[ $1 == "-c" || $1 == "--compile" ]]; then
-    check_args "$@"
-    cd "$3" || echo "Warning: Changing directory via cd failed."
-    case "$2" in
+# only compiles the file
+elif [[ ${RUN_TYPE} == "-c" || ${RUN_TYPE} == "--compile" ]]; then
+    DIRECTORY="$1"
+    shift
+    cd "${DIRECTORY}" || echo "Warning: Chanding directory via command 'cd' failed."
+    case "${RUN_LANGUAGE}" in
 		"assembly")
-			check_valid "$@"
-			nasm "$4" -f elf64 -o "$assembly_bin/$5.o"
-			ld "$assembly_bin/$5.o" -o "$assembly_bin/$5"
-			echo "Finished: Assembly Program Compiled: Build output is at '$assembly_bin/$5'."
+            # no extensions
+            OUTPUT_FILE="${1%.*}"
+            shift
+            # input file
+            INPUT_FILE="$1"
+            shift
+            check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${INPUT_FILE}"
+			nasm "${INPUT_FILE}" -f elf64 -o "${ASSEMBLY_BIN}/${OUTPUT_FILE}.o"
+			ld "${ASSEMBLY_BIN}/${OUTPUT_FILE}.o" -o "${ASSEMBLY_BIN}/${OUTPUT_FILE}"
+			echo "Finished: Assembly Program Compiled: Build output is at '${ASSEMBLY_BIN}/${OUTPUT_FILE}'."
 		;;
 		"bash")
-			check_valid "$@"
 			echo "Finished: Note: Bash scripts are automatically compiled when run."
 		;;
         "c")
-			check_valid "$@"
-			gcc "$4" -o "$c_bin/$5.o"
-			echo "Finished: C Program Compiled: Build output is at '$c_bin/$5.o.'"
+            # no extensions
+            OUTPUT_FILE="${1%.*}"
+            shift
+            # input file
+            INPUT_FILE="$1"
+            shift
+			check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${INPUT_FILE}"
+			gcc "${INPUT_FILE}" -o "${C_BIN}/${OUTPUT_FILE}.o"
+			echo "Finished: C Program Compiled: Build output is at '${C_BIN}/${OUTPUT_FILE}.o.'"
 		;;
 		"cpp_gpp")
-			check_valid "$@"
-			g++ -std=c++23 -Wall -Wextra -Wpedantic "$4" -o "$cpp_bin/$5_gpp.o"
-			echo "Finished: C++ Program Compiled: Build output is at '$cpp_bin/$5_gpp.o'."
+            # no extensions
+            OUTPUT_FILE="${1%.*}"
+            shift
+            # input file
+            INPUT_FILE="$1"
+            shift
+			check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${INPUT_FILE}"
+			g++ -std=c++23 -Wall -Wextra -Wpedantic "${INPUT_FILE}" -o "${CPP_BIN}/${OUTPUT_FILE}_gpp.o"
+			echo "Finished: C++ Program Compiled: Build output is at '${CPP_BIN}/${OUTPUT_FILE}_gpp.o'."
 		;;
 		"cpp_clang")
-			check_valid "$@"
-			clang++ -std=c++23 -Wall -Wextra -Wpedantic "$4" -o "$cpp_bin/$5_clang.o"
-			echo "Finished: C++ Program Compiled: Build output is at '$cpp_bin/$5_clang.o'."
+            # no extensions
+            OUTPUT_FILE="${1%.*}"
+            shift
+            # input file
+            INPUT_FILE="$1"
+            shift
+			check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${INPUT_FILE}"
+			clang++ -std=c++23 -Wall -Wextra -Wpedantic "${INPUT_FILE}" -o "${CPP_BIN}/${OUTPUT_FILE}_clang.o"
+			echo "Finished: C++ Program Compiled: Build output is at '${CPP_BIN}/${OUTPUT_FILE}_clang.o'."
 		;;
 		"java")
-			check_valid "$@"
-			javac "$4" -d "$java_bin"
-			echo "Finished: Java Program Compiled: Build output is at '$java_bin/$5.class'."
+            # no extensions
+            OUTPUT_FILE="${1%.*}"
+            shift
+            # input file
+            INPUT_FILE="$1"
+            shift
+			check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${INPUT_FILE}"
+			javac "${INPUT_FILE}" -d "${JAVA_BIN}"
+			echo "Finished: Java Program Compiled: Build output is at '${JAVA_BIN}/${OUTPUT_FILE}.class'."
 		;;
 		"python")
-			check_valid "$@"
 			echo "Finished: Note: Python programs are automatically compiled when run."
 		;;
 		"rust")
-			check_valid "$@"
-			rustc "$4" -o "$rust_bin/$5.o"
-			echo "Finished: Rust Program Compiled: Build output is at '$rust_bin/$5.o'."
+            # no extensions
+            OUTPUT_FILE="${1%.*}"
+            shift
+            # input file
+            INPUT_FILE="$1"
+            shift
+			check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${INPUT_FILE}"
+			rustc "${INPUT_FILE}" -o "${RUST_BIN}/${OUTPUT_FILE}.o"
+			echo "Finished: Rust Program Compiled: Build output is at '${RUST_BIN}/${OUTPUT_FILE}.o'."
 		;; 
         *)
             echo "how did you get here?"
         ;;
     esac
-# runs a program from a specified build folder
-elif [[ $1 == "-r" || $1 == "--run" ]]; then
-    check_args "$@"
-    cd "$3" || echo "Warning: Changing directory via cd failed."
-    case "$2" in
-		"assembly")
-			check_valid "$@"
-			if [[ -f "$assembly_bin/$5" ]]; then { 
-				out_assembly
-				"$assembly_bin/$5" 
-			} 
-			else 
-				echo "Error: File Not Found: Did the source file successfully compiled?"
-			fi
-		;;
-		"bash")
-			check_valid "$@"
-			out_bash
-			bash "$4"
-		;;
+# compiles the file with its headers and runs the output file
+elif [[ ${RUN_TYPE} == "-wr" || ${RUN_TYPE} == "--compile-and-run-with-header" ]]; then
+    DIRECTORY="$1"
+    shift
+    cd "${DIRECTORY}" || echo "Warning: Chanding directory via command 'cd' failed."
+    case "${RUN_LANGUAGE}" in
         "c")
-			check_valid "$@"
-			if [[ -f "$c_bin/$5.o" ]]; then { 
+            # no extensions
+            OUTPUT_FILE="${1%.*}"
+            shift
+            # input file
+            INPUT_FILE="$1"
+            shift
+            check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${INPUT_FILE}" "$@"
+			if [[ -f "${C_BIN}/${OUTPUT_FILE}.o" ]]; then { 
+				rm "${C_BIN}/${OUTPUT_FILE}.o" 
+			} 
+			fi
+			gcc "${INPUT_FILE}" "${@}" -o "${C_BIN}/${OUTPUT_FILE}.o"
+			if [[ -f "${C_BIN}/${OUTPUT_FILE}.o" ]]; then { 
 				out_c
-				"$c_bin/$5.o" 
+				"${C_BIN}/${OUTPUT_FILE}.o" 
+			} 
+			else 
+				echo "Error: File Not Found: Did the source file/s successfully compiled?"
+			fi
+        ;;
+        *)
+            echo "how did you get here?"
+        ;;
+    esac
+# only compiles the file with its headers
+elif [[ ${RUN_TYPE} == "-w" || ${RUN_TYPE} == "--compile-with-header" ]]; then
+    DIRECTORY="$1"
+    shift
+    cd "${DIRECTORY}" || echo "Warning: Chanding directory via command 'cd' failed."
+    case "${RUN_LANGUAGE}" in
+        "c")
+            # no extensions
+            OUTPUT_FILE="${1%.*}"
+            shift
+            # input file
+            INPUT_FILE="$1"
+            shift
+            check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${INPUT_FILE}" "$@"
+			if [[ -f "${C_BIN}/${OUTPUT_FILE}.o" ]]; then { 
+				rm "${C_BIN}/${OUTPUT_FILE}.o" 
+			} 
+			fi
+			gcc "${INPUT_FILE}" "${@}" -o "${C_BIN}/${OUTPUT_FILE}.o"
+			echo "Finished: C Program Compiled: Build output is at '${C_BIN}/${OUTPUT_FILE}.o.'"
+        ;;
+        *)
+            echo "how did you get here?"
+        ;;
+    esac
+# only runs the output file
+elif [[ ${RUN_TYPE} == "-r" || ${RUN_TYPE} == "--run" ]]; then
+    DIRECTORY="$1"
+    shift
+    cd "${DIRECTORY}" || echo "Warning: Chanding directory via command 'cd' failed."
+    case "${RUN_LANGUAGE}" in
+        "assembly")
+            # no extensions
+            COMPILED_FILE="${1}"
+            shift
+            check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${COMPILED_FILE}"
+			if [[ -f "${ASSEMBLY_BIN}/${COMPILED_FILE}" ]]; then { 
+				out_assembly
+				"${ASSEMBLY_BIN}/${COMPILED_FILE}" 
 			} 
 			else 
 				echo "Error: File Not Found: Did the source file successfully compiled?"
 			fi
-		;;
-		"cpp_gpp")
-			check_valid "$@"
-			if [[ -f "$cpp_bin/$5_gpp.o" ]]; then { 
+        ;;
+        "bash")
+            # input file
+            INPUT_FILE="$1"
+            shift
+            check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${INPUT_FILE}"
+            out_bash
+            bash "${INPUT_FILE}"
+        ;;
+        "c")
+            # no extensions
+            COMPILED_FILE="${1}"
+            shift
+            check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${COMPILED_FILE}"
+			if [[ -f "${C_BIN}/${COMPILED_FILE}" ]]; then { 
+				out_c
+				"${C_BIN}/${COMPILED_FILE}" 
+			} 
+			else 
+				echo "Error: File Not Found: Did the source file successfully compiled?"
+			fi
+        ;;
+        "cpp_gpp")
+            # no extensions
+            COMPILED_FILE="${1}"
+            shift
+            check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${COMPILED_FILE}"
+			if [[ -f "${CPP_BIN}/${COMPILED_FILE}" ]]; then { 
 				out_cpp_gpp
-				"$cpp_bin/$5_gpp.o" 
+				"${CPP_BIN}/${COMPILED_FILE}" 
 			}  
 			else 
 				echo "Error: File Not Found: Did the source file successfully compiled?"
 			fi
-		;;
-		"cpp_clang")
-			check_valid "$@"
-			if [[ -f "$cpp_bin/$5_clang.o" ]]; then { 
+        ;;
+        "cpp_clang")
+            # no extensions
+            COMPILED_FILE="${1}"
+            shift
+            check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${COMPILED_FILE}"
+			if [[ -f "${CPP_BIN}/${COMPILED_FILE}" ]]; then { 
 				out_cpp_clang
-				"$cpp_bin/$5_clang.o" 
+				"${CPP_BIN}/${COMPILED_FILE}" 
 			}  
 			else 
 				echo "Error: File Not Found: Did the source file successfully compiled?"
 			fi
-		;;
-		"java")
-			check_valid "$@"
-			if [[ -f "$java_bin/$5.class" ]]; then { 
+        ;;
+        "java")
+            # no extensions
+            COMPILED_FILE="${1}"
+            shift
+            check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${COMPILED_FILE}"
+			if [[ -f "${JAVA_BIN}/${COMPILED_FILE}" ]]; then { 
 				out_java
-				java -cp "$java_bin" "${4%.*}" 
+				java -cp "${JAVA_BIN}" "${COMPILED_FILE%.*}" 
 			}  
 			else 
 				echo "Error: File Not Found: Did the source file successfully compiled?"
 			fi
-		;;
-		"python")
-			check_valid "$@"
+        ;;
+        "python")
+            # input file
+            INPUT_FILE="$1"
+            shift
+            check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${INPUT_FILE}"
 			out_python
-			"$python_bin/python" -u "$4"
-		;;
-		"rust")
-			check_valid "$@"
-			if [[ -f "$rust_bin/$5.o" ]]; then { 
+			"${PYTHON_BIN}/python" -u "${INPUT_FILE}"
+        ;;
+        "rust")
+            # no extensions
+            COMPILED_FILE="${1}"
+            shift
+            check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${COMPILED_FILE}"
+			if [[ -f "${RUST_BIN}/${COMPILED_FILE}" ]]; then { 
 				out_rust
-				"$rust_bin/$5.o" 
+				"${RUST_BIN}/${COMPILED_FILE}" 
 			}  
 			else 
 				echo "Error: File Not Found: Did the source file successfully compiled?"
 			fi
-		;; 
-			*)
-				echo "how did you get here?"
-		;;
+        ;;
+        *)
+            echo "how did you get here?"
+        ;;
     esac
-# prints the help page
-elif [[ $1 == "-h" || $1 == "--help" ]]; then
-	help;
-# only prints out the output separator
-elif [[ $1 == "-s" || $1 == "--separate" ]]; then
-    case "$2" in
+# prints the separators
+elif [[ ${RUN_TYPE} == "-s" || ${RUN_TYPE} == "--separate" ]]; then
+    case "${RUN_LANGUAGE}" in
 		"simple")
 			separate
 		;;
@@ -508,10 +702,13 @@ elif [[ $1 == "-s" || $1 == "--separate" ]]; then
 			echo "tell tarcy to git gud"
 		;;
     esac
-# runs when an invalid argument is used
+# prints the help page
+elif [[ "${RUN_TYPE}" == "-h" || "${RUN_TYPE}" == "--help" ]]; then
+    help
+# runs when the input option is invalid
 else
-    echo "Error: Invalid Argument: '$1' is not a valid argument."
+    echo "Error: Invalid Argument: '$RUN' is not a valid argument."
 	echo "SYPNOSIS"
-	echo "        quick [OPTIONS] [LANGUAGE] [DIRECTORY] [FILE_WITH_EXIT] [FILE_NO_EXT]"
+	echo "        quick [OPTIONS] [LANGUAGE] [DIRECTORY] [FILE_WITHOUT_EXTENSION] [FILE_WITH_EXTENSION]"
 	echo "        quick [-h | --help]"
 fi
