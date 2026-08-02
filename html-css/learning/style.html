@@ -1,32 +1,133 @@
 <!-- open this page on a browser -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en_US">
 <head>
     <title>
         style
     </title>
+    <style>
+        body {background-color: #1e2227;}
+        pre  {color: #abb2bf;}
+    </style>
 </head>
-<body style="background-color:black;">
-    <pre style="color:wheat">
-    - style attribute
-        - used to add styles to an element
-            - such as color, font, size, etc.
-        - note that thsi is an attribute
-            - the tag comes in the form of CSS
-            - syntax:
-                &lt;(tag) style="(property):(value)"&gt;
-            - example:
-                &lt;p style="color:blue"&gt;
-                    blue
-                &lt;/p&gt;
-        - list of properties
-            properties          values          description                             example
-            background-color    color           sets the bacground color                powderblue, tomato, green, etc.
-            border              px type color   sets the border size, type and color    3px solid black, 2x solid DodgerBlue, etc.
-            color               color           sets the text color                     blue, red, green, etc.
-            font-size           px or %         sets the text size                      90px, 250%, etc.
-            font-family         font            sets the font                           verdana, courier, etc.
-            text-align          alignment       sets the text alignment                 right, center, left
+<body>
+    <pre>
+        - inline styling
+            - used to add styles to an element direcly in the same line
+                - such as the color, font, size, etc.
+            - note that this is an attribute
+                - through the style attribute
+                - the tag comes in the form of CSS
+                - syntax:
+                    &lt;<i>tag</i> style="<i>property</i>:<i>value</i>"&gt;
+                - example:
+                    &lt;p style="color:blue"&gt;
+                        imagine this is blue
+                    &lt;/p&gt;
+            - list of properties
+                properties          values          description                             example
+                background-color    color           sets the bacground color                powderblue, tomato, green, etc.
+                border              px type color   sets the border size, type and color    3px solid black, 2x solid DodgerBlue, etc.
+                color               color           sets the text color                     blue, red, green, etc.
+                font-size           px or %         sets the text size                      90px, 250%, etc.
+                font-family         font            sets the font                           verdana, courier, etc.
+                text-align          alignment       sets the text alignment                 right, center, left
+            - color values
+                - in HTML, color can be represented using these values
+                    - RGB, or RGBA
+                    - HEX, and
+                    - HS, or HSLA
+                - RGB
+                    - Red, Green and Blue
+                        - named RGB due to being represented by these color values
+                    - while in RGBA
+                        - the A represents the alpha channel
+                        - or in other terms, transparency or opacity
+                    - each parameter in the RGB color spectrum is a value with an intensity between 0 to 255 units
+                        - the first channel repreesnt the amount of red
+                        - the second channel represents the amount of green, and
+                        - the third channel represents the amount of blue
+                        - meaning, there are a possible of 256 x 256 x 256 or 16,777,216 possible colors in RGB
+                    - examples:
+                        Normal Colors
+                        rgb(255, 0, 0) or pure red
+                        rgb(0, 0, 255) or pure blue
+                        rgb(0, 255, 0) or pure green
+                        rgb(238, 130, 238) or pink
+
+                        Shades of Gray
+                        rgb(60, 60, 60)
+                        rgb(100, 100, 100)
+                        rgb(140, 140, 140)
+                        rgb(180, 180, 180)
+                        rgb(200, 200, 200)
+                        rgb(240, 240, 240)
+
+                        RGBA values
+                        rgba(063, 063, 063, 0.25)
+                        rgba(127, 127, 127, 0.5)
+                        rgba(192, 192, 192, 0.75)
+                        rgba(255, 255, 255, 1.00)
+                - HEX
+                    - Hexadecimal Coloring
+                    - similar to RGB
+                        - wherein the first two values denotes red
+                        - the second two values denotes green, and
+                        - the last two value denotes blue
+                        - having the same number of colors as RGB
+                    - examples:
+                        Normal Colors
+                        #ff0000 or pure red
+                        #0000ff or pure blue
+                        #00ff00 or pure green
+                        #ee82ee or pink
+
+                        Shades of Gray
+                        rgb(60, 60, 60)
+                        #363636
+                        #646464
+                        #8c8c8c
+                        #b4b4b4
+                        #c8c8c8
+                        #f0f0f0
+
+                        RGBA values
+                - HSL
+                    - Hue, Saturation and Lightness
+                        - denoting the color degree, color intensity and color brightness
+                    - while in RGBA, the A represents the alpha channel
+                        - or in other terms, transparency or opacity
+                    - the hue is a degree on the color wheel from 0 to 360
+                        - where red is 0
+                        - green is 120, and
+                        - blue is 240
+                    - the saturation is a percentage of a color
+                        - where 0% to 99% is a shade of gray
+                        - and 100% means the full color
+                    - the lightness is a percentage of light
+                        - where 0% is black
+                        - where 100% is white
+                        - and 50% is the color
+                    - example:
+                        Normal Colors
+                        hsl(0, 100%, 50%) or pure red
+                        hsl(240, 100%, 50%) or pure blue
+                        hsl(120, 100%, 50%) or pure green
+                        hsl(300, 76%, 72%) or pink
+
+                        Shades of Gray
+                        hsl(0, 0%, 20%)
+                        hsl(0, 0%, 30%)
+                        hsl(0, 0%, 40%)
+                        hsl(0, 0%, 60%)
+                        hsl(0, 0%, 70%)
+                        hsl(0, 0%, 90%)
+
+                        HSLA values
+                        hsl(0, 0%, 25%, 0.25)
+                        hsl(0, 0%, 50%, 0.50)
+                        hsl(0, 0%, 70%, 0.75)
+                        hsl(0, 0%, 90%, 1.00)
     </pre>
 </body>
 </html>

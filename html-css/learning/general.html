@@ -5,49 +5,73 @@
     <title>
         general
     </title>
+    <style>
+        body {background-color: #1e2227;}
+        pre  {color: #abb2bf;}
+    </style>
 </head>
-<body style="background-color: black;">
-    <pre style="color: wheat;">
+<body>
+    <pre>
+    - HTML declaration
+        - it indicates that the document is an HTML file
+            - html means that the file is HTML 5
+        - syntax:
+            &lt;!DOCTYPE html&gt;
+
     - syntax
-        - doctype declaration
-            - it indicates that the document is an HTML file
-            - syntax:
-                &lt;!DOCTYPE html&gt;
         - html element
-            - every html file must have the html tag at the lowest level
+            - every HTML file is declared by containing an html element at the lowest level
+                - typically before declaring any other elements
             - syntax:
-                &lt;html&gt;
-                    &lt;statements&gt;
-                &lt;/html&gt;
+                &lt;<i>html</i>&gt;
+                    &lt;<i>statements</i>&gt;
+                &lt;/<i>html</i>&gt;
         - elements
             - an element in html is defined by their tags
-            - some elements require a starting tag and a closing tag
-                - while some require no closing tags
+            - note some elements require a starting tag and a closing tag
+                - while some require no closing tags, being an "empty" tag
             - closing tags
                 - for elements that needs a closing tag
                     - the forward slash / is required to close the element
                 - note that if a tag requires a closing tag
                     - if it is not present, contents may not show correctly
                 - syntax:
-                    &lt;(tagname)&gt;
-                        &lt;statements&gt;
-                    &lt;/(tagname)&gt;
+                    &lt;<i>tagname</i>&gt;
+                        &lt;<i>statements</i>&gt;
+                    &lt;/<i>tagname</i>&gt;
+                - example:
+                    &lt;p&gt;
+                        idkman
+                    &lt;/p&gt;
+            - empty tags
+                - for elements that are only declared once
+                    - without any closing tags
+                - syntax:
+                    &lt;<i>tagname</i>&gt;
+                - example:
+                    &lt;br&gt;
         - attributes
-            - html elements can contain attributes
-            - they provide additional indormation about the elements
-                - they alway are specified at the start tag
+            - html elements are able to be declared with attributes
+                - providing additional indormation about the elements
+            - they always are specified at the start tag
                 - usually in the form of name="value"
             - syntax:
-                &lt;(tag) (attribute)="(value)"&gt;
+                &lt;<i>tag</i> <i>attribute</i>="<i>value</i>"&gt;
+                    &lt;<i>statements</i>&gt;
+                &lt;<i>tag</i>&gt;
         - HTML is not case-sensitive
-            - &lt;p&gt; is the same as &lt;P&gt;
-            - it is generally recommmended to follow the lowercase format
+            - &lt;br&gt; is the same as &lt;BR&gt;
+            - it is by convention to follow the lowercase format
                 - due to being recommmended by the W3C
+            - example:
+                &lt;p&gt;
+                    Hello World
+                &lt;/p&gt;
         - commemts
             - can be done inline and out of line
             - used to add extra descriptions or temporarily remove problematic lines
             - syntax:
-                &lt;!-- (text) --&gt;
+                &lt;!-- <i>text</i> --&gt;
             - example:
                 <!-- y u here? -->
     </pre>
