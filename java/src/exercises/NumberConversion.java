@@ -109,8 +109,6 @@ public class NumberConversion {
         return Boolean.toString(t);
     }
 
-    static 
-
     public static void main(String[] args) {
         try {
             Scanner in = new Scanner(System.in);
