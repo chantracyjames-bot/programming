@@ -1,32 +1,20 @@
 
 #include <iostream>
 #include <vector>
-
-class DataStructures {
-public:
-    virtual ~DataStructures() = default;
-    virtual bool isEmpty();
-    virtual void pushNew(std::string element);
-    virtual std::string popElement();
-    virtual std::string peekElement();
-    virtual int getSize();
-    virtual void traverse();
-};
-
-class Stack: public DataStructures {
+class Stack {
     private:
-        int size;
+        int size = 0;
         std::vector<std::string> store;
     public:
-        bool isEmpty() override {
+        bool isEmpty() const {
             return size == 0;
         }
-        void pushNew(std::string element) override {
+        void pushNew(std::string element) {
             store.push_back(element);
             size += 1;
         }
 
-        std::string popElement() override {
+        std::string popElement() {
             if (isEmpty()) {
                 std::cout << "Stack is empty.\n";
                 return "";
@@ -37,7 +25,7 @@ class Stack: public DataStructures {
             return temp;
         }
 
-        std::string peekElement() override {
+        std::string peekElement() {
             if (isEmpty()) {
                 std::cout << "Stack is empty.\n";
                 return "";
@@ -45,11 +33,11 @@ class Stack: public DataStructures {
             return store.back();
         }
 
-        int getSize() override {
+        int getSize() const {
             return size;
         }
 
-        void traverse() override {
+        void traverse() {
             std::vector<std::string> current = store;
             for(int i = 0; i < size; i++) {
                 std::cout << current.at(i) << " ";
