@@ -14,7 +14,7 @@
             - classes
                 - a user-defined type
                 - works as an object constructor
-                    - derves as a blueprint for creating objects
+                    - serves as a blueprint for creating objects
                     - defines what an object should look like
             - objects
                 - created based on the class
@@ -24,10 +24,10 @@
 
         - Procedural Programming vs Object-Oriented Programming
             - procedural
-                - focuses on writing fundtions that operate on data
+                - focuses on writing functions that operate on data
                 - procedural operates more on programming around functions
             - object-oriented
-                - focues on creating objects that contains both the date and functions
+                - focues on creating objects that contains both the data and functions
                 - OOP operates on declaring classes and creating classes
 
     - C++ classes
