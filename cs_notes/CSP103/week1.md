@@ -25,6 +25,7 @@ __CISC__
 - it carries out complex instructions.
 - taking multiple cycles to complete a single instruction.
 - it has the advantage of speed at the cost of complexity (difficulty).
+
 __RISC__
 - _Reduced Instruction Set Computers_
 - it carries out simple (reduced) instructions.
