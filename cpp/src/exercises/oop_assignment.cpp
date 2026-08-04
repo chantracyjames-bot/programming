@@ -33,7 +33,7 @@ class Numbers {
             return num % 3 == 0;
         }
 
-        static bool isDivisibleByFive(int num) {
+        static bool isDivisibleByFive(int num)  {
             return num % 5 == 0;
         }
     public:
@@ -60,7 +60,7 @@ class Numbers {
 };
 
 int main() {
-    int *nums = new int[10];
+    int nums[10];
 
     std::cout << "Enter 10 random numbers.\n";
     for (int i = 0; i < 10; i++) {
@@ -73,7 +73,7 @@ int main() {
     int result = Numbers::idk();
 
     std::cout << "The sum of 0 to 200 is: " << result;
-    std::cout << "Sorted 10 random numbers: ";
+    std::cout << "\nSorted 10 random numbers: ";
     for (int i = 0; i < 10; i++) {
         std::cout << nums[i] << ", ";
     }
