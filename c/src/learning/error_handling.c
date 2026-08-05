@@ -155,7 +155,7 @@
                         fgets(name, sizeof(name), stdin);
                         name[strcspn(name, '\n')] = 0;
                     } while (strlen(name) == 0);
-                - validating text input
+                - validating integer input
                     int number;
                     char input[100];
                     while (fgets(input, sizeof(input), stdin)) {
