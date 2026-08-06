@@ -7,9 +7,9 @@ Welcome to my GitHub repository, wherein, this is the place where I upload my fi
 
 The languages that I am familiar of are:  
 + Beginner Level:
-  * Assembly
+  * Assembly (NASM)
   * Bash
-  * HTML-CSS
+  * HTML
   * SQL (MySQL)
 + Intermediate Level:
   * C
