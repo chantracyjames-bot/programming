@@ -73,4 +73,75 @@
                 }
             - sidenote:
                 - the loop variable type must match the iterable type
+
+    - iterators
+        - are used to access and iterate through elements inside a data structure
+            - like vectors, sets, maps, etc.
+            - done by "pointing" to them
+        - the term comes from "iterating" which is a technical from of looping
+        - note that stacks and queues do not support iterators
+
+        - for-each vs iterators
+            - a for-each loop is generally used when only reading through a data structure
+            - an iterator is used to add, modify, or remove elements during iteration
+                - it is also able to iterate in reverse or skip elements
+
+        - declaration and initialization
+            - to create an iterator, an iterator of a data structure type is declared
+            - syntax:
+                std::<data_structure><(dataType)>::iterator <iteratorName>;
+            - example:
+                std::vector<std::string>::iterator lumbago;
+            - using the auto keyword lets the compiler determine the correct data type automatically
+                - simplifying the code and makes it more readable
+                - example:
+                    // before auto
+                    std::vector<std::string>::iterator idkman = myVector.begin();
+
+                    // after auto
+                    auto idkman = myVector.begin();
+                - note that it is also possible to use the auto type in for loops
+        - access and iteration
+            - to increment or decrement an iterator
+                - the increment ++ or decrement -- operators are used, respectively
+                - syntax:
+                    ++<iteratorName>;
+                    // or
+                    --<iteratorName>;
+                - example:
+                    ++lumbago;
+                    // or
+                    --lumbago;
+            - .begin() and .end() methods
+                - these are methods that belong to the data structure type
+                    - not to the iterator type
+                - used to point to the start or end of a data structure, respectively
+                - syntax:
+                    <iteratorName>.begin();
+                    // or
+                    <iteratorName>.end()
+                - example:
+                    lumbago.begin(); // points to the start of the data structure
+                    // or
+                    lumbago.end();   // points to the end of the data structure
+                - sidenote:
+                    - these methods return a pointer to the memory location of each respective end
+                        - .begin() points to the first element, and
+                        - .end() points to the end of the data structure
+                    - the .end() method points to the next position after the last element of a data structure
+                        - meaning, it does not actually point to an element unlesss it is decremented by 1
+                - it is possible to use the addition + and subtraction - operators on these methods
+                    - syntax:
+                        <iteratorName>.begin() + 1;
+                        // or
+                        <iteratorName>.end() - 1;
+                    - example:
+                        lumbago.begin() + 1; // points to the second element
+                        // or
+                        lumbagi.end() - 1;   // points to the last element
+            - .rbegin() and .rend()
+                - similar to the .begin() and .end methods
+                    - only that it iterates the data structure in reverse order
+                - example:
+                    for (auto idkman = myVector.rbegin(); lumbago != myVector.rend(); ++lumbago) {...}
 */
