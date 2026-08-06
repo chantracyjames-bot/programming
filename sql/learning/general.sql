@@ -1,0 +1,34 @@
+/* general
+    - syntaxes
+        - case-sensitive
+            - select and SELECT are the same statement
+        - semicolons
+            - some database systems require a semicolon at the end of each SQL statement
+            - it is the standard way to separate each SQL statement in database systems
+                - allowing for more than one SQL statement to be executed 
+                - all while in the same call to the server
+    
+    - important SQL commands
+        - SELECT
+            - extracts data from a database
+        - UPDATE
+            - updates data in a database
+        - DELETE
+            - deletes data from a database
+        - INSERT INTO
+            - inserts new data into a database
+        - CREATE DATABASE
+            - creates a new database
+        - ALTER DATABASE
+            - alters or mofidies a database
+        - CREATE TABLE
+            - creates a new table
+        - ALTER TABLE
+            - alters of modifies a table
+        - DROP TABLE
+            - delets a table
+        - CREATE INDEX
+            - creates an index or a seach key
+        - DROP INDEX
+            - deletes an index
+*/
