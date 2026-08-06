@@ -7,6 +7,30 @@
             - it is the standard way to separate each SQL statement in database systems
                 - allowing for more than one SQL statement to be executed 
                 - all while in the same call to the server
+        - text vs numbers
+            - like in most programming languages
+                - text or strings are enclosed in single quotes ''
+                - some databases allow double quotes " "
+                - example:
+                    'idkman'
+            - while dealing with numbers
+                - it does not require any quotations
+                - example:
+                    23
+        - comments
+            - single-line comments
+                - can be a double dash --
+                    -- this is a comment
+                - or can be a double frontslash //
+                    - similar to C-style languages
+                    // this is a comment
+            - multi-line comments
+                - through the C-style multi-line comment
+                /*
+                    don't mind the space
+                    removing that will break the
+                    structure of the multi-line stuff
+                * /
     
     - important SQL commands
         - SELECT
@@ -32,3 +56,9 @@
         - DROP INDEX
             - deletes an index
 */
+
+CREATE DATABASE IF NOT EXISTS programming;
+
+USE programming;
+
+SHOW DATABASES;
