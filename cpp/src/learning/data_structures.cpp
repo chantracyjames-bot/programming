@@ -294,7 +294,7 @@
                         #include <vector>
 
                 - declaration and initialization
-                    - to create a vector, the vector keyword followd by the data type is done to create one
+                    - to create a vector, the vector keyword followd by the data type is done
                     - syntax:
                         std::vector<(dataType)> <vectorName>;
                     - exmaple:
@@ -390,7 +390,7 @@
                         #include <list>
                  
                 - declaration and initialization
-                    - to create a list, the list keyword is followed by the data type is done to create one
+                    - to create a list, the list keyword is followed by the data type is done
                     - syntax:
                         std::list<(dataType)> <listName>;
                     - example:
@@ -483,7 +483,7 @@
                         #include <stack>
                         
                 - decalration and initialization
-                    - to create a stack, the stack keyword is followed by the data type is done to create one
+                    - to create a stack, the stack keyword is followed by the data type is done
                     - syntax:
                         stack<(dataType)> <stackName>;
                     - example:
@@ -560,7 +560,7 @@
                         #include <queue>
 
                 - declaration and initialization
-                    - to create a queue, the queue keyword is followed by the data type is done to create one
+                    - to create a queue, the queue keyword is followed by the data type is done
                     - syntax:
                         queue<(dataType)> <queueName>;
                     - example:
@@ -641,7 +641,7 @@
                         #include <deque>
 
                 - declaration and initialization
-                    - to create a deque, the deque keyword is followed by the data type is done to create one
+                    - to create a deque, the deque keyword is followed by the data type is done
                     - syntax:
                         std::deque<(dataType)> <dequeName>;
                     - example:
@@ -649,13 +649,15 @@
                     - it is possible to assign values to the deque during declaration
                         - syntax:
                             std::deque<(dataType)> <dequeName> = {<values>};
+                        - example:
+                            std::deque<int> yes = {1, 2, 3, 4};
                     - note that after a deque have been assigned to a data type
-                        - it cannot be changed and can only hole that specific data type
+                        - it cannot be changed and can only hold that specific data type
 
                     - it is possible for queues to hold more than one data type
                         - it is achieved through the use of the <variant> header
                             - using the std::variant type
-                            - note that the data types that the queue is able to hold must be specified
+                            - note that the data types that the deque is able to hold must be specified
                         - syntax:
                             std::deque<std::variant<(dataTypes)>> <queueName>;
                         - example:
@@ -722,4 +724,192 @@
                                 <dequeName>.empty();
                             - example:
                                 yes.empty();
+            - Set
+                - definition
+                    - a data structure that contains only unique elements, where:
+                        - each element is sorted alphanumerically in ascending order
+                        - each element is unique, making any duplicates additions ignored
+                        - can be added and removed, but no element is modifyable after insertion
+                        - cannot be accessed via an index due to being sorted, not indexed
+
+                    - initialized through the <set> library
+                    - syntax:
+                        #include <set>
+
+                - declaration and initialization
+                    - to create a set, the set keyword is followed by the data type is done
+                    - syntax:
+                        std::set<(dataType)> <setName>;
+                    - example:
+                        set::set<set::string> hello;
+                    - it is possible to declare values to the set during declaration
+                        - syntax:
+                            std::set<(dataType)> <setName> = {<values>};
+                        - example:
+                            std::set<int> hello =  {1, 2, 3, 4};
+                    - note that after a set has been assigned to a data type
+                        - it cannot be changed and can only hold that specific data type
+
+                    - it is possible for sets to hold more than one data type
+                        - it is achieved through the use of the <variant> header
+                            - using the std::variant type
+                            - note that the data types that a set can hold must be specified
+                        - syntax:
+                            std::set<std::variant<(dataTypes)>> <setName>;
+                        - example:
+                            std::set<std::variant<std::string, int>> mySet;
+
+                - access and modification
+                    - note that a set cannot be accessed through any normal means
+                        - like through index based access in vectors and arrays
+                        - it can only accessed as an iterator in loops
+                        - syntax:
+                            for (<dataType> <loopVariable> : <setName>) {...}
+                        - example:
+                            for (std::string son : hello) {
+                                std::cout << son;
+                            }
+                    - sets are automatically sorted in an ascending order and they only store unique elements
+                        - trying to store duplicates will only store one of them
+                        - example:
+                            std::set<std::string> hello = {"yes", "no", "yes"}; // only a single "yes" entry is stored
+                    - it is possible to add elements to a set using the .insert() method
+                        - syntax:
+                            <setName>.insert(<value>);
+                        - example:
+                            hello.insert("world");
+                    - it is possible to remove elements from a set using the .erase() method
+                        - syntax:
+                            <setName>.erase(value);
+                        - example:
+                            hello.erase("world");
+                        - to remove all elements in a set, the .clear() method is used
+                            - syntax:
+                                <setName>.clear();
+                            - example:
+                                hello.clear();
+                    - the size of a set is able to be queried using the .size() method
+                        - syntax:
+                            <setName>.size();
+                        - example:
+                            hello.size();
+                        - sets can also be queried if they are empty or not
+                            - through the .empty() method
+                                - returns 1 if it is empty
+                                - returns 0 if it is not
+                            - syntax:
+                                <setName>.empty();
+                            - example:
+                                hello.empty();
+                
+            - Maps
+                - definition
+                    - a data structur that contains a key-value pair, where
+                        - it is accessible through keys, not index
+                        - similar to sets, each key must be unique
+                        - unlike its key counterpart, the values can be a duplicate
+                        - each entry is sorted alphanumerically in ascending order by their keys
+
+                    - initialized through the <map> library
+                    - syntax:
+                        #include <map>
+
+                - declaration and initialization
+                    - to create a map, the map keyword is used followed by the type of both the key and the value
+                    - syntax:
+                        std::map<(keyDataType), <valueDataType>> <mapName>;
+                    - example:
+                        std::map<std::string, std::string> probs;
+                    - it is possible to declare values to the map during declaration
+                        - syntax:
+                            std::map<(keyDataType), (valueDataType)> <mapName> = {{<key>, <value>}, ...};
+                        - example:
+                            std::map<std::string, std::string> probs = {{"hello", "world"}, {"yes", "no"}};
+                    - note that after a map's keys and values have been declared to a data type
+                        - it cannot be changed and can only hold that specific data type
+                    
+                    - it it possible for maps to hold more than one data type for each of its keys and values
+                        - it is achieved through the use of the <variant> header
+                            - using the std::variant type
+                            - note that he data types that a map's keys and values must hold must be specified
+                        - syntax;
+                            std::map<std::variant<(dataTypes), std::variant(dataTypes)>> <mapName>;
+                        - example:
+                            std::map<std::variant<std::string, int>, std::variant<std::string, int>> myMap;
+                    
+                - access and modification
+                    - unlike normal arrays or vectors, maps are accesed using their key instead of an index
+                        - syntax:
+                            <mapName>[<key>];
+                        - example:
+                            probs["hello"];
+                        - maps can also using the .at() method to access key-value elements
+                            - instead of an index, a key is used
+                            - syntax:
+                                <mapName>.at(<key>);
+                            - example:
+                                probs.at("yes");
+                            - it is recommended to us the .at() method to access elements rather than the square brackets
+                                - it lets programmers know if an error occurs
+                    - using the same concept, it is possiblt to modify the value of a specific map element
+                        - through the assignment = operator
+                        - syntax:
+                            <mapName>.at(<key>) = <newValue>;
+                        - example:
+                            probs.at("yes") = "maybe";
+                    - it is possible to add elements to a map using the .insert() method
+                        - syntax:
+                            <mapName>.insert({<key>, <value>});
+                        - example:
+                            probs.insert({"maybe", "probs"});
+                        - it is also possible to add elements using square brackts [ ]
+                            - assigning a value to a non-existent key will add a new entry with that same key and value
+                            - syntax:
+                                <mapName>[<key>] = <value>;
+                            - example:
+                                probs["idkman"] = "lumbago";
+                        - note that when adding a new map element with a pre-existing key
+                            - only the first value of the same key remains
+                            - while the new value is ignored
+                    - it is possible to remove elements from a map using the .erase() method
+                        - syntax:
+                            <mapName>.erase(<key>);
+                        - example:
+                            probs.erase("maybe");
+                        - to remove all elements in a map, the .clear() method is used
+                            - syntax:
+                                <mapName>.clear();
+                            - example:
+                                probs.clear();
+                    - the size of a map is able to be queried using the .size() method
+                        - syntax:
+                            <mapName>.size();
+                        - example:
+                            probs.size();
+                        - maps can also be queried if they are empty or not
+                            - through the .empty() method
+                                - returns 1 if it is empty
+                                - returns 0 if it is not
+                            - syntax:
+                                <mapName>.empty();
+                            - example:
+                                probs.empty();
+                        - keys can be queried if they exists or not
+                            - through the .count() method
+                                - returns 1 if it exists
+                                - returns 0 if it does not
+                            - syntax:
+                                <mapName>.count(<key>);
+                            - example:
+                                probs.count("yes");
+                - looping through a map
+                    - it is recommended to use the auto keyword inside a for each loop when looping through a map
+                        - this allows the compiler to automatically determine the type for each key-value pair
+                    - since maps have two elements, a key and its value
+                        - the .first attribute is used to access the key, and
+                        - the .second attribute is used to access the value
+                    - sample code:
+                        for (auto idkman : probs) {
+                            std::cout << idkman.first << idkman.second;
+                        }
 */
