@@ -2,7 +2,7 @@
 *.rs linguist-language=Rust
 cs_notes/**/*.md linguist-detectable=true
 cs_notes/**/*.md linguist-documentation=false
-cs_notes/**/*.sql linguist-detectable=true
+*.sql linguist-detectable=true # gosh i'm an idiot
 
 # Set the default behavior for all files.
 * text=auto eol=lf
