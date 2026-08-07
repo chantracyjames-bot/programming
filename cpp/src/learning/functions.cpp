@@ -1,13 +1,3 @@
-
-
-
-
-
-
-
-
-
-
 /*
     - built-in functions amd methods
         - string functions
@@ -108,13 +98,6 @@
                         - example: idk man becomes idk
 
     - manipulators
-        - std::endl
-            - adds a new line
-            - commonly used at the end of a cout call
-            - syntax:
-                std::cout << <value> << std::endl;
-            - example:
-                std::cout << "Hello World" << std::endl; // Hello World\n
         - std::boolalpha
             - tells the cout object to convert boolean values from integers to boolean
             - 1 becomes true and 0 becomes false
@@ -124,6 +107,13 @@
                 std::cout << true;              //1
                 std::cout << std:;boolalpha << true; // true
             - after declaration, boolalpha become active until deactivated
+        - std::endl
+            - adds a new line
+            - commonly used at the end of a cout call
+            - syntax:
+                std::cout << <value> << std::endl;
+            - example:
+                std::cout << "Hello World" << std::endl; // Hello World\n
         - std::noboolalpha
             - tells the cout object to return to normal behavior
                 - disables boolalpha
