@@ -10,7 +10,7 @@ The languages that I am familiar of are:
   * Assembly (NASM)
   * Bash
   * HTML
-  * SQL (MySQL)
+  * SQL (MySQL/MariaDB)
 + Intermediate Level:
   * C
   * C++
@@ -20,3 +20,5 @@ The languages that I am familiar of are:
 + Planning to learn:
   * CSS
   * JavaScript
+
+Happy 1st Month of being in GitHub!!!
