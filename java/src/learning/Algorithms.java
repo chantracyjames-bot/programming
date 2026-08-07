@@ -5,22 +5,22 @@
                 - these types of algorithms are used to find certain elements inside a collection
                 - a well-known searching algorithm is called "Binary Search"
             - Sorting Algoriths
-                - these types of alrighthms are uses to sort collections
-                    - depening on what order the resulting collection becomes
+                - these types of algorithms are uses to sort collections
+                    - depending on what order the resulting collection becomes
                 - a common order type is natural order
-            - Iteraion
+            - Iteration
                 - iteration is also another type of algorithm
                     - used to loop through elements
                 - refer to Iteratives.java for more info
 
     - Java Algorithms
-        - Seaching
+        - Searching
             - Java has various built-in helper methods for searching through collections
             - Binary Search
                 - a commonly used searching algorithm
                 - can be used through the .binarySearch() method inside the Collections class
                     - returns the index of the element if found
-                - note that the collectrion must be sorted first
+                - note that the collection must be sorted first
                 - syntax:
                     Collections.binarySearch(<collection.Object>, <element>) 
             - Maximum and Minimum Search
