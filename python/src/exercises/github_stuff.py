@@ -46,9 +46,9 @@ def get_percentage():
     total_percent: float = 0
     bytes_count: float = 0
     # prints the header of the table
-    print("---------------------------------------------")
-    print(f"| {'Language':^9s} : {'Percent':^7s} : {'Lines':^7s} : {'Chars':^10s}|")
-    print("---------------------------------------------")
+    print("----------------------------------------------")
+    print(f"| {'Language':^10s} : {'Percent':^7s} : {'Lines':^7s} : {'Chars':^10s}|")
+    print("----------------------------------------------")
 
     # loops the languages dictionanry
     for lang, cur_count in languages.items():
@@ -58,13 +58,13 @@ def get_percentage():
         total_percent += bytes_count  # should total to 100.00
         # prints the calculated count
         print(
-            f"| {lang:^9s} : {bytes_count:^6.02f}% : {per_lang[lang]['lines']:^7,d} : {per_lang[lang]['chars']:^10,d}|"
+            f"| {lang:^10s} : {bytes_count:^6.02f}% : {per_lang[lang]['lines']:^7,d} : {per_lang[lang]['chars']:^10,d}|"
         )
 
     # prints the bottom portion of the table
-    print("---------------------------------------------")
+    print("----------------------------------------------")
     print(
-        f"| {'Total':^9s} : {total_percent:.02f}% : {total_stuff['lines']:7,d} : {total_stuff['chars']:^10,d}|"
+        f"| {'Total':^10s} : {total_percent:.02f}% : {total_stuff['lines']:7,d} : {total_stuff['chars']:^10,d}|"
     )
     git.close()
 
