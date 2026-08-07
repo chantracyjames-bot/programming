@@ -49,6 +49,7 @@
             - creates a new table
         - ALTER TABLE
             - alters of modifies a table
+            - operations are: adding, dropping, renaming, modifying columns, adding constraints, and renaming the table
         - DROP TABLE
             - delets a table
         - CREATE INDEX
@@ -57,8 +58,11 @@
             - deletes an index
 */
 
-CREATE DATABASE IF NOT EXISTS programming;
+CREATE DATABASE IF NOT EXISTS learning;
 
-USE programming;
+USE learning;
 
 SHOW DATABASES;
+SHOW TABLES
+
+SELECT * FROM programming
