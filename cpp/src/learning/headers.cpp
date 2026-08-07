@@ -31,12 +31,12 @@
                 #include <fstream>
         - ctime
             - includes basic time and date libraries
-            - allows querying of current time
+            - enables querying of current time
             - syntax:
                 #include <ctime>
         - cstdlib
             - includes random number generation
-            - allowa the use of random functions
+            - enables the use of random functions
             - syntax:
                 #include <cstdlib>
             - to generate random numbers
@@ -54,4 +54,54 @@
                             // inside a function
                             srand(time(0));
                             int myNum = rand() % 101;
+        - set
+            - includes the set library
+            - enables the use of set data structures
+            - syntax:
+                #include <set>
+        - algorithm
+            - includes the algorithm library
+            - enables the use of algorithm functions
+            - syntax:
+                #include <algorithm>
+        - list
+            - includes the list library
+            - enables the use of list data structures
+            - syntax:
+                #include <list>
+        - vector
+            - includes the vector library
+            - enables the use of vector data structures
+            - syntax:
+                #include <vector>
+        - stack
+            - includes the stack library
+            - enables the use of stack data structures
+            - syntax:
+                #include <stack>
+        - queue
+            - includes the queue library
+            - enables the use of queue data structures
+            - syntax:
+                #include <queue>
+        - deque
+            - includes the deque library
+            - enables the use of deque data structures
+            - syntax:
+                #include <deque>
+        - set
+            - includes the set library
+            - enables the use of set data structures
+            - syntax:
+                #include <set>
+        - map
+            - includes the map library
+            - enables the use of map data structures
+            - syntax:
+                #include <map>
+        - array
+            - includes the array library
+            - enables the use of array data structures
+            - syntax:
+                #include <array>
 */
