@@ -299,6 +299,11 @@
                         std::vector<(dataType)> <vectorName>;
                     - exmaple:
                         std::vector<std::string> idkman;
+                    - it is possible to assign a size to a vector
+                        - syntax:
+                            std::vector<(dataType)> <vectorName>(<size>);
+                        - example:
+                            std::vector<std::string> idkman(10); // initializes a vector with a size of 10 std::string
                     - it is possible to directly assign values to a vector during declaration
                         - using a comma separated list inside curly braces { }
                         - syntax:
@@ -306,7 +311,7 @@
                         - example:
                             std::vector<std::string> idkman = {"yes", "no", "maybe"};
                     - note that when a vector array has been assigned a data type
-                        - it cannot be changed and can only hold that specifiv data type
+                        - it cannot be changed and can only hold that specific data type
 
                     - it is possible for vectors to hold more than one data type
                         - it is achieved through the use of the <variable> header
@@ -395,6 +400,11 @@
                         std::list<(dataType)> <listName>;
                     - example:
                         std::list<std::list> lumbago;
+                    - it is possible to assign a size to a list
+                        - syntax:
+                            std::list<(dataType)> <listName>(<size>);
+                        - example:
+                            std::list<std::string> lumbago(10); // initializes a list with a size of 10 std::string
                     - it is possible to directly assign values to a list during declaration
                         - syntax:
                             std::list<(dataType)> <listName> = {<values>};
@@ -485,13 +495,13 @@
                 - decalration and initialization
                     - to create a stack, the stack keyword is followed by the data type is done
                     - syntax:
-                        stack<(dataType)> <stackName>;
+                        std::stack<(dataType)> <stackName>;
                     - example:
-                        stack<std::string> maybe;
+                        std::stack<std::string> maybe;
                     - sidenote:
                         - unlike vectors or lists, it is not possible to assign values to the stack during declaration
                             - example:
-                                stack<int> myNums = {1, 2, 3, 4}; -> Error
+                                std::stack<int> myNums = {1, 2, 3, 4}; -> Error
                         - after a stack has been assigned a data type
                             - it cannot be changed and can only hold that specific data type
                         
@@ -562,13 +572,13 @@
                 - declaration and initialization
                     - to create a queue, the queue keyword is followed by the data type is done
                     - syntax:
-                        queue<(dataType)> <queueName>;
+                        std::queue<(dataType)> <queueName>;
                     - example:
-                        queue<std::string> no;
+                        std::queue<std::string> no;
                     - sidenote:
                         - unlike vectors or lists, it is not possible to assign values to the queue during declaration
                             - example:
-                                queue<int> myNums = {1, 2, 3, 4}; -> Error
+                                std::queue<int> myNums = {1, 2, 3, 4}; -> Error
                         - after a queue has been assigned a data type
                             - it cannot be changed and can only hold that specific data type
 
@@ -646,6 +656,11 @@
                         std::deque<(dataType)> <dequeName>;
                     - example:
                         std::deque<std::string> yes;
+                    - it is possible to assign a size to a deque
+                        - syntax:
+                            std::deque<(dataType)> <dequeName>(<size>);
+                        - example:
+                            std::deque<std::string> yes(10); // initializes a deque with a size of 10 std::string
                     - it is possible to assign values to the deque during declaration
                         - syntax:
                             std::deque<(dataType)> <dequeName> = {<values>};
