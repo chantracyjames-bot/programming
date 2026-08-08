@@ -2,19 +2,17 @@
 ## Target
 - Learning Outcomes
   * Define computer
-  * Define the scope of computer organization and explain its role in the functionality of computer
-systems.
+  * Define the scope of computer organization and explain its role in the functionality of computer systems.
   * Define the scope of computer architecture and describe its impact on system design and performance. 
   * Identify common goals shared by computer organization and computer architecture and explain their interdependence.
-  * Contrast computer organization and computer architecture by highlighting their differences in terms of system functionality, design, and
-performance. 
+  * Contrast computer organization and computer architecture by highlighting their differences in terms of system functionality, design, and performance. 
 - Topics
   1. Introduction to Computer Organization and Computer Architecture
     * 1.1. What is Computer, its features, advantages, disadvantages?
     * 1.2. Scope of Computer Organization
     * 1.3. Scope of Computer Architecture
-    * 1.4.Common Goals and Interdependence
-    * 1.5.Contrast Between Computer Organization 
+    * 1.4. Common Goals and Interdependence
+    * 1.5. Contrast Between Computer Organization 
 
 ## What is a Computer?
 - Definition
@@ -118,9 +116,9 @@ performance.
   * __Job displacement__: 
     + Automation and the use of computers __can lead to job displacement in certain industries__, requiring workers to adapt to new skill sets or find new employment.
 
-## Introduction to Compuer Organization and Computer Architecture
+## Introduction to Computer Organization and Computer Architecture
 - Computer Organization
-  * Definition
+  * Scope and Definition
     + Refers to the __physical aspects__ of a _computer system_ — the __organizational units and their interconnections__.
     + It concerns the __computer system's realization and the hardware components' operational behavior__, ensuring __they work together seemlessly__ to perform computational tasks.
   - Key Areas:
@@ -178,7 +176,7 @@ performance.
 <!--help me, i spent like 20 minutes on this-->
 
 - Computer Architecture
-  * Definition
+  * Scope and Definition
     + Focuses on the __logical and functional design__ of a computer system.
     + It deals with the __conceptual design and the fundamental operational structure__, which defines _how a computer perform tasks and interacts with software_.
     + The architecture primarily __concerns the programmer's view of the system__ rather than the physical implementation.
@@ -284,18 +282,61 @@ Higher Performance                                          Higher Latency
 - Key Differences
   * Focus:
     + Architecture: 
-      - Concentrates on what the processor can do (instructions, data types, addressing).
+      - Concentrates on __what the processor can do__ (instructions, data types, addressing).
     + Organization: 
-      - Focuses on how the processor does it (pipeline, cache, memory design).
+      - Focuses on __how the processor does it__ (pipeline, cache, memory design).
   * Level of Abstraction:
     + Architecture: 
-      - More abstract, providing a general specification that multiple processors can implement.
+      - __More abstract__, providing a __general specification that multiple processors can implement__.
     + Organization: 
-      - Concrete, dealing with the actual hardware design and implementation of a specific processor.
+      - __Concrete__, __dealing with the actual hardware design and implementation__ of a specific processor.
   * Flexibility:
     + Architecture: 
-      - Can be applied to different processors across different generations (e.g., Pentium, Core, Xeon).
+      - Can be __applied to different processors__ across different generations (e.g., Pentium, Core, Xeon).
     + Organization: 
-      - Specific to a particular processor or family of processors (e.g., Intel Core i7, i9). 
+      - __Specific to a particular processor__ or family of processors (e.g., Intel Core i7, i9). 
 - Conclusion
   * Understanding the distinction between Computer Organization and Architecture is critical for anyone designing, constructing, or programming computer systems. Both fields are interdependent, with the effectiveness of one relying on the soundness of the other. Mastery of these concepts equips students with the knowledge to design, analyze, and optimize modern computer systems, ensuring they meet desired performance, cost, and power consumption goals.
+
+## Computer Organization vs Computer Architecture
+- Computer Organization
+  * Definition
+    + Delves into the __physical components and their interconnections__ that make up a computer system.
+    + It is about understanding how the __hardware is put together and how it functions__.
+  * Scope
+    + Its primary scope encompasses __the structural elements of a computer__, inclusing the _CPU_, _Memory_, _I/O devices_, and the data pathways — _buses_ that connects them.
+  * Concerns
+    + The primary concerns revolve around the __effective utilization of hardware resources__. 
+    + This includes __optimizing memory access, data storage, and the efficient connection of peripheral devices__ to the computer.
+  * Design Focus
+    + At its core, computer organization is all about __ensuring that these hardware components work harmoniously__.
+    + It places significant emphasis on __resource management and the efficient transfer of data__ between various components.
+  * Level
+    + Operating at a practical, hands-on level, computer organization __deals with the physical hardware-components, circuits, and the way they are physically interconnected__ within a computer system.
+    + It is about understanding the nuts and bolts of computer technology.
+- Computer Architecture
+  * Definition
+    + Focuses on the __high-level design and the conceptual framework structure__ of a computer system.
+    + It defines the __logical organization and framework__ of how the computer functions.
+  * Scope
+    + The __scope extends to the broader scope of the computer__, including the design of the __ISA, memory hierarchy, and how data is processed__.
+  * Concerns
+    + Its primary concern is __providing a logical framework__ for the computer's operation.
+    + This includes aspects like __how instructions are executed, how data is moved within the system, and how control flows through the computer__.
+  * Design Focus
+    + Rather than being fixated on the physical hardware, computer architecture concentrates on __creating a user-friendly, efficient, and abstracted model__ of the computer system.
+    + It aims to make the computer operation __understandable and manageable__ for both users and programmers.
+  * Level
+    + Operating at a more abstract level, computer architecture __deals with the logical structure__ of the computer system.
+    + It emcompasses how __software interacts with the hardware__, and it aims to provide a high-level perspective on the computer's operation.
+- Comparison:
+  * Both computer organization and computer architecture are __essential components__ of the field of computer science and engineering. They are __intrinsically related__, as __decisions made at the architectural level can significantly influence the organization, and vice versa__.
+  * Their common goal is to __ensure that a computer system functions effectively, efficiently, and reliably__.
+  * The interdependence of these two fields lies in the fact that __decisions made at the architectural level can impact how the organization is configured__. They work in tandem to improve the overall performance and functionality of a computer system.
+- Contrast:
+  * While _computer organization_ __deals with the practical, physical aspects of a computer system__, _computer architecture_ __focuses on the logical and conceptual aspects__.
+  * Computer organization's concerns __revolve around resource management and physical connectivity__, while computer architecture __deals with the high-level design and operation__ of the computer system.
+  * Computer organization __answers the "how" questions regarding how hardware components are connected and work together__. In contrast computer architecture addresses the __"what" questions about what the components do and how they are controlled__.
+  * Computer organization operates at a more concrete and hands-on level, __focusing on the physical aspects__. On the other hand, computer architecture operates at a more abstract level, __concentrating on the logical and high-level design__ of the computer system.
+- Conclusion
+  * Computer organization and computer architecture are __closely related but distinct areas__ within the realm of computer science. Computer organization deals with the __physical and practical aspects of hardware design__, while computer architecture __deals with the logical and conceptual framework__ of a computer system. Together, they ensure that computers are not only __efficient and reliable but also capable of executing a wide range of tasks__, making them indispensable in the world of technology.
