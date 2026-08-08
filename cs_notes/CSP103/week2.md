@@ -117,3 +117,185 @@ performance.
     + The production and disposal of computers __can have a negative impact on the environment__ due to the use of resources and the creation of electronic waste.
   * __Job displacement__: 
     + Automation and the use of computers __can lead to job displacement in certain industries__, requiring workers to adapt to new skill sets or find new employment.
+
+## Introduction to Compuer Organization and Computer Architecture
+- Computer Organization
+  * Definition
+    + Refers to the __physical aspects__ of a _computer system_ — the __organizational units and their interconnections__.
+    + It concerns the __computer system's realization and the hardware components' operational behavior__, ensuring __they work together seemlessly__ to perform computational tasks.
+  - Key Areas:
+    1. __Hardware Components__:
+      - __Central Processing Unit__ (_CPU_)
+        * Often termed the computer's "brain", the CPU __executes instructions and processes data__.
+         It comprises the __Arithmetic Logic Unit__ (_ALU_), __Control Unit__ (_CU_), and registers.
+      - __Memory__
+        + This includes __Primary Memory__ (_RAM_) for __temporary data storage__ and __Secondary Memory__ (_HDDs_, _SSDs_) for __long-term data storage__.
+      - __Input / Output Devices__
+        + Peripherals like _keyboards_, _mice_, and _printers_ allow users to __interact__ with the computer and __receive outputs__.
+    > Consider a scenario where a user runs a program. The CPU fetches the program's instructions from memory, decodes them, and executes them using its ALU while using the CU to manage data flow to and from memory and I/O devices. 
+    2. __Data Paths__:
+      - __Buses__
+        * These comunication systems __transfer data__ between __inside or outside__ a computer.
+        * Types include the:
+          + __data bus__ — transfers actual data
+          + __address bus__ — carries memory addresses; and
+          + __control bus__ — carries control signals
+      - __Interconnects__
+        * These __link different components__, such as the _CPU_, _Memory_, and _I/O devices_, allowing them to __communicate__.
+    > During a memory read operation, the data is transferred from memory to the CPU through the data bus, while the address bus specifies the memory location to be read. 
+    3. __Control Signals__
+      - These are _electrical signals_ that __coordinate the activities of different computer components__.
+      - The _CU_ within the _CPU_ __generates control signals to synchronize the execution of instructions and manage the data flow__.
+    > When executing an instruction, the control unit sends a signal to the ALU to perform a specific operation (like addition) and another to the memory to read the required data.
+    4. __Memory Management__
+      - Involves __strategies for efficient allocation, management, and data retrieval in memory__.
+      - Techniques include:
+        * __Paging__ — diviing memory into fixed-size pages; and
+        * __Segmentation__ — dividing the memory into segments based on program structure.
+    > When running multiple programs simultaneously, the operating system manages memory allocation so that each program gets the required memory space, using techniques like paging to ensure efficient use of RAM.
+  * Basic Architecture of a Computer
+```
+                       Basic Architecture of a Computer
+
+                         |-------------------------|
+                         |           CPU           |
+                         |     |-------------|     |
+    Input Devices        |     | |---------| |     |       Output Devices
+    |------------|       |     | | Control | |     |       |------------|
+    |  Keyboard  |-|     |     | |  Unit   | |     |     |-|  Monitor   |
+    |------------| v     |     | |---------| |     |     v |------------|
+    |    Mouse   |-|     |     | |   ALU   | |     |     |-|  Printer   |
+    |------------| v     |     | |---------| |     |     v |------------|
+    |   Scanner  |-|     |     |-------------|     |     |-|  Speaker   |
+    |------------| v     |            ^            |     v |------------|
+    |  Joystick  |-|-->--|-->-        |        -<--|--<--|-| Headphones |
+    |------------|       |   |        v        |   |       |------------|
+                         |   v   |---------|   v   |
+                         |   |-->|  Memory |<--|   |
+                         |       |---------|       |
+                         |-------------------------|
+``` 
+<!--help me, i spent like 20 minutes on this-->
+
+- Computer Architecture
+  * Definition
+    + Focuses on the __logical and functional design__ of a computer system.
+    + It deals with the __conceptual design and the fundamental operational structure__, which defines _how a computer perform tasks and interacts with software_.
+    + The architecture primarily __concerns the programmer's view of the system__ rather than the physical implementation.
+  * Key Areas:
+    1. __Instruction Sets__
+      - The __Instruction Set Architecture__ (_ISA_) defines the set operations that a _CPU_ can perform.
+      - It serves as the __interface between software and hardware__, specifying the instructions that can be executed, such as __arithmetic operations, data movement, and control flow__.
+    >  The x86 ISA used in most personal computers defines instructions for operations like addition, subtraction, and data movement, which software developers use to write programs. 
+    2. __Data Types__
+      - Different _CPUs_ support various data types, including __integers__, __floating point numbers__, __characters__, and more complex types like __vectors__.
+      - The architecture defines how the system represents and manipulates these data types.
+    >  In a CPU designed for scientific computing, floating-point operations are critical, and the architecture will include optimized instructions for handling such data.
+    3. __CPU Design__
+      - CPU design involves decisions about the:
+        * __Number of cores__ 
+        * __Pipeline structure__ — how instructions are processed in stages
+        * __Branch prediction__ mechanisms; and
+        * __Cache hierarchy__
+    >  A multi-core CPU can execute multiple instructions simultaneously by assigning them to different cores, increasing overall processing speed. The architecture defines how these cores communicate and share resources. 
+    4. __Memory Hierarchy__
+      - The memory hierarchy is __organized to balance speed, cost, and size__.
+      - It includes:
+        * __Registers__ — fastest, most minor
+        * __Cache Memory__
+        * __Main Memory__ — _RAM_; and
+        * __Secondary Storage__ — _HDDs_, __SSDs__
+    > The architecture dictates how frequently used data is stored in cache memory to reduce the CPU's time to access it, thereby improving performance. 
+  - Memory Hierchy of a CPU        
+```
+
+        /\                           /\                        |------|
+       /  \                         /  \                       |      |
+      /    \                       /    \                      |      |
+     /      \                     /      \                     |      |
+    /        \                   /        \                    |      |
+   /          \                 / Central  \                   |      |
+  /            \               / Processing \                  |      |
+ /--------------\             /     Unit     \                 |      |
+     |      |                /  (registers)   \                |      |
+     |      |               /------------------\               |      |
+     |      |              /  L1, L2, L3 Cache  \              |      |
+     |      |             / Static Random Access \             |      |
+     |      |            /         Memory         \            |      |
+     |      |           /--------------------------\       \--------------/
+     |      |          /        Main Memory         \       \            /
+     |      |         /    Dynamic Random Access     \       \          /
+     |      |        /             Memory             \       \        /
+     |      |       /----------------------------------\       \      /
+     |      |      /     Secondary memory (storage)     \       \    /
+     |      |     /       magnetic or flash media        \       \  /
+     |------|    /----------------------------------------\       \/
+   Higher means                                               Lower means
+Higher Performance                                          Higher Latency
+ Endurance per Bit                                        Higher Persistence
+   Higher Speeds
+```
+
+- __Common Goals and Interdependence__
+  * The overarching goal of both computer organization and architecture is to design an __efficient, cost-effective, and powerful computer system__.
+  * An equally well-organized set of hardware must support the design of a computer's architecture to ensure the system functions as intended.
+  > In a modern CPU, the pipeline architecture (an architectural feature that allows multiple instructions to be processed simultaneously) must be supported by an organized system of data paths and control signals. This ensures instructions are fetched, decoded, and executed orderly and efficiently, maximizing the CPU’s performance. 
+- __Contrast Between Computer Organization and Computer Architecture__
+  1. __Computer Organization__:
+    * Focuses on the __physical structure and operation__ of the computer's hardware components.
+    * Deals with implementation details like __circuit design, timing, and control signals__.
+    * Concerned with how components like __CPU, Memory, I/O devices__ are connected and managed.
+  > The motherboard layout concerns computer organization, including CPU, memory, and I/O port placement.
+  2. __Computer Architecture__
+    * Deals with the __design of the system's functional structure__ and behavior.
+    * Focuses on what the system does and how it interacts with software, rather than how it is physically implemented.
+    * Involves high-level design choices like __Instruction Set designs, CPU architecture, and Memory Hierarchy__.
+  > The design of an instruction set that determines how software interacts with the CPU is part of computer architecture. 
+- _Intel x86 Architecture_
+  * Definition
+    + The x86 architecture is a family of instruction set architectures (ISAs) that defines the rules, instructions, data types, registers, and memory addressing modes for Intel processors. 
+    + It is essentially a blueprint that specifies what the processor can do.
+  * Components:
+    + Instruction Set: 
+      - The x86 architecture includes a rich set of instructions the processor can execute. 
+      - These instructions are fundamental operations like arithmetic (e.g., ADD, SUB), logic (e.g., AND, OR), data movement (e.g., MOV), and control flow (e.g., JMP, CALL).
+    + Data Types: 
+      - It defines the data types the processor can handle, such as integers, floating-point numbers, and packed data types.
+    + Addressing Modes: 
+      - The architecture specifies how memory addresses are calculated and accessed, allowing instructions to operate on data differently (e.g., direct, indirect, indexed addressing). 
+    + Registers: The architecture defines a set of registers that the processor can use for various operations, such as general-purpose registers, segment registers, and control registers.
+- _Intel x86 Organization_
+  * Definition: 
+    + Processor organization refers to how the architecture's instructions are implemented in hardware. 
+    + It involves the physical design of the processor, including the layout and interaction of various subsystems like the pipeline, cache, memory, and execution units.
+  * Components:
+    + Pipeline Design: 
+      - Modern processors use pipelining to execute multiple instructions simultaneously. 
+      - The pipeline's depth and the number of stages can affect performance. For instance, an Intel Core i7 processor might have multiple execution pipelines, allowing it to execute several instructions in parallel.
+    + Cache Hierarchy: 
+      - The processor's cache organization (L1, L2, L3) determines how quickly data can be accessed. 
+      - A well-designed cache system reduces latency and improves processing speed.
+    + Memory Subsystem: 
+      - The organization includes how the processor interacts with RAM and how data is transferred between the CPU and memory. 
+      - Features like memory controllers, bandwidth, and latency are critical here.
+    + Execution Units: 
+      - These parts of the processor carry out the instructions. 
+      - A Core i7 processor might have multiple arithmetic logic units (ALUs), floating-point units (FPUs), and other specialized execution units. 
+- Key Differences
+  * Focus:
+    + Architecture: 
+      - Concentrates on what the processor can do (instructions, data types, addressing).
+    + Organization: 
+      - Focuses on how the processor does it (pipeline, cache, memory design).
+  * Level of Abstraction:
+    + Architecture: 
+      - More abstract, providing a general specification that multiple processors can implement.
+    + Organization: 
+      - Concrete, dealing with the actual hardware design and implementation of a specific processor.
+  * Flexibility:
+    + Architecture: 
+      - Can be applied to different processors across different generations (e.g., Pentium, Core, Xeon).
+    + Organization: 
+      - Specific to a particular processor or family of processors (e.g., Intel Core i7, i9). 
+- Conclusion
+  * Understanding the distinction between Computer Organization and Architecture is critical for anyone designing, constructing, or programming computer systems. Both fields are interdependent, with the effectiveness of one relying on the soundness of the other. Mastery of these concepts equips students with the knowledge to design, analyze, and optimize modern computer systems, ensuring they meet desired performance, cost, and power consumption goals.
