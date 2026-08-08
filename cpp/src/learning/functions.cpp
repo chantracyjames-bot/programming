@@ -1,40 +1,204 @@
 /*
     - built-in functions amd methods
-        - string functions
+        - C stdlib functions <cstdlib>
+            - rand()
+                - used to generate random numbers
+                - syntax:
+                    rand();
+                - example:
+                    rand() % 101; // generates a number from 0 - 100
+                - sidenote:
+                    - thie method of randon number generation only works once
+                        - due to it only randomizing the number in the same process
+                        - meaning, it will be the same the number in-between program runs
+                    - to solve this, the srand()
+            - srand()
+                - used to initialize the rand() function
+                    - or seed the function, truly randomizing it
+                - syntax:
+                    srand(<seed>);
+                - example:
+                    srand(21);
+                - commonly used with the time() for true randomness
+                    - it makes the number generation a lot more randomized
+                    - example:
+                        srand(time(0));
+                        int myNum = rand() % 101;
+        - string functions <string>
             - .append()
                 - concatenates (or adds) two strings together
+                - returns the new string to the first string
+                    - with the second string appended to it
                 - syntax 
-                    <string>.append(<string>);
+                    <string1>.append(<string2>);
                 - example:
-                    std::string myString = "idk"; // "idk"
-                    myString.append("man"); // "idkman"
-            - .length() or size()
-                - queries the length of a string object
-                - syntax:
-                    <string>.length();
-                - example:
-                    std::string myString = "idk";
-                    int length = myString.length(); // 3
+                    std::string("idk").append("man"); // "idkman"
             - .at()
-                - queries a character in a string object through its index
+                - returns the character at the specified index in the string
                 - syntax:
                     <string>.at(<index>)
                 - example:
-                    std::string myString = "idk";
-                    int length = myString.at(1); // 'd'
+                    std::string("idkman").at(1); // 'd'
                 - changes a character in a string object through its index
                     - syntax
                         <string>.at(<index>) = <newValue>;
                     - example:
-                        std::string myString = "idk";
-                        myString.at(2) = 'c'; // "idc"
-            - getline()
-                - able to extraxt strings from the cin object even with whitespace
+                        std::string("idkman").at(2) = 'c'; // "idcman"
+            - .back()
+                - returns the last character in the string
                 - syntax:
-                    getline(cin, <stringVariable>);
+                    <string>.back();
+                - example:
+                    std::string("idkman").back(); // 'n'
+            - .c_str()
+                - returns a C-style const char* type string
+                    - returned with a null terminator
+                - syntax:
+                    <string>.c_str();
+                - example
+                    std::string("idkman").c_str(); // "idkman\0"
+            - .clear()  
+                - truncates or clears the string
+                - returns an empty string
+                - syntax:
+                    <string>.clear();
+                - example:
+                    std::string("idkman").clear(); // ""
+            - .compare()
+                - compares two string up to a specified index of both strings
+                    - via their ASCII values
+                - returns an integer indicating the result
+                    - if the function returns zero
+                        - there are no difference between the two strings
+                    - if the function returns a positve number
+                        - the first string is greater than the second string
+                    - if the function returns a negative number
+                        - the second string is greater than the first string
+                - syntax:
+                    <string1>.compare(<string2>);
+                - example:
+                    std::string("idkman").compare("lumbago"); // 3
+            - .empty()
+                - queries if the string is empty or not
+                - returns a bool value
+                    - returns true if it is empty
+                    - returns false if it is not
+                - syntax:
+                    <string>.empty();
+                - example:
+                    std::string("idkman").empty(); // false
+            - .erase()
+                - deletes parts of a straing
+                - takes in two arguments
+                    - <index> refers to the start of the index to be deleted
+                    - <count> if the number of characters to delete
+                - syntax:
+                    <string>.erase(<index>, <count>);
+                - example:
+                    std::string("idkman").erase(3, 3); // "idk"
+            - .find()
+                - queries the string for the first occurence of a character or substring
+                - returns an in values
+                    - if found, retuns a number corresponding to the index of the character
+                        - or the first index of substring if matched with a substring
+                    - if not, returns a std::string::npos static value
+                - syntax:
+                    <string>.find(<substring>);
+                - example:
+                    std::string("idkman").find("man"); // 3
+            - .front()
+                - returns the first character in the string
+                - syntax:
+                    <string>.fromt();
+                - example:
+                    std::string("idkman").front(); // 'i'
+            - getline()
+                - able to extract strings from the cin object
+                    - even with whitespace
+                - syntax:
+                    std::getline(std::cin, <stringVariable>);
                 - example:
                     std::string myString;
-                    getline(cin, myString);
+                    std::getline(std::cin, myString);
+            - .insert()
+                - inserts a substring at a given index
+                - syntax:
+                    <string1>.insert(<index>, <string2>);
+                - example:
+                    std::string("idkman").insert(6, "lumbago"); // "idkman lumbago"
+            - .length()
+                - queries the length of a string object
+                - syntax:
+                    <string>.length();
+                - example:
+                    std::string("idkman").length(); // 6
+            - .operator[]
+                - the long form of the square brackets [ ] index access
+                - queries the character at that location
+                    - note that it does not check if the index is valid or not
+                - syntax:
+                    <string>[<index>];
+                    // or
+                    <string>.operator[](<index>);
+                - example:
+                    std::string("idkman")[0]; // 'i'
+                    // or
+                    std::string("idkman").operator[](0); // 'i'
+            - .pop_back()
+                - removes the last character in the string
+                - syntax:
+                    <string>.pop_back();
+                - example:
+                    std::string("idkman").pop_back(); // "idkma"
+            - .push_back()
+                - adds a single character to the end of the string
+                - syntax:
+                    <string>.push_back();
+                - example:
+                    std::string("idkma").push_back('n'); // "idkman"
+            - .replace()
+                - replaces a portion of a string with a substring
+                - syntax:
+                    <string>.replace(<index>, <count>, <substring>);
+                - example:
+                    std::string("idkman").replace(3, 3, "lumbago"); // "idklumbago"
+            - .rfind()
+                - queries the string for the last occurence of a character or substring
+                - returns an in values
+                    - if found, retuns a number corresponding to the index of the character
+                        - or the first index of substring if matched with a substring
+                    - if not, returns a std::string::npos static value
+                - syntax:
+                    <string>.rfind(<substring>);
+                - example:
+                    std::string("idkman").rfind("man"); // 3
+            - .resize()
+                - resizes a string to a new size
+                - the second argument is the "fill" value
+                    - ignoring it fills the empty part of the string with null terminators '\0'
+                - syntax:
+                    <string>.resize(<size>, <char>);
+                - example:
+                    std::string("idkman").resize(10); // "idkman\0\0\0\0"
+            - .size()
+                - alias of .length(); queries the length of a string object
+                - syntax:
+                    <string>.size();
+                - example:
+                    std::string("idkman").size(); // 6
+            - .substr()
+                - returns a substring of a string
+                - leavning the second argument empty copies the string from the index to the end
+                - syntax:
+                    <string>.substr(<startIndex>, <endIndex>);
+                - example:
+                    std::string("idkman").substr(3); // "man"
+            - .swap()
+                - swaps two string values
+                - syntax:
+                    <string1>.swap(<string2>);
+                - example:
+                    std::string("idkman").swap("lumbago"); // "lumbago"
         
         - math functions
             - max()
