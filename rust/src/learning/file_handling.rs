@@ -25,7 +25,7 @@
                 - to read the contents of the file, the Read trait is brought into scope
                     - syntax:
                         use std::io::Read;
-                - after importing the required trait, .the read_to_string() method is able to be used to read the file
+                - after importing the required trait, the .read_to_string() method is able to be used to read the file
                     - note that a String variable is needed to store the read lines, also requiring pattern matching
                     - syntax:
                         match <file_variable>.read_to_string(&mut <string>) {
@@ -38,6 +38,23 @@
                             Err(yes) => panic!("Error {}", yes),
                             Ok(_) => print("{}", s),
                         }
+                - another method can be used to read files, being the .read() function
+                    - also requires the Read trait from std::io
+                    - note that a Vector<u8> is required to store the read lines
+                    - syntax:
+                        match <file_variable>.read(&mut <vector>) {
+                            Err(<var>) => <statement>,
+                            Ok(<var>) => <statement>,
+                        }
+                    - example:
+                            let mut buf = [0; 128];
+                            match file.read(&mut buf) {
+                                Err(error) => println!("yes {}", error),
+                                Ok(yes) => match str::from_utf8(&buf[0..yes]) {
+                                    Err(error) => println!("yes {}", error),
+                                    Ok(no) => print!("{}", no),
+                                }
+                            }
             - write-only mode
                 - done through the File::create() function
                 - syntax:
@@ -88,7 +105,15 @@
                     fs::write(<file>, <string>);
                 - example:
                     fs::write("yes.txt", "idkman");
-
+        - std::io::prelude
+            - brings the Read, Write, Seek and BufRead traits into scope
+            - syntax:
+                use std::io::prelude
+            - instead of:
+                use std::io::Read;
+                use std::io::Write;
+                use std::io::Seek;
+                use std::io::BufRead;
 */
 
 use std::fs::File;
@@ -96,7 +121,7 @@ use std::path::Path;
 use std::io::prelude::*;
 
 fn main() {
-    read_test();
+    test();
 }
 
 fn read_test() {
@@ -128,5 +153,24 @@ fn write_test() {
     match file.write_all(b) {
         Err(error) => panic!("Error {}", error),
         Ok(_) => print!("sakses"),
+    }
+}
+
+fn test() {
+    let path = Path::new("general.rs");
+    let display = path.display();
+
+    let mut file = match File::open(&path) {
+        Err(error) => panic!("Error: {}", error),
+        Ok(file) => file,
+    };
+
+    let mut buf = [0; 128];
+    match file.read(&mut buf) {
+        Err(error) => println!("yes {}", error),
+        Ok(yes) => match str::from_utf8(&buf[0..yes]) {
+            Err(error) => println!("yes {}", error),
+            Ok(no) => print!("{}", no),
+        }
     }
 }
