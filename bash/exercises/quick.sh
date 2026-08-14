@@ -10,12 +10,12 @@
 # quick -cr cpp_clang /home/user/Documents/ my_program my_program.cpp
 
 # build folder locations for each language
-ASSEMBLY_BIN="/home/tarcy_arch/Documents/Programming/assembly/bin"
-C_BIN="/home/tarcy_arch/Documents/Programming/c/bin"
-CPP_BIN="/home/tarcy_arch/Documents/Programming/cpp/bin"
-JAVA_BIN="/home/tarcy_arch/Documents/Programming/java/bin"
-PYTHON_BIN="/home/tarcy_arch/Documents/Programming/python/bin"
-RUST_BIN="/home/tarcy_arch/Documents/Programming/rust/bin"
+ASSEMBLY_BIN="/home/tarcy/Documents/Programming/assembly/bin"
+C_BIN="/home/tarcy/Documents/Programming/c/bin"
+CPP_BIN="/home/tarcy/Documents/Programming/cpp/bin"
+JAVA_BIN="/home/tarcy/Documents/Programming/java/bin"
+PYTHON_BIN="/home/tarcy/Documents/Programming/python/bin"
+RUST_BIN="/home/tarcy/Documents/Programming/rust/bin"
 
 # functions used for a clean output
 separate()      { echo "==================================================="; }
