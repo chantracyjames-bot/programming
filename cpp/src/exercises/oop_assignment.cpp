@@ -28,38 +28,48 @@ class SortNumbers {
 };
 
 class Numbers {
-    private:
-        static bool isDivisibleByThree(int num) {
-            return num % 3 == 0;
-        }
-
-        static bool isDivisibleByFive(int num)  {
-            return num % 5 == 0;
-        }
     public:
-        static int idk() {
-            int sum = 0;
+        static void idk() {
+            int sumOf3 = 0;
+            int sumOf5 = 0;
+            int sumOf3And5 = 0;
+            int sumOf3Or5 = 0;
+            int sumOfAll = 0;
             for (int i = 0; i <= 200; i++) {
-                sum += i;
-                if (Numbers::isDivisibleByThree(i) && Numbers::isDivisibleByFive(i)) {
+                if (i % 3 == 0 && i % 5 == 0) {
+                    sumOfAll += i;
+                    sumOf3And5 += i;
                     std::cout << i << " is divisible by 3 and 5\n";
                     continue;
-                } else if (Numbers::isDivisibleByThree(i)) {
+                } else if (i % 3 == 0) {
+                    sumOf3 += i;
+                    sumOf3Or5 += i;
+                    sumOfAll += i;
                     std::cout << i << " is divisible by 3\n";
                     continue;
-                } else if (Numbers::isDivisibleByFive(i)) {
+                } else if (i % 5 == 0) {
+                    sumOf5 += i;
+                    sumOf3Or5 += i;
+                    sumOfAll += i;
                     std::cout << i << " is divisible by 5\n";
                     continue;
-                } else {
-                    std::cout << i << "\n";
-                    continue;
-                }
+                } 
             }
-            return sum;
+            std::cout << "\n";
+            std::cout << "Sum of 3: " << sumOf3 << "\n";
+            std::cout << "Sum of 5: " << sumOf5 << "\n";
+            std::cout << "Sum of 3 & 5: " << sumOf3And5 << "\n";
+            std::cout << "Sum of 3 + 5: " << sumOf3Or5 << "\n";
+            std::cout << "Sum of All: " << sumOfAll << "\n";
         }
 };
 
-int main() {
+
+void number_assignment() {
+    Numbers::idk();
+}
+
+void sort_10() {
     int nums[10];
 
     std::cout << "Enter 10 random numbers.\n";
@@ -70,12 +80,15 @@ int main() {
 
     SortNumbers *myObj = new SortNumbers;
     myObj->quickSort(nums, 0, 9);
-    int result = Numbers::idk();
 
-    std::cout << "The sum of 0 to 200 is: " << result;
     std::cout << "\nSorted 10 random numbers: ";
     for (int i = 0; i < 10; i++) {
         std::cout << nums[i] << ", ";
     }
     std::cout << (char) 10;
+}
+
+int main() {
+    number_assignment();
+    return 0;
 }
