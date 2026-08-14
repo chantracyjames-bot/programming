@@ -9,7 +9,7 @@ public class DSAActivity1 {
     // the Ceiling Function
     static double ceilFunc(double num) {
         return Math.ceil(num);
-    }
+    } 
 
     // the Modulo Function
     static int moduloFunc(int base, int div) {
@@ -21,9 +21,10 @@ public class DSAActivity1 {
         // initializes a Scanner object and a local variable
         Scanner in = new Scanner(System.in);
         double inNum;
+        boolean isRunning = true;
 
         // loops the program
-        while(true) {
+        while(isRunning) {
             // runs the program in a try-catch to catch Exceptions
             try {
                 // printing with format
@@ -69,6 +70,8 @@ public class DSAActivity1 {
                     // a way to quit the program
                     case "q":
                         System.out.println("Exiting...");
+                        isRunning = false;
+                        in.close();
                         System.exit(0);
                     // if the user input an invalid option
                     default:
@@ -82,5 +85,7 @@ public class DSAActivity1 {
                 System.out.println("An Error occured: " + e + "\n");
             }
         }
+
+        in.close();
     }
 }
