@@ -25,7 +25,7 @@ EXTENSIONS: dict = {
 
 def main() -> None:
     # changes the cwd to the root of the git repo
-    os.chdir("/home/tarcy_arch/Documents/Programming")
+    os.chdir("/home/tarcy/Documents/Programming")
     # loads the .env file
     load_dotenv()
     # creates a Github object
