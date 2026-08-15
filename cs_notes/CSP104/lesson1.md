@@ -1,4 +1,4 @@
-# Week 2
+# Lesson 1
 <!-- AI generated powerpoint presentation? -->
 ## Course Orientation
 
