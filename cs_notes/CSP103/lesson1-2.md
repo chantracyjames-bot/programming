@@ -1,4 +1,4 @@
-# Topic 1
+# Topic 1 & 2
 ## Background
 - Relationship between Architecture and Organization
   *__Definition__
@@ -40,13 +40,19 @@
   * Define the scope of computer architecture and describe its impact on system design and performance. 
   * Identify common goals shared by computer organization and computer architecture and explain their interdependence.
   * Contrast computer organization and computer architecture by highlighting their differences in terms of system functionality, design, and performance. 
+  * Define computer organization and explain its significance in the operation of computer systems.
+  * Define computer architecture and explain its  ignificance in the design and performance of  computer systems.
+  * Distinguish between computer organization and computer architecture by comparing their roles, focus areas, and impact on system functionality.
 - Topics
   1. Introduction to Computer Organization and Computer Architecture
-    * 1.1. What is Computer, its features, advantages, disadvantages?
-    * 1.2. Scope of Computer Organization
-    * 1.3. Scope of Computer Architecture
-    * 1.4. Common Goals and Interdependence
-    * 1.5. Contrast Between Computer Organization 
+    + 1.1. What is Computer, its features, advantages, disadvantages?
+    + 1.2. Scope of Computer Organization
+    + 1.3. Scope of Computer Architecture
+    + 1.4. Common Goals and Interdependence
+    + 1.5. Contrast Between Computer Organization 
+  2. Computer Organization (CO) VS Computer Architecture (CA)
+    + 2.1.Definition and significance.
+    + 2.2.Distinction between computer organization and computer architecture.
 
 ## What is a Computer?
 - Definition
