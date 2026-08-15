@@ -21,6 +21,9 @@ EXTENSIONS: dict = {
     "Python": [".py"],
     "Rust": [".rs"],
 }
+EXEMPTIONS = [
+    ".png", ".jpg", ".webp", ".jpeg", "gif"
+]
 
 
 def main() -> None:
@@ -57,6 +60,8 @@ def get_percentage(git: Github) -> (dict, float):
 def get_language(file_stuff) -> str:
     ext = Path(file_stuff).suffix.lower()
     for lang, exts in EXTENSIONS.items():
+        if ext in EXEMPTIONS:
+            return "Invalid"
         if ext in exts:
             return lang
     return "Others"
@@ -77,6 +82,8 @@ def get_lang_tally():
     for file_stuff in files:
         # checks using the get_language() function if the file is present inside the EXTENSIONS dict
         lang: str = get_language(file_stuff)
+        if lang == "Invalid":
+            continue
         with open(file_stuff, "r", encoding="utf-8") as file:
             content = file.read()
             # per iteration
