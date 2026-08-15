@@ -1,5 +1,27 @@
 use std::io::{self, Write};
 use std::collections::HashMap;
+use std::sync::LazyLock;
+
+// hashmaps for pattern matching
+static FOOD_MAP: LazyLock<HashMap<String, &str>> = LazyLock::new(|| {
+    let mut temp: HashMap<String, &str> = HashMap::new();
+    temp.insert("1".to_string(), "Burger");
+    temp.insert("2".to_string(), "Pizza");
+    temp.insert("3".to_string(), "Fried Chicken");
+    temp.insert("4".to_string(), "French Fries");
+    temp.insert("5".to_string(), "Soft Drink");
+    temp
+});
+
+static PRICE_MAP: LazyLock<HashMap<&str, f64>> = LazyLock::new(|| {
+    let mut temp: HashMap<&str, f64> = HashMap::new();
+    temp.insert("Burger", 50.00);
+    temp.insert("Pizza", 120.00);
+    temp.insert("Fried Chicken", 90.00);
+    temp.insert("French Fries", 60.00);
+    temp.insert("Soft Drink", 40.00);
+    temp
+});
 
 // prints the main menu
 fn display_price_menu() {
@@ -35,7 +57,7 @@ fn display_summary_footer() {
 }
 
 // retrives the produce through a loop
-fn get_product(foo: &HashMap<String, &str>) -> String {
+fn get_product() -> String {
     // initializes local variable
     let mut inp: String = String::new();
     let opt: String;
@@ -46,13 +68,14 @@ fn get_product(foo: &HashMap<String, &str>) -> String {
         display_price_menu();
 
         // gathers user input
+        inp.clear();
         print!("Enter product number: ");
         io::stdout().flush().unwrap(); 
         io::stdin().read_line(&mut inp).expect("huh?");
         inp = inp.trim().to_string();
 
         // breaks the loop if the input matches the options
-        if let Some(food) = foo.get(&inp) { 
+        if let Some(food) = FOOD_MAP.get(&inp) { 
             opt = food.to_string();
             break 'pro
         } else { 
@@ -73,6 +96,7 @@ fn get_quantity() -> i32 {
 
     'number: loop {
         // gathers user input
+        inp.clear();
         print!("Enter quantity: ");
         io::stdout().flush().unwrap(); 
         io::stdin().read_line(&mut inp).expect("huh?");
@@ -99,9 +123,9 @@ fn get_quantity() -> i32 {
 }
 
 // retrieves the price of the product
-fn get_current_price(opt: &str, qua: i32, pri: &HashMap<&str, f64>) -> f64 {
+fn get_current_price(opt: &str, qua: i32) -> f64 {
     // checks if the option is inside the hashmap
-    if let Some(price) = pri.get(opt) { 
+    if let Some(price) = PRICE_MAP.get(opt) { 
         price * qua as f64 
     } 
     else { 
@@ -119,6 +143,7 @@ fn repeat_yes_no() -> String {
     // loops through until a certain condition is met
     'choice: loop {
         // gathers user input
+        inp.clear();
         print!("Do you want to order again? (Y/N): ");
         io::stdout().flush().unwrap(); 
         io::stdin().read_line(&mut inp).expect("huh?");
@@ -142,6 +167,7 @@ fn get_payment(tot: f64) -> f64 {
     // loops through until a certain condition is met
     'payment: loop {
         // gathers user input
+        inp.clear();
         print!("Enter payment: PHP ");
         io::stdout().flush().unwrap(); 
         io::stdin().read_line(&mut inp).expect("huh?");
@@ -171,49 +197,40 @@ fn get_payment(tot: f64) -> f64 {
     pay
 }
 
-fn main() {
-    // hashmaps for pattern matching
-    let food_list: HashMap<String, &str> = HashMap::from([
-        ("1".to_string(), "Burger"),
-        ("2".to_string(), "Pizza"),
-        ("3".to_string(), "Fried Chicken"),
-        ("4".to_string(), "French Fries"),
-        ("5".to_string(), "Soft Drink"),
-    ]);
-    let price_list: HashMap<&str, f64> = HashMap::from([
-        ("Burger", 50.00),
-        ("Pizza", 120.00),
-        ("Fried Chicken", 90.00),
-        ("French Fries", 60.00),
-        ("Soft Drink", 40.00),
-    ]);
+fn print_summary(tot: f64) -> () {
+    // initializes a local variable
+    let pay: f64;
+        
+    // prints the summary screen
+    display_summary_header();
+    println!("TOTAL AMOUNT: {:.2}\n", tot);
 
+    pay = get_payment(tot);
+
+    println!("\nPayment: {:.2}", pay);
+    println!("Change: {:.2}", pay - tot);
+
+    display_summary_footer();
+}
+
+fn main() {
     // initializes variables
     let mut option: String;
     let mut quantity: i32;
     let mut total: f64 = 0.00;
-    let payment: f64;
-
+    
     // loops the main meny
     'program: loop {
-        option = get_product(&food_list);
+        option = get_product();
         quantity = get_quantity();
 
-        total += get_current_price(&option, quantity, &price_list);
-        println!("\nSubtotal: PHP {:.2}", get_current_price(&option, quantity, &price_list));
+        total += get_current_price(&option, quantity);
+        println!("\nSubtotal: PHP {:.2}", get_current_price(&option, quantity));
         println!("Current Total: PHP {:.2}\n", total);
         
         if repeat_yes_no() == "y" { break 'program }
     }
 
-    // prints the summary screen
-    display_summary_header();
-    println!("TOTAL AMOUNT: {:.2}\n", total);
-
-    payment = get_payment(total);
-
-    println!("\nPayment: {:.2}", payment);
-    println!("Change: {:.2}", payment - total);
-
-    display_summary_footer();
+    // prints the summary
+    print_summary(total);
 }
