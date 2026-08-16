@@ -162,6 +162,34 @@
                             Err(error) => print!("Error: {}", error),
                             Ok(_) => print!("Success"),
                         };
+                - rename()
+                    - renames a file using the rename syscall()
+                        - requires pattern matching for handling errors
+                    - syntax:
+                        match fs::rename(<file>, <new_name>) {
+                            Err(<var>) => <statement>,
+                            Ok(<var>) => <statement>,
+                        }
+                    - example:
+                        match fs::rename("yes", "no") {
+                            Err(error) => print!("idkman {}", error),
+                            Ok(_) => print!("maybe"),
+                        }
+                - create_dir_all()
+                    - recursively creates a directory tree
+                        - similar to mkdir -p in shell
+                        - requires pattern matching
+                    - syntax:
+                        match fs::create_dir_all(<path>) {
+                            Err(<var>) => <statement>,
+                            Ok(<var>) => <statement>
+                        }
+                    - example:
+                        match fs::create_dir_all("yes/no/maybe") {
+                            Err(error) => println!("idkman {}", error),
+                            Ok(_) => println!("yes")
+                        }
+                    
 
     - std::io::prelude
         - brings the Read, Write, Seek and BufRead traits into scope
