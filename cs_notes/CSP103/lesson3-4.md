@@ -86,12 +86,45 @@
 <!-- i hate light mode huhuhu -->
 
 ### Storage Devices
-
+- Definition:
+  * Are responsible for __holding data permanently or semi-permanently__, ensuring tha information can be __retained even when the computer is powered off__.
+  * _Storage devices_ __vary in speed, capacity, and technology__.
+- Types of Storage Devices:
+  * __Hard Disk Drives__ (_HDDs_)
+    + Uses __magnetic storage__ to read and write data on __spinning disks__ (_platters_).
+    + They offer ample storage capabilities at a __lower costs__ but are __slower__ than newer technologies.
+    > An operating system and most files, such as documents, photos, and videos, are typically stored on an HDD.
+  * __Solid-State Disks__ (_SSDs_)
+    + Uses __flash memory__ to store data providing __faster access and excellent reliability than HDDs__.
+    + _SSDs_ have __no moving parts__, which make the more __durable and energy-efficient__, but they are usualle __more expensive__ per gigabyte.
+    > An SSD often stores the operating system and frequently accessed applications, significantly speeding up boot and program loading times.
+  * __Optical Drives__ (_CDs_, _DVDs_, _Blu-rays_)
+    + Uses __lasers__ to read and write data on __disks__, such as _Compact Disks, Digital Video Disks_, and _Blu-rays_.
+    + Altough __less common__ today due to digital distribution, there are still __used for installing software, playing media, and archiving data__.
+    > When you install a program from a DVD, the optical drive reads the data from the disc and transfers it to your computer’s storage. 
+  * __Flash Devices__
+    + Are __portable storage devices__ that use __flash memory__, making them ideal for __transferring files between computers__.
+    + They are __small, durable__, and __do not require external power sources__.
+    > You might use a flash drive to carry important documents or presentations that you need to access on different computers.
 - Diagram:
  ![SSDs vs HDDs](../../html-css/image_sets/CSP103-6.png)
 
 ### Buses (Data Pathways)
-
+- Definition
+  * Are __communication pathways__ that __connect computer components__, allowing them to __communicate and transfer data efficiently__.
+- Types of Buses:
+  * __Data Bus__
+    + Carries __actual data between the CPU, memory, and other peripherals__.
+    + The width of the data bus — the number of bits that it can carry — affects the amount of data that can be transfered simultaneously.
+    >  When the CPU reads data from memory, the data bus transfers the data from the memory to the CPU for processing.
+  * __Address Bus__
+    + Carries __memory addresses__, which specify the __location in memory where data should be read from or written to__.
+    + Unlike the data bus, the address bus typically only transfers memory addresses.
+    > When the CPU needs to access data stored in a specific memory location, it sends the address of that location over the address bus.
+  + __Control Bus__
+    + Carries __control signals__ that __manage the operations__ across the computer's components.
+    + This signals __coordinate activities__ like reading from memory, writing to memory, and responding to input devices.
+    > During a memory read operation, the control bus sends signals that trigger the memory to place the requested data onto the data bus for the CPU to read.
 - Diagram:
  ![Data Pathways](../../html-css/image_sets/CSP103-7.png)
 
