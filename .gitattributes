@@ -1,7 +1,5 @@
 # Set the correct language flag in GitHub
 *.rs linguist-language=Rust
-cs_notes/**/*.md linguist-detectable=true
-cs_notes/**/*.md linguist-documentation=false
 # gosh i'm even more of an idiot
 # am loing my mind with Linguist detecting SQL
 sql/**/*.sql linguist-detectable=true 
