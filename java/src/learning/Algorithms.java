@@ -1,82 +1,6 @@
-/* algorithms
-    - Algorithms
-        - are used to solve problems related to sorting, searching, or manipulating data strutures
-            - Searching Algorithms
-                - these types of algorithms are used to find certain elements inside a collection
-                - a well-known searching algorithm is called "Binary Search"
-            - Sorting Algoriths
-                - these types of algorithms are uses to sort collections
-                    - depending on what order the resulting collection becomes
-                - a common order type is natural order
-            - Iteration
-                - iteration is also another type of algorithm
-                    - used to loop through elements
-                - refer to Iteratives.java for more info
-
-    - Java Algorithms
-        - Searching
-            - Java has various built-in helper methods for searching through collections
-            - Binary Search
-                - a commonly used searching algorithm
-                - can be used through the .binarySearch() method inside the Collections class
-                    - returns the index of the element if found
-                - note that the collection must be sorted first
-                - syntax:
-                    Collections.binarySearch(<collection.Object>, <element>) 
-            - Maximum and Minimum Search
-                - used to find the maximum and minimum values of a collection
-                    - through the .max() and .min() methods of the Collections class, respectively
-                - syntax:
-                    Collections.max(<collectionObject>);
-                    // or
-                    Collections.min(<collectionObject>);
-            - Frequency Search
-                - used to query a collection about the number of times an element appears
-                    - through the .frequency() method of the Collections class
-                - syntax:
-                    Collections.frequency(<collectionObject>, <element>);
-            - Disjoint Search
-                - compares two collections is they have no elements in common
-                - results into a boolean value
-                    - returns true if there are no common elements between the two collections
-                    - returns a false is there is
-                - syntax:
-                    Collections.disjoint(<collectionObject1>, <collectionObject2>);    
-
-        - Sorting
-            - Java has a built-in sorting method for sorting methods
-            - Natural Order
-                - a common type of sorting algorithm
-                - sorts items alphanumerically
-                    - 0-9, then
-                    - A-Z, and
-                    - a-z
-                - can be used through the .sort() method inside the Collections class
-                    - sorts the items through natural order
-                - syntax:
-                    Collections.sort(<collectionObject>);
-            - Reverse Order
-                - reverses the current order of a collection
-                - used through the .reverse() method inside the Collections class
-                - syntax:
-                    Collections.reverse(<collectionObject>);
-                - another method, reverseOrder() can be used inside the .sort() method
-                    - syntax:
-                        Collections.sort(<collectionObject>, reverseOrder());
-            - Random Order
-                - randomly shuffles the elements around in a collection
-                    - used through the .shuffly() method from the Collections class
-                - syntax:
-                    Collections.shuffle(<collectionObject>);
-            - Swap Order
-                - swaps two elements inside a collection
-                    - used through the .swap() method from the Collections class
-                - syntax:
-                    Collections.swap(<collectionObject>, <index1>, <index2>);
-*/
-
 import java.util.Collections;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Algorithms {
     static int fibonacciRecursion(int a) {
@@ -85,8 +9,165 @@ public class Algorithms {
         }
         return fibonacciRecursion(a - 1) + fibonacciRecursion(a - 2);
     }
-    
-    public static void main(String[] args) {
 
+    static int factorialRecursion(int a) {
+        if (a <= 1) {
+            return 1; 
+        }
+        return a * factorialRecursion(a - 1);
+    }
+
+    static int linearSearch(int[] arr, int target) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == target) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    static int binarySearch(int[] arr, int target) {
+        int left = 0;
+        int right = arr.length - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (arr[mid] == target) {
+                return mid;
+            }
+            if (arr[mid] < target) {
+                left = mid + 1; 
+            } else {
+                right = mid - 1;
+            }
+        }
+        return -1;
+    }
+
+    static void bubbleSort(int[] arr) {
+        int n = arr.length;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    // Swap elements
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    static void selectionSort(int[] arr) {
+        int n = arr.length;
+        for (int i = 0; i < n - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j;
+                }
+            }
+            int temp = arr[minIndex];
+            arr[minIndex] = arr[i];
+            arr[i] = temp;
+        }
+    }
+
+    static void userAlgorithms() {
+        int arr[] = {4, 23, 14, 6, 8, 33};
+        int targetNumber = 6;
+
+        System.out.print("Array:");
+        for ( int i : arr ) {
+            System.out.print(" " + i);
+        }
+
+        bubbleSort(arr);
+        System.out.print("\nBubble sort:");
+        for ( int i : arr ) {
+            System.out.print(" " + i);
+        }
+        arr = new int[]{4, 23, 14, 6, 8, 33};
+        selectionSort(arr);
+        System.out.print("\nSelection sort: ");
+        for ( int i : arr ) {
+            System.out.print(" " + i);
+        }
+
+        Integer linear = linearSearch(arr, targetNumber);
+        Integer binary = binarySearch(arr, targetNumber);
+
+        System.out.println("\nLinear Search:  " + linear);
+        System.out.println("Binary Search:  " + binary);
+
+        System.out.println("Factorial of 5: " + factorialRecursion(5));
+        System.out.println("Fibonacci of 5: " + fibonacciRecursion(5));
+    }
+    
+    static void sortingAlgorithms() {
+        System.out.println("Sorting Algorhtms:");
+
+        // list to search and sort
+        List<Integer> items = new ArrayList<Integer>(List.of(2, 4, 1, 5, 6));
+        System.out.println("List:    " + items);
+
+        // copy list
+        List<Integer> copy = new ArrayList<Integer>(items);
+        
+        // shuffles the list for random order
+        Collections.shuffle(copy);
+        System.out.println("Shuffle: " + copy);
+        copy = new ArrayList<Integer>(items);
+
+        // swaps the order of two elements
+        Collections.swap(copy, 0, 4);
+        System.out.println("Swap:    " + copy);
+        copy = new ArrayList<Integer>(items);
+
+        // reverses the order of the list
+        Collections.reverse(copy);
+        System.out.println("Reverse: " + copy);
+        copy = new ArrayList<Integer>(items);
+
+        // sorts the list using natural order
+        Collections.sort(copy);
+        System.out.println("Sort:    " + copy);
+    }
+
+    static void searchingAlgorthms() {
+        System.out.println("Searching Algortihms:");
+
+        // list to search and sort
+        List<Integer> items = new ArrayList<Integer>(List.of(2, 4, 1, 5, 6));
+        System.out.println("List:     " + items);
+
+        // binary search
+        Integer whereElement = Collections.binarySearch(items, 6);
+        System.out.println("6 is at:  " + whereElement);
+
+        // maximum search
+        Integer maxElement = Collections.min(items);
+        System.out.println("Maximum:  " + maxElement);
+
+        // minimum search
+        Integer minElement = Collections.min(items);
+        System.out.println("Minimum:  " + minElement);
+
+        // frequency search
+        Integer freqElement = Collections.frequency(items, 2);
+        System.out.println("6 occurs: " + freqElement + " times");
+
+        // disjoint search
+        Boolean isDisjoint = Collections.disjoint(items, items);
+        System.out.println("List ∩ List: " + isDisjoint);
+    }
+
+    public static void main() {
+        searchingAlgorthms();
+        System.out.println();
+        sortingAlgorithms();
+        System.out.println();
+        userAlgorithms();
     }
 }
