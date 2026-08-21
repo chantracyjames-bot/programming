@@ -1,4 +1,4 @@
-package inventory;
+package tracy.inventory;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.BufferedReader;

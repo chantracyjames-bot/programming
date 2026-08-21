@@ -1,4 +1,4 @@
-package inventory;
+package tracy.inventory;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -40,7 +40,7 @@ public class InventorySystem {
 
     public static void mainProgram() {
         try {
-            File testFile = new File("./inventory", "inventory_database.txt");
+            File testFile = new File("build/inventory_database.txt");
             if (!testFile.exists()) {
                 testFile.createNewFile();
                 throw new IOException("File not found.");
@@ -55,7 +55,7 @@ public class InventorySystem {
             System.out.println("Error: " + e.getMessage());
             System.out.println("Created a new file.");
         } catch (InputMismatchException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error: " + "Invalid input!");
             System.out.println("Please try again.");
         } catch (CustomExceptions.ProductIDAlreadyExistsException e) {
             System.out.println("Error: " + e.getMessage());

@@ -1,4 +1,4 @@
-package inventory;
+package tracy.inventory;
 
 public class CustomExceptions {
     public static class ProductIDAlreadyExistsException extends RuntimeException {

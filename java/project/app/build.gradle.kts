@@ -37,10 +37,14 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = "tracy.calc.MainCalculator"
+
+    // CSP104 - Calculator Assignment
+    // mainClass = "tracy.calc.MainCalculator"
+
+    // CC104 - Inventory Database Finals Project
+    mainClass = "tracy.inventory.FinalsProject"
 }
 
-tasks.named<Test>("test") {
-    // Use JUnit Platform for unit tests.
-    useJUnitPlatform()
+tasks.named<JavaExec>("run") {
+    standardInput = System.`in`
 }
