@@ -196,8 +196,32 @@
                 JLabel whatToSay = new JLabel("What to say?: ");
                 ```
             - Methods:
+                - .setFont()
+                    - Definition:`
+                        - Sets the font of the _JLabel_ object.
+                        - Takes a _Font_ object as an arguemnt.
+                    - Syntax:
+                        ```
+                        <labelName>.setFont(<fontObject>);
+                        ```
+                    - Example:
+                        ```
+                        whatToSay.setFont(new Font("Serif", Font.ITALIC, 21));
+                        ```
+                - .setHorizontalAlignment()
+                    - Definition:
+                        - Sets the horizontal alignment of a _JLabel_ text.
+                        - Takes in any of the alignment constants of Swing.
+                    - Syntax:
+                        ```
+                        <labelName>.setHorizontalAlignment(<direction>)
+                        ```
+                    - Example:
+                        ```
+                        whatToSay.setHorizontalAlignment(JLabel.CENTER);
+                        ```
                 - .setText()
-                    - Definition
+                    - Definition:
                         - A setter method that sets the text in the _JLabel_ object to whatever the argument is.
                     - Syntax:
                         ```
@@ -207,6 +231,17 @@
                         ```
                         whatToSay.setText("you did not say " + maybe);
                         ```
+        - JTextArea
+            - Definition:
+                - Is a component that displays a box of text that the user can edit/
+            - Syntax:
+                ```
+                JTextArea <textAreaName> = new JTextArea(<string>);
+                ```
+            - Example:
+                ```
+                JTextArea editMe = new JTextArea("Don't Edit Me");
+                ```
         - JTextField
             - Definition:
                 - Is a component that allows users to type single-line text input.
@@ -326,3 +361,29 @@
                         ```
                         SwingUtilities.invokeAndWait(() -> {...});
                         ```
+        - ActionListener
+            - Definition:
+                - Is an interface that is used to create event listeners.
+                - Event listeners are objects that define functions that are called when a certain even happens; like when a user cliks the mouse of presses a key on the keyboard.
+                - To create an event listener, the ActionListener is inherited (implemented) to a child class.
+                - Do note that the ActionListener and AciontEvent classes are imported before any code can be created using them. They are imported from the _java.awt.event_ package.
+                - Syntax:
+                    ```
+                    import java.awt.event.ActionEvent;
+                    import java.awt.event.ActionListener;
+                    ```
+            - Syntax:
+                ```
+                <modifier> class <className> implements ActionListener {
+                    <modifier> <dataType> actionPerformed(ActionEvent <eventObject>) {...}
+                }
+                ```
+            - Example:
+                ```
+                public class eventStuff implements ActionListener {
+                    // the class must define the abstract method
+                    public void actionPerformed(ActionEvent yes) {
+                        System.out.println("smth smth");
+                    }
+                }
+                ```
