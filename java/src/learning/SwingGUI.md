@@ -58,6 +58,84 @@
         - Note
             - _import java.swing.*_ imports all top-level classes from the _javax.swing_ package.
             - the 'x' in _javax_ stands for extension, due to Swing being built on top of the old AWT.
+        - JButton
+            - Definition:
+                - Is a component that allows an interactive visual button object.
+            - Syntax:
+                ```
+                JButton <buttomName> = new JButton(<buttonLabe>);
+                ```
+                - Where
+                    - buttonName
+                        - Is the name of the _JButton_ object.
+                    - buttonLabel
+                        - Is the label on the button when displayed.
+            - Example:
+                ```
+                JButton clickMe = new JButton("Don't Click Me");
+                ```
+            - Methods:
+                - .addActionListener()
+                    - Definition:
+                        - Adds an event listener object to a _JButton_ object's event handling list.
+                        - The argument is usually the single method of the _ActionListener_ interface, the abstract method of _actionPerformed_ which takes an _ActionEvent_ object.
+                    - Syntax:
+                        ```
+                        <buttonName>.addActionListener(<listenerObject>);
+                        ```
+                    - Example:
+                        ```
+                        // uses a lambda expression implementing the ActionInterface's abstract method
+                        clickMe.addActionListener(e -> {...});
+                        ```
+                    - Sample Code:
+                        ```
+                        clickMe.addActionListener(e -> {
+                            String maybe = youShouldSay.getText();
+                            whatToSay.setText("you did not say "+ maybe);
+                        })
+        - JCheckBox
+            - Definition:
+                - Is a square toggle box with a text label, used to represent independent true/false choices or values.
+            - Syntax:
+                ```
+                JCheckBox <boxName> = new JCheckBox(<boxLabel>, <boxInitialState>);
+                ```
+                - Where:
+                    - boxName
+                        - Is the name of the _JCheckBox_ object.
+                    - boxLabel
+                        - Is the text that is present on the check box.
+                    - boxInitialState
+                        - is the initially selected boolean, true for checked, false for unchecked.
+            - Example:
+                ```
+                JCheckBox chessStuff = new JCheckBox("Checkmate", true);
+                ```
+            - Methods:
+                - .isSelected()
+                    - Description:
+                        - Returns a boolean value to whatever state the button is in, true is ON, false if OFF.
+                    - Syntax:
+                        ```
+                        <toggleName>.isSelected();
+                        ```
+                    - Example:
+                        ```
+                        turnItOff.isSelected();
+                        ```
+        - JColorChooser
+            - Definition:
+                - Is a class that provides a pane of controls to allow a user to manipulate and select a user.
+            - Syntax:
+                ```
+                JColorChooser <chooserName> = new JColorChooser(<colorObject>);
+                ```
+            - Example:
+                ```
+                // default value is white
+                JColorChooser colorBlind = new JColorChooser();
+                ```
         - JFrame
             - Definition:
                 - _JFrame_ is a top-level container class extending _java.awt.Frame_, _java.awt.Window_, _java.awt.Container_, and _java.awt.Component_.
@@ -138,6 +216,92 @@
                         ```
                         idkman.setVisible(true);
                         ```
+        - JFormattedTextField
+            - Definition:
+                - A single-line text field that restricts input according to a defined pattern.
+                - Useful for having an input where only numbers are allowed.
+            - Syntax:
+                ```
+                JFormattedTextField <fFieldName> = new JFormattedTextField(<formatObject>);
+                ```
+                - Where:
+                    - fFieldName
+                        - Is the name of the _JFormattedTextField_ object.
+                    - formatObject
+                        - Used to specify what type of format the text field should take, e.g. _MaskFormatter_.
+            - Example:
+                ```
+                JFormattedTextField stringsOnly = new JFormattedTextField(new MaskFormatter("(##) ###-###-####"));
+                ```
+            - Methods:
+                - .setColumns()
+                    - Definition:
+                        - used to set the number of columns of the text field.
+                    - Syntax:
+                        ```
+                        <fFieldName>.setColumns(<int>);
+                        ```
+                    - Example:
+                        ```
+                        stringsOnly.setColumns(15);
+                        ```
+        - JLabel
+            - Definition:
+                - A class based on JComponent that is used for displaying non-editable text or images.
+                - It can also be used to display images using _Icon_ objects.
+            - Syntax:
+                ```
+                JLabel <labelName> = new JLabel(<labelLabel>, <labelAlignment>);
+                ```
+                - Where:
+                    - labelName
+                        - Is the name of the _JLabel_ object.
+                    - labelLabel
+                        - Is the text that the _JLabel_ object will display.
+                    - labelAlignment
+                        - Where the text is aligned, can be Centered, Right, or Left.
+                        - This arguemnt is optional.
+            - Example:
+                ```
+                // justifies the text to the right
+                JLabel whatToSay = new JLabel("What to say?: ", JLabel.RIGHT);
+                ```
+            - Methods:
+                - .setFont()
+                    - Definition:`
+                        - Sets the font of the _JLabel_ object.
+                        - Takes a _Font_ object as an arguemnt.
+                    - Syntax:
+                        ```
+                        <labelName>.setFont(<fontObject>);
+                        ```
+                    - Example:
+                        ```
+                        whatToSay.setFont(new Font("Serif", Font.ITALIC, 21));
+                        ```
+                - .setHorizontalAlignment()
+                    - Definition:
+                        - Sets the horizontal alignment of a _JLabel_ text.
+                        - Takes in any of the alignment constants of Swing.
+                    - Syntax:
+                        ```
+                        <labelName>.setHorizontalAlignment(<direction>)
+                        ```
+                    - Example:
+                        ```
+                        whatToSay.setHorizontalAlignment(JLabel.CENTER);
+                        ```
+                - .setText()
+                    - Definition:
+                        - A setter method that sets the text in the _JLabel_ object to whatever the argument is.
+                    - Syntax:
+                        ```
+                        <labelName>.setText(<string>);
+                        ```
+                    - Example:
+                        ```
+                        whatToSay.setText("you did not say " + maybe);
+                        ```
         - JPanel
             - Definition:
                 - It is a lightweight intermediate container that is a subclass from JComponent.
@@ -179,75 +343,113 @@
                         ```
                         pane.add(whatToSay);
                         ```
-        - JLabel
-            - Definition:
-                - A class based on JComponent that is used for displaying non-editable text or images.
+        - JPasswordField
+            - Description:
+                - Is a component that presents a single-line text field that obscures characters to securely capture passwords.
             - Syntax:
                 ```
-                JLabel <labelName> = new JLabel(<labelContent>);
+                JPasswordField <pfieldName> = new JPasswordField(<pfieldSize>);
                 ```
                 - Where:
-                    - labelName
-                        - Is the name of the _JLabel_ object.
-                    - labelContent
-                        - Is the content that the _JLabel_ object will display.
+                    - pfieldName
+                        - Is the name of the _JPasswordField_ object.
+                    - pfieldSize
+                        - Is the initial size of the text field to certain number of columns
+                        - Do note that it does not cap the maximum input length, only sets the width of the text field.
             - Example:
                 ```
-                JLabel whatToSay = new JLabel("What to say?: ");
+                JPasswordField givLogin = new JPasswordField(10);
                 ```
             - Methods:
-                - .setFont()
-                    - Definition:`
-                        - Sets the font of the _JLabel_ object.
-                        - Takes a _Font_ object as an arguemnt.
-                    - Syntax:
-                        ```
-                        <labelName>.setFont(<fontObject>);
-                        ```
-                    - Example:
-                        ```
-                        whatToSay.setFont(new Font("Serif", Font.ITALIC, 21));
-                        ```
-                - .setHorizontalAlignment()
+                - .getPassword()
                     - Definition:
-                        - Sets the horizontal alignment of a _JLabel_ text.
-                        - Takes in any of the alignment constants of Swing.
+                        - Returns a char[] value from what the user has typed in.
                     - Syntax:
                         ```
-                        <labelName>.setHorizontalAlignment(<direction>)
+                        <pfieldName>.getPassword();
                         ```
                     - Example:
                         ```
-                        whatToSay.setHorizontalAlignment(JLabel.CENTER);
+                        givLogin.getPassword();
                         ```
-                - .setText()
-                    - Definition:
-                        - A setter method that sets the text in the _JLabel_ object to whatever the argument is.
-                    - Syntax:
-                        ```
-                        <labelName>.setText(<string>);
-                        ```
-                    - Example:
-                        ```
-                        whatToSay.setText("you did not say " + maybe);
-                        ```
-        - JTextArea
-            - Definition:
-                - Is a component that displays a box of text that the user can edit/
+        - JRadioButton
+            - Description:
+                - Is a component that presents circular buttons for mutually exclusive options.
+            - Note:
+                - This component requires to be grouped in a _ButtonGroup_ object.
             - Syntax:
                 ```
-                JTextArea <textAreaName> = new JTextArea(<string>);
+                JRadioButton <radioName> = new JRadioButton(<radioLabel>);
                 ```
+                - Where:
+                    - radioName
+                        - Is the name of the _JRadioButton_ object.
+                    - radioLabel
+                        - Is the text present next to the button.
+            - Example:
+                ```
+                JRadioButton idkWhatToNameThisThing = new JRadioButton("This has a name");
+                ```
+        - JTextArea
+            - Definition:
+                - Is a component that displays a box of text that the user can edit.
+            - Syntax:
+                ```
+                JTextArea <textAreaName> = new JTextArea(<textAreaLabel>, <textAreaRows>, <textAreaColumns>);
+                ```
+                - Where:
+                    - textAreaName
+                        - The name of the _JTextArea_ object.
+                    - textAreaLabel
+                        - The text that appears in the _JTextArea_ object.
+                    - textAreaRows
+                        - An integer that defines the number of rows in the text area.
+                    - textAreaColumns
+                        - An integer that defines the number of columns in the text area.
             - Example:
                 ```
                 JTextArea editMe = new JTextArea("Don't Edit Me");
                 ```
+            - Methods:
+                - .append()
+                    - Definition:
+                        - Appends a string to the text area, used to add text independent from the initial declaration of the object.
+                    - Syntax:
+                        ```
+                        <textAreaName>.append(<string>);
+                        ```
+                    - Example:
+                        ```
+                        editMe.append("edit here");
+                        ```
+                - .setLineWrap()
+                    - Definition:
+                        - Takes in a boolean to indicate whether text should wrap around or not.
+                    - Syntax:
+                        ```
+                        <textAreaName>.setLineWrap(<boolean>);
+                        ```
+                    - Example:
+                        ```
+                        editMe.setLineWrap(true);
+                        ```
+                - setWrapStyleWord()
+                    - Definition:
+                        - Takes in a boolean to indicate whether words should stay together when it line wraps or not.
+                    - Syntax:
+                        ```
+                        <textAreaName>.setWrapStyleWord(<boolean>);
+                        ```
+                    - Example:
+                        ```
+                        editMe.setWrapStyleWord(false);
+                        ```
         - JTextField
             - Definition:
                 - Is a component that allows users to type single-line text input.
             - Syntax:
                 ```
-                JTextField <fieldName> = new JTextField(<fieldSize>);
+                JTextField <fieldName> = new JTextField(<fieldSize>, <fieldAlignment>);
                 ```
                 - Where:
                     - fieldName
@@ -255,6 +457,9 @@
                     - fieldSize
                         - Is the initial size of the text field to certain number of columns
                         - Do note that it does not cap the maximum input length, only sets the width of the text field.
+                    - fieldAlignment
+                        - Where the text is aligned, can be Centered, Right, or Left.
+                        - This arguemnt is optional.
             - Example:
                 ```
                 JTextField youShouldSay = new JTextField(10);
@@ -271,42 +476,62 @@
                         ```
                         youShouldSay.getText();
                         ```
-        - JButton
+        - JToggleButton
             - Definition:
-                - Is a component that allows an interactive visual button object.
+                - A button with two states, on or off, that remains visually pressed down when clicked and pops back up when clicked again.
             - Syntax:
                 ```
-                JButton <buttomName> = new JButton(<buttonLabek>);
+                JToggleButton <toggleName> = new JToggleButton(<toggleLabel>, <toggleInitialState>);
                 ```
-                - Where
-                    - buttonName
-                        - Is the name of the _JButton_ object.
-                    - buttonLabel
-                        - Is the label on the button when displayed.
+                - Where:
+                    - toggleName
+                        - Is the name of the _JToggleButton_ object.
+                    - toggleLabel
+                        - Is the text that is present on the button.
+                    - toggleInitialState
+                        - The initially selected boolean, on or off.
             - Example:
                 ```
-                JButton clickMe = new JButton("Don't Click Me");
+                JToggleButton turnItOff = new JToggleButton("stop", false);
                 ```
             - Methods:
-                - .addActionListener()
-                    - Definition:
-                        - Adds an event listener object to a _JButton_ object's event handling list.
-                        - The argument is usually the single method of the _ActionListener_ interface, the abstract method of _actionPerformed_ which takes an _ActionEvent_ object.
+                - .isSelected()
+                    - Description:
+                        - Returns a boolean value to whatever state the button is in, true is ON, false if OFF.
                     - Syntax:
                         ```
-                        <buttonName>.addActionListener(<listenerObject>);
+                        <toggleName>.isSelected();
                         ```
                     - Example:
                         ```
-                        // uses a lambda expression implementing the ActionInterface's abstract method
-                        clickMe.addActionListener(e -> {...});
+                        turnItOff.isSelected();
                         ```
-                    - Sample Code:
-                        ```
-                        clickMe.addActionListener(e -> {
-                            String maybe = youShouldSay.getText();
-                            whatToSay.setText("you did not say "+ maybe);
-                        })
+        - ActionListener
+            - Definition:
+                - Is an interface that is used to create event listeners.
+                - Event listeners are objects that define functions that are called when a certain even happens; like when a user cliks the mouse of presses a key on the keyboard.
+                - To create an event listener, the ActionListener is inherited (implemented) to a child class.
+                - Do note that the ActionListener and AciontEvent classes are imported before any code can be created using them. They are imported from the _java.awt.event_ package.
+                - Syntax:
+                    ```
+                    import java.awt.event.ActionEvent;
+                    import java.awt.event.ActionListener;
+                    ```
+            - Syntax:
+                ```
+                <modifier> class <className> implements ActionListener {
+                    <modifier> <dataType> actionPerformed(ActionEvent <eventObject>) {...}
+                }
+                ```
+            - Example:
+                ```
+                public class eventStuff implements ActionListener {
+                    // the class must define the abstract method
+                    public void actionPerformed(ActionEvent yes) {
+                        System.out.println("smth smth");
+                    }
+                }
+                ```
         - SwingUtilities
             - Definition:
                 - Java Swing components are not thread-safe, it is vulnerable to memory corruption and visual glitches.
@@ -361,29 +586,3 @@
                         ```
                         SwingUtilities.invokeAndWait(() -> {...});
                         ```
-        - ActionListener
-            - Definition:
-                - Is an interface that is used to create event listeners.
-                - Event listeners are objects that define functions that are called when a certain even happens; like when a user cliks the mouse of presses a key on the keyboard.
-                - To create an event listener, the ActionListener is inherited (implemented) to a child class.
-                - Do note that the ActionListener and AciontEvent classes are imported before any code can be created using them. They are imported from the _java.awt.event_ package.
-                - Syntax:
-                    ```
-                    import java.awt.event.ActionEvent;
-                    import java.awt.event.ActionListener;
-                    ```
-            - Syntax:
-                ```
-                <modifier> class <className> implements ActionListener {
-                    <modifier> <dataType> actionPerformed(ActionEvent <eventObject>) {...}
-                }
-                ```
-            - Example:
-                ```
-                public class eventStuff implements ActionListener {
-                    // the class must define the abstract method
-                    public void actionPerformed(ActionEvent yes) {
-                        System.out.println("smth smth");
-                    }
-                }
-                ```
