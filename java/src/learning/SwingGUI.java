@@ -1,13 +1,14 @@
 // import needed libraries
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
+
 import java.awt.FlowLayout;
+import java.text.ParseException;
 
 // main class
 public class SwingGUI {
     // driver method
     static void openGUI() {
-        // Run UI creation on the Event Dispatch Thread
-        SwingUtilities.invokeLater(() -> {
             // creates a new JFrame object
             // this is what the window is
             JFrame idkman = new JFrame("Greeting App");
@@ -49,10 +50,54 @@ public class SwingGUI {
             idkman.add(pane);
             // sets the window to be visible
             idkman.setVisible(true);
-        });
+    }
+
+    static void testStuff() throws ParseException {
+        JFrame newWindow = new JFrame("Window");
+        JPanel newPanel = new JPanel(new FlowLayout());
+
+        JToggleButton toggleButton = new JToggleButton("Toggle");
+        JRadioButton radioButton1 = new JRadioButton("yes");
+        JRadioButton radioButton2 = new JRadioButton("no");
+        JRadioButton radioButton3 = new JRadioButton("maybe");
+        ButtonGroup buttonGroup = new ButtonGroup();
+        buttonGroup.add(radioButton1);
+        buttonGroup.add(radioButton2);
+        buttonGroup.add(radioButton3);
+        JCheckBox checkBox = new JCheckBox("Check box");
+        JTextArea textArea = new JTextArea("Text area", 10, 10);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        JTextField textField = new JTextField("Text field", 10);
+        JPasswordField passwordField = new JPasswordField(10);
+        JFormattedTextField formattedTextField = new JFormattedTextField(new MaskFormatter("(##) ###-###-####"));
+        formattedTextField.setColumns(10);
+        JLabel label = new JLabel("Label", JLabel.CENTER);
+
+        newPanel.add(toggleButton);
+        newPanel.add(radioButton1);
+        newPanel.add(radioButton2);
+        newPanel.add(radioButton3);
+        newPanel.add(checkBox);
+        newPanel.add(textArea);
+        newPanel.add(textField);
+        newPanel.add(passwordField);
+        newPanel.add(formattedTextField);
+        newPanel.add(label);
+
+        newWindow.add(newPanel);
+        newWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        newWindow.setSize(400, 600);
+        newWindow.setVisible(true);
     }
 
     public static void main(String[] args) {
-        openGUI();
+        SwingUtilities.invokeLater(() -> {
+            try {
+                testStuff();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }
