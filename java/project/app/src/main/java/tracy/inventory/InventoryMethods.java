@@ -8,12 +8,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class InventoryMethods {
+    Scanner in = new Scanner(System.in);
+
     public void placeholder() {
         System.out.println("This is a placeholder option.");
     }
 
     public void addProduct() {
-        Scanner in = new Scanner(System.in);
         System.out.print("Enter Product ID: ");
         String searchItem = in.nextLine();
         String[] invContent = null;
@@ -50,7 +51,6 @@ public class InventoryMethods {
     }
 
     public void updateProduct() {
-        Scanner in = new Scanner(System.in);
         System.out.print("Enter Product ID: ");
         String searchItem = in.nextLine();
         String[] invContent = null;
@@ -88,7 +88,6 @@ public class InventoryMethods {
     }
 
     public void removeProduct() {
-        Scanner in = new Scanner(System.in);
         System.out.print("Enter Product ID: ");
         String searchItem = in.nextLine();
         String[] invContent = null;
@@ -122,7 +121,6 @@ public class InventoryMethods {
     }
 
     public void displayProduct() {
-        Scanner in = new Scanner(System.in);
         System.out.print("Enter Product ID: ");
         String searchItem = in.nextLine();
         String[] invContent = null;

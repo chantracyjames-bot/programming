@@ -1,6 +1,5 @@
 package tracy.conversion;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MenuLogic {

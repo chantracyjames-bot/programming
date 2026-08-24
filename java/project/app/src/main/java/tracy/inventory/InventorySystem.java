@@ -39,6 +39,8 @@ public class InventorySystem {
     }
 
     public static void mainProgram() {
+        Scanner in = new Scanner(System.in);
+
         try {
             File testFile = new File("build/inventory_database.txt");
             if (!testFile.exists()) {
@@ -47,7 +49,7 @@ public class InventorySystem {
             }
 
             mainScreen();
-            Scanner in = new Scanner(System.in);
+            
             System.out.print("Input: ");
             userChoiceParser(in.nextInt());
             
@@ -65,6 +67,8 @@ public class InventorySystem {
             System.out.println("Please try again.");
         } catch (NumberFormatException e) {
             throw new InputMismatchException("Invalid input!");
-        } 
+        } finally {
+            in.close();
+        }
     }
 }
