@@ -22,3 +22,18 @@ The languages that I am familiar of are:
   * JavaScript
 
 Happy 1st Month of being in GitHub!!!
+
+## Future Plans / Task Lists
+I am still a bit uncertain on where this repository is going to go but here are my ambitions to achieve in the coming weeks, though progress if very slow.
+
+- [ ] Notes into .md files
+  - [ ] Convert C.
+  - [ ] Convert C++.
+  - [ ] Convert Java.
+  - [ ] Convert Rust.
+  - [ ] Convert Python.
+  - [ ] Convert SQL.
+  - [ ] Convert Bash.
+  - [ ] Convert Assembly.
+- [ ] (placeholder)
+<!-- i have so much to do huhuhuhu -->
