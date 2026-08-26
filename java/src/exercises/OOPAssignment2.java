@@ -25,32 +25,32 @@ enum Menu {
 
 public class OOPAssignment2 {
     static void print_main_menu() {
-        System.out.printf("\n%s\n%-6s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n", 
-        "================================",
+        System.out.printf("\n%s\n%-12s%s\n%s\n%s%-30s%s\n%s%-30s%s\n%s%-30s%s\n%s%-30s%s\n%s%-30s%s\n%s\n", 
+        "===========================================",
         "", "FOOD ORDERING MENU",
-        "================================",
-        "1. Burger          PHP 50.00",
-        "2. Pizza           PHP 120.00",
-        "3. Fried Chicken   PHP 90.00",
-        "4. French Fries    PHP 60.00",
-        "5. Soft Drink      PHP 40.00",
-        "================================"
+        "===========================================",
+        "1. ", Menu.ITEM_1.getName(), " PHP 50.00",
+        "2. ", Menu.ITEM_2.getName(), " PHP 50.00",
+        "3. ", Menu.ITEM_3.getName(), " PHP 50.00",
+        "4. ", Menu.ITEM_4.getName(), " PHP 50.00",
+        "5. ", Menu.ITEM_5.getName(), " PHP 50.00",
+        "============================================"
         );
     }
 
     static void print_summary_header() {
-        System.out.printf("\n%s\n%-9s%s\n%s\n", 
-        "================================",
+        System.out.printf("\n%s\n%-16s%s\n%s\n", 
+        "============================================",
         "", "ORDER SUMMARY",
-        "================================"
+        "============================================"
         );
     }
 
     static void print_summary_footer() {
-        System.out.printf("\n%s\n%-4s%s\n%s\n", 
-        "================================",
+        System.out.printf("\n%s\n%-10s%s\n%s\n", 
+        "============================================",
         "", "THANK YOU FOR ORDERING!",
-        "================================"
+        "============================================"
         );
     }
 
