@@ -581,9 +581,10 @@
         Math.abs(-10); // 10
         ```
 - .addExact()
-    - adds two values
-    - returns a long or an int value
-        - throws a ArithmeticException if the sum causes an overflow
+    - Definition:
+        - Adds two value, returnng a long or an int value.
+    - Note:
+        - This method throws a ArithmeticException if the sum causes an overflow.
     - Syntax:
         ```
         Math.addExact(x, y);
@@ -593,8 +594,8 @@
         Math.addExact(1, 1); // 2
         ```
 - .cbrt()
-    - performs a cube root operation
-    - returns a double value
+    - Definition:
+        - Performs a cube root operatiom, returning a double value.
     - Syntax:
         ```
         Math.cbrt(x);
@@ -604,8 +605,8 @@
         Math.cbrt(27); // 3
         ```
 - .ceil()
-    - rounds a number to the nearest next integer
-    - returns a double value
+    - Definition:
+        - Rounds a number to the nearest next integer, returning a double value.
     - Syntax:
         ```
         Math.ceil(x);
@@ -615,8 +616,8 @@
         Math.ceil(3.14); // 4.0
         ```
 - .copySign()
-    - copies the sign of the second argument and places it on the first
-    - returns double or a float value
+    - Definition:
+        - Copies the sign of the second argument and places it on the first, returning double or a float value.
     - Syntax:
         ```
         Math.copySign(x, y);
@@ -626,9 +627,10 @@
         Math.copySign(-1, 4); // 1
         ```
 - decrementExact()
-    - returns exactly one integer less than the argument
-    - returns an long or an int value
-        - throws an ArithmeticException if an overflow occurs
+    - Definition:
+        - Returns exactly one integer less than the argument
+    - Note:
+        - This method returns an long or an int value and throws an ArithmeticException if an overflow occurs.
     - Syntax:
         ```
         Math.decrementExact(x);
@@ -638,7 +640,8 @@
         Math.decrementExact(1); // 0
         ```
 - .floor()
-    - rounds a number to the nearest preceding integer
+    - Definition:
+        - Rounds a number to the nearest preceding integer.
     - Syntax:
         ```
         Math.floor(x);
@@ -648,9 +651,9 @@
         Math.floor(2.72); // 2.0
         ```
 - .floorDiv()
-    - performs a division operation between two arguments
-        - and then rounds the quotient down
-    - returns a long or an int value
+    - Definitin:
+        - Performs a division operation between two arguments, and then rounds the quotient down.
+        - Thie method returns a long or an int value.
     - Syntax:
         ```
         Math.floorDiv(x, y);
@@ -660,9 +663,9 @@
         Math.floorDiv(10, 3); // 3
         ```
 - .floorMod()
-    - performs a division operation between two arguements
-        - and then returns the modulo of the remainder rounded up
-    - returns a long or an int value
+    - Defintion:
+        - Performs a division operation between two arguements, and then returns the modulo of the remainder rounded up.
+        - This method returns a long or an int value.
     - Syntax:
         ```
         Math.floorMod(x, y);
@@ -672,9 +675,10 @@
         Math.floorMod(10, 3); // 1
         ```
 - .incrementExact()
-    - returns exactly one integer more than the argument
-    - returns a long or an int value
-        - throws an ArithmeticException if an overflow occurs
+    - Definition:
+        - Returns exactly one integer more than the argument.
+    - Note:
+        - This method returns a long or an int value, throws an ArithmeticException if an overflow occurs.
     - Syntax:
         ```
         Math.incrementExact(x);
@@ -684,8 +688,8 @@
         Math.incrementExact(1); // 2 
         ```
 - .max()
-    - queries the highest value between two values
-    - returns a double, float, int, or long value
+    - Definition:
+        - Queries the highest value between two values, returning either a double, float, int, or long value.
     - Syntax:
         ```
         Math.max(x, y);
@@ -695,8 +699,8 @@
         Math.max(9, 5); // 9
         ```
 - .min()
-    - queries the lowest value between two values
-    - returns a double, float, int or long value
+    - Definition:
+        - Queries the lowest value between two values, returning either a double, float, int or long value.
     - Syntax:
         ```
         Math.min(x, y);
@@ -706,9 +710,10 @@
         Math.min(9, 5); // 5
         ```
 - .multipleExact()
-    - returns the exact product between two arguements
-    - returns a long or an int value
-        - throws an ArithmeticException if an overflow occurs
+    - Definition:
+        - Returns the exact product between two arguements.
+    - Note:
+        - This method returns a long or an int value, and throws an ArithmeticException if an overflow occurs.
     - Syntax:
         ```
         Math.multiplyExact(x, y);
@@ -718,9 +723,10 @@
         Math.multiplyExact(1, 1); // 1
         ```
 - .negateExact()
-    - returns the exact number but in the opposite sign (domain)
-    - returns a long or an int value
-        - throws an ArithmeticException if an overflow occurs
+    - Definition:
+        - Returns the exact number but in the opposite sign (domain).
+    - Note:
+        - This method returns a long or an int value, and throws an ArithmeticException if an overflow occurs.
     - Syntax:
         ```
         Math.negateExact(x);
@@ -730,9 +736,8 @@
         Math.negateExact(Integer.MIN_VALUE); -> Error
         ```
 - .nextAfter()
-    - finds the next floating point number 
-        - in the direction of the second argument
-    - returns a double or float value
+    - Definition:
+        - Finds the next floating point number in the direction of the second argument, returns a double or float value.
     - Syntax:
         ```
         Math.nextAfter(x, y);
@@ -742,9 +747,8 @@
         Math.nextAfter(1f, 2f); // 1.0000001
         ```
 - .nextDown()
-    - finds the next floating point number
-        - in the negative direction
-    - returns a double or float value
+    - Definition:
+        - Finds the next floating point number in the negative direction, returns a double or float value.
     - Syntax:
         ```
         Math.nextDown(x);
@@ -754,9 +758,8 @@
         Math.nextDown(1); // 0.99999994
         ```
 - .nextUp()
-    - finds the next floating point number
-        - in the positive direction
-    - returns a double or float number
+    - Definition:
+        - Finds the next floating point number in the positive direction, returning a double or float number.
     - Syntax:
         ```
         Math.nextUp(x);
@@ -766,9 +769,8 @@
         Math.nextUp(1); // 1.0000001
         ```
 - .pow()
-    - raises a number to a power
-        - the first argument is the base
-        - the second argument is the exponent
+    - Definition:
+        - Raises a number to a power with the first argument being the base and the second argument being the exponent.
     - Syntax:
         ```
         Math.pow(x, y);
@@ -778,8 +780,10 @@
         Math.pow(3, 2); // 9
         ```
 - .random()
-    - returns a double ranging from 0.0 to 1.0
-        - 0.0 is inclusive, 1.0 is exclusive
+    - Definition:
+        - Returns a double ranging from 0.0 to 1.0.
+    - Note:
+        - 0.0 is inclusive, and 1.0 is exclusive.
     - Syntax
         Math.random();
         ```
@@ -788,10 +792,10 @@
         Math.random(); // 0.00 to 0.99 
         ```
 - .rint()
-    - rounds a number to the nearest integer
-        - if the both integers are equally as far (0.5)
-            - the method returns the nearest even number
-    - returns a double value
+    - Definition:
+        - Rounds a number to the nearest integer, returning a double value.
+    - Note
+        - If the both integers are equally as far (0.5), the method returns the nearest even number.
     - Syntax:
         ```
         Math.rint(x);
@@ -801,7 +805,8 @@
         Math.rint(1.5); // 2   
         ```
 - .round()
-    - rounds a number to the nearest integer
+    - Definition:
+        - Rounds a number to the nearest integer.
     - Syntax:
         ```
         Math.round(x);
@@ -811,10 +816,10 @@
         Math.round(0.6); // 1
         ```
 - .scalb()
-    - performs the mathemetical operation of x*2^y
-        - the first argument is the base
-        - the second argument is the exponent of 2
-    - returns a double or a float value
+    - Definition:
+        - Performs the mathemetical operation of x*2^y, with the first argument being the base and the second argument being the exponent of 2.
+    - Note:
+        - This method returns a double or a float value.
     - Syntax:
         ```
         Math.scalb(x, y);
@@ -824,11 +829,13 @@
         Math.scalb(3.0, 3.0); // 24.0
         ```
 - .signum()
-    - queries the sign of the number
-    - return a double or a float
-        - -1 if the number is negative
-        - 1 if the number is positive
-        - 0 if the number is exactly zero
+    - Definition:
+        - Queries the sign of the number.
+    - Note:
+        - This method returns a double or a float only if:
+            - -1 if the number is negative.
+            - 1 if the number is positive.
+            - 0 if the number is exactly zero.
     - Syntax:
         ```
         Math.signum(x);
@@ -838,7 +845,8 @@
         Math.signum(10); // 1.0
         ```
 - .sqrt()
-    - performs a square root operation
+    - Definition:
+        - Performs a square root operation.
     - Syntax:
         ```
         Math.sqrt(x);
@@ -848,9 +856,10 @@
         Math.sqrt(9); // 3
         ```
 - .subtractExact()
-    - subtracts two values
-    - returns a long or an int value
-        - throws a ArithmeticException if the difference causes an overflow
+    - Definition:
+        - Subtracts two values.
+    - Note:
+        - This method returns a long or an int value, and throws a ArithmeticException if the difference causes an overflow.
     - Syntax:
         ```
         Math.subtractExact(x, y);
@@ -860,9 +869,10 @@
         Math.subtractExact(1, 1); // 0
         ```
 - .toIntExact()
-    - converts a long value to an int value
-    - returns an int value
-        - throws a ArithmeticException if the result causes an overflow
+    - Definition:
+        - Converts a long value to an int value.
+    - Note:
+        - This method returns an int value, and throws a ArithmeticException if the result causes an overflow.
     - Syntax:
         ```
         Math.toIntExact(x);
@@ -872,10 +882,10 @@
         Math.toIntExcat(10L); // 10
         ```
 - .ulp()
-    - returns the unit of least precision of a number
-        - larger numbers have lower precision
-    - returns a double or long value
-        - doubles are more precise than floats
+    - Defintion:
+        - Returns the unit of least precision of a number, with larger numbers having lower precision.
+    - Note:
+        - This method returns a double or long value, and doubles are more precise than floats.
     - Syntax:
         ```
         Math.ulp(x);
