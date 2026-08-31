@@ -3,7 +3,6 @@
 ## Definition:
 - In Java, a package is a group of classes, they differ by name to avoid naming conflicts.
 - built-in packages in java is part of the Java API, is a library of prewritten classes that are free of use, included in the Java Development Environment (JDE)
-## Importing:
 
 ## Java has two types of packages
 - Built-in Packages

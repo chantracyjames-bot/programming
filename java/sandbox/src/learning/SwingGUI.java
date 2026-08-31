@@ -16,6 +16,9 @@ public class SwingGUI {
             idkman.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             // sets the size of the window
             idkman.setSize(670, 690);
+            // sets the window to be unresizable
+            // i am using a window manager (Hyprland), cant tell the difference
+            idkman.setResizable(false);
 
             // creates a new JPanel object
             // this is what the layout of the window is
