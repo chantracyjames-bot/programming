@@ -39,10 +39,10 @@ application {
     // Define the main class for the application.
 
     // CSP104 - Calculator Assignment
-    // mainClass = "tracy.calc.MainCalculator"
+    mainClass = "tracy.calc.MainCalculator"
 
     // CC104 - Inventory Database Finals Project
-    mainClass = "tracy.inventory.FinalsProject"
+    // mainClass = "tracy.inventory.FinalsProject"
 }
 
 tasks.named<JavaExec>("run") {
