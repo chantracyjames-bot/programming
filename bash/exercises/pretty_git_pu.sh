@@ -1,7 +1,5 @@
 #!/bin/bash
 
-DIRECTORY="$HOME/Documents/Programming"
-
 if [[ "${1}" == "-f" ]]; then
     echo "=== Pushing to GitHub (forced) ===" 
     git push -f github main
@@ -17,12 +15,4 @@ elif [[ "${1}" == "-n" ]]; then
 else
     echo "No options selected, use \"-n\" for a normal push or \"-f\" for a forced push."
     exit 1
-fi
-
-if [[ "$(git config list | grep "remote.github.url")" == "remote.github.url=git@github.com:chantracyjames-bot/programming.git" ]]; then
-    # such an idiot
-    cd "$DIRECTORY" || exit
-    export $(cat .env | xargs)
-    export PATH="${DIRECTORY}/python/bin:$PATH"
-    python -u ~/.local/bin/github_stuff.py
 fi
