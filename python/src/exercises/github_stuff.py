@@ -28,7 +28,7 @@ EXEMPTIONS = [
 
 def main() -> None:
     # changes the cwd to the root of the git repo
-    os.chdir("/home/tarcy/Documents/Programming")
+    os.chdir("/home/tarcy/Documents/Projects/programming")
     # loads the .env file
     load_dotenv()
     # creates a Github object
@@ -138,7 +138,7 @@ def print_table(languages: dict, total_count: float) -> None:
 
 # debugging stuff
 def debug() -> None:
-    os.chdir("/home/tarcy_arch/Documents/Programming")
+    os.chdir("/home/tarcy/Documents/Projects/programming")
     load_dotenv()
     git: Github = Github(auth=Auth.Token(os.getenv("TOKEN")))
     repo: Repostitory = git.get_repo("chantracyjames-bot/programming")
