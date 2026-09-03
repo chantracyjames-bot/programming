@@ -1,4 +1,5 @@
 import os
+import argparse
 import subprocess
 from pathlib import Path
 from github import Github
@@ -21,32 +22,65 @@ EXTENSIONS: dict = {
     "Python": [".py"],
     "Rust": [".rs"],
 }
-EXEMPTIONS = [
-    ".png", ".jpg", ".webp", ".jpeg", "gif"
-]
+
+# exempts binary-based files to prevent dumb errors
+EXEMPTIONS = [".png", ".jpg", ".webp", ".jpeg", "gif"]
+
+# made the .env path global and constant
+ENV_PATH = os.environ["HOME"] + "/Documents/Projects/programming/.env"
 
 
+# main function
 def main() -> None:
-    # changes the cwd to the root of the git repo
-    os.chdir("/home/tarcy/Documents/Projects/programming")
-    # loads the .env file
-    load_dotenv()
-    # creates a Github object
-    git: Github = Github(auth=Auth.Token(os.getenv("TOKEN")))
-    # prints the header of the table
-    print_header()
-    langs, total = get_percentage(git)
-    print_table(langs, total)
-    # closes the git object
-    git.close()
+    try:
+        # enables arguemnts in in the terminal
+        parser: ArgumentParser = argparse.ArgumentParser()
+        # adds a single arguments, accessible via the -d flag
+        # requires at least one arguemnt
+        parser.add_argument(
+            "-d",
+            "--directory",
+            nargs="+",
+            type=str,
+            required=True,
+            dest="dir",
+            help="The path to the repository, or repositories.",
+        )
+        # converts the argument into a list
+        args: list[str] = parser.parse_args()
+        # loops through the arguments, becoming an str object
+        for dir in args.dir:
+            # prints the path, for debugging purposes
+            print(dir)
+            # splits the path into a list
+            path: str = dir.split("/")
+            # removes the last element if its empty
+            if path[-1] == '':
+                path.pop(-1)
+            # changes the cwd to the root of the git repo
+            os.chdir(dir)
+            # loads the .env file
+            load_dotenv(dotenv_path=ENV_PATH)
+            # creates a Github object
+            git: Github = Github(auth=Auth.Token(os.getenv("TOKEN")))
+            # prints the header of the table
+            print_header(path[-1])
+            langs, total = get_percentage(git, path[-1])
+            print_table(langs, total)
+            print("-" * 57)
+    except Exception as err:
+        print("An Exception occured, blame tarcy")
+    finally:
+        # closes the git object
+        git.close()
 
 
 # function to get the percentage and everything
-def get_percentage(git: Github) -> (dict, float):
+def get_percentage(git: Github, repo: str) -> (dict, float):
     # retrieves a repostitory using the Github object
-    repo = git.get_repo("chantracyjames-bot/programming")
+    repository = git.get_repo("chantracyjames-bot/" + repo)
     # retrieves the languages present in the repo
-    languages: dict = repo.get_languages()
+    languages: dict = repository.get_languages()
     # removes the 'url' entry, byproduct of the .get_languages() method
     languages.pop("url")
     # adds the 'Others' entry, making sure that unknown files are shown
@@ -71,9 +105,7 @@ def get_language(file_stuff) -> str:
 def get_lang_tally():
     # initializes some variables
     files: list[str] = get_term_output()
-    total_stats: dict = {
-        "chars": 0, "lines": 0
-    }
+    total_stats: dict = {"chars": 0, "lines": 0}
     cur_stats: dict = {
         lang: {"chars": 0, "lines": 0} for lang in list(EXTENSIONS.keys()) + ["Others"]
     }
@@ -107,10 +139,15 @@ def get_term_output() -> list[str]:
     # splits each line stored inside of term_output
     return term_output.stdout.splitlines()
 
-def print_header() -> None:
-    print("---------------------------------------------------------")
-    print(f"| {'Language':^10s} : {'Percent':^7s} : {'Lines':^7s} : {'Chars':^9s} : {'Density':^8s} |")
-    print("---------------------------------------------------------")
+
+def print_header(repo: str) -> None:
+    print("─" * 57)
+    print(f"|{repo.upper() + '\'s Statistics':^55s}|")
+    print("-" * 57)
+    print(
+        f"| {'Language':^10s} : {'Percent':^7s} : {'Lines':^7s} : {'Chars':^9s} : {'Density':^8s} |"
+    )
+    print("-" * 57)
 
 
 def print_table(languages: dict, total_count: float) -> None:
@@ -130,35 +167,12 @@ def print_table(languages: dict, total_count: float) -> None:
             f"| {lang:^10s} : {bytes_count:^6.02f}% : {per_lang[lang]['lines']:^7,d} : {per_lang[lang]['chars']:^9,d} : {per_lang[lang]["chars"] / per_lang[lang]["lines"]:^6.02f}pl |"
         )
     # prints the bottom portion of the table
-    print("---------------------------------------------------------")
+    print("-" * 57)
     print(
         f"| {'Total':^10s} : {total_percent:.02f}% : {total_stuff['lines']:7,d} : {total_stuff['chars']:^9,d} : {total_stuff["chars"] / total_stuff["lines"]:^6.02f}pl |"
     )
 
 
-# debugging stuff
-def debug() -> None:
-    os.chdir("/home/tarcy/Documents/Projects/programming")
-    load_dotenv()
-    git: Github = Github(auth=Auth.Token(os.getenv("TOKEN")))
-    repo: Repostitory = git.get_repo("chantracyjames-bot/programming")
-    languages: dict = repo.get_languages()
-
-    for lang in languages.items():
-        print(f"Languages: {lang[0]:10s} - {lang[1]}")
-
-    exts: list = []
-    for x in EXTENSIONS.values():
-        exts += x
-    print(f'Supported extensions:', end=' ')
-    for x in exts:
-        print(x, end=', ')
-    
-    files: list[str] = get_term_output()
-    for file_stuff in files:
-        ext = Path(file_stuff).suffix.lower()
-        print(f'\nFiles: {file_stuff}', end='') if not ext in exts else print('', end='')
-            
-
+# entry point
 if __name__ == "__main__":
     main()
