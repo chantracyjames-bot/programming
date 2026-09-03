@@ -5,17 +5,17 @@
 # Resulting into a cleaner terminal environment, easier to debug and diagnose.
 
 # From:
-# cd /home/user/Documents/ && clang++ my_program.cpp -o ~/Documents/my_program.o && ~/Documents/my_program.o
+# cd /home/user/Documents/ && clang++ my_program.cpp -o $HOME/Documents/my_program.o && $HOME/Documents/my_program.o
 # To:
 # quick -cr cpp_clang /home/user/Documents/ my_program my_program.cpp
 
 # build folder locations for each language
-ASSEMBLY_BIN="/home/tarcy/Documents/Programming/assembly/bin"
-C_BIN="/home/tarcy/Documents/Programming/c/bin"
-CPP_BIN="/home/tarcy/Documents/Programming/cpp/bin"
-JAVA_BIN="/home/tarcy/Documents/Programming/java/bin"
-PYTHON_BIN="/home/tarcy/Documents/Programming/python/bin"
-RUST_BIN="/home/tarcy/Documents/Programming/rust/bin"
+ASSEMBLY_BIN="$HOME/Documents/Projects/programming/assembly/bin"
+C_BIN="$HOME/Documents/Projects/programming/c/bin"
+CPP_BIN="$HOME/Documents/Projects/programming/cpp/bin"
+JAVA_BIN="$HOME/Documents/Projects/programming/java/bin"
+PYTHON_BIN="$HOME/Documents/Projects/programming/python/bin"
+RUST_BIN="$HOME/Documents/Projects/programming/rust/bin"
 
 # functions used for a clean output
 separate()      { echo "==================================================="; }
@@ -63,13 +63,13 @@ help() {
 	echo ""
 	echo "EXAMPLES"
 	echo "        Compile a C source file from a specific directory."
-	echo "                quick -c c ~/Documents my_program my_program.c"
+	echo "                quick -c c $HOME/Documents my_program my_program.c"
 	echo "        Run a C++ (clang++) output file from a specified directory."
-	echo "                quick -r cpp_clang ~/Documents my_program_clang.o"
+	echo "                quick -r cpp_clang $HOME/Documents my_program_clang.o"
 	echo "        Compile a .rs source file from a specific directory and run it."
-	echo "                quick -cr rust ~/Documents my_program my_program.rs"
+	echo "                quick -cr rust $HOME/Documents my_program my_program.rs"
     echo "        Compile a C source file with header files from a specific directory and run it"
-    echo "                quick -wr c ~/Documents output main.c my_header.c"
+    echo "                quick -wr c $HOME/Documents output main.c my_header.c"
 }
 
 # validates the arguments
@@ -79,7 +79,7 @@ check_arguments() {
 			case "$2" in
 				"assembly"|"c"|"cpp_gpp"|"cpp_clang"|"java"|"rust")
 					if [[ -z "$3" || -z "$4" || -z "$5" ]]; then
-						echo "Error: Invalid Input: A directory, a file without extension and a file is required. i.e quick -c lang ~/my_folder my_file my_file.ext"
+						echo "Error: Invalid Input: A directory, a file without extension and a file is required. i.e quick -c lang $HOME/my_folder my_file my_file.ext"
 						exit 1
 					elif [[ -n "$6" ]]; then
 						echo "Error: Too Many Arguments: This option takes only 5 arguments at most."
@@ -88,7 +88,7 @@ check_arguments() {
 				;;
 				"bash"|"python")
 					if [[ -z "$3" || -z "$4" ]]; then
-						echo "Error: Invalid Input: A directory, and a file is required. i.e quick -c lang ~/my_folder my_file.ext"
+						echo "Error: Invalid Input: A directory, and a file is required. i.e quick -c lang $HOME/my_folder my_file.ext"
 						exit 1
 					elif [[ -n "$5" ]]; then
 						echo "Error: Too Many Arguments: This option takes only 4 arguments at most."
@@ -105,7 +105,7 @@ check_arguments() {
 			case "$2" in
 				"bash"|"c"|"cpp_gpp"|"cpp_clang"|"python"|"rust")
 					if [[ -z "$3" || -z "$4" ]]; then
-						echo "Error: Invalid Input: A directory, and a file is required. i.e quick -r lang ~/my_folder my_file.o"
+						echo "Error: Invalid Input: A directory, and a file is required. i.e quick -r lang $HOME/my_folder my_file.o"
 						exit 1
 					elif [[ -n "$5" ]]; then
 						echo "Error: Too Many Arguments: This option takes only 4 arguments at most."
@@ -114,7 +114,7 @@ check_arguments() {
 				;;
 				"assembly"|"java")
 					if [[ -z "$3" || -z "$4" ]]; then
-						echo "Error: Invalid Input: A directory, and a file without its extension is required. i.e quick -r lang ~/my_folder my_file"
+						echo "Error: Invalid Input: A directory, and a file without its extension is required. i.e quick -r lang $HOME/my_folder my_file"
 						exit 1
 					elif [[ -n "$5" ]]; then
 						echo "Error: Too Many Arguments: This option takes only 4 arguments at most."
@@ -131,13 +131,13 @@ check_arguments() {
 			case "$2" in
 				"c")
 					if [[ -z "$3" || -z "$4" || -z "$5" ]]; then
-						echo "Error: Invalid Input: A directory, a file without extension and a file is required. i.e quick -wr lang ~/my_folder my_file my_file.ext"
+						echo "Error: Invalid Input: A directory, a file without extension and a file is required. i.e quick -wr lang $HOME/my_folder my_file my_file.ext"
 						exit 1
 					fi
                     shift; shift; shift; shift; shift;
                     for file in "$@"; do
                         if [[ -z "$file" ]]; then 
-                            echo "Error: Invalid Input: A directory, a file without extension, and a main file with its headers is required. i.e. quick -wr lang ~/my_folder my_file my_file.ext my_header.ext etc."
+                            echo "Error: Invalid Input: A directory, a file without extension, and a main file with its headers is required. i.e. quick -wr lang $HOME/my_folder my_file my_file.ext my_header.ext etc."
                             exit 1
                         fi
                     done
