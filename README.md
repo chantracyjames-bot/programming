@@ -10,6 +10,7 @@ The languages that I am familiar of are:
 	* Assembly (NASM)
 	* Bash
 	* HTML
+	* Powershell
 	* SQL (MySQL/MariaDB)
 + Intermediate Level:
 	* C
