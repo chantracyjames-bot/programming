@@ -23,11 +23,29 @@ EXTENSIONS: dict = {
     "Rust": [".rs"],
 }
 
+# special edge-case for my p_notes repository mapping folder names to languages
+P_EXTENSIONS: dict = {
+    "Assembly": "assembly",
+    "Shell": "shell",
+    "C": "c",
+    "C++": "cpp",
+    "CSS": "css",
+    "Java": "java",
+    "JavaScript": "javascript",
+    "SQL": "sql",
+    "HTML": "html",
+    "Markdown": "markdown",
+    "Python": "python",
+    "Rust": "rust",
+}
+
 # exempts binary-based files to prevent dumb errors
-EXEMPTIONS = [".png", ".jpg", ".webp", ".jpeg", "gif"]
+EXEMPTIONS: list = [".png", ".jpg", ".webp", ".jpeg", "gif"]
 
 # made the .env path global and constant
 ENV_PATH = os.environ["HOME"] + "/Documents/Projects/programming/.env"
+
+current_repo: str = ""
 
 
 # main function
@@ -55,8 +73,11 @@ def main() -> None:
             # splits the path into a list
             path: str = dir.split("/")
             # removes the last element if its empty
-            if path[-1] == '':
+            if path[-1] == "":
                 path.pop(-1)
+            # updates the current_repo gloabl variable
+            global current_repo
+            current_repo = path[-1]
             # changes the cwd to the root of the git repo
             os.chdir(dir)
             # loads the .env file
@@ -70,6 +91,7 @@ def main() -> None:
             print("-" * 57)
     except Exception as err:
         print("An Exception occured, blame tarcy")
+        print(err)
     finally:
         # closes the git object
         git.close()
@@ -93,6 +115,19 @@ def get_percentage(git: Github, repo: str) -> (dict, float):
 # checks if the the extension of a file is in the EXTENSIONS dict
 def get_language(file_stuff) -> str:
     ext = Path(file_stuff).suffix.lower()
+    # if the repository is p_notes
+    if current_repo == "p_notes":
+        if ext in EXEMPTIONS:
+            return "Invalid"
+        # check parent folder name for special p_notes edge case
+        path_parts = Path(file_stuff).parts
+        if len(path_parts) > 1:
+            folder_name = path_parts[0].lower()
+            for lang, target_folder in P_EXTENSIONS.items():
+                if folder_name == target_folder:
+                    return lang
+        return "Others"
+    # for anything other that p_notes
     for lang, exts in EXTENSIONS.items():
         if ext in EXEMPTIONS:
             return "Invalid"
@@ -162,6 +197,8 @@ def print_table(languages: dict, total_count: float) -> None:
         bytes_count = cur_count / total_count * 100
         # adds the current language's count to the total percentage
         total_percent += bytes_count  # should total to 100.00
+        if per_lang[lang]["lines"] == 0:
+            continue
         # prints the calculated count
         print(
             f"| {lang:^10s} : {bytes_count:^6.02f}% : {per_lang[lang]['lines']:^7,d} : {per_lang[lang]['chars']:^9,d} : {per_lang[lang]["chars"] / per_lang[lang]["lines"]:^6.02f}pl |"
