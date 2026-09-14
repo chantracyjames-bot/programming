@@ -24,4 +24,6 @@ The languages that I am familiar of are:
 
 If you want to read through my notes as a try to learn programming in multiple languages, look [here](https://github.com/chantracyjames-bot/p_notes/). But if you want to go through my notes as a Computer Science student, look [here](https://github.com/chantracyjames-bot/cs_notes/).
 
+If you want to have my repositories locally located onto your machines, i.e. download and access my files offline, follow this [guide](https://github.com/chantracyjames-bot/main/blob/main/guide.md).
+
 ___Happy 1st Month of being in GitHub!!!___
