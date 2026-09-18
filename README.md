@@ -9,6 +9,7 @@ The languages that I am familiar of are:
 + Beginner Level:
 	* Assembly (NASM)
 	* Bash
+	* C#
 	* HTML
 	* Powershell
 	* SQL (MySQL/MariaDB)
