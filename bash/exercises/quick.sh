@@ -25,8 +25,10 @@ out_bash()		{ echo "================ Code Output: Bash ================"; separa
 out_c()			{ echo "================== Code Output: C ================="; separate; }
 out_cpp_gpp()	{ echo "============== Code Output: C++ (g++) ============="; separate; }
 out_cpp_clang()	{ echo "============= Code Output: C++ (clang) ============"; separate; }
+out_csharp()	{ echo "================= Code Output: C# ================="; separate; }
 out_java()		{ echo "================ Code Output: Java ================"; separate; }
 out_python()	{ echo "=============== Code Output: Python ==============="; separate; }
+out_powershell(){ echo "============= Code Output: Powershell ============="; separate; }
 out_rust()		{ echo "================ Code Output: Rust ================"; separate; }
 
 # help page
@@ -86,7 +88,7 @@ check_arguments() {
 						exit 1
 					fi
 				;;
-				"bash"|"python")
+				"bash"|"csharp"|"powershell"|"python")
 					if [[ -z "$3" || -z "$4" ]]; then
 						echo "Error: Invalid Input: A directory, and a file is required. i.e quick -c lang $HOME/my_folder my_file.ext"
 						exit 1
@@ -103,7 +105,7 @@ check_arguments() {
 		;;
 		"-r"|"--run")
 			case "$2" in
-				"bash"|"c"|"cpp_gpp"|"cpp_clang"|"python"|"rust")
+				"bash"|"c"|"cpp_gpp"|"cpp_clang"|"csharp"|"powershell"|"python"|"rust")
 					if [[ -z "$3" || -z "$4" ]]; then
 						echo "Error: Invalid Input: A directory, and a file is required. i.e quick -r lang $HOME/my_folder my_file.o"
 						exit 1
@@ -188,9 +190,21 @@ check_file_validity() {
 				;;
 				esac
 			;;
+			"csharp")
+				if [[ "$3" != *.cs ]]; then
+					echo "Error: Invalid C# Source File: This script only validates .cs source files."
+					exit 1
+				fi
+			;;
 			"java")
 				if [[ "$3" != *.java ]]; then
 					echo "Error: Invalid Java Source File: This script only validates .java source files."
+					exit 1
+				fi
+			;;
+			"powershell")
+				if [[ "$3" != *.ps1 ]]; then
+					echo "Error: Invalid Powershell Script: This script only validates .ps1 script files."
 					exit 1
 				fi
 			;;
@@ -232,7 +246,13 @@ check_file_validity() {
 					echo "Error: Invalid Output File: This script only runs Assembly files without any file extensions."
 					exit 1
 				fi
-			;;		
+			;;
+			"bash")
+				if [[ "$3" != *.sh ]]; then
+					echo "Error: Invalid Output File: This script only runs .sh script files."
+					exit 1
+				fi
+			;;
 			"c"|"cpp_clang"|"cpp_gpp"|"rust")
 				case "$3" in
 					*.o)
@@ -244,9 +264,21 @@ check_file_validity() {
 					;;
 				esac
 			;;
+			"csharp")
+				if [[ "$3" != *.cs ]]; then
+					echo "Error: Invalid Output File: This script only runs .cs source files."
+					exit 1
+				fi
+			;;
 			"java")
 				if [[ "$3" != *.class ]]; then
-					echo "Error: Invalid Output File: When running java, the .java extension is omiited."
+					echo "Error: Invalid Output File: When running a Java file, the .java extension is omiited."
+					exit 1
+				fi
+			;;
+			"powershell")
+				if [[ "$3" != *.ps1 ]]; then
+					echo "Error: Invalid Output File: This script only runs .ps1 script files."
 					exit 1
 				fi
 			;;
@@ -370,6 +402,14 @@ if [[ ${RUN_TYPE} == "-cr" || ${RUN_TYPE} == "--compile-run" ]]; then
 				echo "Error: File Not Found: Did the source file successfully compiled?"
 			fi
         ;;
+        "csharp")
+            # input file
+            INPUT_FILE="$1"
+            check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${INPUT_FILE}"
+            shift
+            out_csharp
+            dotnet run --file "${INPUT_FILE}" --no-restore --no-dependencies
+		;;
         "java")
             # no extensions
             OUTPUT_FILE="${1%.*}"
@@ -398,6 +438,14 @@ if [[ ${RUN_TYPE} == "-cr" || ${RUN_TYPE} == "--compile-run" ]]; then
 			out_python
 			"${PYTHON_BIN}/python" -u "${INPUT_FILE}"
         ;;
+        "powershell")
+            # input file
+            INPUT_FILE="$1"
+            check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${INPUT_FILE}"
+            shift
+            out_powershell
+            powershell "-ExecutionPolicy ByPass -File ${INPUT_FILE}"
+		;;
         "rust")
             # no extensions
             OUTPUT_FILE="${1%.*}"
@@ -476,6 +524,9 @@ elif [[ ${RUN_TYPE} == "-c" || ${RUN_TYPE} == "--compile" ]]; then
 			clang++ -std=c++23 -Wall -Wextra -Wpedantic "${INPUT_FILE}" -o "${CPP_BIN}/${OUTPUT_FILE}_clang.o"
 			echo "Finished: C++ Program Compiled: Build output is at '${CPP_BIN}/${OUTPUT_FILE}_clang.o'."
 		;;
+		"csharp")
+			echo "Finished: Note: Python programs are automatically compiled when run."
+		;;
 		"java")
             # no extensions
             OUTPUT_FILE="${1%.*}"
@@ -486,6 +537,9 @@ elif [[ ${RUN_TYPE} == "-c" || ${RUN_TYPE} == "--compile" ]]; then
 			check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${INPUT_FILE}"
 			javac "${INPUT_FILE}" -d "${JAVA_BIN}"
 			echo "Finished: Java Program Compiled: Build output is at '${JAVA_BIN}/${OUTPUT_FILE}.class'."
+		;;
+		"powershell")
+			echo "Finished: Note: Python programs are automatically compiled when run."
 		;;
 		"python")
 			echo "Finished: Note: Python programs are automatically compiled when run."
@@ -627,6 +681,14 @@ elif [[ ${RUN_TYPE} == "-r" || ${RUN_TYPE} == "--run" ]]; then
 				echo "Error: File Not Found: Did the source file successfully compiled?"
 			fi
         ;;
+        "csharp")
+            # input file
+            INPUT_FILE="$1"
+            check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${INPUT_FILE}"
+            shift
+            out_csharp
+            dotnet run --file "${INPUT_FILE}" --no-restore --no-dependencies
+		;;
         "java")
             # no extensions
             COMPILED_FILE="${1}"
@@ -648,6 +710,14 @@ elif [[ ${RUN_TYPE} == "-r" || ${RUN_TYPE} == "--run" ]]; then
 			out_python
 			"${PYTHON_BIN}/python" -u "${INPUT_FILE}"
         ;;
+        "powershell")
+            # input file
+            INPUT_FILE="$1"
+            check_file_validity "${RUN_TYPE}" "${RUN_LANGUAGE}" "${INPUT_FILE}"
+            shift
+            out_powershell
+            powershell "-ExecutionPolicy ByPass -File ${INPUT_FILE}"
+		;;
         "rust")
             # no extensions
             COMPILED_FILE="${1}"
@@ -689,8 +759,14 @@ elif [[ ${RUN_TYPE} == "-s" || ${RUN_TYPE} == "--separate" ]]; then
 		"cpp_clang")
 			out_cpp_clang
 		;;
+		"csharp")
+			out_csharp
+		;;
 		"java")
 			out_java
+		;;
+		"powershell")
+			out_powershell
 		;;
 		"python")
 			out_python
@@ -707,7 +783,7 @@ elif [[ "${RUN_TYPE}" == "-h" || "${RUN_TYPE}" == "--help" ]]; then
     help
 # runs when the input option is invalid
 else
-    echo "Error: Invalid Argument: '$RUN' is not a valid argument."
+    echo "Error: Invalid Argument: '${RUN_TYPE}' is not a valid argument."
 	echo "SYPNOSIS"
 	echo "        quick [OPTIONS] [LANGUAGE] [DIRECTORY] [FILE_WITHOUT_EXTENSION] [FILE_WITH_EXTENSION]"
 	echo "        quick [-h | --help]"
